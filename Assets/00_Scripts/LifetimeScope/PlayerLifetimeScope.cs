@@ -6,5 +6,6 @@ public class PlayerLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<PlayerMove>();
+        builder.RegisterComponentInHierarchy<PlayerJump>();
     }
 }

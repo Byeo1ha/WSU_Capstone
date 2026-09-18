@@ -3,6 +3,7 @@ using R3;
 using UnityEngine;
 using VContainer;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어의 이동 속도")]
@@ -16,15 +17,15 @@ public class PlayerMove : MonoBehaviour
 
     private float moveInput;
 
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-    }
-
     [Inject]
     public void Construct(InputManager inputManager)
     {
         this.inputManager = inputManager;
+    }
+    
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -35,6 +36,11 @@ public class PlayerMove : MonoBehaviour
     }
 
     private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
     {
         float targetSpeed = moveInput * maxSpeed;
         float speedChangeRate;
