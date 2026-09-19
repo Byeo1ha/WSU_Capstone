@@ -7,15 +7,15 @@ using VContainer;
 public class PlayerJump : MonoBehaviour
 {
     [Header("플레이어 점프력")]
-    [SerializeField] private float jumpPower = 20f;
+    [SerializeField] private float jumpPower = 20f; //점프력
 
     [Header("착지 판정")]
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.7f, 0.08f);
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private Transform groundCheck; //바닥 감지용
+    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.7f, 0.08f); //바닥 감지용 크기
+    [SerializeField] private LayerMask groundLayer; //바닥 레이어 지정
 
     [Header("근접 판정")]
-    [SerializeField] private float nearGroundDistance = 1f;
+    [SerializeField] private float nearGroundDistance = 1f; //바닥이랑 가까워지는 거리
 
     private InputManager inputManager;
     private PlayerState playerState;
@@ -37,6 +37,7 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         inputManager.OnJump
+            .Where(_ => playerState.IsGrounded)
             .Subscribe(_ => Jump())
             .AddTo(this);
     }
@@ -53,8 +54,6 @@ public class PlayerJump : MonoBehaviour
 
     private void Jump()
     {
-        if (!playerState.IsGrounded) return;
-
         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         playerState.StartJump();
     }
