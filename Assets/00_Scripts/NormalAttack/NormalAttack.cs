@@ -22,9 +22,8 @@ public class NormalAttack : MonoBehaviour
     private async UniTask TestDeActive()
     {
         await UniTask.Delay(
-            TimeSpan.FromSeconds(1f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy()
-        );
+            TimeSpan.FromSeconds(0.6f), 
+            cancellationToken: this.GetCancellationTokenOnDestroy());
 
         pool.Release(this);
     }

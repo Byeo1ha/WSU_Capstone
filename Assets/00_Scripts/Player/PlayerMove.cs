@@ -5,6 +5,7 @@ using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerState))]
+[RequireComponent(typeof(PlayerGroundCheck))]
 public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어의 이동 속도")]
@@ -17,8 +18,11 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody2D rigid;
     private PlayerState playerState;
+    private PlayerGroundCheck playerGroundCheck;
 
     private float moveInput;
+    private float lockedAirSpeed;
+    private bool wasAirAttack;
 
     [Inject]
     public void Construct(InputManager inputManager)
@@ -30,6 +34,7 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
+        playerGroundCheck = GetComponent<PlayerGroundCheck>();
     }
 
     private void Start()
@@ -41,8 +46,28 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float currentMoveInput = playerState.IsActionLocked() ? 0f : moveInput;
-        Move(currentMoveInput);
+        bool isActionLocked = playerState.IsActionLocked();
+        bool isAirAttack = playerState.IsAttacking && !playerState.IsGrounded;
+
+        if (isAirAttack && !wasAirAttack)
+        {
+            lockedAirSpeed = rigid.linearVelocity.x;
+        }
+
+        if (isAirAttack)
+        {
+            MaintainAirAttackMomentum();
+        }
+        else if (isActionLocked)
+        {
+            Move(0f);
+        }
+        else
+        {
+            Move(moveInput);
+        }
+
+        wasAirAttack = isAirAttack;
     }
 
     private void Move(float input)
@@ -70,5 +95,12 @@ public class PlayerMove : MonoBehaviour
             speedChangeRate * Time.fixedDeltaTime);
 
         rigid.linearVelocity = new Vector2(xSpeed, rigid.linearVelocity.y);
+    }
+
+    private void MaintainAirAttackMomentum()
+    {
+        rigid.linearVelocity = new Vector2(
+            lockedAirSpeed,
+            rigid.linearVelocity.y);
     }
 }

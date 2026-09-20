@@ -8,6 +8,7 @@ using VContainer;
 [RequireComponent(typeof(PlayerState))]
 public class PlayerNormalAttack : MonoBehaviour
 {
+    [Header("생성 위치 보정")]
     [SerializeField] private float offset = 1.5f;
 
     private InputManager inputManager;
@@ -58,7 +59,7 @@ public class PlayerNormalAttack : MonoBehaviour
     private async UniTask TestEndAttack()
     {
         await UniTask.Delay(
-            TimeSpan.FromSeconds(1f), 
+            TimeSpan.FromSeconds(0.6f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
         
         playerState.StopNormalAttack();

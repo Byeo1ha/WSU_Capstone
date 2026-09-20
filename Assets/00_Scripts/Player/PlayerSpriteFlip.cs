@@ -39,9 +39,12 @@ public class PlayerSpriteFlip : MonoBehaviour
             .AddTo(this);
     }
 
-    private void RefreshFlip()
+    private void FixedUpdate()
     {
-        if (moveInput != 0)
+        if (playerState.IsActionLocked())
+            return;
+        
+        if (moveInput != 0f)
             OnFlip(moveInput);
     }
 

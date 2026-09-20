@@ -32,7 +32,9 @@ public class PlayerJump : MonoBehaviour
     private void Start()
     {
         inputManager.OnJump
-            .Where(_ => playerState.IsGrounded)
+            .Where(_ => 
+                playerState.IsGrounded &&
+                !playerState.IsActionLocked())
             .Subscribe(_ => Jump())
             .AddTo(this);
     }
