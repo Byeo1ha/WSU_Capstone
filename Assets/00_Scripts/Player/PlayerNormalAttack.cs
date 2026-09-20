@@ -1,7 +1,11 @@
+using System;
+using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using VContainer;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PlayerState))]
 public class PlayerNormalAttack : MonoBehaviour
 {
     [SerializeField] private float offset = 1.5f;
@@ -9,6 +13,7 @@ public class PlayerNormalAttack : MonoBehaviour
     private InputManager inputManager;
     private NormalAttackPool normalAttackPool;
 
+    private PlayerState playerState;
     private SpriteRenderer spriteRenderer;
 
     [Inject]
@@ -23,11 +28,13 @@ public class PlayerNormalAttack : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerState = GetComponent<PlayerState>();
     }
 
     private void Start()
     {
         inputManager.OnNormalAttack
+            .Where(_ => !playerState.IsActionLocked())
             .Subscribe(_ => Attack())
             .AddTo(this);
     }
@@ -35,10 +42,30 @@ public class PlayerNormalAttack : MonoBehaviour
     private void Attack()
     {
         NormalAttack attack = normalAttackPool.Get();
+
+        if (!playerState.StartNormalAttack()) return;
         
         float x = spriteRenderer.flipX ? transform.position.x - offset : transform.position.x + offset;
 
         attack.transform.position = new Vector3(x, transform.position.y, transform.position.z);
         attack.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+
+        TestEndAttack().Forget();
+    }
+
+    //테스트 전용 함수
+    //공격 이펙트 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
+    private async UniTask TestEndAttack()
+    {
+        await UniTask.Delay(
+            TimeSpan.FromSeconds(1f), 
+            cancellationToken: this.GetCancellationTokenOnDestroy());
+        
+        playerState.StopNormalAttack();
+    }
+
+    public void EndAttack()
+    {
+        playerState.StopNormalAttack();
     }
 }

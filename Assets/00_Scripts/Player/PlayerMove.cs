@@ -4,6 +4,7 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(PlayerState))]
 public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어의 이동 속도")]
@@ -13,7 +14,9 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float turnSpeed = 70f; //반대 방향으로 전환되는 속도
 
     private InputManager inputManager;
+
     private Rigidbody2D rigid;
+    private PlayerState playerState;
 
     private float moveInput;
 
@@ -26,6 +29,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        playerState = GetComponent<PlayerState>();
     }
 
     private void Start()
@@ -37,19 +41,20 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        float currentMoveInput = playerState.IsActionLocked() ? 0f : moveInput;
+        Move(currentMoveInput);
     }
 
-    private void Move()
+    private void Move(float input)
     {
-        float targetSpeed = moveInput * maxSpeed;
+        float targetSpeed = input * maxSpeed;
         float speedChangeRate;
 
-        if (moveInput == 0)
+        if (input == 0)
         {
             speedChangeRate = deceleration;
         }
-        else if (Mathf.Sign(moveInput) != Math.Sign(rigid.linearVelocity.x) 
+        else if (Mathf.Sign(input) != Math.Sign(rigid.linearVelocity.x) 
             && Mathf.Abs(rigid.linearVelocity.x) > 0.01f)
         {
             speedChangeRate = turnSpeed;
@@ -59,7 +64,10 @@ public class PlayerMove : MonoBehaviour
             speedChangeRate = acceleration;
         }
 
-        float xSpeed = Mathf.MoveTowards(rigid.linearVelocity.x, targetSpeed, speedChangeRate * Time.fixedDeltaTime);
+        float xSpeed = Mathf.MoveTowards(
+            rigid.linearVelocity.x, 
+            targetSpeed, 
+            speedChangeRate * Time.fixedDeltaTime);
 
         rigid.linearVelocity = new Vector2(xSpeed, rigid.linearVelocity.y);
     }

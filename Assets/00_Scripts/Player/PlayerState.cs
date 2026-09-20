@@ -28,4 +28,41 @@ public class PlayerState : MonoBehaviour
         IsJumping = true;
         IsGrounded = false;
     }
+
+    public bool IsActionLocked()
+    {
+        return CurrentAction != PlayerActionState.None;
+    }
+
+    public bool StartNormalAttack()
+    {
+        if(!TryStartAction(PlayerActionState.NormalAttack))
+            return false;
+
+        return true;
+    }
+
+    public void StopNormalAttack()
+    {
+        if(!TryStopAction(PlayerActionState.NormalAttack))
+            return;
+    }
+
+    private bool TryStartAction(PlayerActionState nextAction)
+    {
+        if (CurrentAction != PlayerActionState.None)
+            return false;
+
+        CurrentAction = nextAction;
+        return true;
+    }
+
+    private bool TryStopAction(PlayerActionState action)
+    {
+        if (CurrentAction != action)
+            return false;
+        
+        CurrentAction = PlayerActionState.None;
+        return true;
+    }
 }
