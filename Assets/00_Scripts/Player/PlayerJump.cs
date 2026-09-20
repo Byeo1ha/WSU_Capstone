@@ -4,23 +4,17 @@ using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerState))]
+[RequireComponent(typeof(PlayerGroundCheck))]
 public class PlayerJump : MonoBehaviour
 {
     [Header("플레이어 점프력")]
     [SerializeField] private float jumpPower = 20f; //점프력
 
-    [Header("착지 판정")]
-    [SerializeField] private Transform groundCheck; //바닥 감지용
-    [SerializeField] private Vector2 groundCheckSize = new Vector2(0.7f, 0.08f); //바닥 감지용 크기
-    [SerializeField] private LayerMask groundLayer; //바닥 레이어 지정
-
-    [Header("근접 판정")]
-    [SerializeField] private float nearGroundDistance = 1f; //바닥이랑 가까워지는 거리
-
     private InputManager inputManager;
     private PlayerState playerState;
 
     private Rigidbody2D rigid;
+    private PlayerGroundCheck playerGroundCheck;
 
     [Inject]
     public void Construct(InputManager inputManager)
@@ -32,6 +26,7 @@ public class PlayerJump : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
+        playerGroundCheck = GetComponent<PlayerGroundCheck>();
     }
 
     private void Start()
@@ -42,16 +37,6 @@ public class PlayerJump : MonoBehaviour
             .AddTo(this);
     }
 
-    private void FixedUpdate()
-    {
-        bool isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
-
-        if (playerState.IsJumping && rigid.linearVelocity.y > 0.1f) 
-            isGrounded = false;
-
-        playerState.SetGrounded(isGrounded);
-    }
-
     private void Jump()
     {
         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -60,14 +45,6 @@ public class PlayerJump : MonoBehaviour
 
     public bool IsNearGround()
     {
-        if (rigid.linearVelocity.y >= 0f) return false;
-
-        Vector2 checkSize = new Vector2(groundCheckSize.x, nearGroundDistance);
-
-        Vector2 checkPosition = (Vector2)groundCheck.position 
-            + Vector2.down * nearGroundDistance * 0.5f;
-
-        return Physics2D.OverlapBox(checkPosition, checkSize, 0f, groundLayer);
+        return playerGroundCheck.IsNearGround();
     }
-
 }

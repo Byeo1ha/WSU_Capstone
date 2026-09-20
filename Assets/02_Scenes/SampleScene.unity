@@ -709,6 +709,7 @@ GameObject:
   - component: {fileID: 1729075169}
   - component: {fileID: 1729075167}
   - component: {fileID: 1729075168}
+  - component: {fileID: 1729075172}
   - component: {fileID: 1729075170}
   - component: {fileID: 1729075171}
   - component: {fileID: 1729075163}
@@ -899,6 +900,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
   jumpPower: 20
+--- !u!114 &1729075172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729075162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b9c2e47a6d4a12b8e0531cd9f76a44, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGroundCheck
   groundCheck: {fileID: 914492051}
   groundCheckSize: {x: 0.7, y: 0.08}
   groundLayer:
