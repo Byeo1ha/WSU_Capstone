@@ -237,6 +237,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: ad042df1-acf3-4504-8306-28f6dbba9430
     m_ActionName: 'Action/Attack[/Keyboard/z]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 290039865}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnUpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 4e1f3b6f-a961-4899-813b-e7c332cf6acd
+    m_ActionName: 'Action/Function[/Keyboard/upArrow]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Mouse&Keyboard
   m_DefaultActionMap: Action
@@ -900,24 +916,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
   jumpPower: 20
---- !u!114 &1729075172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729075162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3b9c2e47a6d4a12b8e0531cd9f76a44, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerGroundCheck
-  groundCheck: {fileID: 914492051}
-  groundCheckSize: {x: 0.7, y: 0.08}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  nearGroundDistance: 1
 --- !u!114 &1729075169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -942,7 +940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350d4159721589f449f2c1d2826e7be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormalAttack
-  offset: 1.5
+  offset: 2.5
 --- !u!114 &1729075171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,6 +953,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cab16cd749cb0e43bdea65bc1dd2aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSpriteFlip
+--- !u!114 &1729075172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729075162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b9c2e47a6d4a12b8e0531cd9f76a44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerGroundCheck
+  groundCheck: {fileID: 914492051}
+  groundCheckSize: {x: 0.7, y: 0.08}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  nearGroundDistance: 1
 --- !u!1 &1910554092
 GameObject:
   m_ObjectHideFlags: 0

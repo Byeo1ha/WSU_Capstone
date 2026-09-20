@@ -17,6 +17,8 @@ public class PlayerNormalAttack : MonoBehaviour
     private PlayerState playerState;
     private SpriteRenderer spriteRenderer;
 
+    private bool upInput;
+
     [Inject]
     public void Construct(
         InputManager inputManager,
@@ -38,13 +40,23 @@ public class PlayerNormalAttack : MonoBehaviour
             .Where(_ => !playerState.IsActionLocked())
             .Subscribe(_ => Attack())
             .AddTo(this);
+        
+        inputManager.UpInput
+            .Subscribe(upInput => this.upInput = upInput)
+            .AddTo(this);
     }
 
     private void Attack()
     {
-        NormalAttack attack = normalAttackPool.Get();
+        playerState.StartNormalAttack();
 
-        if (!playerState.StartNormalAttack()) return;
+        if (upInput) HighAttack();
+        else HorizontalAttack();
+    }
+
+    private void HorizontalAttack()
+    {
+        NormalAttack attack = normalAttackPool.Get();
         
         float x = spriteRenderer.flipX ? transform.position.x - offset : transform.position.x + offset;
 
@@ -54,8 +66,13 @@ public class PlayerNormalAttack : MonoBehaviour
         TestEndAttack().Forget();
     }
 
+    private void HighAttack()
+    {
+        Debug.Log("상단 공격 수행");
+    }
+
     //테스트 전용 함수
-    //공격 이펙트 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
+    //캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
     private async UniTask TestEndAttack()
     {
         await UniTask.Delay(

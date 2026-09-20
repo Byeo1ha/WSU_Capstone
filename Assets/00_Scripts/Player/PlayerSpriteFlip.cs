@@ -29,13 +29,7 @@ public class PlayerSpriteFlip : MonoBehaviour
     {
         inputManager.MoveInput
             .Where(input => input != 0)
-            .Subscribe(input =>
-            {
-                moveInput = input;
-
-                if (!playerState.IsAttacking)
-                    OnFlip(input);
-            })
+            .Subscribe(input => moveInput = input)
             .AddTo(this);
     }
 

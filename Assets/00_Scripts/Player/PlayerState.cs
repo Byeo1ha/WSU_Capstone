@@ -34,35 +34,29 @@ public class PlayerState : MonoBehaviour
         return CurrentAction != PlayerActionState.None;
     }
 
-    public bool StartNormalAttack()
+    public void StartNormalAttack()
     {
-        if(!TryStartAction(PlayerActionState.NormalAttack))
-            return false;
-
-        return true;
+        TryStartAction(PlayerActionState.NormalAttack);
     }
 
     public void StopNormalAttack()
     {
-        if(!TryStopAction(PlayerActionState.NormalAttack))
-            return;
+        TryStopAction(PlayerActionState.NormalAttack);
     }
 
-    private bool TryStartAction(PlayerActionState nextAction)
+    private void TryStartAction(PlayerActionState nextAction)
     {
         if (CurrentAction != PlayerActionState.None)
-            return false;
+            return;
 
         CurrentAction = nextAction;
-        return true;
     }
 
-    private bool TryStopAction(PlayerActionState action)
+    private void TryStopAction(PlayerActionState action)
     {
         if (CurrentAction != action)
-            return false;
+            return;
         
         CurrentAction = PlayerActionState.None;
-        return true;
     }
 }
