@@ -1000,7 +1000,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61cd0a31de3925f4695ed3587f885534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalAttackPool
-  normalAttackPrefab: {fileID: 5523263523127427871, guid: a8caeaf8e3c002649ba4e3ae0b5c39b6, type: 3}
+  normalAttackPrefab:
+  - {fileID: 5523263523127427871, guid: 8bb822ce05c1538489316c2017c5f1cd, type: 3}
+  - {fileID: 5523263523127427871, guid: 0e522781dedbb534c86d1a41761f3073, type: 3}
+  - {fileID: 5523263523127427871, guid: ea5dafd1a0d72914f81d21bcca4559eb, type: 3}
+  - {fileID: 5523263523127427871, guid: a8caeaf8e3c002649ba4e3ae0b5c39b6, type: 3}
 --- !u!4 &1910554094
 Transform:
   m_ObjectHideFlags: 0

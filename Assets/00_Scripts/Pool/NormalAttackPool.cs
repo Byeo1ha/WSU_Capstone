@@ -3,35 +3,51 @@ using UnityEngine.Pool;
 
 public class NormalAttackPool : MonoBehaviour
 {
-    [Header("풀링할 객체")]
-    [SerializeField] private NormalAttack normalAttackPrefab; //풀링할 대상
-    
-    private ObjectPool<NormalAttack> pool;
+    [Header("기본 공격 Prefabs")]
+    [SerializeField] private NormalAttack[] normalAttackPrefab; //풀링할 대상
+
+    private ObjectPool<NormalAttack>[] pool;
+
+    public int ComboCount => normalAttackPrefab == null ? 0 : normalAttackPrefab.Length;
 
     private void Awake()
     {
-        pool = new ObjectPool<NormalAttack>(
-            CreateAttack,
-            OnGetAttack,
-            OnReleaseAttack,
-            OnDestroyAttack
-        );
+        pool = new ObjectPool<NormalAttack>[normalAttackPrefab.Length];
+
+        for (int i = 0; i < normalAttackPrefab.Length; i++)
+        {
+            int index = i;
+
+            pool[index] = new ObjectPool<NormalAttack>(
+                () => CreateAttack(index),
+                OnGetAttack,
+                OnReleaseAttack,
+                OnDestroyAttack
+            );
+        }
     }
 
-    public NormalAttack Get()
+    public NormalAttack Get(int index)
     {
-        return pool.Get();
+        if (index < 0 || index >= pool.Length)
+        {
+            Debug.LogWarning($"존재하지 않는 기본 공격 인덱스. / 인덱스 번호 : {index}");
+            return null;
+        }
+
+        if (normalAttackPrefab[index] == null)
+        {
+            Debug.LogWarning($"{index}번 기본 공격 Prefab이 지정되지 않음.");
+            return null;
+        }
+
+        return pool[index].Get();
     }
 
-    public void Release(NormalAttack normalAttack)
+    private NormalAttack CreateAttack(int index)
     {
-        pool.Release(normalAttack);
-    }
-
-    private NormalAttack CreateAttack()
-    {
-        NormalAttack attack = Instantiate(normalAttackPrefab, gameObject.transform);
-        attack.SetPool(pool);
+        NormalAttack attack = Instantiate(normalAttackPrefab[index], gameObject.transform);
+        attack.SetPool(pool[index]);
 
         return attack;
     }
