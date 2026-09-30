@@ -17,7 +17,7 @@ public class PlayerNormalAttack : MonoBehaviour
     [SerializeField] private float comboGraceDuration = 0.4f;
 
     private InputManager inputManager;
-    private NormalAttackPool normalAttackPool;
+    private NormalAttackHitboxPool normalAttackHitboxPool;
 
     private PlayerState playerState;
     private SpriteRenderer spriteRenderer;
@@ -34,10 +34,10 @@ public class PlayerNormalAttack : MonoBehaviour
     [Inject]
     public void Construct(
         InputManager inputManager,
-        NormalAttackPool normalAttackPool)
+        NormalAttackHitboxPool normalAttackPool)
     {
         this.inputManager = inputManager;
-        this.normalAttackPool = normalAttackPool;
+        this.normalAttackHitboxPool = normalAttackPool;
     }
 
     private void Awake()
@@ -110,7 +110,7 @@ public class PlayerNormalAttack : MonoBehaviour
         canQueueNextAttack = false;
         isNextAttackQueued = false;
 
-        NormalAttack attack = normalAttackPool.Get(comboIndex);
+        NormalAttackHitbox attack = normalAttackHitboxPool.Get();
 
         if (attack == null)
         {
@@ -118,7 +118,7 @@ public class PlayerNormalAttack : MonoBehaviour
             EndAttack();
             return;
         }
-        
+
         float x = spriteRenderer.flipX ? transform.position.x - offset : transform.position.x + offset;
 
         attack.transform.position = new Vector3(x, transform.position.y, transform.position.z);
@@ -139,7 +139,7 @@ public class PlayerNormalAttack : MonoBehaviour
 
     private bool HasNextComboAttack()
     {
-        return comboIndex + 1 < Mathf.Min(MaxComboCount, normalAttackPool.ComboCount);
+        return comboIndex + 1 < MaxComboCount;
     }
 
     private void ContinueGroundCombo()

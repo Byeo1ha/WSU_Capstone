@@ -3,11 +3,11 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class NormalAttack : MonoBehaviour
+public class NormalAttackHitbox : MonoBehaviour
 {
-    private IObjectPool<NormalAttack> pool;
+    private IObjectPool<NormalAttackHitbox> pool;
 
-    public void SetPool(IObjectPool<NormalAttack> pool)
+    public void SetPool(IObjectPool<NormalAttackHitbox> pool)
     {
         this.pool = pool;
     }

@@ -11,6 +11,6 @@ public class PlayerLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PlayerNormalAttack>();
         builder.RegisterComponentInHierarchy<PlayerHighAttack>();
 
-        builder.RegisterComponentInHierarchy<NormalAttackPool>();
+        builder.RegisterComponentInHierarchy<NormalAttackHitboxPool>();
     }
 }
