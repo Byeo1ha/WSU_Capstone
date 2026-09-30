@@ -94,10 +94,15 @@ public class PlayerNormalAttack : MonoBehaviour
         isNextAttackQueued = false;
         isComboGraceActive = false;
 
-        playerState.StartNormalAttack();
-
-        if (upInput) HighAttack();
-        else HorizontalAttack();
+        if (upInput)
+        {
+            return;
+        }
+        else 
+        {
+            playerState.StartNormalAttack();
+            HorizontalAttack();
+        }
     }
 
     private void HorizontalAttack()
@@ -119,13 +124,6 @@ public class PlayerNormalAttack : MonoBehaviour
         attack.transform.position = new Vector3(x, transform.position.y, transform.position.z);
         attack.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
 
-        attackStepVersion++;
-        TestEndAttack(attackStepVersion).Forget();
-    }
-
-    private void HighAttack()
-    {
-        Debug.Log("상단 공격 수행");
         attackStepVersion++;
         TestEndAttack(attackStepVersion).Forget();
     }
