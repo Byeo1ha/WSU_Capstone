@@ -3,7 +3,8 @@ using UnityEngine;
 public enum PlayerActionState
 {
     None,
-    NormalAttack
+    NormalAttack,
+    HighAttack
 }
 
 public class PlayerState : MonoBehaviour
@@ -34,16 +35,6 @@ public class PlayerState : MonoBehaviour
         return CurrentAction != PlayerActionState.None;
     }
 
-    public void StartNormalAttack()
-    {
-        TryStartAction(PlayerActionState.NormalAttack);
-    }
-
-    public void StopNormalAttack()
-    {
-        TryStopAction(PlayerActionState.NormalAttack);
-    }
-
     private void TryStartAction(PlayerActionState nextAction)
     {
         if (CurrentAction != PlayerActionState.None)
@@ -59,4 +50,16 @@ public class PlayerState : MonoBehaviour
         
         CurrentAction = PlayerActionState.None;
     }
+
+    public void StartNormalAttack() 
+        => TryStartAction(PlayerActionState.NormalAttack);
+
+    public void StopNormalAttack()
+        => TryStopAction(PlayerActionState.NormalAttack);
+
+    public void StartHighAttack()
+        => TryStartAction(PlayerActionState.HighAttack);
+
+    public void StopHighAttack()
+        => TryStopAction(PlayerActionState.HighAttack);
 }

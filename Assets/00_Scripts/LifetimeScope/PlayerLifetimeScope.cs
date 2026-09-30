@@ -1,8 +1,19 @@
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
+public enum PoolKey
+{
+    NormalAttack,
+    HighAttack
+}
+
 public class PlayerLifetimeScope : LifetimeScope
 {
+    [Header("키로 등록할 객체들")]
+    [SerializeField] private AttackHitboxPool normalAttack;
+    [SerializeField] private AttackHitboxPool highAttack;
+
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<PlayerMove>();
@@ -11,6 +22,7 @@ public class PlayerLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PlayerNormalAttack>();
         builder.RegisterComponentInHierarchy<PlayerHighAttack>();
 
-        builder.RegisterComponentInHierarchy<NormalAttackHitboxPool>();
+        builder.RegisterComponent(normalAttack).Keyed(PoolKey.NormalAttack);
+        builder.RegisterComponent(highAttack).Keyed(PoolKey.HighAttack);
     }
 }

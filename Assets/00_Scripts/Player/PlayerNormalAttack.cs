@@ -11,13 +11,13 @@ public class PlayerNormalAttack : MonoBehaviour
     private const int MaxComboCount = 4;
 
     [Header("생성 위치 보정")]
-    [SerializeField] private float offset = 1.5f;
+    [SerializeField] private float offset = 2.5f;
 
     [Header("공격 종료 후 콤보 유예시간")]
     [SerializeField] private float comboGraceDuration = 0.4f;
 
     private InputManager inputManager;
-    private NormalAttackHitboxPool normalAttackHitboxPool;
+    private AttackHitboxPool attackHitboxPool;
 
     private PlayerState playerState;
     private SpriteRenderer spriteRenderer;
@@ -34,10 +34,11 @@ public class PlayerNormalAttack : MonoBehaviour
     [Inject]
     public void Construct(
         InputManager inputManager,
-        NormalAttackHitboxPool normalAttackPool)
+        [Key(PoolKey.NormalAttack)]
+        AttackHitboxPool attackHitboxPool)
     {
         this.inputManager = inputManager;
-        this.normalAttackHitboxPool = normalAttackPool;
+        this.attackHitboxPool = attackHitboxPool;
     }
 
     private void Awake()
@@ -110,7 +111,7 @@ public class PlayerNormalAttack : MonoBehaviour
         canQueueNextAttack = false;
         isNextAttackQueued = false;
 
-        NormalAttackHitbox attack = normalAttackHitboxPool.Get();
+        AttackHitbox attack = attackHitboxPool.Get();
 
         if (attack == null)
         {
