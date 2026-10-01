@@ -5,8 +5,8 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlayerState))]
+[RequireComponent(typeof(AttackHitboxSpawner))]
 public class PlayerHighAttack : MonoBehaviour
 {
     [Header("올라가는 높이")]
@@ -16,8 +16,8 @@ public class PlayerHighAttack : MonoBehaviour
 
     private InputManager inputManager;
     private Rigidbody2D rigid;
-    private SpriteRenderer spriteRenderer;
     private PlayerState playerState;
+    private AttackHitboxSpawner attackHitboxSpawner;
 
     private AttackHitboxPool attackHitboxPool;
 
@@ -26,8 +26,8 @@ public class PlayerHighAttack : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         playerState = GetComponent<PlayerState>();
+        attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
     }
 
     [Inject]
@@ -62,12 +62,8 @@ public class PlayerHighAttack : MonoBehaviour
     private void Attack()
     {
         rigid.AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
-        AttackHitbox attack = attackHitboxPool.Get();
 
-        float x = spriteRenderer.flipX ? transform.position.x - offset : transform.position.x + offset;
-
-        attack.transform.position = new Vector3(x, transform.position.y, transform.position.z);
-        attack.GetComponent<SpriteRenderer>().flipX = spriteRenderer.flipX;
+        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
         playerState.StartHighAttack();
 
         TestEndAttack().Forget();

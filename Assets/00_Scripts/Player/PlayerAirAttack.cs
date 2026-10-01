@@ -6,9 +6,9 @@ using VContainer;
 
 [RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(AttackHitboxSpawner))]
-public class PlayerNormalAttack : MonoBehaviour
+public class PlayerAirAttack : MonoBehaviour
 {
-    private const int MaxComboCount = 4;
+    private const int MaxComboCount = 3;
 
     [Header("공격 종료 후 콤보 유예시간")]
     [SerializeField] private float comboGraceDuration = 0.4f;
@@ -24,7 +24,7 @@ public class PlayerNormalAttack : MonoBehaviour
 
     private bool upInput;
     private int comboIndex;
-    private bool isGroundComboActive;
+    private bool isAirComboActive;
     private bool canQueueNextAttack;
     private bool isNextAttackQueued;
     private bool isComboGraceActive;
@@ -34,7 +34,7 @@ public class PlayerNormalAttack : MonoBehaviour
     [Inject]
     public void Construct(
         InputManager inputManager,
-        [Key(PoolKey.NormalAttack)]
+        [Key(PoolKey.AirAttack)]
         AttackHitboxPool attackHitboxPool)
     {
         this.inputManager = inputManager;
@@ -64,11 +64,11 @@ public class PlayerNormalAttack : MonoBehaviour
         {
             if (isComboGraceActive &&
                 Time.time <= comboGraceEndTime &&
-                playerState.IsGrounded &&
+                !playerState.IsGrounded &&
                 !upInput &&
                 HasNextComboAttack())
             {
-                ContinueGroundCombo();
+                ContinueAirCombo();
             }
             else
             {
@@ -78,24 +78,25 @@ public class PlayerNormalAttack : MonoBehaviour
             return;
         }
 
-        if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
+        if (!playerState.IsAirAttacking || !isAirComboActive || playerState.IsGrounded)
             return;
 
         if (upInput || !canQueueNextAttack || isNextAttackQueued || !HasNextComboAttack())
             return;
 
         isNextAttackQueued = true;
+        
     }
 
     private void Attack()
     {
-        if (upInput || !playerState.IsGrounded) return;
+        if (upInput || playerState.IsGrounded) return;
 
         comboIndex = 0;
-        isGroundComboActive = playerState.IsGrounded && !upInput;
+        isAirComboActive = !playerState.IsGrounded && !upInput;
         isComboGraceActive = false;
 
-        playerState.StartNormalAttack();
+        playerState.StartAirAttack();
         HorizontalAttack();
     }
 
@@ -114,7 +115,7 @@ public class PlayerNormalAttack : MonoBehaviour
 
     public void OpenComboInput()
     {
-        if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
+        if (!playerState.IsAirAttacking || !isAirComboActive || playerState.IsGrounded)
             return;
 
         if (HasNextComboAttack())
@@ -126,14 +127,14 @@ public class PlayerNormalAttack : MonoBehaviour
         return comboIndex + 1 < MaxComboCount;
     }
 
-    private void ContinueGroundCombo()
+    private void ContinueAirCombo()
     {
         isComboGraceActive = false;
         comboIndex++;
-        isGroundComboActive = true;
+        isAirComboActive = true;
 
-        if (!playerState.IsNormalAttacking)
-            playerState.StartNormalAttack();
+        if (!playerState.IsAirAttacking)
+            playerState.StartAirAttack();
 
         HorizontalAttack();
     }
@@ -154,19 +155,19 @@ public class PlayerNormalAttack : MonoBehaviour
 
     public void EndAttack()
     {
-        if (!playerState.IsNormalAttacking)
+        if (!playerState.IsAirAttacking)
             return;
 
         attackStepVersion++;
         canQueueNextAttack = false;
 
-        if (isGroundComboActive && isNextAttackQueued && playerState.IsGrounded && HasNextComboAttack())
+        if (isAirComboActive && isNextAttackQueued && !playerState.IsGrounded && HasNextComboAttack())
         {
-            ContinueGroundCombo();
+            ContinueAirCombo();
             return;
         }
 
-        if (isGroundComboActive && playerState.IsGrounded && HasNextComboAttack() && comboGraceDuration > 0f)
+        if (isAirComboActive && !playerState.IsGrounded && HasNextComboAttack() && comboGraceDuration > 0f)
         {
             isComboGraceActive = true;
             comboGraceEndTime = Time.time + comboGraceDuration;
@@ -177,8 +178,8 @@ public class PlayerNormalAttack : MonoBehaviour
             comboIndex = 0;
         }
 
-        isGroundComboActive = false;
+        isAirComboActive = false;
         isNextAttackQueued = false;
-        playerState.StopNormalAttack();
+        playerState.StopAirAttack();
     }
 }

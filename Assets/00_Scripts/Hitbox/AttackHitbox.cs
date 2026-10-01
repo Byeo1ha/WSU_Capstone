@@ -3,9 +3,17 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class AttackHitbox : MonoBehaviour
 {
     private IObjectPool<AttackHitbox> pool;
+
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
 
     public void SetPool(IObjectPool<AttackHitbox> pool)
     {
@@ -15,6 +23,11 @@ public class AttackHitbox : MonoBehaviour
     private void OnEnable()
     {
         TestDeActive().Forget();
+    }
+
+    public void SetDirection(bool value)
+    {
+        spriteRenderer.flipX = value;
     }
 
     //테스트 전용 함수

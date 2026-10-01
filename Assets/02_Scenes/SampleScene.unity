@@ -617,6 +617,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &706479937
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 706479938}
+  - component: {fileID: 706479939}
+  m_Layer: 0
+  m_Name: AirAttackPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &706479938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706479937}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.0069, y: -2.50627, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1729075164}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &706479939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706479937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61cd0a31de3925f4695ed3587f885534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackHitboxPool
+  attackHitbox: {fileID: 5523263523127427871, guid: 18e57aeabd1e3f1459350ace4910d01d, type: 3}
 --- !u!1 &914492050
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,6 +729,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   normalAttack: {fileID: 1910554093}
   highAttack: {fileID: 1922821040}
+  airAttack: {fileID: 706479939}
 --- !u!4 &1037723319
 Transform:
   m_ObjectHideFlags: 0
@@ -862,7 +908,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1729075164}
+  - component: {fileID: 1729075174}
   - component: {fileID: 1729075169}
+  - component: {fileID: 1729075175}
   - component: {fileID: 1729075173}
   - component: {fileID: 1729075167}
   - component: {fileID: 1729075168}
@@ -954,6 +1002,7 @@ Transform:
   - {fileID: 914492051}
   - {fileID: 1910554094}
   - {fileID: 1922821039}
+  - {fileID: 706479938}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1729075165
@@ -1082,8 +1131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 350d4159721589f449f2c1d2826e7be5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormalAttack
-  offset: 2.5
   comboGraceDuration: 0.4
+  offset: 2.5
 --- !u!114 &1729075171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1127,6 +1176,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHighAttack
   upperPower: 20
+  offset: 2.5
+--- !u!114 &1729075174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729075162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3203393fecf6e21429f612ff013b3a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackHitboxSpawner
+--- !u!114 &1729075175
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729075162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8162a0dae114984c8a4e11d75644530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAirAttack
+  comboGraceDuration: 0.4
   offset: 2.5
 --- !u!1 &1910554092
 GameObject:
