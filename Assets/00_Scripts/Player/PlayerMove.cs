@@ -6,6 +6,8 @@ using VContainer;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(PlayerGroundCheck))]
+[RequireComponent(typeof(PlayerAirAttack))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어의 이동 속도")]
@@ -19,9 +21,14 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rigid;
     private PlayerState playerState;
     private PlayerGroundCheck playerGroundCheck;
+    private PlayerAirAttack playerAirAttack;
+    private SpriteRenderer spriteRenderer;
 
     private float moveInput;
     private float lockedAirSpeed;
+    private float originalGravityScale;
+    private float airAttackDirection;
+    private float airDashRemainingTime;
     private bool wasAirAttack;
 
     [Inject]
@@ -35,6 +42,9 @@ public class PlayerMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
         playerGroundCheck = GetComponent<PlayerGroundCheck>();
+        playerAirAttack = GetComponent<PlayerAirAttack>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        originalGravityScale = rigid.gravityScale;
     }
 
     private void Start()
@@ -44,14 +54,21 @@ public class PlayerMove : MonoBehaviour
             .AddTo(this);
     }
 
+    private void OnEnable()
+    {
+        playerAirAttack.AirAttackStarted += StartAirDash;
+    }
+
     private void FixedUpdate()
     {
         bool isActionLocked = playerState.IsActionLocked();
-        bool isAirAttack = playerState.IsAttacking && !playerState.IsGrounded;
+        bool isAirAttack = playerState.IsAirAttacking && !playerState.IsGrounded;
 
         if (isAirAttack && !wasAirAttack)
         {
             lockedAirSpeed = rigid.linearVelocity.x;
+            if (playerAirAttack.MovementCase != AirAttackMovementCase.Original)
+                rigid.gravityScale = 0f;
         }
 
         if (isAirAttack)
@@ -60,10 +77,12 @@ public class PlayerMove : MonoBehaviour
         }
         else if (isActionLocked)
         {
+            RestoreGravity();
             Move(0f);
         }
         else
         {
+            RestoreGravity();
             Move(moveInput);
         }
 
@@ -99,8 +118,89 @@ public class PlayerMove : MonoBehaviour
 
     private void MaintainAirAttackMomentum()
     {
-        rigid.linearVelocity = new Vector2(
-            lockedAirSpeed,
-            rigid.linearVelocity.y);
+        if (playerAirAttack.MovementCase == AirAttackMovementCase.Original)
+        {
+            rigid.linearVelocity = new Vector2(lockedAirSpeed, rigid.linearVelocity.y);
+            return;
+        }
+
+        float xSpeed = GetAirAttackHorizontalSpeed();
+        float ySpeed = IsHoverCase() ? 0f : -playerAirAttack.SlowFallSpeed;
+
+        rigid.linearVelocity = new Vector2(xSpeed, ySpeed);
+    }
+
+    private float GetAirAttackHorizontalSpeed()
+    {
+        switch (playerAirAttack.MovementCase)
+        {
+            case AirAttackMovementCase.SlowFallNormalDeceleration:
+            case AirAttackMovementCase.HoverNormalDeceleration:
+                lockedAirSpeed = Mathf.MoveTowards(
+                    lockedAirSpeed,
+                    0f,
+                    deceleration * Time.fixedDeltaTime);
+                return lockedAirSpeed;
+
+            case AirAttackMovementCase.SlowFallSlowDeceleration:
+            case AirAttackMovementCase.HoverSlowDeceleration:
+                lockedAirSpeed = Mathf.MoveTowards(
+                    lockedAirSpeed,
+                    0f,
+                    playerAirAttack.SlowHorizontalDeceleration * Time.fixedDeltaTime);
+                return lockedAirSpeed;
+
+            case AirAttackMovementCase.SlowFallDash:
+            case AirAttackMovementCase.HoverDash:
+                return GetAirDashSpeed();
+
+            default:
+                return lockedAirSpeed;
+        }
+    }
+
+    private bool IsHoverCase()
+    {
+        return playerAirAttack.MovementCase == AirAttackMovementCase.HoverNormalDeceleration ||
+               playerAirAttack.MovementCase == AirAttackMovementCase.HoverSlowDeceleration ||
+               playerAirAttack.MovementCase == AirAttackMovementCase.HoverDash;
+    }
+
+    private void StartAirDash()
+    {
+        if (playerAirAttack.MovementCase != AirAttackMovementCase.SlowFallDash &&
+            playerAirAttack.MovementCase != AirAttackMovementCase.HoverDash)
+            return;
+
+        airAttackDirection = spriteRenderer.flipX ? -1f : 1f;
+        airDashRemainingTime = playerAirAttack.DashDuration;
+        lockedAirSpeed = 0f;
+        rigid.linearVelocity = new Vector2(0f, rigid.linearVelocity.y);
+    }
+
+    private float GetAirDashSpeed()
+    {
+        if (airDashRemainingTime <= 0f || playerAirAttack.DashSpeed <= 0f)
+            return 0f;
+
+        airDashRemainingTime = Mathf.Max(
+            0f,
+            airDashRemainingTime - Time.fixedDeltaTime);
+
+        return airAttackDirection * playerAirAttack.DashSpeed;
+    }
+
+    private void RestoreGravity()
+    {
+        if (rigid.gravityScale != originalGravityScale)
+            rigid.gravityScale = originalGravityScale;
+    }
+
+    private void OnDisable()
+    {
+        playerAirAttack.AirAttackStarted -= StartAirDash;
+        RestoreGravity();
+        airDashRemainingTime = 0f;
+        wasAirAttack = false;
     }
 }

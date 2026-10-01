@@ -4,6 +4,17 @@ using R3;
 using UnityEngine;
 using VContainer;
 
+public enum AirAttackMovementCase
+{
+    Original,
+    SlowFallNormalDeceleration,
+    SlowFallSlowDeceleration,
+    SlowFallDash,
+    HoverNormalDeceleration,
+    HoverSlowDeceleration,
+    HoverDash
+}
+
 [RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(AttackHitboxSpawner))]
 public class PlayerAirAttack : MonoBehaviour
@@ -13,8 +24,27 @@ public class PlayerAirAttack : MonoBehaviour
     [Header("공격 종료 후 콤보 유예시간")]
     [SerializeField] private float comboGraceDuration = 0.4f;
 
+    [Header("Air Attack Timing")]
+    [SerializeField, Min(0f)] private float attackDuration = 0.4f;
+    [SerializeField, Min(0f)] private float comboInputOpenDelay = 0.12f;
+
     [Header("생성 위치 보정")]
     [SerializeField] private float offset = 2.5f;
+
+    [Header("Air Attack Movement")]
+    [SerializeField] private AirAttackMovementCase movementCase;
+    [SerializeField, Min(0f)] private float slowFallSpeed = 2f;
+    [SerializeField, Min(0f)] private float horizontalDeceleration = 10f;
+    [SerializeField, Min(0f)] private float dashSpeed = 12f;
+    [SerializeField, Min(0f)] private float dashDuration = 0.12f;
+
+    public AirAttackMovementCase MovementCase => movementCase;
+    public float SlowFallSpeed => slowFallSpeed;
+    public float SlowHorizontalDeceleration => horizontalDeceleration;
+    public float DashSpeed => dashSpeed;
+    public float DashDuration => dashDuration;
+
+    public event Action AirAttackStarted;
 
     private InputManager inputManager;
     private AttackHitboxPool attackHitboxPool;
@@ -108,9 +138,10 @@ public class PlayerAirAttack : MonoBehaviour
         Debug.Log($"진행 중인 Index: {comboIndex}");
 
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
+        AirAttackStarted?.Invoke();
 
         attackStepVersion++;
-        TestEndAttack(attackStepVersion).Forget();
+        RunAttackStep(attackStepVersion).Forget();
     }
 
     public void OpenComboInput()
@@ -141,12 +172,31 @@ public class PlayerAirAttack : MonoBehaviour
 
     //테스트 전용 함수
     //캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
-    private async UniTask TestEndAttack(int version)
+    private async UniTask RunAttackStep(int version)
     {
-        await UniTask.Delay(
-            TimeSpan.FromSeconds(0.4f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-        
+        float inputOpenDelay = Mathf.Min(comboInputOpenDelay, attackDuration);
+
+        if (inputOpenDelay > 0f)
+        {
+            await UniTask.Delay(
+                TimeSpan.FromSeconds(inputOpenDelay),
+                cancellationToken: this.GetCancellationTokenOnDestroy());
+        }
+
+        if (version != attackStepVersion)
+            return;
+
+        OpenComboInput();
+
+        float remainingDuration = attackDuration - inputOpenDelay;
+
+        if (remainingDuration > 0f)
+        {
+            await UniTask.Delay(
+                TimeSpan.FromSeconds(remainingDuration),
+                cancellationToken: this.GetCancellationTokenOnDestroy());
+        }
+
         if (version != attackStepVersion)
             return;
 
