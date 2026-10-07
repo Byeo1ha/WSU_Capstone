@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class PlayerHighAttack : MonoBehaviour
     [SerializeField] private float upperPower = 20f;
     [Header("생성 위치 보정")]
     [SerializeField] private float offset = 2.5f;
+    [Header("공중 체공 보정")]
+    [SerializeField] private float airOffset = 0.8f;
 
     private InputManager inputManager;
     private Rigidbody2D rigid;
@@ -21,13 +24,18 @@ public class PlayerHighAttack : MonoBehaviour
 
     private AttackHitboxPool attackHitboxPool;
 
+    private CancellationTokenSource cts;
+
     private bool upInput;
+    private float originalGravity;
 
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
         attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
+
+        originalGravity = rigid.gravityScale;
     }
 
     [Inject]
@@ -66,7 +74,28 @@ public class PlayerHighAttack : MonoBehaviour
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
         playerState.StartHighAttack();
 
+        AirCorrection().Forget();
+    }
+
+    private async UniTask AirCorrection()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+
+        cts = new CancellationTokenSource();
+
+        rigid.gravityScale = 0f;
+
         TestEndAttack().Forget();
+
+        while (true)
+        {
+            rigid.linearVelocity = new Vector2(
+                rigid.linearVelocity.x, 
+                rigid.linearVelocity.y * airOffset);
+
+            await UniTask.WaitForFixedUpdate(
+                cancellationToken: cts.Token);
+        }
     }
 
     //테스트 전용 함수
@@ -74,9 +103,11 @@ public class PlayerHighAttack : MonoBehaviour
     private async UniTask TestEndAttack()
     {
         await UniTask.Delay(
-            TimeSpan.FromSeconds(0.4f), 
+            TimeSpan.FromSeconds(0.2f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
+        rigid.gravityScale = originalGravity;
+        cts?.Cancel();
         EndAttack();
     }
 

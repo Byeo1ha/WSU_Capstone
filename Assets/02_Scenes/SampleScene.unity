@@ -1724,6 +1724,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHighAttack
   upperPower: 20
   offset: 2.5
+  airOffset: 0.8
 --- !u!114 &1729075174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1751,7 +1752,7 @@ MonoBehaviour:
   comboGraceDuration: 0.4
   offset: 2.5
   xAirOffset: 0.2
-  yAirOffset: 0.2
+  yAirOffset: 0.8
 --- !u!114 &1729075176
 MonoBehaviour:
   m_ObjectHideFlags: 0
