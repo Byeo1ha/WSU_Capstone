@@ -6,6 +6,9 @@ using UnityEngine.Pool;
 [RequireComponent(typeof(SpriteRenderer))]
 public class AttackHitbox : MonoBehaviour
 {
+    [Header("피해량")]
+    [SerializeField] private int damage;
+
     private IObjectPool<AttackHitbox> pool;
 
     private SpriteRenderer spriteRenderer;
@@ -15,14 +18,22 @@ public class AttackHitbox : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    private void OnEnable()
+    {
+        TestDeActive().Forget();
+    }
+
     public void SetPool(IObjectPool<AttackHitbox> pool)
     {
         this.pool = pool;
     }
 
-    private void OnEnable()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        TestDeActive().Forget();
+        if (collision.TryGetComponent<IDamageable>(out var damageable))
+        {
+            damageable.TakeDamage(damage);
+        }
     }
 
     public void SetDirection(bool value)
@@ -30,8 +41,6 @@ public class AttackHitbox : MonoBehaviour
         spriteRenderer.flipX = value;
     }
 
-    //테스트 전용 함수
-    //공격 이펙트 애니메이션을 받으면 마지막 프레임에 DeActive함수를 실행시키게 할 것
     private async UniTask TestDeActive()
     {
         await UniTask.Delay(
@@ -41,8 +50,4 @@ public class AttackHitbox : MonoBehaviour
         pool.Release(this);
     }
 
-    public void DeActive()
-    {
-        pool.Release(this);
-    }
 }
