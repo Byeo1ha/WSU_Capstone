@@ -22,7 +22,7 @@ public class PlayerAirAttack : MonoBehaviour
 
     private PlayerState playerState;
 
-    private bool upInput;
+    private bool downInput;
     private int comboIndex;
     private bool isAirComboActive;
     private bool canQueueNextAttack;
@@ -53,8 +53,8 @@ public class PlayerAirAttack : MonoBehaviour
             .Subscribe(_ => HandleAttackInput())
             .AddTo(this);
         
-        inputManager.UpInput
-            .Subscribe(upInput => this.upInput = upInput)
+        inputManager.DownInput
+            .Subscribe(downInput => this.downInput = downInput)
             .AddTo(this);
     }
 
@@ -65,7 +65,7 @@ public class PlayerAirAttack : MonoBehaviour
             if (isComboGraceActive &&
                 Time.time <= comboGraceEndTime &&
                 !playerState.IsGrounded &&
-                !upInput &&
+                !downInput &&
                 HasNextComboAttack())
             {
                 ContinueAirCombo();
@@ -81,7 +81,7 @@ public class PlayerAirAttack : MonoBehaviour
         if (!playerState.IsAirAttacking || !isAirComboActive || playerState.IsGrounded)
             return;
 
-        if (upInput || !canQueueNextAttack || isNextAttackQueued || !HasNextComboAttack())
+        if (downInput || !canQueueNextAttack || isNextAttackQueued || !HasNextComboAttack())
             return;
 
         isNextAttackQueued = true;
@@ -90,10 +90,10 @@ public class PlayerAirAttack : MonoBehaviour
 
     private void Attack()
     {
-        if (upInput || playerState.IsGrounded) return;
+        if (downInput || playerState.IsGrounded) return;
 
         comboIndex = 0;
-        isAirComboActive = !playerState.IsGrounded && !upInput;
+        isAirComboActive = !playerState.IsGrounded && !downInput;
         isComboGraceActive = false;
 
         playerState.StartAirAttack();
@@ -105,7 +105,7 @@ public class PlayerAirAttack : MonoBehaviour
         canQueueNextAttack = false;
         isNextAttackQueued = false;
 
-        Debug.Log($"진행 중인 Index: {comboIndex}");
+        //Debug.Log($"진행 중인 Index: {comboIndex}");
 
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
 

@@ -104,7 +104,7 @@ public class PlayerNormalAttack : MonoBehaviour
         canQueueNextAttack = false;
         isNextAttackQueued = false;
 
-        Debug.Log($"진행 중인 Index: {comboIndex}");
+        //Debug.Log($"진행 중인 Index: {comboIndex}");
 
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
 

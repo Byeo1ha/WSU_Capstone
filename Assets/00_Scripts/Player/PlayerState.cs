@@ -5,7 +5,9 @@ public enum PlayerActionState
     None,
     NormalAttack,
     HighAttack,
-    AirAttack
+    AirAttack,
+    DownAttack,
+    Dodge
 }
 
 public class PlayerState : MonoBehaviour
@@ -14,6 +16,8 @@ public class PlayerState : MonoBehaviour
 
     public bool IsNormalAttacking => CurrentAction == PlayerActionState.NormalAttack;
     public bool IsAirAttacking => CurrentAction == PlayerActionState.AirAttack;
+    public bool IsDownAttacking => CurrentAction == PlayerActionState.DownAttack;
+    public bool IsDodging => CurrentAction == PlayerActionState.Dodge;
     public bool IsAttacking => IsNormalAttacking || IsAirAttacking;
     
     public bool IsGrounded { get; private set; }
@@ -71,4 +75,16 @@ public class PlayerState : MonoBehaviour
 
     public void StopAirAttack()
         => TryStopAction(PlayerActionState.AirAttack);
+
+    public void StartDodge()
+        => TryStartAction(PlayerActionState.Dodge);
+
+    public void StopDodge()
+        => TryStopAction(PlayerActionState.Dodge);
+
+    public void StartDownAttack()
+        => TryStartAction(PlayerActionState.DownAttack);
+
+    public void StopDownAttack()
+        => TryStopAction(PlayerActionState.DownAttack);
 }

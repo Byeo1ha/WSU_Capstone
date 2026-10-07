@@ -18,7 +18,6 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody2D rigid;
     private PlayerState playerState;
-    private PlayerGroundCheck playerGroundCheck;
 
     private float moveInput;
     private float lockedAirSpeed;
@@ -34,7 +33,6 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
-        playerGroundCheck = GetComponent<PlayerGroundCheck>();
     }
 
     private void Start()
