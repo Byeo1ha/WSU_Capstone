@@ -1,9 +1,11 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using VContainer;
 
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(AttackHitboxSpawner))]
 public class PlayerAirAttack : MonoBehaviour
@@ -16,10 +18,15 @@ public class PlayerAirAttack : MonoBehaviour
     [Header("생성 위치 보정")]
     [SerializeField] private float offset = 2.5f;
 
+    [Header("체공 보정")]
+    [SerializeField] private float xAirOffset = 0.2f;
+    [SerializeField] private float yAirOffset = 0.05f;
+
     private InputManager inputManager;
     private AttackHitboxPool attackHitboxPool;
     private AttackHitboxSpawner attackHitboxSpawner;
 
+    private Rigidbody2D rigid;
     private PlayerState playerState;
 
     private bool downInput;
@@ -30,6 +37,10 @@ public class PlayerAirAttack : MonoBehaviour
     private bool isComboGraceActive;
     private float comboGraceEndTime;
     private int attackStepVersion;
+
+    private CancellationTokenSource cts;
+
+    private float originalGravity;
 
     [Inject]
     public void Construct(
@@ -43,8 +54,11 @@ public class PlayerAirAttack : MonoBehaviour
 
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
         attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
+
+        originalGravity = rigid.gravityScale;
     }
 
     private void Start()
@@ -110,7 +124,25 @@ public class PlayerAirAttack : MonoBehaviour
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
 
         attackStepVersion++;
+        AirCorrection().Forget();
         TestEndAttack(attackStepVersion).Forget();
+    }
+
+    private async UniTask AirCorrection()
+    {
+        cts = new CancellationTokenSource();
+
+        rigid.gravityScale = 0f;
+
+        while (true)
+        {
+            rigid.linearVelocity = new Vector2(
+                rigid.linearVelocity.x * xAirOffset, 
+                rigid.linearVelocity.y * yAirOffset);
+
+            await UniTask.WaitForFixedUpdate(
+                cancellationToken: cts.Token);
+        }
     }
 
     public void OpenComboInput()
@@ -158,6 +190,8 @@ public class PlayerAirAttack : MonoBehaviour
         if (!playerState.IsAirAttacking)
             return;
 
+        cts?.Cancel();
+        rigid.gravityScale = originalGravity;
         attackStepVersion++;
         canQueueNextAttack = false;
 

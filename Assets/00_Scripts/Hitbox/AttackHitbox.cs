@@ -13,9 +13,13 @@ public class AttackHitbox : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
 
+    private int targetLayer;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        targetLayer = LayerMask.NameToLayer("Enemy");
     }
 
     private void OnEnable()
@@ -30,7 +34,8 @@ public class AttackHitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent<IDamageable>(out var damageable))
+        if (collision.TryGetComponent<IDamageable>(out var damageable) &&
+            collision.gameObject.layer == targetLayer)
         {
             damageable.TakeDamage(damage);
         }
