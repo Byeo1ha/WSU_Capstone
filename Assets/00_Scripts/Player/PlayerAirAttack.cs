@@ -178,15 +178,15 @@ public class PlayerAirAttack : MonoBehaviour
         await UniTask.Delay(
             TimeSpan.FromSeconds(0.4f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
-        
+    
+        EndAttack(version);
+    }
+
+    public void EndAttack(int version)
+    {
         if (version != attackStepVersion)
             return;
 
-        EndAttack();
-    }
-
-    public void EndAttack()
-    {
         if (!playerState.IsAirAttacking)
             return;
 
@@ -214,6 +214,6 @@ public class PlayerAirAttack : MonoBehaviour
 
         isAirComboActive = false;
         isNextAttackQueued = false;
-        playerState.StopAirAttack();
+        playerState.StopAction(PlayerActionState.AirAttack);
     }
 }

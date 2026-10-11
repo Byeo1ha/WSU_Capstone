@@ -64,7 +64,7 @@ public class PlayerLowAttack : MonoBehaviour
         rigid.AddForce(Vector2.down * slamPower, ForceMode2D.Impulse);
 
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
-        playerState.StartDownAttack();
+        playerState.StartLowAttack();
 
         TestEndAttack().Forget();
     }
@@ -82,6 +82,6 @@ public class PlayerLowAttack : MonoBehaviour
 
     public void EndAttack()
     {
-        playerState.StopDownAttack();
+        playerState.StopAction(PlayerActionState.LowAttack);
     }
 }

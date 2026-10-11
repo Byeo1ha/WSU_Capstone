@@ -4,8 +4,8 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlayerState))]
-[RequireComponent(typeof(PlayerGroundCheck))]
 public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어의 이동 속도")]
@@ -17,6 +17,7 @@ public class PlayerMove : MonoBehaviour
     private InputManager inputManager;
 
     private Rigidbody2D rigid;
+    private SpriteRenderer spriteRenderer;
     private PlayerState playerState;
 
     private float moveInput;
@@ -32,6 +33,7 @@ public class PlayerMove : MonoBehaviour
     private void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         playerState = GetComponent<PlayerState>();
     }
 
@@ -66,6 +68,24 @@ public class PlayerMove : MonoBehaviour
         }
 
         wasAirAttack = isAirAttack;
+
+        MoveFlip();
+    }
+
+    private void MoveFlip()
+    {
+        if (moveInput == 0) return;
+
+        if (playerState.IsActionLocked())
+            return;
+        
+        OnFlip(moveInput);
+    }
+
+    private void OnFlip(float input)
+    {
+        if (input < 0) spriteRenderer.flipX = true;
+        else if (input > 0) spriteRenderer.flipX = false;
     }
 
     private void Move(float input)

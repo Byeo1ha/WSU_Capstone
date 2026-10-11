@@ -6,7 +6,7 @@ public enum PlayerActionState
     NormalAttack,
     HighAttack,
     AirAttack,
-    DownAttack,
+    LowAttack,
     Dodge
 }
 
@@ -16,7 +16,7 @@ public class PlayerState : MonoBehaviour
 
     public bool IsNormalAttacking => CurrentAction == PlayerActionState.NormalAttack;
     public bool IsAirAttacking => CurrentAction == PlayerActionState.AirAttack;
-    public bool IsDownAttacking => CurrentAction == PlayerActionState.DownAttack;
+    public bool IsLowAttacking => CurrentAction == PlayerActionState.LowAttack;
     public bool IsDodging => CurrentAction == PlayerActionState.Dodge;
     public bool IsAttacking => IsNormalAttacking || IsAirAttacking;
     
@@ -50,41 +50,26 @@ public class PlayerState : MonoBehaviour
         CurrentAction = nextAction;
     }
 
-    private void TryStopAction(PlayerActionState action)
+    public void StopAction(PlayerActionState action)
     {
-        if (CurrentAction != action)
-            return;
-        
+        if (CurrentAction != action) return;
+
         CurrentAction = PlayerActionState.None;
     }
 
     public void StartNormalAttack() 
         => TryStartAction(PlayerActionState.NormalAttack);
 
-    public void StopNormalAttack()
-        => TryStopAction(PlayerActionState.NormalAttack);
-
     public void StartHighAttack()
         => TryStartAction(PlayerActionState.HighAttack);
-
-    public void StopHighAttack()
-        => TryStopAction(PlayerActionState.HighAttack);
 
     public void StartAirAttack()
         => TryStartAction(PlayerActionState.AirAttack);
 
-    public void StopAirAttack()
-        => TryStopAction(PlayerActionState.AirAttack);
-
     public void StartDodge()
         => TryStartAction(PlayerActionState.Dodge);
 
-    public void StopDodge()
-        => TryStopAction(PlayerActionState.Dodge);
+    public void StartLowAttack()
+        => TryStartAction(PlayerActionState.LowAttack);
 
-    public void StartDownAttack()
-        => TryStartAction(PlayerActionState.DownAttack);
-
-    public void StopDownAttack()
-        => TryStopAction(PlayerActionState.DownAttack);
 }

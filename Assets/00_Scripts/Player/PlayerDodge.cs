@@ -6,6 +6,7 @@ using VContainer;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PlayerState))]
 public class PlayerDodge : MonoBehaviour
 {
     [SerializeField] private float dashDistance = 3f;
@@ -81,7 +82,7 @@ public class PlayerDodge : MonoBehaviour
                 cancellationToken: this.GetCancellationTokenOnDestroy());
         }
 
-        playerState.StopDodge();
+        playerState.StopAction(PlayerActionState.Dodge);
 
         gameObject.layer = originalLayer;
     }

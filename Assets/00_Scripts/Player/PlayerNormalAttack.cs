@@ -145,15 +145,15 @@ public class PlayerNormalAttack : MonoBehaviour
         await UniTask.Delay(
             TimeSpan.FromSeconds(0.4f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
-        
+
+        EndAttack(version);
+    }
+
+    public void EndAttack(int version)
+    {
         if (version != attackStepVersion)
             return;
 
-        EndAttack();
-    }
-
-    public void EndAttack()
-    {
         if (!playerState.IsNormalAttacking)
             return;
 
@@ -179,6 +179,6 @@ public class PlayerNormalAttack : MonoBehaviour
 
         isGroundComboActive = false;
         isNextAttackQueued = false;
-        playerState.StopNormalAttack();
+        playerState.StopAction(PlayerActionState.NormalAttack);
     }
 }

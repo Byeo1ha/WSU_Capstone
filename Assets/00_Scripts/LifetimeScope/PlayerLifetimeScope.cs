@@ -22,7 +22,6 @@ public class PlayerLifetimeScope : LifetimeScope
     {
         builder.RegisterComponentInHierarchy<PlayerMove>();
         builder.RegisterComponentInHierarchy<PlayerJump>();
-        builder.RegisterComponentInHierarchy<PlayerSpriteFlip>();
         builder.RegisterComponentInHierarchy<PlayerNormalAttack>();
         builder.RegisterComponentInHierarchy<PlayerHighAttack>();
         builder.RegisterComponentInHierarchy<PlayerAirAttack>();

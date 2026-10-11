@@ -113,6 +113,6 @@ public class PlayerHighAttack : MonoBehaviour
 
     public void EndAttack()
     {
-        playerState.StopHighAttack();
+        playerState.StopAction(PlayerActionState.HighAttack);
     }
 }
