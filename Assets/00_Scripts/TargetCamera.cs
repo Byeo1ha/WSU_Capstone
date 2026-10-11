@@ -21,7 +21,7 @@ public class TargetCamera : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
-    private void FixedUpdate() 
+    private void LateUpdate() 
     {
         Vector3 targetPos = target.position;
 
