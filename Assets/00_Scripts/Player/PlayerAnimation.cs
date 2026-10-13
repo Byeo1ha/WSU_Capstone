@@ -1,3 +1,4 @@
+using System;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -8,6 +9,8 @@ public class PlayerAnimation : MonoBehaviour
 {
     private InputManager inputManager;
     private PlayerState playerState;
+    private PlayerNormalAttack playerNormalAttack;
+    private IDisposable normalAttackSubscription;
 
     private Animator anim;
 
@@ -23,6 +26,22 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
+        playerNormalAttack = GetComponent<PlayerNormalAttack>();
+    }
+
+    private void OnEnable()
+    {
+        if (playerNormalAttack == null) return;
+
+        normalAttackSubscription = playerNormalAttack.OnNormalAttackStarted
+            .Subscribe(StartNormalAttackAnim)
+            .AddTo(this);
+    }
+
+    private void OnDisable()
+    {
+        normalAttackSubscription?.Dispose();
+        normalAttackSubscription = null;
     }
 
     private void Start()
@@ -54,4 +73,9 @@ public class PlayerAnimation : MonoBehaviour
         anim.SetBool("isJump", true);
     }
 
+    private void StartNormalAttackAnim(int comboIndex)
+    {
+        anim.SetInteger("isNormalAttackCombo", comboIndex);
+        anim.SetTrigger("normalAttack");
+    }
 }

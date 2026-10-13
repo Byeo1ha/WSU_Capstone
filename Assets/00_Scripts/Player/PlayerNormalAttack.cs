@@ -10,6 +10,9 @@ public class PlayerNormalAttack : MonoBehaviour
 {
     private const int MaxComboCount = 4;
 
+    private readonly Subject<int> onNormalAttackStarted = new();
+    public Observable<int> OnNormalAttackStarted => onNormalAttackStarted;
+
     [Header("공격 종료 후 콤보 유예시간")]
     [SerializeField] private float comboGraceDuration = 0.4f;
 
@@ -104,15 +107,16 @@ public class PlayerNormalAttack : MonoBehaviour
         canQueueNextAttack = false;
         isNextAttackQueued = false;
 
-        //Debug.Log($"진행 중인 Index: {comboIndex}");
+        onNormalAttackStarted.OnNext(comboIndex);
 
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
 
         attackStepVersion++;
-        TestEndAttack(attackStepVersion).Forget();
+        
+        //TestEndAttack(attackStepVersion).Forget();
     }
 
-    public void OpenComboInput()
+    public void OpenNormalAttackComboInput()
     {
         if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
             return;
@@ -149,6 +153,12 @@ public class PlayerNormalAttack : MonoBehaviour
         EndAttack(version);
     }
 
+    //애니메이션 전용 함수
+    public void OnNormalAttackAnimationEnd()
+    {
+        EndAttack(attackStepVersion);
+    }
+
     public void EndAttack(int version)
     {
         if (version != attackStepVersion)
@@ -180,5 +190,10 @@ public class PlayerNormalAttack : MonoBehaviour
         isGroundComboActive = false;
         isNextAttackQueued = false;
         playerState.StopAction(PlayerActionState.NormalAttack);
+    }
+
+    private void OnDestroy()
+    {
+        onNormalAttackStarted.Dispose();
     }
 }
