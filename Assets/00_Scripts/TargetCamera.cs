@@ -20,8 +20,8 @@ public class TargetCamera : MonoBehaviour
     [SerializeField] private float yMinValue = 0;
 
     [Header("카메라 흔들림 연출 값")]
-    [SerializeField] private float maxShakingValue = 0.2f;
-    [SerializeField] private float minShakingValue = -0.2f;
+    [SerializeField] private float normalShakingValue = 0.02f;
+    [SerializeField] private float powerShakingValue = 0.07f;
 
     private Vector3 velocity = Vector3.zero;
 
@@ -74,13 +74,26 @@ public class TargetCamera : MonoBehaviour
             smoothTime);
     }
 
-    public void Shaking()
+    public void NormalShaking()
     {
-        Debug.Log("화면");
-        float randomX = Random.Range(minShakingValue, maxShakingValue);
-        float randomY = Random.Range(minShakingValue, maxShakingValue);
-        float randomZ = Random.Range(minShakingValue, maxShakingValue);
+        float randomX = Random.Range(normalShakingValue * (-1), normalShakingValue);
+        float randomY = Random.Range(normalShakingValue * (-1), normalShakingValue);
+        float randomZ = Random.Range(normalShakingValue * (-1), normalShakingValue);
+        
+        Shaking(randomX, randomY, randomZ);
+    }
 
+    public void PowerShaking()
+    {
+        float randomX = powerShakingValue * (Random.value < 0.5f ? -1 : 1);
+        float randomY = powerShakingValue * (Random.value < 0.5f ? -1 : 1);
+        float randomZ = powerShakingValue * (Random.value < 0.5f ? -1 : 1);
+        
+        Shaking(randomX, randomY, randomZ);
+    }
+
+    private void Shaking(float randomX, float randomY, float randomZ)
+    {
         transform.position = new Vector3(
             transform.position.x + randomX,
             transform.position.y + randomY,

@@ -21,6 +21,7 @@ public class PlayerNormalAttack : MonoBehaviour
 
     private InputManager inputManager;
     private AttackHitboxPool attackHitboxPool;
+    private AttackHitboxPool finalAttackHitboxPool;
     private AttackHitboxSpawner attackHitboxSpawner;
 
     private PlayerState playerState;
@@ -34,14 +35,20 @@ public class PlayerNormalAttack : MonoBehaviour
     private float comboGraceEndTime;
     private int attackStepVersion;
 
+    public int ComboIndex => comboIndex;
+    public int MaxCombo => MaxComboCount;
+
     [Inject]
     public void Construct(
         InputManager inputManager,
         [Key(PoolKey.NormalAttack)]
-        AttackHitboxPool attackHitboxPool)
+        AttackHitboxPool attackHitboxPool,
+        [Key(PoolKey.FinalNormalAttack)]
+        AttackHitboxPool finalAttackHitboxPool)
     {
         this.inputManager = inputManager;
         this.attackHitboxPool = attackHitboxPool;
+        this.finalAttackHitboxPool = finalAttackHitboxPool;
     }
 
     private void Awake()
@@ -117,6 +124,13 @@ public class PlayerNormalAttack : MonoBehaviour
         if (!playerState.IsNormalAttacking) return;
         
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
+    }
+
+    public void OnFinalNormalAttackHitboxStart()
+    {
+        if (!playerState.IsNormalAttacking) return;
+        
+        attackHitboxSpawner.Spawn(finalAttackHitboxPool, offset);
     }
 
     public void OpenNormalAttackComboInput()

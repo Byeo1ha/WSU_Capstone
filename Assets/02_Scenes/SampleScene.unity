@@ -1124,6 +1124,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   normalAttack: {fileID: 1910554093}
+  finalNormalAttack: {fileID: 1168619196}
   highAttack: {fileID: 1922821040}
   airAttack: {fileID: 706479939}
   lowAttack: {fileID: 1209936296}

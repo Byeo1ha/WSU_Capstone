@@ -5,6 +5,7 @@ using VContainer.Unity;
 public enum PoolKey
 {
     NormalAttack,
+    FinalNormalAttack,
     HighAttack,
     AirAttack,
     LowAttack
@@ -14,6 +15,7 @@ public class PlayerLifetimeScope : LifetimeScope
 {
     [Header("키로 등록할 객체들")]
     [SerializeField] private AttackHitboxPool normalAttack;
+    [SerializeField] private AttackHitboxPool finalNormalAttack;
     [SerializeField] private AttackHitboxPool highAttack;
     [SerializeField] private AttackHitboxPool airAttack;
     [SerializeField] private AttackHitboxPool lowAttack;
@@ -31,6 +33,7 @@ public class PlayerLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PlayerAttackFeedback>();
 
         builder.RegisterComponent(normalAttack).Keyed(PoolKey.NormalAttack);
+        builder.RegisterComponent(finalNormalAttack).Keyed(PoolKey.FinalNormalAttack);
         builder.RegisterComponent(highAttack).Keyed(PoolKey.HighAttack);
         builder.RegisterComponent(airAttack).Keyed(PoolKey.AirAttack);
         builder.RegisterComponent(lowAttack).Keyed(PoolKey.LowAttack);

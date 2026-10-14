@@ -3,11 +3,13 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
+[RequireComponent(typeof(PlayerNormalAttack))]
 [RequireComponent(typeof(Animator))]
 public class PlayerAttackFeedback : MonoBehaviour
 {
     private TargetCamera targetCamera;
 
+    private PlayerNormalAttack playerNormalAttack;
     private Animator anim;
 
     private float originalAnimSpeed;
@@ -20,6 +22,7 @@ public class PlayerAttackFeedback : MonoBehaviour
 
     private void Awake()
     {
+        playerNormalAttack = GetComponent<PlayerNormalAttack>();
         anim = GetComponent<Animator>();
     }
 
@@ -31,7 +34,11 @@ public class PlayerAttackFeedback : MonoBehaviour
 
     private void CameraShaking()
     {
-        targetCamera.Shaking();
+        if (playerNormalAttack.ComboIndex
+            == playerNormalAttack.MaxCombo - 1)
+            targetCamera.PowerShaking();
+        else
+            targetCamera.NormalShaking();
     }
 
     private async UniTask HitStop()
