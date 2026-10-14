@@ -49,7 +49,7 @@ public class AttackHitbox : MonoBehaviour
     private async UniTask TestDeActive()
     {
         await UniTask.Delay(
-            TimeSpan.FromSeconds(0.4f), 
+            TimeSpan.FromSeconds(0.2f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
         pool.Release(this);
