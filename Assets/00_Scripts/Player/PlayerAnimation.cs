@@ -4,9 +4,11 @@ using UnityEngine;
 using VContainer;
 
 [RequireComponent(typeof(PlayerState))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimation : MonoBehaviour
 {
+    private Rigidbody2D rigid;
     private InputManager inputManager;
     private PlayerState playerState;
     private PlayerNormalAttack playerNormalAttack;
@@ -24,6 +26,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
         playerNormalAttack = GetComponent<PlayerNormalAttack>();
@@ -57,15 +60,33 @@ public class PlayerAnimation : MonoBehaviour
 
     private void FixedUpdate()
     {
+        RunAnimCheck();
+        GroundCheck();
+        FallCheck();
+    }
+
+    private void RunAnimCheck()
+    {
         if (moveInput == 0) anim.SetBool("isRun", false);
         else anim.SetBool("isRun", true);
-
-        GroundCheck();
     }
 
     private void GroundCheck()
     {
         if (playerState.IsGrounded) anim.SetBool("isJump", false);
+    }
+
+    private void FallCheck()
+    {
+        if (rigid.linearVelocity.y < -0.3f)
+        {
+            anim.SetBool("isFall", true);
+            anim.SetBool("isJump", false);
+        }
+        else
+        {
+            anim.SetBool("isFall", false);
+        }
     }
 
     private void StartJumpAnim()

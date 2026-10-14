@@ -19,6 +19,10 @@ public class TargetCamera : MonoBehaviour
     [SerializeField] private bool yMinEnabled = false;
     [SerializeField] private float yMinValue = 0;
 
+    [Header("카메라 흔들림 연출 값")]
+    [SerializeField] private float maxShakingValue = 0.2f;
+    [SerializeField] private float minShakingValue = -0.2f;
+
     private Vector3 velocity = Vector3.zero;
 
     private void LateUpdate() 
@@ -68,5 +72,19 @@ public class TargetCamera : MonoBehaviour
             targetPos, 
             ref velocity, 
             smoothTime);
+    }
+
+    public void Shaking()
+    {
+        Debug.Log("화면");
+        float randomX = Random.Range(minShakingValue, maxShakingValue);
+        float randomY = Random.Range(minShakingValue, maxShakingValue);
+        float randomZ = Random.Range(minShakingValue, maxShakingValue);
+
+        transform.position = new Vector3(
+            transform.position.x + randomX,
+            transform.position.y + randomY,
+            transform.position.z + randomZ
+        );
     }
 }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
+using VContainer;
+using VContainer.Unity;
 
 public class AttackHitboxPool : MonoBehaviour
 {
@@ -7,6 +9,13 @@ public class AttackHitboxPool : MonoBehaviour
     [SerializeField] private AttackHitbox attackHitbox; //풀링할 대상
     
     private ObjectPool<AttackHitbox> pool;
+    private IObjectResolver resolver;
+
+    [Inject]
+    public void Construct(IObjectResolver resolver)
+    {
+        this.resolver = resolver;
+    }
 
     private void Awake()
     {
@@ -30,7 +39,7 @@ public class AttackHitboxPool : MonoBehaviour
 
     private AttackHitbox CreateAttack()
     {
-        AttackHitbox attack = Instantiate(attackHitbox, gameObject.transform);
+        AttackHitbox attack = resolver.Instantiate(attackHitbox, gameObject.transform);
         attack.SetPool(pool);
 
         return attack;

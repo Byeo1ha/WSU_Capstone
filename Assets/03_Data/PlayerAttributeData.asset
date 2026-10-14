@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5e4f2ac0da52e4dbc3c8adebee9e08, type: 3}
   m_Name: PlayerAttributeData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttributeData
-  hp: 15
+  hp: 100

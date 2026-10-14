@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
+using VContainer;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class AttackHitbox : MonoBehaviour
@@ -12,8 +13,15 @@ public class AttackHitbox : MonoBehaviour
     private IObjectPool<AttackHitbox> pool;
 
     private SpriteRenderer spriteRenderer;
+    private PlayerAttackFeedback playerAttackFeedback;
 
     private int targetLayer;
+
+    [Inject]
+    public void Construct(PlayerAttackFeedback playerAttackFeedback)
+    {
+        this.playerAttackFeedback = playerAttackFeedback;
+    }
 
     private void Awake()
     {
@@ -38,6 +46,7 @@ public class AttackHitbox : MonoBehaviour
             collision.gameObject.layer == targetLayer)
         {
             damageable.TakeDamage(damage);
+            playerAttackFeedback.StartFeedback();
         }
     }
 

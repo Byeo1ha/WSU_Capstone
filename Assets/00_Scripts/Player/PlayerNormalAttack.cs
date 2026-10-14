@@ -109,11 +109,14 @@ public class PlayerNormalAttack : MonoBehaviour
 
         onNormalAttackStarted.OnNext(comboIndex);
 
-        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
-
         attackStepVersion++;
+    }
+
+    public void OnNormalAttackHitboxStart()
+    {
+        if (!playerState.IsNormalAttacking) return;
         
-        //TestEndAttack(attackStepVersion).Forget();
+        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
     }
 
     public void OpenNormalAttackComboInput()
