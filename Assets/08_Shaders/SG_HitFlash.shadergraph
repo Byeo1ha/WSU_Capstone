@@ -708,7 +708,7 @@
         "r": 1.0,
         "g": 1.0,
         "b": 1.0,
-        "a": 0.3921568691730499
+        "a": 0.5882353186607361
     },
     "isMainColor": false,
     "m_ColorMode": 0
@@ -791,7 +791,7 @@
     "m_LiteralFloatMode": false,
     "m_RangeValues": {
         "x": 0.0,
-        "y": 0.5
+        "y": 0.30000001192092898
     },
     "m_SliderType": 0,
     "m_SliderPower": 3.0,

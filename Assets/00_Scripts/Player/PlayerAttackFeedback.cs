@@ -13,6 +13,7 @@ public class PlayerAttackFeedback : MonoBehaviour
     private Animator anim;
 
     private float originalAnimSpeed;
+    private bool isHitStopping;
 
     [Inject]
     public void Construct(TargetCamera targetCamera)
@@ -43,12 +44,22 @@ public class PlayerAttackFeedback : MonoBehaviour
 
     private async UniTask HitStop()
     {
+        if (isHitStopping) return;
+        
+        isHitStopping = true;
+
         originalAnimSpeed = anim.speed;
         anim.speed = 0f;
-        
-        await UniTask.Delay(TimeSpan.FromSeconds(0.05f),
-            cancellationToken: this.GetCancellationTokenOnDestroy());
 
-        anim.speed = originalAnimSpeed;
+        try
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(0.05f),
+                cancellationToken: this.GetCancellationTokenOnDestroy());
+        }
+        finally
+        {
+            anim.speed = originalAnimSpeed;
+            isHitStopping = false;
+        }
     }
 }

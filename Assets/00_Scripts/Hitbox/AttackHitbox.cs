@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -18,6 +19,8 @@ public class AttackHitbox : MonoBehaviour
 
     private int targetLayer;
 
+    private CancellationTokenSource cts;
+
     [Inject]
     public void Construct(PlayerAttackFeedback playerAttackFeedback)
     {
@@ -33,7 +36,16 @@ public class AttackHitbox : MonoBehaviour
 
     private void OnEnable()
     {
+        cts = new CancellationTokenSource();
+        
         TestDeActive().Forget();
+    }
+
+    private void OnDisable()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
     }
 
     public void SetPool(IObjectPool<AttackHitbox> pool)
@@ -70,7 +82,7 @@ public class AttackHitbox : MonoBehaviour
     {
         await UniTask.Delay(
             TimeSpan.FromSeconds(0.2f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
+            cancellationToken: cts.Token);
 
         pool.Release(this);
     }

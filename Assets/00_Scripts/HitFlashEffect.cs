@@ -31,7 +31,7 @@ public class HitFlashEffect : MonoBehaviour
 
     private IEnumerator FlashRoutine()
     {
-        SetFlashAmount(0.7f);
+        SetFlashAmount(0.5f);
 
         yield return new WaitForSeconds(flashDuration);
 

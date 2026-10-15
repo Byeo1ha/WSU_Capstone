@@ -79,7 +79,8 @@ public class PlayerHighAttack : MonoBehaviour
 
     private async UniTask AirCorrection()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+        await UniTask.Delay(TimeSpan.FromSeconds(0.2f),
+            cancellationToken: this.GetCancellationTokenOnDestroy());
 
         cts = new CancellationTokenSource();
 
@@ -106,13 +107,17 @@ public class PlayerHighAttack : MonoBehaviour
             TimeSpan.FromSeconds(0.2f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
-        rigid.gravityScale = originalGravity;
-        cts?.Cancel();
         EndAttack();
     }
 
     public void EndAttack()
     {
+        rigid.gravityScale = originalGravity;
+        
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
+
         playerState.StopAction(PlayerActionState.HighAttack);
     }
 }

@@ -8,6 +8,7 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
 
     private void Awake()
     {
+
         hp = data.Hp;
     }
 
