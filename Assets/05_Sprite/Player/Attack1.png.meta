@@ -89,9 +89,6 @@ TextureImporter:
   - first:
       213: -8118909442114183852
     second: Attack1_28
-  - first:
-      213: -6248466401528118510
-    second: Attack1_29
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -327,7 +324,7 @@ TextureImporter:
         width: 185
         height: 116
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.05, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -476,7 +473,7 @@ TextureImporter:
       name: Attack1_13
       rect:
         serializedVersion: 2
-        x: 2405
+        x: 2404
         y: 0
         width: 185
         height: 116
@@ -591,7 +588,7 @@ TextureImporter:
         width: 185
         height: 116
       alignment: 9
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0.15, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -608,7 +605,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e1ddcf70891218348a1ba57d89057bae
+    spriteID: 2c9ddbbc90385e74189ac5bec0e1cca0
     internalID: 0
     vertices: []
     indices: 
