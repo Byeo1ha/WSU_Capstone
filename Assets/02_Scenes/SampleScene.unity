@@ -1006,12 +1006,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 655570221}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.08, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1081187068}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &706479937
 GameObject:
@@ -1189,6 +1189,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 655570223}
   - {fileID: 292054746}
   - {fileID: 1209463408}
   - {fileID: 1254971205}
@@ -1852,6 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bc759402c8f0ba468883b6ea6305398, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttackFeedback
+  duration: 0.1
 --- !u!70 &1729075183
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -2187,7 +2189,6 @@ SceneRoots:
   - {fileID: 1729075164}
   - {fileID: 425924836}
   - {fileID: 1180540965}
-  - {fileID: 655570223}
   - {fileID: 1037723319}
   - {fileID: 290039866}
   - {fileID: 60569526}

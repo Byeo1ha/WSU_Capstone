@@ -5,11 +5,18 @@ using UnityEngine;
 using UnityEngine.Pool;
 using VContainer;
 
+public enum ShakingType
+{
+    Normal,
+    Power
+}
+
 [RequireComponent(typeof(SpriteRenderer))]
 public class AttackHitbox : MonoBehaviour
 {
     [Header("피해량")]
     [SerializeField] private int damage;
+    [SerializeField] private ShakingType shakingType;
 
     private IObjectPool<AttackHitbox> pool;
 
@@ -66,7 +73,7 @@ public class AttackHitbox : MonoBehaviour
             Vector3 hitPosition = collision.transform.position;
 
             damageable.TakeDamage(damage);
-            playerAttackFeedback.StartFeedback();
+            playerAttackFeedback.StartFeedback(shakingType);
 
             if (hitEffectPool != null)
                 hitEffectPool.Spawn(hitPosition, spriteRenderer.flipX);

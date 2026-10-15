@@ -8,6 +8,7 @@ using VContainer;
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(PlayerNormalAttack))]
 [RequireComponent(typeof(PlayerLowAttack))]
+[RequireComponent(typeof(PlayerAttackFeedback))]
 public class PlayerAnimation : MonoBehaviour
 {
     private Rigidbody2D rigid;
@@ -15,6 +16,7 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerState playerState;
     private PlayerNormalAttack playerNormalAttack;
     private PlayerLowAttack playerLowAttack;
+    private PlayerAttackFeedback playerAttackFeedback;
 
     private IDisposable normalAttackSubscription;
 
@@ -35,6 +37,7 @@ public class PlayerAnimation : MonoBehaviour
         playerState = GetComponent<PlayerState>();
         playerNormalAttack = GetComponent<PlayerNormalAttack>();
         playerLowAttack = GetComponent<PlayerLowAttack>();
+        playerAttackFeedback = GetComponent<PlayerAttackFeedback>();
     }
 
     private void Start()
@@ -85,6 +88,8 @@ public class PlayerAnimation : MonoBehaviour
 
     private void FallCheck()
     {
+        if (playerAttackFeedback.IsHitStopping) return;
+
         if (rigid.linearVelocity.y < -0.3f)
         {
             anim.SetBool("isFall", true);

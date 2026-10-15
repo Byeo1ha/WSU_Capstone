@@ -6,6 +6,7 @@ using VContainer;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(PlayerState))]
+[RequireComponent(typeof(PlayerAttackFeedback))]
 public class PlayerMove : MonoBehaviour
 {
     [Header("플레이어의 이동 속도")]
@@ -19,6 +20,7 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rigid;
     private SpriteRenderer spriteRenderer;
     private PlayerState playerState;
+    private PlayerAttackFeedback playerAttackFeedback;
 
     private float moveInput;
     private float lockedAirSpeed;
@@ -35,6 +37,7 @@ public class PlayerMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerState = GetComponent<PlayerState>();
+        playerAttackFeedback = GetComponent<PlayerAttackFeedback>();
     }
 
     private void Start()
@@ -46,6 +49,12 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (playerAttackFeedback.IsHitStopping)
+        {
+            rigid.linearVelocity = Vector2.zero;
+            return;
+        }
+
         bool isActionLocked = playerState.IsActionLocked();
         bool isAirAttack = playerState.IsAttacking && !playerState.IsGrounded;
 

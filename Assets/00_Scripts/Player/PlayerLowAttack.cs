@@ -64,10 +64,14 @@ public class PlayerLowAttack : MonoBehaviour
     {
         rigid.AddForce(Vector2.down * slamPower, ForceMode2D.Impulse);
 
-        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
         playerState.StartLowAttack();
 
         onLowAttackStarted.OnNext(Unit.Default);
+    }
+
+    public void OnLowAttackHitboxStart()
+    {
+        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
     }
 
     public void EndAttack()
