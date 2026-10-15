@@ -6,12 +6,16 @@ using VContainer;
 [RequireComponent(typeof(PlayerState))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerNormalAttack))]
+[RequireComponent(typeof(PlayerLowAttack))]
 public class PlayerAnimation : MonoBehaviour
 {
     private Rigidbody2D rigid;
     private InputManager inputManager;
     private PlayerState playerState;
     private PlayerNormalAttack playerNormalAttack;
+    private PlayerLowAttack playerLowAttack;
+
     private IDisposable normalAttackSubscription;
 
     private Animator anim;
@@ -30,21 +34,7 @@ public class PlayerAnimation : MonoBehaviour
         anim = GetComponent<Animator>();
         playerState = GetComponent<PlayerState>();
         playerNormalAttack = GetComponent<PlayerNormalAttack>();
-    }
-
-    private void OnEnable()
-    {
-        if (playerNormalAttack == null) return;
-
-        normalAttackSubscription = playerNormalAttack.OnNormalAttackStarted
-            .Subscribe(StartNormalAttackAnim)
-            .AddTo(this);
-    }
-
-    private void OnDisable()
-    {
-        normalAttackSubscription?.Dispose();
-        normalAttackSubscription = null;
+        playerLowAttack = GetComponent<PlayerLowAttack>();
     }
 
     private void Start()
@@ -56,6 +46,23 @@ public class PlayerAnimation : MonoBehaviour
         inputManager.OnJump
             .Subscribe(_ => StartJumpAnim())
             .AddTo(this);
+
+        playerLowAttack.OnLowAttackStarted
+            .Subscribe(_ => StartLowAttackAnim())
+            .AddTo(this);
+    }
+
+    private void OnEnable()
+    {  
+        normalAttackSubscription = playerNormalAttack.OnNormalAttackStarted
+            .Subscribe(StartNormalAttackAnim)
+            .AddTo(this);
+    }
+
+    private void OnDisable()
+    {
+        normalAttackSubscription?.Dispose();
+        normalAttackSubscription = null;
     }
 
     private void FixedUpdate()
@@ -98,5 +105,17 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim.SetInteger("isNormalAttackCombo", comboIndex);
         anim.SetTrigger("normalAttack");
+    }
+
+    private void StartLowAttackAnim()
+    {
+        anim.SetBool("isLowAttack", true);
+    }
+
+    //애니메이션 클립 전용 함수
+    public void StopLowAttackAnim()
+    {
+        anim.SetBool("isLowAttack", false);
+        playerLowAttack.EndAttack();
     }
 }

@@ -46,6 +46,8 @@ public class PlayerAttackFeedback : MonoBehaviour
     {
         if (isHitStopping) return;
         
+        Debug.Log("빵야");
+
         isHitStopping = true;
 
         originalAnimSpeed = anim.speed;

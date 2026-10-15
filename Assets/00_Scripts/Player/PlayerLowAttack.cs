@@ -1,5 +1,3 @@
-using System;
-using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 using VContainer;
@@ -9,6 +7,9 @@ using VContainer;
 [RequireComponent(typeof(AttackHitboxSpawner))]
 public class PlayerLowAttack : MonoBehaviour
 {
+    private readonly Subject<Unit> onLowAttackStarted = new();
+    public Observable<Unit> OnLowAttackStarted => onLowAttackStarted;
+    
     [Header("내려가는 강도")]
     [SerializeField] private float slamPower = 20f;
     [Header("생성 위치 보정")]
@@ -66,18 +67,7 @@ public class PlayerLowAttack : MonoBehaviour
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
         playerState.StartLowAttack();
 
-        TestEndAttack().Forget();
-    }
-
-    //테스트 전용 함수
-    //캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
-    private async UniTask TestEndAttack()
-    {
-        await UniTask.Delay(
-            TimeSpan.FromSeconds(0.4f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-
-        EndAttack();
+        onLowAttackStarted.OnNext(Unit.Default);
     }
 
     public void EndAttack()
