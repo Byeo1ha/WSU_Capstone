@@ -14,6 +14,7 @@ public class AttackHitbox : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private PlayerAttackFeedback playerAttackFeedback;
+    private HitEffectPool hitEffectPool;
 
     private int targetLayer;
 
@@ -40,13 +41,23 @@ public class AttackHitbox : MonoBehaviour
         this.pool = pool;
     }
 
+    public void SetHitEffectPool(HitEffectPool hitEffectPool)
+    {
+        this.hitEffectPool = hitEffectPool;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.TryGetComponent<IDamageable>(out var damageable) &&
             collision.gameObject.layer == targetLayer)
         {
+            Vector3 hitPosition = collision.transform.position;
+
             damageable.TakeDamage(damage);
             playerAttackFeedback.StartFeedback();
+
+            if (hitEffectPool != null)
+                hitEffectPool.Spawn(hitPosition, spriteRenderer.flipX);
         }
     }
 

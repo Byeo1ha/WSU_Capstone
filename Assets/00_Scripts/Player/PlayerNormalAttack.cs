@@ -17,7 +17,10 @@ public class PlayerNormalAttack : MonoBehaviour
     [SerializeField] private float comboGraceDuration = 0.4f;
 
     [Header("생성 위치 보정")]
-    [SerializeField] private float offset = 2.5f;
+    [SerializeField] private float offset = 1.5f;
+
+    [Header("4타 생성 위치 보정")]
+    [SerializeField] private float finalAttackOffset = 3.5f;
 
     private InputManager inputManager;
     private AttackHitboxPool attackHitboxPool;
@@ -130,7 +133,7 @@ public class PlayerNormalAttack : MonoBehaviour
     {
         if (!playerState.IsNormalAttacking) return;
         
-        attackHitboxSpawner.Spawn(finalAttackHitboxPool, offset);
+        attackHitboxSpawner.Spawn(finalAttackHitboxPool, finalAttackOffset);
     }
 
     public void OpenNormalAttackComboInput()

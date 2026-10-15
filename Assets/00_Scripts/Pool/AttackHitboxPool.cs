@@ -7,6 +7,9 @@ public class AttackHitboxPool : MonoBehaviour
 {
     [Header("풀링할 객체")]
     [SerializeField] private AttackHitbox attackHitbox; //풀링할 대상
+
+    [Header("피격 이펙트 (필요한 공격에만 연결)")]
+    [SerializeField] private HitEffectPool hitEffectPool;
     
     private ObjectPool<AttackHitbox> pool;
     private IObjectResolver resolver;
@@ -41,6 +44,7 @@ public class AttackHitboxPool : MonoBehaviour
     {
         AttackHitbox attack = resolver.Instantiate(attackHitbox, gameObject.transform);
         attack.SetPool(pool);
+        attack.SetHitEffectPool(hitEffectPool);
 
         return attack;
     }
