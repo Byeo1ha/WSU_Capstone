@@ -420,6 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ffb3bd3acfa9740bf91f7728a517b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
+  bossData: {fileID: 11400000, guid: 14bdd68b3e1993541942df7bf6a97fbe, type: 2}
   maxHealth: 600
 --- !u!4 &1028047474
 Transform:

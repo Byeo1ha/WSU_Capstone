@@ -3,8 +3,10 @@ using System;
 
 public class BossHealth : MonoBehaviour
 {
-    [Header("체력 설정")]
-    [SerializeField, Min(1)] private int maxHealth = 600;
+    [Header("보스 데이터")]
+    [SerializeField] private BossData bossData;
+
+    private int maxHealth;
 
     private int currentHealth;
 
@@ -15,6 +17,12 @@ public class BossHealth : MonoBehaviour
     
     private void Awake()
     {
+        if(bossData == null)
+        {
+            Debug.LogError("Boss Data연결 필요", this);
+            return;
+        }
+        maxHealth = bossData.MaxHealth;
         currentHealth = maxHealth;
     }
 
