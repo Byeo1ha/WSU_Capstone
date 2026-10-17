@@ -401,6 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1028047474}
   - component: {fileID: 1028047473}
+  - component: {fileID: 1028047475}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -421,7 +422,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossHealth
   bossData: {fileID: 11400000, guid: 14bdd68b3e1993541942df7bf6a97fbe, type: 2}
-  maxHealth: 600
 --- !u!4 &1028047474
 Transform:
   m_ObjectHideFlags: 0
@@ -437,6 +437,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1028047475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c91052341c763647a970d792b2b5e24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossPhaseController
+  bossHealth: {fileID: 1028047473}
+  currentPhase: 0
 --- !u!1 &1342568435
 GameObject:
   m_ObjectHideFlags: 0
