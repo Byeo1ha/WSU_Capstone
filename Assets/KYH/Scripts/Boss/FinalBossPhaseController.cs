@@ -25,4 +25,14 @@ public class FinalBossPhaseController : MonoBehaviour
 
         Debug.Log($"페이즈 관리: 체력 {healthRatio:P0}", this);
     }
+
+    private void ChangePhase(FinalBossPhase nextPhase)
+    {
+        if(currentPhase == nextPhase)
+            return;
+
+        currentPhase = nextPhase;
+
+        Debug.Log($"보스 페이즈 변경: {currentPhase}", this);
+    }
 }
