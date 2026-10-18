@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class BossPatternRunner : MonoBehaviour
 {
@@ -13,12 +14,16 @@ public class BossPatternRunner : MonoBehaviour
 
     public BossPatternState CurrentState => currentState;
 
+    public event Action<BossPatternState> StateChanged;
+
     private void ChangeState(BossPatternState nextState)
     {
         if(currentState == nextState)
             return;
 
         currentState = nextState;
+
+        StateChanged?.Invoke(currentState);
 
         Debug.Log($"패턴 단계 변경: {currentState}", this);
     }
