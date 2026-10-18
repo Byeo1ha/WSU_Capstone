@@ -1,7 +1,10 @@
+using NUnit.Framework;
 using UnityEngine;
+using System;
 
 public class FinalBossPhaseController : MonoBehaviour
 {
+    private bool hasStarted;
     private const float Phase2HealthRatio = 0.75f;
     private const float Phase3HealthRatio = 0.35f;
 
@@ -13,6 +16,11 @@ public class FinalBossPhaseController : MonoBehaviour
     public FinalBossPhase CurrentPhase => currentPhase;
 
     public bool IsTransforming => isTransforming;
+    public event Action<FinalBossPhase> PhaseChanged;
+
+    public event Action TransformationStarted;
+
+    public event Action TransformationEnded;
 
     [Header("변신 설정")]
     [SerializeField, Min(0f)] private float transformDuration = 1.4f;
@@ -24,6 +32,13 @@ public class FinalBossPhaseController : MonoBehaviour
     private void Awake()
     {
         currentPhase = FinalBossPhase.Phase1;
+
+        if(bossHealth == null)
+        {
+            Debug.LogError("Boss Health를 연결해 주세요.", this);
+            enabled = false;
+            return;
+        }
     }
     
     private void Start()
@@ -31,6 +46,9 @@ public class FinalBossPhaseController : MonoBehaviour
         int minimumHealth = Mathf.CeilToInt(bossHealth.MaxHealth * Phase2HealthRatio);
 
         bossHealth.SetMinimumHealth(minimumHealth);
+
+        hasStarted = true;
+        HandleHealthChanged(bossHealth.CurrentHealth, bossHealth.MaxHealth);
     }
 
     private void Update()
@@ -48,12 +66,21 @@ public class FinalBossPhaseController : MonoBehaviour
 
     private void OnEnable()
     {
-        bossHealth.HealthChanged += HandleHealthChanged;        
+        bossHealth.HealthChanged += HandleHealthChanged;
+
+        if(hasStarted)
+            HandleHealthChanged(bossHealth.CurrentHealth, bossHealth.MaxHealth);
     }
 
     private  void OnDisable()
     {
+        if(bossHealth == null)
+            return;
+
         bossHealth.HealthChanged -= HandleHealthChanged;
+
+        if(isTransforming)
+            EndTransformation();
     }
 
     private void HandleHealthChanged(int currentHealth, int maxHealth)
@@ -97,6 +124,8 @@ public class FinalBossPhaseController : MonoBehaviour
             bossHealth.SetMinimumHealth(0);
         }
 
+        PhaseChanged?.Invoke(CurrentPhase);
+
         Debug.Log($"보스 페이즈 변경: {currentPhase}", this);
     }
 
@@ -106,15 +135,19 @@ public class FinalBossPhaseController : MonoBehaviour
         transformTimeRemaining = transformDuration;
         bossHealth.SetInvincible(true);
 
-        // 변신 애니메이션 시작
-        // 애니메이션이 끝나면 EndTransform() 호출
+        TransformationStarted?.Invoke();
     }
 
     private void EndTransformation()
     {
+        if(!isTransforming)
+            return;
+
         transformTimeRemaining = 0f;
         isTransforming = false;
         bossHealth.SetInvincible(false);
+    
+        TransformationEnded?.Invoke();
     }
 
     [ContextMenu("테스트/페이즈 2로 변경")]
