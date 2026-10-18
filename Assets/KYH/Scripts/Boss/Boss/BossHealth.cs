@@ -44,7 +44,8 @@ public class BossHealth : MonoBehaviour
         if (damage <= 0 || IsDead || isInvincible)
             return;
 
-        currentHealth = Mathf.Max(minimumHealth, currentHealth - damage);
+        int nextHealth = Mathf.Max(minimumHealth, currentHealth - damage);
+        currentHealth = Mathf.Min(currentHealth, nextHealth);
 
         HealthChanged?.Invoke(currentHealth, maxHealth);
 

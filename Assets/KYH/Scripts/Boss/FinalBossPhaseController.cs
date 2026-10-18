@@ -111,7 +111,6 @@ public class FinalBossPhaseController : MonoBehaviour
             return;
 
         currentPhase = nextPhase;
-        BeginTransformation();
 
         if(currentPhase == FinalBossPhase.Phase2)
         {
@@ -124,6 +123,7 @@ public class FinalBossPhaseController : MonoBehaviour
             bossHealth.SetMinimumHealth(0);
         }
 
+        BeginTransformation();
         PhaseChanged?.Invoke(CurrentPhase);
 
         Debug.Log($"보스 페이즈 변경: {currentPhase}", this);

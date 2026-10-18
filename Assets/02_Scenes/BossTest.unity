@@ -403,6 +403,8 @@ GameObject:
   - component: {fileID: 1028047473}
   - component: {fileID: 1028047475}
   - component: {fileID: 1028047476}
+  - component: {fileID: 1028047477}
+  - component: {fileID: 1028047478}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -466,6 +468,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossPhaseEventTest
   phaseController: {fileID: 1028047475}
+--- !u!114 &1028047477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c891ae4ad867a841af5b416a34ab26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossPatternRunner
+  stateTimeRemaining: 0
+  patternData: {fileID: 11400000, guid: 337d080f864bedf4a8b07a66ce250035, type: 2}
+  currentState: 0
+--- !u!114 &1028047478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806b5833bcd441e498d7b80dae85651b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossPatternCoordinator
+  phaseController: {fileID: 1028047475}
+  patternRunner: {fileID: 1028047477}
 --- !u!1 &1342568435
 GameObject:
   m_ObjectHideFlags: 0
