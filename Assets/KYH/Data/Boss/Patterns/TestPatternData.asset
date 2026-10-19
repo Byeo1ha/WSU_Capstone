@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestPatternData
   m_EditorClassIdentifier: Assembly-CSharp::BossPatternData
   windupDuration: 1
-  activeDuration: 0.5
+  activeDuration: 1
   recoveryDuration: 1

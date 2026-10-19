@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class MidBossFireballPattern : MonoBehaviour
 {
@@ -8,6 +9,11 @@ public class MidBossFireballPattern : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [Header("공유 파이어볼 풀")]
     [SerializeField] private BossFireballPool fireballPool;
+    [Header("연속 발사 설정")]
+    [SerializeField, Min(1)]private int shotCount =3;
+    [SerializeField, Min(0f)]private float shotInterval = 0.4f;
+
+    private Coroutine firingCoroutine;
 
     private void OnEnable()
     {
@@ -30,12 +36,22 @@ public class MidBossFireballPattern : MonoBehaviour
                 return;
         }
 
-        GameObject fireball = fireballPool.Rent(firePoint.position, 3f, Vector2.right, 5f);
-
-        if(fireball == null)
-        {
-            Debug.LogWarning("파이어볼을 대여하지 못했습니다.", this);
+        if(firingCoroutine != null)
             return;
+
+        firingCoroutine = StartCoroutine(FireSequence());
+    }
+
+    private IEnumerator FireSequence()
+    {
+        for(int i = 0; i < shotCount; i++)
+        {
+            fireballPool.Rent(firePoint.position, 3f, Vector2.right, 5f);
+
+            if (i < shotCount - 1)
+                yield return new WaitForSeconds(shotInterval);
         }
+
+        firingCoroutine = null;
     }
 }
