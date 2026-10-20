@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class BossFireballPool : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class BossFireballPool : MonoBehaviour
 
     private readonly Queue<GameObject> availableFireballs = new Queue<GameObject>();
     private readonly HashSet<GameObject> rentedFireballs = new HashSet<GameObject>(); 
+
+    public event Action<GameObject> FireballReturned;
 
     private void Awake()
     {
@@ -76,6 +79,8 @@ public class BossFireballPool : MonoBehaviour
 
         fireball.SetActive(false);
         availableFireballs.Enqueue(fireball);
+
+        FireballReturned?.Invoke(fireball);
     }
 
     [ContextMenu("테스트/파이어볼 대여")]

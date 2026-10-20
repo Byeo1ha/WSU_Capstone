@@ -18,17 +18,23 @@ public class MidBossFireballPattern : MonoBehaviour
     private void OnEnable()
     {
         patternRunner.StateChanged += HandleStateChanged;
+        fireballPool.FireballReturned += HandleFireballReturned;
     }
 
     private void OnDisable()
     {
         patternRunner.StateChanged -= HandleStateChanged;
+        fireballPool.FireballReturned -= HandleFireballReturned;
+        StopFiring();
     }
 
     private void HandleStateChanged(BossPatternState state)
     {
         if(state != BossPatternState.Active)
-            return;
+        {
+            StopFiring();
+            return;   
+        }
 
         if(firePoint == null || fireballPool == null)
         {
@@ -52,6 +58,21 @@ public class MidBossFireballPattern : MonoBehaviour
                 yield return new WaitForSeconds(shotInterval);
         }
 
+        yield return null;
         firingCoroutine = null;
+    }
+
+    private void StopFiring()
+    {
+        if (firingCoroutine == null)
+            return;
+
+        StopCoroutine(firingCoroutine);
+        firingCoroutine = null;
+    }
+
+    private void HandleFireballReturned(GameObject fireball)
+    {
+        Debug.Log($"파이어볼 반환 알림: {fireball.name}", this);
     }
 }

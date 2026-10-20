@@ -41,7 +41,8 @@ public class BossPatternRunner : MonoBehaviour
 
     private void Update()
     {
-        if(currentState == BossPatternState.Idle)
+        if(currentState == BossPatternState.Idle ||
+           currentState == BossPatternState.Active)
             return;
 
         stateTimeRemaining = Mathf.Max(0f, stateTimeRemaining - Time.deltaTime);
@@ -52,13 +53,8 @@ public class BossPatternRunner : MonoBehaviour
         switch (currentState)
         {
             case BossPatternState.Windup:
-                stateTimeRemaining = patternData.ActiveDuration;
+                stateTimeRemaining = 0f;
                 ChangeState(BossPatternState.Active);
-                break;
-
-            case BossPatternState.Active:
-                stateTimeRemaining = patternData.RecoveryDuration;
-                ChangeState(BossPatternState.Recovery);
                 break;
             
             case BossPatternState.Recovery:
@@ -86,6 +82,18 @@ public class BossPatternRunner : MonoBehaviour
 
         stateTimeRemaining = patternData.WindupDuration;
         ChangeState(BossPatternState.Windup);
+    }
+
+    public void CompleteActive()
+    {
+        if(!isActiveAndEnabled)
+            return;
+
+        if(currentState != BossPatternState.Active)
+            return;
+
+        stateTimeRemaining = patternData.RecoveryDuration;
+        ChangeState(BossPatternState.Recovery);
     }
 
     public void StopPattern()

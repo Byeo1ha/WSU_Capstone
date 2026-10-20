@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class BossHealth : MonoBehaviour
+public class BossHealth : MonoBehaviour, IDamageable
 {
     [Header("보스 데이터")]
     [SerializeField] private BossData bossData;

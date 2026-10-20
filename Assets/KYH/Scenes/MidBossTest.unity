@@ -229,6 +229,8 @@ MonoBehaviour:
   patternRunner: {fileID: 1876966164}
   firePoint: {fileID: 589096293}
   fireballPool: {fileID: 1876966166}
+  shotCount: 3
+  shotInterval: 1
 --- !u!114 &1876966166
 MonoBehaviour:
   m_ObjectHideFlags: 0
