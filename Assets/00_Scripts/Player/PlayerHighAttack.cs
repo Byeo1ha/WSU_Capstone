@@ -59,6 +59,7 @@ public class PlayerHighAttack : MonoBehaviour
             .AddTo(this);
     }
 
+    // 키 입력을 받는 조건 필터링 함수
     private void HandleInput()
     {
         if (!upInput || playerState.IsActionLocked()) return;
@@ -67,6 +68,7 @@ public class PlayerHighAttack : MonoBehaviour
         Attack();
     }
 
+    // 공격하는 함수
     private void Attack()
     {
         rigid.AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
@@ -77,6 +79,7 @@ public class PlayerHighAttack : MonoBehaviour
         AirCorrection().Forget();
     }
 
+    // 공중 체공 보정 함수
     private async UniTask AirCorrection()
     {
         await UniTask.Delay(TimeSpan.FromSeconds(0.2f),
@@ -99,18 +102,19 @@ public class PlayerHighAttack : MonoBehaviour
         }
     }
 
-    //테스트 전용 함수
-    //캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
+    // 테스트 전용 함수
+    // 캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
     private async UniTask TestEndAttack()
     {
         await UniTask.Delay(
             TimeSpan.FromSeconds(0.2f), 
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
-        EndAttack();
+        EndHighAttack();
     }
 
-    public void EndAttack()
+    // 애니메이션 키 프레임에 넣는 공격 종료 함수
+    public void EndHighAttack()
     {
         rigid.gravityScale = originalGravity;
         

@@ -75,17 +75,39 @@ public class PlayerAnimation : MonoBehaviour
         FallCheck();
     }
 
+    // 달리는 상태를 체크하고 Run 애니메이션을 재생하는 함수
     private void RunAnimCheck()
     {
         if (moveInput == 0) anim.SetBool("isRun", false);
         else anim.SetBool("isRun", true);
     }
 
+    // 점프 애니메이션을 재생하는 함수
+    private void StartJumpAnim()
+    {
+        anim.SetBool("isJump", true);
+    }
+
+    // 지면에 닿아있는 상태일 경우 Jump 애니메이션 재생을 취소하는 함수
     private void GroundCheck()
     {
         if (playerState.IsGrounded) anim.SetBool("isJump", false);
     }
 
+    // 하단 공격 애니메이션을 재생하는 함수
+    private void StartLowAttackAnim()
+    {
+        anim.SetBool("isLowAttack", true);
+    }
+
+    // 애니메이션 키 프레임에 넣는 하단 공격 애니메이션 재생을 취소하는 함수
+    public void StopLowAttackAnim()
+    {
+        anim.SetBool("isLowAttack", false);
+        playerLowAttack.EndLowAttack();
+    }
+
+    // 추락을 감지하면 Fall 애니메이션을 재생하는 함수
     private void FallCheck()
     {
         if (playerAttackFeedback.IsHitStopping) return;
@@ -101,26 +123,10 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    private void StartJumpAnim()
-    {
-        anim.SetBool("isJump", true);
-    }
-
+    // 콤보 수치에 따라 Normal Attack 애니메이션을 재생하는 함수
     private void StartNormalAttackAnim(int comboIndex)
     {
         anim.SetInteger("isNormalAttackCombo", comboIndex);
         anim.SetTrigger("normalAttack");
-    }
-
-    private void StartLowAttackAnim()
-    {
-        anim.SetBool("isLowAttack", true);
-    }
-
-    //애니메이션 클립 전용 함수
-    public void StopLowAttackAnim()
-    {
-        anim.SetBool("isLowAttack", false);
-        playerLowAttack.EndAttack();
     }
 }

@@ -52,6 +52,7 @@ public class PlayerLowAttack : MonoBehaviour
             .AddTo(this);
     }
 
+    // 키 입력을 받는 조건 필터링 함수
     private void HandleInput()
     {
         if (!downInput || playerState.IsActionLocked()) return;
@@ -60,6 +61,7 @@ public class PlayerLowAttack : MonoBehaviour
         Attack();
     }
 
+    // 공격 함수
     private void Attack()
     {
         rigid.AddForce(Vector2.down * slamPower, ForceMode2D.Impulse);
@@ -69,12 +71,14 @@ public class PlayerLowAttack : MonoBehaviour
         onLowAttackStarted.OnNext(Unit.Default);
     }
 
+    // 애니메이션 키 프레임에 넣는 히트박스 소환 함수
     public void OnLowAttackHitboxStart()
     {
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
     }
 
-    public void EndAttack()
+    // 애니메이션 키 프레임에 넣는 공격 종료 함수
+    public void EndLowAttack()
     {
         playerState.StopAction(PlayerActionState.LowAttack);
     }

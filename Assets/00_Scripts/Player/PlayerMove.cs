@@ -81,6 +81,7 @@ public class PlayerMove : MonoBehaviour
         MoveFlip();
     }
 
+    // 좌우 반전 여부를 결정하는 함수
     private void MoveFlip()
     {
         if (moveInput == 0) return;
@@ -91,12 +92,14 @@ public class PlayerMove : MonoBehaviour
         OnFlip(moveInput);
     }
 
+    // 좌우 반전을 실행하는 함수
     private void OnFlip(float input)
     {
         if (input < 0) spriteRenderer.flipX = true;
         else if (input > 0) spriteRenderer.flipX = false;
     }
 
+    // 플레이어를 움직이는 함수
     private void Move(float input)
     {
         float targetSpeed = input * maxSpeed;
@@ -124,6 +127,7 @@ public class PlayerMove : MonoBehaviour
         rigid.linearVelocity = new Vector2(xSpeed, rigid.linearVelocity.y);
     }
 
+    // 공중 공격 중에 좌우 이동속도를 공격 중에 유지해주는 함수
     private void MaintainAirAttackMomentum()
     {
         rigid.linearVelocity = new Vector2(

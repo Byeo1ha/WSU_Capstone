@@ -44,12 +44,6 @@ public class PlayerJump : MonoBehaviour
             .AddTo(this);
     }
 
-    private void Jump()
-    {
-        rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-        playerState.StartJump();
-    }
-
     private void FixedUpdate()
     {
         bool isGrounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer);
@@ -60,6 +54,14 @@ public class PlayerJump : MonoBehaviour
         playerState.SetGrounded(isGrounded);
     }
 
+    // 점프 함수
+    private void Jump()
+    {
+        rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+        playerState.StartJump();
+    }
+
+    // 외부에서 지면에 가까운지 확인하고 반환해주는 함수 
     public bool IsNearGround()
     {
         if (rigid.linearVelocity.y >= 0f) return false;

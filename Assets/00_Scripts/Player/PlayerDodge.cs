@@ -46,6 +46,7 @@ public class PlayerDodge : MonoBehaviour
             .AddTo(this);
     }
 
+    // 키 입력을 받는 조건 필터링 함수
     private void HandleInput()
     {
         if (!playerState.IsGrounded) return;
@@ -54,6 +55,7 @@ public class PlayerDodge : MonoBehaviour
         Dodge().Forget();
     }
 
+    // 회피 함수
     private async UniTask Dodge()
     {
         playerState.StartDodge();

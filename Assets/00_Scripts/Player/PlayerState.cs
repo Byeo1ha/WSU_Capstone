@@ -25,6 +25,7 @@ public class PlayerState : MonoBehaviour
     public bool IsGrounded { get; private set; }
     public bool IsJumping { get; private set; }
 
+    // 플레이어의 지면 상태를 설정하는 함수
     public void SetGrounded(bool value)
     {
         IsGrounded = value;
@@ -33,17 +34,20 @@ public class PlayerState : MonoBehaviour
             IsJumping = false;
     }
 
+    // 점프 중임을 설정하는 함수
     public void StartJump()
     {
         IsJumping = true;
         IsGrounded = false;
     }
 
+    // 외부에서 현재 다른 액션 상태 중인지 체크하는 함수
     public bool IsActionLocked()
     {
         return CurrentAction != PlayerActionState.None;
     }
 
+    // 특정 액션 상태로 설정해주는 함수
     private void TryStartAction(PlayerActionState nextAction)
     {
         if (CurrentAction != PlayerActionState.None)
@@ -52,6 +56,7 @@ public class PlayerState : MonoBehaviour
         CurrentAction = nextAction;
     }
 
+    // 특정 액션 상태임을 확인하고 액션 상태를 종료하는 함수
     public void StopAction(PlayerActionState action)
     {
         if (CurrentAction != action) return;
@@ -59,6 +64,9 @@ public class PlayerState : MonoBehaviour
         CurrentAction = PlayerActionState.None;
     }
 
+    /// <summary>
+    /// 액션 상태를 설정하는 함수
+    /// </summary>
     public void StartNormalAttack() 
         => TryStartAction(PlayerActionState.NormalAttack);
 

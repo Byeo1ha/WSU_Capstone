@@ -12,6 +12,7 @@ public class PlayerAttributes : MonoBehaviour, IDamageable
         hp = data.Hp;
     }
 
+    // 외부에서 플레이어에게 피해를 입히기 위한 함수
     public void TakeDamage(int damage)
     {
         if (hp < damage) 

@@ -45,7 +45,7 @@ public class AttackHitbox : MonoBehaviour
     {
         cts = new CancellationTokenSource();
         
-        TestDeActive().Forget();
+        DeActive().Forget();
     }
 
     private void OnDisable()
@@ -55,17 +55,31 @@ public class AttackHitbox : MonoBehaviour
         cts = null;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Attack(collision);
+    }
+
+    // 외부에서 이 Hitbox가 저장되야할 풀을 참조시켜주는 함수
     public void SetPool(IObjectPool<AttackHitbox> pool)
     {
         this.pool = pool;
     }
 
+    // 외부에서 이 Hitbox에 타격되면 발생시킬 피격 이펙트를 가진 풀을 참조시켜주는 함수
     public void SetHitEffectPool(HitEffectPool hitEffectPool)
     {
         this.hitEffectPool = hitEffectPool;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    // 외부에서 이 객체의 좌우 반전 여부를 결정해주는 함수
+    public void SetDirection(bool value)
+    {
+        spriteRenderer.flipX = value;
+    }
+
+    // 적을 감지하면 데미지를 주고 연출을 재생, 피격 이펙트를 참조 중이면 피격 이펙트도 재생하는 함수 
+    private void Attack(Collider2D collision)
     {
         if (collision.TryGetComponent<IDamageable>(out var damageable) &&
             collision.gameObject.layer == targetLayer)
@@ -80,12 +94,8 @@ public class AttackHitbox : MonoBehaviour
         }
     }
 
-    public void SetDirection(bool value)
-    {
-        spriteRenderer.flipX = value;
-    }
-
-    private async UniTask TestDeActive()
+    // 스스로를 풀로 되돌리기 위한 함수
+    private async UniTask DeActive()
     {
         await UniTask.Delay(
             TimeSpan.FromSeconds(0.2f), 

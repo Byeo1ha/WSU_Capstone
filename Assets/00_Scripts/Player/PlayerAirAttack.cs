@@ -72,6 +72,7 @@ public class PlayerAirAttack : MonoBehaviour
             .AddTo(this);
     }
 
+    // 키 입력을 받는 조건 필터링 함수
     private void HandleAttackInput()
     {
         if (!playerState.IsActionLocked())
@@ -86,7 +87,7 @@ public class PlayerAirAttack : MonoBehaviour
             }
             else
             {
-                Attack();
+                TryAttack();
             }
 
             return;
@@ -102,7 +103,8 @@ public class PlayerAirAttack : MonoBehaviour
         
     }
 
-    private void Attack()
+    // 공격 실행을 시도하는 함수
+    private void TryAttack()
     {
         if (downInput || playerState.IsGrounded) return;
 
@@ -114,12 +116,11 @@ public class PlayerAirAttack : MonoBehaviour
         HorizontalAttack();
     }
 
+    // 수평 공격을 실제로 실행하는 함수
     private void HorizontalAttack()
     {
         canQueueNextAttack = false;
         isNextAttackQueued = false;
-
-        //Debug.Log($"진행 중인 Index: {comboIndex}");
 
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
 
@@ -128,6 +129,7 @@ public class PlayerAirAttack : MonoBehaviour
         TestEndAttack(attackStepVersion).Forget();
     }
 
+    // 공격 도중에 실행하는 공중 체공 함수
     private async UniTask AirCorrection()
     {
         cts = new CancellationTokenSource();
@@ -145,20 +147,13 @@ public class PlayerAirAttack : MonoBehaviour
         }
     }
 
-    public void OpenComboInput()
-    {
-        if (!playerState.IsAirAttacking || !isAirComboActive || playerState.IsGrounded)
-            return;
-
-        if (HasNextComboAttack())
-            canQueueNextAttack = true;
-    }
-
+    // 다음 콤보 공격이 남아 있는지 확인하는 함수
     private bool HasNextComboAttack()
     {
         return comboIndex + 1 < MaxComboCount;
     }
 
+    // 콤보 수치를 올리고 다음 콤보 공격을 실행하는 함수
     private void ContinueAirCombo()
     {
         isComboGraceActive = false;
@@ -171,8 +166,8 @@ public class PlayerAirAttack : MonoBehaviour
         HorizontalAttack();
     }
 
-    //테스트 전용 함수
-    //캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
+    // 테스트 전용 함수
+    // 캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
     private async UniTask TestEndAttack(int version)
     {
         await UniTask.Delay(
@@ -182,7 +177,23 @@ public class PlayerAirAttack : MonoBehaviour
         EndAttack(version);
     }
 
+    // 애니메이션 키 프레임에 넣는 선입력 함수
+    public void OpenComboInput()
+    {
+        if (!playerState.IsAirAttacking || !isAirComboActive || playerState.IsGrounded)
+            return;
+
+        if (HasNextComboAttack())
+            canQueueNextAttack = true;
+    }
+
     public void EndAttack(int version)
+    {
+        EndAttackInternal(version);
+    }
+
+    // 애니메이션 키 프레임에 넣는 공격 종료 함수
+    private void EndAttackInternal(int version)
     {
         if (version != attackStepVersion)
             return;

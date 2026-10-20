@@ -10,6 +10,7 @@ public class AttackHitboxSpawner : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
+    // 외부에서 받은 풀링을 특정 좌표에 소환하는 함수
     public AttackHitbox Spawn(AttackHitboxPool pool, float offset)
     {
         AttackHitbox attack = pool.Get();

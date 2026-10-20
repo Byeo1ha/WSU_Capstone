@@ -14,7 +14,6 @@ public class PlayerAttackFeedback : MonoBehaviour
 
     private TargetCamera targetCamera;
 
-    private PlayerNormalAttack playerNormalAttack;
     private Animator anim;
     private Rigidbody2D rigid;
 
@@ -34,7 +33,6 @@ public class PlayerAttackFeedback : MonoBehaviour
 
     private void Awake()
     {
-        playerNormalAttack = GetComponent<PlayerNormalAttack>();
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody2D>();
     }
@@ -49,12 +47,14 @@ public class PlayerAttackFeedback : MonoBehaviour
         RestoreHitStop();
     }
 
+    // 외부에서 실행하는 공격 연출 함수
     public void StartFeedback(ShakingType type)
     {
         CameraShaking(type);
         HitStop().Forget();
     }
 
+    // enum 타입에 따라 재생시킬 카메라 흔들림 정도를 결정하는 함수
     private void CameraShaking(ShakingType type)
     {
         if (type == ShakingType.Power)
@@ -63,6 +63,7 @@ public class PlayerAttackFeedback : MonoBehaviour
             targetCamera.NormalShaking();
     }
 
+    // 히트 스톱 함수
     private async UniTask HitStop()
     {
         if (isHitStopping || !isActiveAndEnabled || duration <= 0f) return;
@@ -91,7 +92,6 @@ public class PlayerAttackFeedback : MonoBehaviour
         }
         finally
         {
-            // 이전 대기가 재활성화 후 시작된 히트 스톱을 해제하지 않도록 한다.
             if (hitStopCancellation == cancellation)
             {
                 hitStopCancellation = null;
@@ -102,6 +102,7 @@ public class PlayerAttackFeedback : MonoBehaviour
         }
     }
 
+    // 히트스톱 종료 후 원래의 속도로 되돌릴 함수
     private void RestoreHitStop()
     {
         if (anim != null)

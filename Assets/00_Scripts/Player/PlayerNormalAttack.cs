@@ -71,6 +71,12 @@ public class PlayerNormalAttack : MonoBehaviour
             .AddTo(this);
     }
 
+    private void OnDestroy()
+    {
+        onNormalAttackStarted.Dispose();
+    }
+
+    // 키 입력을 받는 조건 필터링 함수
     private void HandleAttackInput()
     {
         if (!playerState.IsActionLocked())
@@ -85,7 +91,7 @@ public class PlayerNormalAttack : MonoBehaviour
             }
             else
             {
-                Attack();
+                TryAttack();
             }
 
             return;
@@ -100,7 +106,8 @@ public class PlayerNormalAttack : MonoBehaviour
         isNextAttackQueued = true;
     }
 
-    private void Attack()
+    // 공격 실행을 시도하는 함수
+    private void TryAttack()
     {
         if (upInput || !playerState.IsGrounded) return;
 
@@ -112,6 +119,7 @@ public class PlayerNormalAttack : MonoBehaviour
         HorizontalAttack();
     }
 
+    // 수평 공격을 실제로 실행하는 함수
     private void HorizontalAttack()
     {
         canQueueNextAttack = false;
@@ -122,6 +130,7 @@ public class PlayerNormalAttack : MonoBehaviour
         attackStepVersion++;
     }
 
+    // 애니메이션 키 프레임에 넣는 히트박스 소환 함수
     public void OnNormalAttackHitboxStart()
     {
         if (!playerState.IsNormalAttacking) return;
@@ -129,6 +138,7 @@ public class PlayerNormalAttack : MonoBehaviour
         attackHitboxSpawner.Spawn(attackHitboxPool, offset);
     }
 
+    // 애니메이션 키 프레임에 넣는 마지막 공격 히트박스 소환 함수
     public void OnFinalNormalAttackHitboxStart()
     {
         if (!playerState.IsNormalAttacking) return;
@@ -136,6 +146,7 @@ public class PlayerNormalAttack : MonoBehaviour
         attackHitboxSpawner.Spawn(finalAttackHitboxPool, finalAttackOffset);
     }
 
+    // 애니메이션 키 프레임에 넣는 선입력 함수
     public void OpenNormalAttackComboInput()
     {
         if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
@@ -145,11 +156,13 @@ public class PlayerNormalAttack : MonoBehaviour
             canQueueNextAttack = true;
     }
 
+    // 다음 콤보 공격이 남아 있는지 확인하는 함수
     private bool HasNextComboAttack()
     {
         return comboIndex + 1 < MaxComboCount;
     }
 
+    // 콤보 수치를 올리고 다음 콤보 공격을 실행하는 함수
     private void ContinueGroundCombo()
     {
         isComboGraceActive = false;
@@ -162,24 +175,14 @@ public class PlayerNormalAttack : MonoBehaviour
         HorizontalAttack();
     }
 
-    //테스트 전용 함수
-    //캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
-    private async UniTask TestEndAttack(int version)
+    // 애니메이션 키 프레임에 넣는 공격 종료 함수
+    public void EndNormalAttack()
     {
-        await UniTask.Delay(
-            TimeSpan.FromSeconds(0.4f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-
-        EndAttack(version);
+        EndAttackInternal(attackStepVersion);
     }
 
-    //애니메이션 전용 함수
-    public void OnNormalAttackAnimationEnd()
-    {
-        EndAttack(attackStepVersion);
-    }
-
-    public void EndAttack(int version)
+    // 현재 공격의 종료 요청인지 확인하고, 다음 콤보 진행 또는 공격 종료를 처리하는 함수
+    private void EndAttackInternal(int version)
     {
         if (version != attackStepVersion)
             return;
@@ -210,10 +213,5 @@ public class PlayerNormalAttack : MonoBehaviour
         isGroundComboActive = false;
         isNextAttackQueued = false;
         playerState.StopAction(PlayerActionState.NormalAttack);
-    }
-
-    private void OnDestroy()
-    {
-        onNormalAttackStarted.Dispose();
     }
 }

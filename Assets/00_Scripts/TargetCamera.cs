@@ -74,6 +74,7 @@ public class TargetCamera : MonoBehaviour
             smoothTime);
     }
 
+    // 외부에서 호출되어 카메라를 작게 흔들도록 하는 함수
     public void NormalShaking()
     {
         float randomX = Random.Range(normalShakingValue * (-1), normalShakingValue);
@@ -83,6 +84,7 @@ public class TargetCamera : MonoBehaviour
         Shaking(randomX, randomY, randomZ);
     }
 
+    // 외부에서 호출되어 카메라를 크게 흔들도록 하는 함수
     public void PowerShaking()
     {
         float randomX = powerShakingValue * (Random.value < 0.5f ? -1 : 1);
@@ -92,6 +94,7 @@ public class TargetCamera : MonoBehaviour
         Shaking(randomX, randomY, randomZ);
     }
 
+    // 실제로 카메라를 흔드는 함수
     private void Shaking(float randomX, float randomY, float randomZ)
     {
         transform.position = new Vector3(
