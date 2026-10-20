@@ -24,13 +24,6 @@ public class PlayerLowAttack : MonoBehaviour
 
     private bool downInput;
 
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        playerState = GetComponent<PlayerState>();
-        attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
-    }
-
     [Inject]
     public void Construct(
         InputManager inputManager, 
@@ -39,6 +32,13 @@ public class PlayerLowAttack : MonoBehaviour
     {
         this.inputManager = inputManager;
         this.attackHitboxPool = attackHitboxPool;
+    }
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        playerState = GetComponent<PlayerState>();
+        attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
     }
 
     private void Start()

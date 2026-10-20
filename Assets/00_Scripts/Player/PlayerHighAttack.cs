@@ -29,15 +29,6 @@ public class PlayerHighAttack : MonoBehaviour
     private bool upInput;
     private float originalGravity;
 
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody2D>();
-        playerState = GetComponent<PlayerState>();
-        attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
-
-        originalGravity = rigid.gravityScale;
-    }
-
     [Inject]
     public void Construct(
         InputManager inputManager, 
@@ -46,6 +37,15 @@ public class PlayerHighAttack : MonoBehaviour
     {
         this.inputManager = inputManager;
         this.attackHitboxPool = attackHitboxPool;
+    }
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody2D>();
+        playerState = GetComponent<PlayerState>();
+        attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
+
+        originalGravity = rigid.gravityScale;
     }
 
     private void Start()

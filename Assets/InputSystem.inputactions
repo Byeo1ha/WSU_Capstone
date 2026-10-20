@@ -47,6 +47,16 @@
                     "priority": 0
                 },
                 {
+                    "name": "DownInput",
+                    "type": "Button",
+                    "id": "1b981d1b-ea42-4fda-9e9f-ff9d0612aecd",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
                     "name": "Dodge",
                     "type": "Button",
                     "id": "4b4858e5-7cae-4ec9-a38b-d332e2829b7e",
@@ -57,9 +67,9 @@
                     "priority": 0
                 },
                 {
-                    "name": "DownInput",
+                    "name": "Potion",
                     "type": "Button",
-                    "id": "1b981d1b-ea42-4fda-9e9f-ff9d0612aecd",
+                    "id": "96b9d57d-9a14-4676-8cf8-8616afe8f09d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -153,6 +163,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DownInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5481a216-918f-4a41-bd4b-9ccdab00032d",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Mouse&Keyboard",
+                    "action": "Potion",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
