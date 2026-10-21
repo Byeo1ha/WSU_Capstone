@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f152a28a7a11bd14594a7c4e707b54fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalAttack
-  damage: 18
+  damage: 10
   shakingType: 1
 --- !u!212 &3118725510573825769
 SpriteRenderer:

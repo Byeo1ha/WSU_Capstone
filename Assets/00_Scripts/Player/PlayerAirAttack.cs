@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
@@ -44,6 +43,7 @@ public class PlayerAirAttack : MonoBehaviour
     private CancellationTokenSource cts;
 
     private float originalGravity;
+    private bool isAttackFinish;
 
     [Inject]
     public void Construct(
@@ -75,6 +75,17 @@ public class PlayerAirAttack : MonoBehaviour
             .AddTo(this);
     }
 
+    private void FixedUpdate()
+    {
+        if (playerState.IsGrounded)
+        {
+            isAttackFinish = false;
+            comboIndex = 0;
+            attackStepVersion = 0;
+            isComboGraceActive = false;
+        }
+    }
+
     private void OnDestroy()
     {
         onAirAttackStarted.Dispose();
@@ -83,6 +94,8 @@ public class PlayerAirAttack : MonoBehaviour
     // 키 입력을 받는 조건 필터링 함수
     private void HandleAttackInput()
     {
+        if (isAttackFinish) return;
+
         if (!playerState.IsActionLocked())
         {
             if (isComboGraceActive &&
@@ -133,7 +146,10 @@ public class PlayerAirAttack : MonoBehaviour
         onAirAttackStarted.OnNext(comboIndex);
 
         attackStepVersion++;
+        
         AirCorrection().Forget();
+
+        if (comboIndex == MaxComboCount - 1) isAttackFinish = true;
     }
 
     public void OnAirAttackHitboxStart()
