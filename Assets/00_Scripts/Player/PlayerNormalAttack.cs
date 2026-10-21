@@ -27,12 +27,14 @@ public class PlayerNormalAttack : MonoBehaviour
     private AttackHitboxSpawner attackHitboxSpawner;
 
     private PlayerState playerState;
+    private PlayerDodge playerDodge;
 
     private bool upInput;
     private int comboIndex;
     private bool isGroundComboActive;
-    private bool canQueueNextAttack;
+    private bool isInputBufferOpen;
     private bool isNextAttackQueued;
+    private bool isDodgeQueued;
     private bool isComboGraceActive;
     private float comboGraceEndTime;
     private int attackStepVersion;
@@ -56,6 +58,7 @@ public class PlayerNormalAttack : MonoBehaviour
     private void Awake()
     {
         playerState = GetComponent<PlayerState>();
+        playerDodge = GetComponent<PlayerDodge>();
         attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
     }
 
@@ -64,10 +67,30 @@ public class PlayerNormalAttack : MonoBehaviour
         inputManager.OnNormalAttack
             .Subscribe(_ => HandleAttackInput())
             .AddTo(this);
+
+        inputManager.OnDodge
+            .Subscribe(_ => QueueDodge())
+            .AddTo(this);
         
         inputManager.UpInput
             .Subscribe(upInput => this.upInput = upInput)
             .AddTo(this);
+    }
+
+    private void Update()
+    {
+        if (isGroundComboActive && (!playerState.IsNormalAttacking || !playerState.IsGrounded))
+            ResetCombo();
+
+        if (isComboGraceActive &&
+            (playerState.IsActionLocked() || !playerState.IsGrounded || Time.time > comboGraceEndTime))
+            ResetCombo();
+    }
+
+    private void OnDisable()
+    {
+        ResetCombo();
+        playerState.StopAction(PlayerActionState.NormalAttack);
     }
 
     private void OnDestroy()
@@ -78,6 +101,8 @@ public class PlayerNormalAttack : MonoBehaviour
     // 키 입력을 받는 조건 필터링 함수
     private void HandleAttackInput()
     {
+        if (!isActiveAndEnabled) return;
+
         if (!playerState.IsActionLocked())
         {
             if (isComboGraceActive &&
@@ -99,10 +124,22 @@ public class PlayerNormalAttack : MonoBehaviour
         if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
             return;
 
-        if (upInput || !canQueueNextAttack || isNextAttackQueued || !HasNextComboAttack())
+        if (upInput || !isInputBufferOpen || isNextAttackQueued || isDodgeQueued || !HasNextComboAttack())
             return;
 
         isNextAttackQueued = true;
+    }
+
+    private void QueueDodge()
+    {
+        if (!isActiveAndEnabled || playerDodge == null || !playerDodge.isActiveAndEnabled) return;
+
+        if (!playerState.IsNormalAttacking || !isGroundComboActive ||
+            !playerState.IsGrounded || !isInputBufferOpen)
+            return;
+
+        isDodgeQueued = true;
+        isNextAttackQueued = false;
     }
 
     // 공격 실행을 시도하는 함수
@@ -121,8 +158,9 @@ public class PlayerNormalAttack : MonoBehaviour
     // 수평 공격을 실제로 실행하는 함수
     private void HorizontalAttack()
     {
-        canQueueNextAttack = false;
+        isInputBufferOpen = false;
         isNextAttackQueued = false;
+        isDodgeQueued = false;
 
         onNormalAttackStarted.OnNext(comboIndex);
 
@@ -151,8 +189,7 @@ public class PlayerNormalAttack : MonoBehaviour
         if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
             return;
 
-        if (HasNextComboAttack())
-            canQueueNextAttack = true;
+        isInputBufferOpen = true;
     }
 
     // 다음 콤보 공격이 남아 있는지 확인하는 함수
@@ -190,7 +227,16 @@ public class PlayerNormalAttack : MonoBehaviour
             return;
 
         attackStepVersion++;
-        canQueueNextAttack = false;
+        isInputBufferOpen = false;
+
+        if (isDodgeQueued)
+        {
+            ResetCombo();
+            playerState.StopAction(PlayerActionState.NormalAttack);
+            if (playerDodge != null)
+                playerDodge.TryDodge();
+            return;
+        }
 
         if (isGroundComboActive && isNextAttackQueued && playerState.IsGrounded && HasNextComboAttack())
         {
@@ -212,5 +258,17 @@ public class PlayerNormalAttack : MonoBehaviour
         isGroundComboActive = false;
         isNextAttackQueued = false;
         playerState.StopAction(PlayerActionState.NormalAttack);
+    }
+
+    private void ResetCombo()
+    {
+        attackStepVersion++;
+        comboIndex = 0;
+        isGroundComboActive = false;
+        isInputBufferOpen = false;
+        isNextAttackQueued = false;
+        isDodgeQueued = false;
+        isComboGraceActive = false;
+        comboGraceEndTime = 0f;
     }
 }

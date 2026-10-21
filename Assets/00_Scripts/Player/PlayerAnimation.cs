@@ -21,6 +21,7 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerAttackFeedback playerAttackFeedback;
     private PlayerAirAttack playerAirAttack;
     private PlayerDodge playerDodge;
+    private PlayerHighAttack playerHighAttack;
 
     private IDisposable normalAttackSubscription;
     private IDisposable airAttackSubscription;
@@ -42,6 +43,7 @@ public class PlayerAnimation : MonoBehaviour
         playerState = GetComponent<PlayerState>();
         playerNormalAttack = GetComponent<PlayerNormalAttack>();
         playerLowAttack = GetComponent<PlayerLowAttack>();
+        playerHighAttack = GetComponent<PlayerHighAttack>();
         playerAttackFeedback = GetComponent<PlayerAttackFeedback>();
         playerAirAttack = GetComponent<PlayerAirAttack>();
         playerDodge = GetComponent<PlayerDodge>();
@@ -63,6 +65,10 @@ public class PlayerAnimation : MonoBehaviour
             
         playerDodge.OnDodged
             .Subscribe(_ => StartDodgeAnim())
+            .AddTo(this);
+
+        playerHighAttack.OnHighAttackStarted
+            .Subscribe(_ => StartHighAttackAnim())
             .AddTo(this);
     }
 
@@ -164,5 +170,10 @@ public class PlayerAnimation : MonoBehaviour
     private void StartDodgeAnim()
     {
         anim.SetTrigger("dodge");
+    }
+
+    private void StartHighAttackAnim()
+    {
+        anim.SetTrigger("highAttack");
     }
 }

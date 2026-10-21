@@ -52,10 +52,17 @@ public class PlayerDodge : MonoBehaviour
     // 키 입력을 받는 조건 필터링 함수
     private void HandleInput()
     {
-        if (!playerState.IsGrounded) return;
-        if (playerState.IsActionLocked()) return;
+        TryDodge();
+    }
+
+    public bool TryDodge()
+    {
+        if (!isActiveAndEnabled) return false;
+        if (!playerState.IsGrounded) return false;
+        if (playerState.IsActionLocked()) return false;
 
         Dodge().Forget();
+        return true;
     }
 
     // 회피 함수

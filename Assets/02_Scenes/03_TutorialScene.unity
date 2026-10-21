@@ -291,6 +291,7 @@ MonoBehaviour:
   subjectBorder: {fileID: 421289945}
   maxNormalAttackSubject: 14
   normalAttackSubjectText: {fileID: 92716771}
+  tutorialDummy: {fileID: 0}
   playerNormalAttack: {fileID: 1729075170}
 --- !u!4 &144826713
 Transform:
@@ -1829,7 +1830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHighAttack
   upperPower: 20
-  offset: 2.5
+  offset: 0.5
   airOffset: 0.8
 --- !u!114 &1729075174
 MonoBehaviour:

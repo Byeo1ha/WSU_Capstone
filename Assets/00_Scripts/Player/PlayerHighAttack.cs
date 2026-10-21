@@ -10,12 +10,13 @@ using VContainer;
 [RequireComponent(typeof(AttackHitboxSpawner))]
 public class PlayerHighAttack : MonoBehaviour
 {
+    private readonly Subject<Unit> onHighAttackStarted = new();
+    public Observable<Unit> OnHighAttackStarted => onHighAttackStarted;
+
     [Header("올라가는 높이")]
     [SerializeField] private float upperPower = 20f;
     [Header("생성 위치 보정")]
     [SerializeField] private float offset = 2.5f;
-    [Header("공중 체공 보정")]
-    [SerializeField] private float airOffset = 0.8f;
 
     private InputManager inputManager;
     private Rigidbody2D rigid;
@@ -24,10 +25,7 @@ public class PlayerHighAttack : MonoBehaviour
 
     private AttackHitboxPool attackHitboxPool;
 
-    private CancellationTokenSource cts;
-
     private bool upInput;
-    private float originalGravity;
 
     [Inject]
     public void Construct(
@@ -44,8 +42,6 @@ public class PlayerHighAttack : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         playerState = GetComponent<PlayerState>();
         attackHitboxSpawner = GetComponent<AttackHitboxSpawner>();
-
-        originalGravity = rigid.gravityScale;
     }
 
     private void Start()
@@ -71,57 +67,21 @@ public class PlayerHighAttack : MonoBehaviour
     // 공격하는 함수
     private void Attack()
     {
+        onHighAttackStarted.OnNext(Unit.Default);
+
         rigid.AddForce(Vector2.up * upperPower, ForceMode2D.Impulse);
 
-        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
         playerState.StartHighAttack();
-
-        AirCorrection().Forget();
     }
 
-    // 공중 체공 보정 함수
-    private async UniTask AirCorrection()
+    public void OnHighAttackHitboxStart()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(0.2f),
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-
-        cts = new CancellationTokenSource();
-
-        rigid.gravityScale = 0f;
-
-        TestEndAttack().Forget();
-
-        while (true)
-        {
-            rigid.linearVelocity = new Vector2(
-                rigid.linearVelocity.x, 
-                rigid.linearVelocity.y * airOffset);
-
-            await UniTask.WaitForFixedUpdate(
-                cancellationToken: cts.Token);
-        }
-    }
-
-    // 테스트 전용 함수
-    // 캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
-    private async UniTask TestEndAttack()
-    {
-        await UniTask.Delay(
-            TimeSpan.FromSeconds(0.2f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-
-        EndHighAttack();
+        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
     }
 
     // 애니메이션 키 프레임에 넣는 공격 종료 함수
     public void EndHighAttack()
     {
-        rigid.gravityScale = originalGravity;
-        
-        cts?.Cancel();
-        cts?.Dispose();
-        cts = null;
-
         playerState.StopAction(PlayerActionState.HighAttack);
     }
 }
