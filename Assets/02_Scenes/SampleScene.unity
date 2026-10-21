@@ -276,7 +276,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0576154, y: -0.5128256}
+  m_Offset: {x: 0.036720872, y: 0.1056025}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -286,7 +286,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.464875, y: 1.8724973}
+  m_Size: {x: 1.6535475, y: 3.1093535}
   m_EdgeRadius: 0
 --- !u!114 &60569529
 MonoBehaviour:
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455cf999f9a5a2148a74627d20c78c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyTest
+  timeCheck: 0
 --- !u!114 &60569530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1662,8 +1663,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormalAttack
   comboGraceDuration: 0.4
-  offset: 1.5
-  finalAttackOffset: 3.5
+  offset: 1
+  finalAttackOffset: 2.5
 --- !u!114 &1729075173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1704,9 +1705,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAirAttack
   comboGraceDuration: 0.4
-  offset: 2.5
+  offset: 1
   xAirOffset: 0.2
-  yAirOffset: 0.8
+  yAirOffset: 0.6
 --- !u!114 &1729075176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1734,7 +1735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLowAttack
   slamPower: 20
-  offset: 2.5
+  offset: 1
 --- !u!114 &1729075178
 MonoBehaviour:
   m_ObjectHideFlags: 0

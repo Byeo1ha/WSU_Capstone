@@ -9,6 +9,7 @@ using VContainer;
 [RequireComponent(typeof(PlayerNormalAttack))]
 [RequireComponent(typeof(PlayerLowAttack))]
 [RequireComponent(typeof(PlayerAttackFeedback))]
+[RequireComponent(typeof(PlayerAirAttack))]
 public class PlayerAnimation : MonoBehaviour
 {
     private Rigidbody2D rigid;
@@ -17,8 +18,10 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerNormalAttack playerNormalAttack;
     private PlayerLowAttack playerLowAttack;
     private PlayerAttackFeedback playerAttackFeedback;
+    private PlayerAirAttack playerAirAttack;
 
     private IDisposable normalAttackSubscription;
+    private IDisposable airAttackSubscription;
 
     private Animator anim;
 
@@ -38,6 +41,7 @@ public class PlayerAnimation : MonoBehaviour
         playerNormalAttack = GetComponent<PlayerNormalAttack>();
         playerLowAttack = GetComponent<PlayerLowAttack>();
         playerAttackFeedback = GetComponent<PlayerAttackFeedback>();
+        playerAirAttack = GetComponent<PlayerAirAttack>();
     }
 
     private void Start()
@@ -60,12 +64,19 @@ public class PlayerAnimation : MonoBehaviour
         normalAttackSubscription = playerNormalAttack.OnNormalAttackStarted
             .Subscribe(StartNormalAttackAnim)
             .AddTo(this);
+
+        airAttackSubscription = playerAirAttack.OnAirAttackStarted
+            .Subscribe(StartAirAttackAnim)
+            .AddTo(this);
     }
 
     private void OnDisable()
     {
         normalAttackSubscription?.Dispose();
         normalAttackSubscription = null;
+
+        airAttackSubscription?.Dispose();
+        airAttackSubscription = null;
     }
 
     private void FixedUpdate()
@@ -128,5 +139,18 @@ public class PlayerAnimation : MonoBehaviour
     {
         anim.SetInteger("isNormalAttackCombo", comboIndex);
         anim.SetTrigger("normalAttack");
+    }
+
+    // 콤보 수치에 따라 Air Attack 애니메이션을 재생하는 함수
+    private void StartAirAttackAnim(int comboIndex)
+    {
+        anim.SetBool("isAirAttack", true);
+        anim.SetInteger("isAirAttackCombo", comboIndex);
+        anim.SetTrigger("airAttack");
+    }
+
+    public void StopAirAttackAnim()
+    {
+        anim.SetBool("isAirAttack", playerState.IsAttacking);
     }
 }

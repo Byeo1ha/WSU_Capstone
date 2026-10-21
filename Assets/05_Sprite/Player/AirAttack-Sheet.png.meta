@@ -1,0 +1,453 @@
+fileFormatVersion: 2
+guid: a166a7f859891db4bb69809ab5246e1a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4654286153850642634
+    second: AirAttack-Sheet_0
+  - first:
+      213: 3736199093795762248
+    second: AirAttack-Sheet_1
+  - first:
+      213: -6787283675284463197
+    second: AirAttack-Sheet_2
+  - first:
+      213: 911572420412369966
+    second: AirAttack-Sheet_3
+  - first:
+      213: -3187455420714214280
+    second: AirAttack-Sheet_4
+  - first:
+      213: 2587529765523311236
+    second: AirAttack-Sheet_5
+  - first:
+      213: 3530628281379718050
+    second: AirAttack-Sheet_6
+  - first:
+      213: -1507536673138653602
+    second: AirAttack-Sheet_7
+  - first:
+      213: -8323149598730495765
+    second: AirAttack-Sheet_8
+  - first:
+      213: -2411126099988558940
+    second: AirAttack-Sheet_9
+  - first:
+      213: 6376412792025532143
+    second: AirAttack-Sheet_10
+  - first:
+      213: 8622047068034777371
+    second: AirAttack-Sheet_11
+  - first:
+      213: -6638535540247959678
+    second: AirAttack-Sheet_12
+  - first:
+      213: -2818653808694666932
+    second: AirAttack-Sheet_13
+  - first:
+      213: -9180492665074962585
+    second: AirAttack-Sheet_14
+  - first:
+      213: 820393544709961584
+    second: AirAttack-Sheet_15
+  - first:
+      213: -816329865189824696
+    second: AirAttack-Sheet_16
+  - first:
+      213: 8952853693582829574
+    second: AirAttack-Sheet_17
+  - first:
+      213: 2966478775013528137
+    second: AirAttack-Sheet_18
+  - first:
+      213: -1435529604089996344
+    second: AirAttack-Sheet_19
+  - first:
+      213: 7465409516965960622
+    second: AirAttack-Sheet_20
+  - first:
+      213: -9155837818186584240
+    second: AirAttack-Sheet_21
+  - first:
+      213: -890817195366344093
+    second: AirAttack-Sheet_22
+  - first:
+      213: 8311850951015187351
+    second: AirAttack-Sheet_23
+  - first:
+      213: 718210671077050879
+    second: AirAttack-Sheet_24
+  - first:
+      213: 8273949575925145853
+    second: AirAttack-Sheet_25
+  - first:
+      213: 8833945746549788998
+    second: AirAttack-Sheet_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: AirAttack-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63f96bc0767a86fb0800000000000000
+      internalID: -4654286153850642634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84035d3d745a9d330800000000000000
+      internalID: 3736199093795762248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a1acd83579bec1a0800000000000000
+      internalID: -6787283675284463197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ce8b1694e86ac00800000000000000
+      internalID: 911572420412369966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 916
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87c9fe6ce22e3c3d0800000000000000
+      internalID: -3187455420714214280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1145
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48a44c7cc90c8e320800000000000000
+      internalID: 2587529765523311236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1374
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a3069147bf4ff030800000000000000
+      internalID: 3530628281379718050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1603
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5642bf0267241be0800000000000000
+      internalID: -1507536673138653602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1832
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be8db33b98b3e7c80800000000000000
+      internalID: -8323149598730495765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 2061
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ab42853695f98ed0800000000000000
+      internalID: -2411126099988558940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AirAttack-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 2290
+        y: 1
+        width: 229
+        height: 136
+      alignment: 9
+      pivot: {x: 0.38, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe640f196a19d7850800000000000000
+      internalID: 6376412792025532143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 306454be1a4b44a49ad73ebdd376cf53
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":229.0,"y":136.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      AirAttack-Sheet_0: -4654286153850642634
+      AirAttack-Sheet_1: 3736199093795762248
+      AirAttack-Sheet_10: 6376412792025532143
+      AirAttack-Sheet_2: -6787283675284463197
+      AirAttack-Sheet_3: 911572420412369966
+      AirAttack-Sheet_4: -3187455420714214280
+      AirAttack-Sheet_5: 2587529765523311236
+      AirAttack-Sheet_6: 3530628281379718050
+      AirAttack-Sheet_7: -1507536673138653602
+      AirAttack-Sheet_8: -8323149598730495765
+      AirAttack-Sheet_9: -2411126099988558940
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

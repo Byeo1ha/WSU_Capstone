@@ -22,6 +22,9 @@ public class PlayerAirAttack : MonoBehaviour
     [SerializeField] private float xAirOffset = 0.2f;
     [SerializeField] private float yAirOffset = 0.05f;
 
+    private readonly Subject<int> onAirAttackStarted = new();
+    public Observable<int> OnAirAttackStarted => onAirAttackStarted;
+
     private InputManager inputManager;
     private AttackHitboxPool attackHitboxPool;
     private AttackHitboxSpawner attackHitboxSpawner;
@@ -70,6 +73,11 @@ public class PlayerAirAttack : MonoBehaviour
         inputManager.DownInput
             .Subscribe(downInput => this.downInput = downInput)
             .AddTo(this);
+    }
+
+    private void OnDestroy()
+    {
+        onAirAttackStarted.Dispose();
     }
 
     // 키 입력을 받는 조건 필터링 함수
@@ -122,11 +130,17 @@ public class PlayerAirAttack : MonoBehaviour
         canQueueNextAttack = false;
         isNextAttackQueued = false;
 
-        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
+        onAirAttackStarted.OnNext(comboIndex);
 
         attackStepVersion++;
         AirCorrection().Forget();
-        TestEndAttack(attackStepVersion).Forget();
+    }
+
+    public void OnAirAttackHitboxStart()
+    {
+        if (!playerState.IsAirAttacking) return;
+        
+        attackHitboxSpawner.Spawn(attackHitboxPool, offset);
     }
 
     // 공격 도중에 실행하는 공중 체공 함수
@@ -166,17 +180,6 @@ public class PlayerAirAttack : MonoBehaviour
         HorizontalAttack();
     }
 
-    // 테스트 전용 함수
-    // 캐릭터 공격 애니메이션을 받으면 마지막 프레임에 EndAttack함수를 실행시키게 할 것
-    private async UniTask TestEndAttack(int version)
-    {
-        await UniTask.Delay(
-            TimeSpan.FromSeconds(0.4f), 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
-    
-        EndAttack(version);
-    }
-
     // 애니메이션 키 프레임에 넣는 선입력 함수
     public void OpenComboInput()
     {
@@ -187,9 +190,9 @@ public class PlayerAirAttack : MonoBehaviour
             canQueueNextAttack = true;
     }
 
-    public void EndAttack(int version)
+    public void EndAirAttack()
     {
-        EndAttackInternal(version);
+        EndAttackInternal(attackStepVersion);
     }
 
     // 애니메이션 키 프레임에 넣는 공격 종료 함수
