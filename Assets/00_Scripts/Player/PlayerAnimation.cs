@@ -10,6 +10,7 @@ using VContainer;
 [RequireComponent(typeof(PlayerLowAttack))]
 [RequireComponent(typeof(PlayerAttackFeedback))]
 [RequireComponent(typeof(PlayerAirAttack))]
+[RequireComponent(typeof(PlayerDodge))]
 public class PlayerAnimation : MonoBehaviour
 {
     private Rigidbody2D rigid;
@@ -19,6 +20,7 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerLowAttack playerLowAttack;
     private PlayerAttackFeedback playerAttackFeedback;
     private PlayerAirAttack playerAirAttack;
+    private PlayerDodge playerDodge;
 
     private IDisposable normalAttackSubscription;
     private IDisposable airAttackSubscription;
@@ -42,6 +44,7 @@ public class PlayerAnimation : MonoBehaviour
         playerLowAttack = GetComponent<PlayerLowAttack>();
         playerAttackFeedback = GetComponent<PlayerAttackFeedback>();
         playerAirAttack = GetComponent<PlayerAirAttack>();
+        playerDodge = GetComponent<PlayerDodge>();
     }
 
     private void Start()
@@ -56,6 +59,10 @@ public class PlayerAnimation : MonoBehaviour
 
         playerLowAttack.OnLowAttackStarted
             .Subscribe(_ => StartLowAttackAnim())
+            .AddTo(this);
+            
+        playerDodge.OnDodged
+            .Subscribe(_ => StartDodgeAnim())
             .AddTo(this);
     }
 
@@ -152,5 +159,10 @@ public class PlayerAnimation : MonoBehaviour
     public void StopAirAttackAnim()
     {
         anim.SetBool("isAirAttack", playerState.IsAttacking);
+    }
+
+    private void StartDodgeAnim()
+    {
+        anim.SetTrigger("dodge");
     }
 }

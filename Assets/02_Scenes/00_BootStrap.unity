@@ -148,8 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2b2588ed6d8c6f45ba7e6240a052fb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BootStrapService
-  rootLifetimeScope: {fileID: 0}
-  nextSceneName: SampleScene
+  nextSceneName: 01_TitleScene
 --- !u!4 &384924340
 Transform:
   m_ObjectHideFlags: 0

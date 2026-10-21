@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/02_Scenes/00_BootStrap.unity
     guid: 0c66c683bacc90941bc79a4469dcbe25
   - enabled: 1
+    path: Assets/02_Scenes/01_TitleScene.unity
+    guid: 9b2c1bb610baeee47bf898578225812d
+  - enabled: 1
+    path: Assets/02_Scenes/03_TutorialScene.unity
+    guid: d0ffcdfed331c1c48aa249fb4b9294bb
+  - enabled: 1
     path: Assets/02_Scenes/LoadingScene.unity
     guid: 46ddb7eb0009c154d862d30cc9859d28
   - enabled: 1

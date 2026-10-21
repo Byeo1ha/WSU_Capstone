@@ -8,30 +8,6 @@ TextureImporter:
   - first:
       213: -744929848246202890
     second: Dummy_1
-  - first:
-      213: 2622266444602237589
-    second: Dummy_2
-  - first:
-      213: 1083368399302836549
-    second: Dummy_3
-  - first:
-      213: -1976479589857983679
-    second: Dummy_4
-  - first:
-      213: 4466833535845002836
-    second: Dummy_5
-  - first:
-      213: 1705854317723561959
-    second: Dummy_6
-  - first:
-      213: 434263748761678788
-    second: Dummy_7
-  - first:
-      213: -963332377401696975
-    second: Dummy_8
-  - first:
-      213: 1763041035418867862
-    second: Dummy_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -73,12 +49,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -130,12 +106,12 @@ TextureImporter:
       name: Dummy_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 22
-        width: 890
-        height: 1621
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.45, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -152,12 +128,12 @@ TextureImporter:
       name: Dummy_1
       rect:
         serializedVersion: 2
-        x: 387
-        y: 1566
-        width: 168
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 185
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.45, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -170,187 +146,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Dummy_2
-      rect:
-        serializedVersion: 2
-        x: 471
-        y: 1566
-        width: 7
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 59261f02079246420800000000000000
-      internalID: 2622266444602237589
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_3
-      rect:
-        serializedVersion: 2
-        x: 485
-        y: 1526
-        width: 25
-        height: 23
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5414459b1d5e80f00800000000000000
-      internalID: 1083368399302836549
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_4
-      rect:
-        serializedVersion: 2
-        x: 511
-        y: 1538
-        width: 7
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 14384bce8422294e0800000000000000
-      internalID: -1976479589857983679
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_5
-      rect:
-        serializedVersion: 2
-        x: 241
-        y: 1498
-        width: 10
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 45ee7de3f616dfd30800000000000000
-      internalID: 4466833535845002836
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_6
-      rect:
-        serializedVersion: 2
-        x: 468
-        y: 1510
-        width: 16
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7efaa76c6796ca710800000000000000
-      internalID: 1705854317723561959
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_7
-      rect:
-        serializedVersion: 2
-        x: 509
-        y: 1494
-        width: 13
-        height: 17
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4c3f4c32490d60600800000000000000
-      internalID: 434263748761678788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_8
-      rect:
-        serializedVersion: 2
-        x: 233
-        y: 1494
-        width: 9
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 13dd6548e4e81a2f0800000000000000
-      internalID: -963332377401696975
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Dummy_9
-      rect:
-        serializedVersion: 2
-        x: 900
-        y: 982
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 69814901b74977810800000000000000
-      internalID: 1763041035418867862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 1ca44427072cc91459fbb6b810c02e13
     internalID: 0
     vertices: []
     indices: 
@@ -358,18 +158,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Dummy_0: 234189154208601328
       Dummy_1: -744929848246202890
-      Dummy_2: 2622266444602237589
-      Dummy_3: 1083368399302836549
-      Dummy_4: -1976479589857983679
-      Dummy_5: 4466833535845002836
-      Dummy_6: 1705854317723561959
-      Dummy_7: 434263748761678788
-      Dummy_8: -963332377401696975
-      Dummy_9: 1763041035418867862
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

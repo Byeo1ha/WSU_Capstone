@@ -12,6 +12,9 @@ public class PlayerDodge : MonoBehaviour
     [SerializeField] private float dashDistance = 3f;
     [SerializeField] private float dashSpeed = 12f;
 
+    private Subject<Unit> onDodged = new Subject<Unit>();
+    public Observable<Unit> OnDodged => onDodged;
+
     private InputManager inputManager;
 
     private Rigidbody2D rigid;
@@ -59,6 +62,8 @@ public class PlayerDodge : MonoBehaviour
     private async UniTask Dodge()
     {
         playerState.StartDodge();
+        onDodged.OnNext(Unit.Default);
+        
         gameObject.layer = invincibleLayer;
         
         int flip = spriteRenderer.flipX ? -1 : 1;
