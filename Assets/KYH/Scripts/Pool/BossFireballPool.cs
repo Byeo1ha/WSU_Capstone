@@ -64,7 +64,6 @@ public class BossFireballPool : MonoBehaviour
         projectile.Prepare(lifetime, direction, speed);
 
         fireball.SetActive(true);
-        projectile.launch();
 
         return fireball;
     }
