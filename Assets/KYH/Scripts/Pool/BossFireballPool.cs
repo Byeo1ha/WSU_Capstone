@@ -8,6 +8,8 @@ public class BossFireballPool : MonoBehaviour
 
     [Header("파이어볼 프리팹")]
     [SerializeField] private GameObject fireballPrefab;
+    [Header("파이어볼 보관 위치")]
+    [SerializeField] private Transform storageRoot;
 
     [Header("초기 생성 개수")]
     [SerializeField, Min(1)] private int initialCount = 10;
@@ -19,9 +21,16 @@ public class BossFireballPool : MonoBehaviour
 
     private void Awake()
     {
-        if(fireballPrefab == null)
+        if(fireballPrefab == null || storageRoot == null)
         {
-            Debug.LogError("Fire ball Prefab을 연결해 주세요", this);
+            Debug.LogError("Fire ball Prefab과 Storage Root을 연결해 주세요", this);
+            enabled = false;
+            return;
+        }
+
+        if (!fireballPrefab.TryGetComponent<BossFireball>(out _))
+        {
+            Debug.LogError("파잉볼 프리팹의 루트에 BossFireball이 필요합니다.", this);
             enabled = false;
             return;
         }
@@ -34,7 +43,7 @@ public class BossFireballPool : MonoBehaviour
     }
     private GameObject CreateFireball()
     {
-        GameObject fireball = Instantiate(fireballPrefab, transform);
+        GameObject fireball = Instantiate(fireballPrefab, storageRoot);
 
         fireball.SetActive(false);
 
