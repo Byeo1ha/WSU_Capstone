@@ -12,21 +12,18 @@ public class MidBossFireballPattern : MonoBehaviour
     [SerializeField] private Transform firePoint;
     [Header("공유 파이어볼 풀")]
     [SerializeField] private BossFireballPool fireballPool;
+    [Header("발사 순서별 파이어볼 풀")]
+    [SerializeField] private BossFireballPool[] fireballPools = new BossFireballPool[3];
     [Header("연속 발사 설정")]
     [SerializeField, Min(1)]private int shotCount =3;
     [SerializeField, Min(0f)]private float shotInterval = 0.4f;
-    [Header("준비 구체 배치")]
-    [SerializeField, Min(0f)]private float preparationSpacing = 0.8f;
-    [SerializeField, Min(0f)]private float centerHeightOffset = 0.3f;
-    [Header("준비 구체 생성")]
-    [SerializeField, Min(0f)]private float preparationDuration = 0.8f;
+
+
 
     private Coroutine firingCoroutine;
-    private Coroutine preparationCoroutine;
     private bool hasFinishedFiring;
 
     private readonly HashSet<GameObject> activeFireballs = new HashSet<GameObject>();
-    private readonly List<GameObject> preparedFireballs = new List<GameObject>();
 
     private void OnEnable()
     {
@@ -36,12 +33,11 @@ public class MidBossFireballPattern : MonoBehaviour
 
     private void OnDisable()
     {
-        StopPreparation();
+        hasFinishedFiring = false;
         StopFiring();
 
         if(fireballPool != null)
         {
-            ReturnPreparedFireballs();
             fireballPool.FireballReturned -= HandleFireballReturned;
         }
 
@@ -66,7 +62,6 @@ public class MidBossFireballPattern : MonoBehaviour
             }
 
             hasFinishedFiring = false;
-            preparationCoroutine = StartCoroutine(PrepareSequence());
             return;
         }
 
@@ -75,8 +70,7 @@ public class MidBossFireballPattern : MonoBehaviour
             StopFiring();
             if(state == BossPatternState.Idle)
             {
-                StopPreparation();
-                ReturnPreparedFireballs();
+                hasFinishedFiring = false;
                 activeFireballs.Clear();
             }
             return;   
@@ -95,60 +89,11 @@ public class MidBossFireballPattern : MonoBehaviour
         firingCoroutine = StartCoroutine(FireSequence());
     }
 
-    private Vector3 GetPreparationPosition(int index)
-    {
-        float offsetX = (index - (shotCount - 1) * 0.5f) * preparationSpacing;
-
-        float offsetY = 0f;
-
-        if (shotCount % 2 == 1 && index == shotCount / 2)
-            offsetY = centerHeightOffset;
-
-        return firePoint.position + new Vector3(offsetX, offsetY, 0f);
-    }
-
-    private void CreatePreparedFireball(int index)
-    {
-        Vector3 position = GetPreparationPosition(index);
-
-        GameObject fireball = fireballPool.Rent(position, 3f, Vector2.right, 5f);
-
-        if (fireball == null)
-            return;
-
-        activeFireballs.Add(fireball);
-        preparedFireballs.Add(fireball);
-        
-        BossFireball projectile = fireball.GetComponent<BossFireball>();
-        Vector3 offset = position - firePoint.position;
-        projectile.SetPreparationPoint(firePoint, offset);
-    }
-
-    private IEnumerator PrepareSequence()
-    {
-        float interval = shotCount > 1 ? preparationDuration / (shotCount - 1) : 0f;
-
-        for(int i = 0; i < shotCount; i++)
-        {
-            CreatePreparedFireball(i);
-
-            if(i < shotCount - 1 && interval > 0f)
-                yield return new WaitForSeconds(interval);
-        }
-
-        yield return null;
-        preparationCoroutine = null;
-    }
-
     private IEnumerator FireSequence()
     {
-        while (preparationCoroutine != null)
-            yield return null;
-
-        while (preparedFireballs.Count > 0)
+        for(int i = 0; i < shotCount; i++)
         {
-            GameObject fireball = preparedFireballs[0];
-            preparedFireballs.RemoveAt(0);
+            GameObject fireball = fireballPool.Rent(firePoint.position, 3f, Vector2.right, 5f);
             
             if (fireball != null)
             {
@@ -170,14 +115,13 @@ public class MidBossFireballPattern : MonoBehaviour
                     projectile.ReturnToPool();
                 }
             }
-            if (preparedFireballs.Count > 0)
+            if (i < shotCount - 1)
                 yield return new WaitForSeconds(shotInterval);
         }
 
         hasFinishedFiring = true;
 
         yield return null;
-        hasFinishedFiring = true;
         firingCoroutine = null;
 
         TryCompleteActive();
@@ -191,32 +135,6 @@ public class MidBossFireballPattern : MonoBehaviour
         StopCoroutine(firingCoroutine);
         firingCoroutine = null;
     }
-
-    private void StopPreparation()
-    {
-        if(preparationCoroutine == null)
-            return;
-
-        StopCoroutine(preparationCoroutine);
-        preparationCoroutine = null;
-    }
-
-    private void ReturnPreparedFireballs()
-    {
-        hasFinishedFiring = false;
-
-        while (preparedFireballs.Count > 0)
-        {
-            int lastIndex = preparedFireballs.Count - 1;
-            GameObject fireball = preparedFireballs[lastIndex];
-
-            preparedFireballs.RemoveAt(lastIndex);
-
-            if(fireball != null)
-                fireballPool.Return(fireball);
-        }
-    }
-
     private void HandleFireballReturned(GameObject fireball)
     {
         if(!activeFireballs.Remove(fireball))

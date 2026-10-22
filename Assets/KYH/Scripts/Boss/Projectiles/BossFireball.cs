@@ -9,8 +9,6 @@ public class BossFireball : MonoBehaviour
     private BossFireballPool ownerPool;
     private float lifetimeRemaining;
     private bool isLaunched;
-    private Transform preparationPoint;
-    private Vector3 preparationOffset;
 
     private void Awake()
     {
@@ -31,16 +29,9 @@ public class BossFireball : MonoBehaviour
         rigid.angularVelocity = 0f;
         
         isLaunched = false;
-        preparationPoint = null;
         lifetimeRemaining = Mathf.Max(0f, lifetime);
         moveDirection = direction.normalized;
         moveSpeed = Mathf.Max(0f, speed);
-    }
-
-    public void SetPreparationPoint(Transform point, Vector3 offset)
-    {
-        preparationPoint = point;
-        preparationOffset = offset;
     }
 
     public void launch()
@@ -62,12 +53,8 @@ public class BossFireball : MonoBehaviour
     private void Update()
     {
         if(!isLaunched)
-        {
-            if(preparationPoint != null)
-                rigid.position = (Vector2)(preparationPoint.position + preparationOffset);
-
             return;
-        }
+            
         lifetimeRemaining = Mathf.Max(0f, lifetimeRemaining - Time.deltaTime);
 
         if(lifetimeRemaining <= 0f)
