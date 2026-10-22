@@ -98,7 +98,7 @@ public class PlayerNormalAttack : MonoBehaviour
         onNormalAttackStarted.Dispose();
     }
 
-    // 키 입력을 받는 조건 필터링 함수
+    // 공격 입력 조건을 확인하고 즉시 공격하거나 회피 예약이 없을 때 다음 콤보를 예약하는 함수
     private void HandleAttackInput()
     {
         if (!isActiveAndEnabled) return;
@@ -130,6 +130,7 @@ public class PlayerNormalAttack : MonoBehaviour
         isNextAttackQueued = true;
     }
 
+    // 지상 공격의 선입력 구간에서 다음 콤보 예약을 취소하고 회피를 우선 예약하는 함수
     private void QueueDodge()
     {
         if (!isActiveAndEnabled || playerDodge == null || !playerDodge.isActiveAndEnabled) return;
@@ -155,7 +156,7 @@ public class PlayerNormalAttack : MonoBehaviour
         HorizontalAttack();
     }
 
-    // 수평 공격을 실제로 실행하는 함수
+    // 선입력 상태를 초기화하고 현재 콤보의 공격 시작을 알리는 함수
     private void HorizontalAttack()
     {
         isInputBufferOpen = false;
@@ -183,7 +184,7 @@ public class PlayerNormalAttack : MonoBehaviour
         attackHitboxSpawner.Spawn(finalAttackHitboxPool, finalAttackOffset);
     }
 
-    // 애니메이션 키 프레임에 넣는 선입력 함수
+    // 애니메이션 키 프레임에서 다음 콤보와 회피를 예약할 수 있는 선입력 구간을 여는 함수
     public void OpenNormalAttackComboInput()
     {
         if (!playerState.IsNormalAttacking || !isGroundComboActive || !playerState.IsGrounded)
@@ -217,7 +218,7 @@ public class PlayerNormalAttack : MonoBehaviour
         EndAttackInternal(attackStepVersion);
     }
 
-    // 현재 공격의 종료 요청인지 확인하고, 다음 콤보 진행 또는 공격 종료를 처리하는 함수
+    // 현재 공격의 종료 요청인지 확인하고, 예약된 회피를 우선 실행하거나 다음 콤보와 공격 종료를 처리하는 함수
     private void EndAttackInternal(int version)
     {
         if (version != attackStepVersion)
@@ -260,6 +261,7 @@ public class PlayerNormalAttack : MonoBehaviour
         playerState.StopAction(PlayerActionState.NormalAttack);
     }
 
+    // 공격과 회피 예약, 콤보 진행 및 유예 상태를 초기화하는 함수
     private void ResetCombo()
     {
         attackStepVersion++;

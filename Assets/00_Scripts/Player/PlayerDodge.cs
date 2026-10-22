@@ -49,12 +49,13 @@ public class PlayerDodge : MonoBehaviour
             .AddTo(this);
     }
 
-    // 키 입력을 받는 조건 필터링 함수
+    // 회피 입력을 받아 회피 실행을 시도하는 함수
     private void HandleInput()
     {
         TryDodge();
     }
 
+    // 활성 상태와 지상 여부, 행동 잠금을 확인하고 회피 시작 여부를 반환하는 함수
     public bool TryDodge()
     {
         if (!isActiveAndEnabled) return false;
