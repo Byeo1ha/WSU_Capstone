@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NormalAttack
   damage: 10
+  attackType: 4
   shakingType: 1
 --- !u!212 &3118725510573825769
 SpriteRenderer:

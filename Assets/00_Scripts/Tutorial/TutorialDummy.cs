@@ -1,12 +1,16 @@
 using R3;
 using UnityEngine;
 
+[RequireComponent(typeof(HitFlashEffect))]
 public class TutorialDummy : MonoBehaviour, IDamageable
 {
     [SerializeField] private bool timeCheck;
 
     private Subject<Unit> onDamaged = new Subject<Unit>();
     public Observable<Unit> OnDamaged => onDamaged;
+
+    private readonly Subject<AttackHitbox.AttackType> onAttackHit = new();
+    public Observable<AttackHitbox.AttackType> OnAttackHit => onAttackHit;
 
     private HitFlashEffect hitFlashEffect;
     private int totalDamage;
@@ -34,6 +38,22 @@ public class TutorialDummy : MonoBehaviour, IDamageable
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!isActiveAndEnabled) return;
+        if (!collision.TryGetComponent<AttackHitbox>(out var hitbox)) return;
+        if (!hitbox.isActiveAndEnabled || hitbox.Type == AttackHitbox.AttackType.None) return;
+
+        onAttackHit.OnNext(hitbox.Type);
+    }
+
+    private void OnDestroy()
+    {
+        onDamaged.Dispose();
+        onAttackHit.Dispose();
+    }
+
+    // 받은 피해량을 누적하고 피격 연출과 피해 알림을 실행하는 함수
     public void TakeDamage(int damage)
     {
         totalDamage += damage;

@@ -14,6 +14,20 @@ public enum ShakingType
 [RequireComponent(typeof(SpriteRenderer))]
 public class AttackHitbox : MonoBehaviour
 {
+    public enum AttackType
+    {
+        None = 0,
+        Normal = 1,
+        Air = 2,
+        High = 3,
+        Low = 4
+    }
+
+    [Header("공격 종류")]
+    [SerializeField] private AttackType attackType;
+
+    public AttackType Type => attackType;
+
     [Header("피해량")]
     [SerializeField] private int damage;
     [SerializeField] private ShakingType shakingType;
