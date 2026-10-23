@@ -241,6 +241,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1876966163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &839361014
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2527840830018875757, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_Name
+      value: MidBossFireballC
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.042
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.453
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c468f50f67b148e5b0d3ecc9e3de91c0, type: 3}
 --- !u!1 &1041933584
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +436,63 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1001 &1476273210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2527840830018875757, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_Name
+      value: MidBossFireballB
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.51868
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.10361
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 84a6a16ddbfc497cb09f56f82db6e4cf, type: 3}
 --- !u!1 &1598996643
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,6 +615,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1822048466
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2527840830018875757, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_Name
+      value: MidBossFireballA
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.21
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.674
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593133396374344976, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8692652924840672354, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
+      propertyPath: m_Radius
+      value: 0.13
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
 --- !u!1 &1876966161
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,11 +757,12 @@ MonoBehaviour:
   targetFinder: {fileID: 1876966167}
   firePoint: {fileID: 589096293}
   fireballPool: {fileID: 1876966166}
+  fireballPools:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   shotCount: 3
   shotInterval: 1
-  preparationSpacing: 0.8
-  centerHeightOffset: 0.3
-  preparationDuration: 0.8
 --- !u!114 &1876966166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,3 +803,6 @@ SceneRoots:
   - {fileID: 1598996644}
   - {fileID: 205545160}
   - {fileID: 1751435914}
+  - {fileID: 1822048466}
+  - {fileID: 1476273210}
+  - {fileID: 839361014}
