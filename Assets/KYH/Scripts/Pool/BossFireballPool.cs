@@ -53,7 +53,7 @@ public class BossFireballPool : MonoBehaviour
         return fireball;
     }
 
-    public GameObject Rent(Vector3 position, float lifetime, Vector2 direction, float speed)
+    public GameObject Rent(Vector3 position, float lifetime, Vector2 direction, float speed, int damage)
     {
         if(!isActiveAndEnabled)
             return null;
@@ -70,7 +70,7 @@ public class BossFireballPool : MonoBehaviour
         fireball.transform.position = position;
 
         BossFireball projectile = fireball.GetComponent<BossFireball>();
-        projectile.Prepare(lifetime, direction, speed);
+        projectile.Prepare(lifetime, direction, speed, damage);
 
         fireball.SetActive(true);
 
@@ -97,7 +97,7 @@ public class BossFireballPool : MonoBehaviour
         if(!Application.isPlaying || testFireball != null)
             return;
 
-        testFireball = Rent(transform.position, 3f, Vector2.right, 5f);
+        testFireball = Rent(transform.position, 3f, Vector2.right, 5f, 10);
     }
 
     [ContextMenu("테스트/ 파이어볼 반환")]
