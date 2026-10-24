@@ -115,6 +115,11 @@ public class MidBossFireballPattern : MonoBehaviour
 
     private void HandleStateChanged(BossPatternState state)
     {
+        if(state == BossPatternState.Windup && !patternRunner.IsSelectedPattern(this))
+        {
+            return;
+        }
+        
         switch (state)
         {
             case BossPatternState.Windup:

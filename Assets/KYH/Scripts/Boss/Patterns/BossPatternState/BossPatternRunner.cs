@@ -11,10 +11,28 @@ public class BossPatternRunner : MonoBehaviour
     [SerializeField] private BossPatternData patternData;
     [Header("현재 패턴 단계")]
     [SerializeField] private BossPatternState currentState = BossPatternState.Idle;
-
+    [Header("실행할 패턴")]
+    [SerializeField] private MonoBehaviour selectedPattern;
     public BossPatternState CurrentState => currentState;
 
     public event Action<BossPatternState> StateChanged;
+
+    public bool IsSelectedPattern(MonoBehaviour pattern)
+    {
+        return selectedPattern == pattern;
+    }
+
+    public bool TrySelectPattern(MonoBehaviour pattern)
+    {
+        if (currentState != BossPatternState.Idle)
+            return false;
+
+        if (pattern == null || !pattern.isActiveAndEnabled)
+            return false;
+
+        selectedPattern = pattern;
+        return true;
+    }
 
     private void ChangeState(BossPatternState nextState)
     {
@@ -73,6 +91,12 @@ public class BossPatternRunner : MonoBehaviour
 
         if(currentState != BossPatternState.Idle)
             return;
+
+        if(selectedPattern == null || !selectedPattern.isActiveAndEnabled)
+        {
+            Debug.LogWarning("활성화된 실행 패턴을 지정해 주세요.", this);
+            return;
+        }
 
         if(patternData == null)
         {
