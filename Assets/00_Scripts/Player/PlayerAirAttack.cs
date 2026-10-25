@@ -211,6 +211,23 @@ public class PlayerAirAttack : MonoBehaviour
         EndAttackInternal(attackStepVersion);
     }
 
+    // 피격 시에는 예약된 콤보를 실행하지 않고 체공 보정까지 취소한다.
+    public void CancelAirAttack()
+    {
+        cts?.Cancel();
+        cts?.Dispose();
+        cts = null;
+        rigid.gravityScale = originalGravity;
+        attackStepVersion++;
+        comboIndex = 0;
+        isAirComboActive = false;
+        canQueueNextAttack = false;
+        isNextAttackQueued = false;
+        isComboGraceActive = false;
+        isAttackFinish = false;
+        playerState.StopAction(PlayerActionState.AirAttack);
+    }
+
     // 애니메이션 키 프레임에 넣는 공격 종료 함수
     private void EndAttackInternal(int version)
     {

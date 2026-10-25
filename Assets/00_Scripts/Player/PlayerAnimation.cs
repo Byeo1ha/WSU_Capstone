@@ -134,6 +134,12 @@ public class PlayerAnimation : MonoBehaviour
     // 추락을 감지하면 Fall 애니메이션을 재생하는 함수
     private void FallCheck()
     {
+        if (playerState.IsDamaging)
+        {
+            anim.SetBool("isFall", false);
+            return;
+        }
+
         if (playerAttackFeedback.IsHitStopping) return;
 
         if (rigid.linearVelocity.y < -0.3f)
@@ -175,5 +181,18 @@ public class PlayerAnimation : MonoBehaviour
     private void StartHighAttackAnim()
     {
         anim.SetTrigger("highAttack");
+    }
+
+    public void StartDamagedAnim()
+    {
+        anim.SetBool("isFall", false);
+        anim.SetBool("isJump", false);
+        anim.SetBool("isAirAttack", false);
+        anim.SetBool("isLowAttack", false);
+        anim.ResetTrigger("normalAttack");
+        anim.ResetTrigger("airAttack");
+        anim.ResetTrigger("highAttack");
+        anim.ResetTrigger("dodge");
+        anim.SetTrigger("damaged");
     }
 }

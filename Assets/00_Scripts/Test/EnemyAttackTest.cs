@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyAttackTest : MonoBehaviour
 {
     [Header("테스트용 피해량")]
-    private int damage = 5;
+    [SerializeField] private int damage = 1;
 
     private int targetLayer;
 

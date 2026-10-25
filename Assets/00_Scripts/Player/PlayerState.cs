@@ -83,6 +83,6 @@ public class PlayerState : MonoBehaviour
         => TryStartAction(PlayerActionState.LowAttack);
 
     public void StartDamaged()
-        => TryStartAction(PlayerActionState.Damaged);
+        => CurrentAction = PlayerActionState.Damaged;
 
 }
