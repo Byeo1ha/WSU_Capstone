@@ -39,6 +39,20 @@ public class BossHealth : MonoBehaviour, IDamageable
         isInvincible = value;
     }
 
+    public bool ResetHealth()
+    {
+        if(maxHealth <= 0)
+        {
+            Debug.LogError("최대 체력이 초기화되지 않았습니다.", this);
+            return false;
+        }
+
+        currentHealth = maxHealth;
+        HealthChanged?.Invoke(currentHealth, maxHealth);
+
+        return true;
+    }
+
     public void TakeDamage(int damage)
     {
         if (damage <= 0 || IsDead || isInvincible)
