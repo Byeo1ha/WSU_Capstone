@@ -15,6 +15,8 @@ public class BossPatternRunner : MonoBehaviour
     [SerializeField] private MonoBehaviour selectedPattern;
     public BossPatternState CurrentState => currentState;
 
+    public bool IsStartAllowed => canStartPattern && isActiveAndEnabled;
+
     public event Action<BossPatternState> StateChanged;
 
     public bool IsSelectedPattern(MonoBehaviour pattern)

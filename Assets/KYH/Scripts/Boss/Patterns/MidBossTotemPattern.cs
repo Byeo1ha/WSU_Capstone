@@ -8,8 +8,12 @@ public class MidBossTotemPattern : MonoBehaviour
     [Header("재사용할 토템")]
     [SerializeField] private MidBossTotem totem;
 
-    [Header("테스트 배치 위기")]
-    [SerializeField] private Transform spawnPoint;
+    [Header("위치 비교 기준")]
+    [SerializeField] private Transform bossTransform;
+
+    [Header("좌우 소환 지점")]
+    [SerializeField] private Transform leftSpawnPoint;
+    [SerializeField] private Transform rightSpawnPoint;
 
     [Header("토템 발사기")]
     [SerializeField] private MidBossTotemShooter shooter;
@@ -20,9 +24,9 @@ public class MidBossTotemPattern : MonoBehaviour
 
     private void OnEnable()
     {
-        if(patternRunner == null || totem == null || spawnPoint == null || shooter == null)
+        if(patternRunner == null || totem == null || shooter == null || bossTransform == null || leftSpawnPoint == null || rightSpawnPoint == null || leftSpawnPoint == rightSpawnPoint)
         {
-            Debug.LogError("실행기,. 토템, 테스트 배치 위치를 연결해 주세요.", this);
+            Debug.LogError("실행기, 토템 발사기, 보스와 서로다른 좌우 소환 지점을 연결해 주세요.", this);
 
             enabled = false;
             return;
@@ -74,15 +78,17 @@ public class MidBossTotemPattern : MonoBehaviour
 
     private void ActivateTotem()
     {
-        if(totem == null || spawnPoint == null || !totem.enabled || !totem.gameObject || totem.gameObject.activeSelf)
+        if(totem == null || bossTransform == null || leftSpawnPoint == null || rightSpawnPoint == null || !totem.enabled || totem.gameObject.activeSelf)
         {
-            Debug.LogWarning("꺼진 상태의 토템과 배치 위치를 확인해 주세요.", this);
+            Debug.LogWarning("꺼진 상태의 토템과 보스 좌우 소환지점을 확인해 주세요.", this);
 
             AbortPattern();
             return;
         }
 
-        totem.transform.position = spawnPoint.position;
+        Transform selectedPoint = GetFartherSpawnPoint();
+
+        totem.transform.position = selectedPoint.position;
         totem.gameObject.SetActive(true);
     }
 
@@ -149,5 +155,19 @@ public class MidBossTotemPattern : MonoBehaviour
 
         if(patternRunner != null)
             patternRunner.StopPattern();
+    }
+
+    private Transform GetFartherSpawnPoint()
+    {
+        float bossX = bossTransform.position.x;
+
+        float leftDistance = Mathf.Abs(leftSpawnPoint.position.x - bossX);
+
+        float rightDistance = Mathf.Abs(rightSpawnPoint.position.x - bossX);
+
+        if(leftDistance >= rightDistance)
+            return leftSpawnPoint;
+
+        return rightSpawnPoint;
     }
 }

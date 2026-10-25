@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ca3f27a79f0744f80cb404b39c5460, type: 3}
   m_Name: MidBossTestData
   m_EditorClassIdentifier: Assembly-CSharp::BossData
-  maxHealth: 600
+  maxHealth: 300

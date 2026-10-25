@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceec61a71bbffb54995c8036018131c7, type: 3}
+  m_Name: MidBossPatternData
+  m_EditorClassIdentifier: Assembly-CSharp::BossPatternData
+  windupDuration: 1
+  activeDuration: 1
+  recoveryDuration: 0.8
