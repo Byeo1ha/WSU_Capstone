@@ -31,6 +31,7 @@ public class PlayerLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PlayerDodge>();
         builder.RegisterComponentInHierarchy<PlayerAnimation>();
         builder.RegisterComponentInHierarchy<PlayerAttackFeedback>();
+        builder.RegisterComponentInHierarchy<PlayerDamaged>();
 
         builder.RegisterComponent(normalAttack).Keyed(PoolKey.NormalAttack);
         builder.RegisterComponent(finalNormalAttack).Keyed(PoolKey.FinalNormalAttack);

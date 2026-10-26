@@ -5,6 +5,7 @@ using VContainer.Unity;
 public class RootLifetimeScope : LifetimeScope
 {
     [SerializeField] private ScreenFader screenFader;
+    [SerializeField] private PlayerAttributes playerAttributes;
 
     private void Start()
     {
@@ -15,5 +16,6 @@ public class RootLifetimeScope : LifetimeScope
     {
         builder.RegisterComponent(screenFader);
         builder.Register<SceneFlowService>(Lifetime.Singleton);
+        builder.RegisterComponent(playerAttributes);
     }
 }

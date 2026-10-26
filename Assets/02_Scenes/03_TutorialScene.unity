@@ -4476,9 +4476,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1729075164}
   - component: {fileID: 1729075184}
+  - component: {fileID: 1729075185}
   - component: {fileID: 1729075182}
   - component: {fileID: 1729075181}
-  - component: {fileID: 1729075178}
   - component: {fileID: 1729075174}
   - component: {fileID: 1729075176}
   - component: {fileID: 1729075169}
@@ -4679,22 +4679,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLowAttack
   slamPower: 20
   offset: 1
---- !u!114 &1729075178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729075162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84dee22d50bac6a4b826f565c7614e24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttributes
-  data: {fileID: 11400000, guid: cc4356111c302164f85affa6835217ca, type: 2}
-  upOffset: 5
-  backOffset: 5
-  damageRecoveryTimeout: 0.5
 --- !u!95 &1729075179
 Animator:
   serializedVersion: 7
@@ -4851,6 +4835,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitFlashEffect
   flashDuration: 0.05
+--- !u!114 &1729075185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729075162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c82504379623e60459cb3628d3a4f594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerDamaged
+  upOffset: 5
+  backOffset: 5
+  damageRecoveryTimeout: 0.5
 --- !u!1 &1753875482
 GameObject:
   m_ObjectHideFlags: 0
