@@ -166,6 +166,57 @@ MonoBehaviour:
   fireballPrefab: {fileID: 2527840830018875757, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
   storageRoot: {fileID: 1598996644}
   initialCount: 3
+--- !u!1 &203114428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203114430}
+  - component: {fileID: 203114429}
+  m_Layer: 0
+  m_Name: BlinkArea
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &203114429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203114428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e667ed5146c5d8149909fa071ac70d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossBlinkArea
+  leftLimit: {fileID: 622912749}
+  rightLimit: {fileID: 1012754732}
+  MinimumPlayerDistance: 3
+  minimumMoveDistance: 2
+  maxAttempts: 32
+--- !u!4 &203114430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203114428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 622912749}
+  - {fileID: 1012754732}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205545158
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +528,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1876966163}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &622912748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 622912749}
+  m_Layer: 0
+  m_Name: LeftLimit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &622912749
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622912748}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 203114430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654039492
 GameObject:
@@ -792,6 +874,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 315974377}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1012754731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012754732}
+  m_Layer: 0
+  m_Name: RightLimit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012754732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012754731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 203114430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1041933584
 GameObject:
@@ -1352,7 +1465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossFlamePillarPPattern
   patternRunner: {fileID: 1876966164}
-  targertFinder: {fileID: 1876966167}
+  targetFinder: {fileID: 1876966167}
   pillar: {fileID: 315974376}
   groundLayer:
     serializedVersion: 2
@@ -1394,6 +1507,8 @@ MonoBehaviour:
   - {fileID: 1876966169}
   - {fileID: 1876966170}
   firstPatternDelay: 1.5
+  blinkController: {fileID: 1876966172}
+  windupScaleAfterBlink: 0.3
 --- !u!114 &1876966172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,6 +1522,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossBlinkController
   bossHealth: {fileID: 1876966162}
+  patternRunner: {fileID: 1876966164}
+  targetFinder: {fileID: 1876966167}
+  blinkArea: {fileID: 203114429}
+  bossBody: {fileID: 1876966173}
 --- !u!50 &1876966173
 Rigidbody2D:
   serializedVersion: 5
@@ -1744,3 +1863,4 @@ SceneRoots:
   - {fileID: 315974377}
   - {fileID: 1973086602}
   - {fileID: 713466527}
+  - {fileID: 203114430}

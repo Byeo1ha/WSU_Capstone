@@ -11,6 +11,12 @@ public class MidBossPatternSelector : MonoBehaviour
 
     [Header("첫 패턴 시작 대기")]
     [SerializeField, Min(0f)] private float firstPatternDelay = 1.5f;
+    [Header("예약된 블링크")]
+    [SerializeField] private MidBossBlinkController blinkController;
+    [Header("블링크 직후 준비시간 배율")]
+    [SerializeField, Range(0.01f, 1f)]
+    private float windupScaleAfterBlink = 0.3f;
+
 
     private readonly List<MonoBehaviour> candidates = new List<MonoBehaviour>();
 
@@ -31,6 +37,11 @@ public class MidBossPatternSelector : MonoBehaviour
 
     private bool ValidateReferences()
     {
+        if(blinkController == null)
+        {
+            Debug.LogError("블링크 관리기를 연결해 주세요.", this);
+            return false;
+        }
         if(patternRunner == null || patterns == null || patterns.Length != 3)
         {
             Debug.LogError("실행기와 서로 다른 세 패턴을 연결해 주세요.", this);
@@ -97,7 +108,11 @@ public class MidBossPatternSelector : MonoBehaviour
         if(!patternRunner.TrySelectPattern(selected))
             return;
 
-        patternRunner.StartPattern();
+        bool didBlink = blinkController.TryExecuteBlink();
+
+        float windupScale = didBlink ? windupScaleAfterBlink : 1f;
+
+        patternRunner.StartPattern(windupScale);
 
         if(patternRunner.CurrentState != BossPatternState.Windup)
         {

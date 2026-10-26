@@ -85,13 +85,12 @@ public class BossPatternRunner : MonoBehaviour
 
     public void StartPattern()
     {
-        if(!isActiveAndEnabled)
-            return;
-        
-        if (!canStartPattern)
-            return;
+        StartPattern(1f);
+    }
 
-        if(currentState != BossPatternState.Idle)
+    public void StartPattern(float windupScale)
+    {
+        if(!IsStartAllowed || currentState != BossPatternState.Idle)
             return;
 
         if(selectedPattern == null || !selectedPattern.isActiveAndEnabled)
@@ -106,7 +105,9 @@ public class BossPatternRunner : MonoBehaviour
             return;
         }
 
-        stateTimeRemaining = patternData.WindupDuration;
+        float scale = Mathf.Clamp(windupScale, 0.01f, 1f);
+
+        stateTimeRemaining = patternData.WindupDuration * scale;
         ChangeState(BossPatternState.Windup);
     }
 

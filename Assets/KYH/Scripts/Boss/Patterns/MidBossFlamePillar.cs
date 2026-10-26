@@ -40,22 +40,21 @@ public class MidBossFlamePillar : MonoBehaviour
         Stop();
     }
 
-    public void Play()
+    public bool PrepareWarning()
     {
-        if(!isActiveAndEnabled)
-            return;
-
         Stop();
 
-        if(data == null||
-            warningVisual == null||
-            pillarVisual == null||
-            warningVisual.sprite == null||
-            pillarVisual.sprite == null)
+        if(!isActiveAndEnabled)
+            return false;
+
+        if(data == null || warningVisual == null || pillarVisual == null ||
+            warningVisual.sprite == null || pillarVisual.sprite == null || 
+            !warningVisual.gameObject.activeInHierarchy || !pillarVisual.gameObject.activeInHierarchy)
         {
-            Debug.LogError("공격 설정과 두 표시 이미지를 연결해 주세요.", this);
-            return;
+            Debug.LogError("데이터와 두 표시 이미지를 연결하고" + "표시 오브젝트를 활성화해 주세요", this);
+            return false;
         }
+
         Vector2 size = data.Size;
 
         attackSize = size;
@@ -69,28 +68,38 @@ public class MidBossFlamePillar : MonoBehaviour
         SetVisualSize(pillarVisual, size.x, size.y);
 
         warningVisual.transform.localPosition = new Vector3(0f, 0.05f, 0f);
+
         pillarVisual.transform.localPosition = new Vector3(0f, size.y * 0.5f, 0f);
 
         isPlaying = true;
-        sequence = StartCoroutine(playSequence());
-    }
-
-    private IEnumerator playSequence()
-    {
         warningVisual.enabled = true;
 
-        yield return new WaitForSeconds(data.WarningDuration);
+        return true;
+    }
+
+    public bool Activate()
+    {
+        if(!isActiveAndEnabled || !isPlaying || isDamageActive || sequence != null)
+            return false;
 
         warningVisual.enabled = false;
         pillarVisual.enabled = true;
         isDamageActive = true;
 
+        sequence = StartCoroutine(ActiveSequence());
+
         CheckDamage();
 
+        return true;
+    }
+
+    private IEnumerator ActiveSequence()
+    {
         yield return new WaitForSeconds(data.ActiveDuration);
 
         isDamageActive = false;
         HideVisuals();
+
 
         isPlaying = false;
         sequence = null;
@@ -167,7 +176,7 @@ public class MidBossFlamePillar : MonoBehaviour
     private void TestPlay()
     {
         if(Application.isPlaying)
-            Play();
+            PrepareWarning();
     }
 
     [ContextMenu("테스트/ 화염기둥 중단")]

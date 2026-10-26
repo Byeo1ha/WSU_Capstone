@@ -4,7 +4,7 @@ public class MidBossFlamePillarPattern : MonoBehaviour
 {
     [Header("실행 연결")]
     [SerializeField] private BossPatternRunner patternRunner;
-    [SerializeField] private BossTargetFinder targertFinder;
+    [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private MidBossFlamePillar pillar;
 
     [Header("바닥 탐색")]
@@ -15,7 +15,7 @@ public class MidBossFlamePillarPattern : MonoBehaviour
 
     private void OnEnable()
     {
-        if (patternRunner == null || targertFinder == null || pillar == null)
+        if (patternRunner == null || targetFinder == null || pillar == null)
         {
             Debug.LogError("실행기, 대상탐색기, 화염기둥을 연결해주세요.", this);
             enabled = false;
@@ -51,11 +51,17 @@ public class MidBossFlamePillarPattern : MonoBehaviour
 
                 CancelExecution();
                 ownsExecution = true;
+
+                BeginWarning();
                 break;
 
             case BossPatternState.Active:
-                if(ownsExecution)
-                    BeginPillar();
+                if(!ownsExecution)
+                    return;
+
+                if(!pillar.Activate())
+                    AbortPattern("화염기둥 공격을 시작하지 못했습니다.");
+
                 break;
 
             case BossPatternState.Recovery:
@@ -65,9 +71,15 @@ public class MidBossFlamePillarPattern : MonoBehaviour
         }
     }
 
-    private void BeginPillar()
+    private void BeginWarning()
     {
-        if(!targertFinder.TryGetTargetPosition(out Vector2 targetPosition))
+        if(!pillar.isActiveAndEnabled)
+        {
+            AbortPattern("화염기둥 오브젝트와 컴포넌트를 켜 주세요.");
+            return;
+        }
+
+        if(!targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
         {
             AbortPattern("화염기둥의 대상을 찾지 못했습니다.");
             return;
@@ -81,18 +93,10 @@ public class MidBossFlamePillarPattern : MonoBehaviour
             return;
         }
 
-        if (!pillar.isActiveAndEnabled)
-        {
-            AbortPattern("화염기둥 오브젝트와 컴포넌트를 켜 주세요.");
-            return;
-        }
-
         pillar.transform.position = new Vector3(hit.point.x, hit.point.y, 0f);
 
-        pillar.Play();
-
-        if(!pillar.IsPlaying)
-            AbortPattern("화염기둥을 시작하지 못했습니다.");
+        if(!pillar.PrepareWarning())
+            AbortPattern("화염기둥 경고를 시작하지 못했습니다.");
     }
 
     private void HandleFinished()
