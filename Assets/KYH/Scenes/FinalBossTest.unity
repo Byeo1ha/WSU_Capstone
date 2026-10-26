@@ -558,6 +558,8 @@ GameObject:
   - component: {fileID: 1028047477}
   - component: {fileID: 1028047478}
   - component: {fileID: 1028047479}
+  - component: {fileID: 1028047481}
+  - component: {fileID: 1028047480}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -636,7 +638,7 @@ MonoBehaviour:
   stateTimeRemaining: 0
   patternData: {fileID: 11400000, guid: 337d080f864bedf4a8b07a66ce250035, type: 2}
   currentState: 0
-  selectedPattern: {fileID: 0}
+  selectedPattern: {fileID: 1028047480}
 --- !u!114 &1028047478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,6 +670,40 @@ MonoBehaviour:
   damageLayer:
     serializedVersion: 2
     m_Bits: 1024
+--- !u!114 &1028047480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cdaafc373a546b48a8be68dbfd79a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossComboPattern
+  patternRunner: {fileID: 1028047477}
+  bossHealth: {fileID: 1028047473}
+  phaseController: {fileID: 1028047475}
+  targetFinder: {fileID: 1028047481}
+  data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
+  slash: {fileID: 1028047479}
+--- !u!114 &1028047481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce9b693192c54e4883b46c492c01886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossTargetFinder
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 3072
+  targetSearchRadius: 30
 --- !u!1 &1342568435
 GameObject:
   m_ObjectHideFlags: 0
