@@ -1398,7 +1398,7 @@ MonoBehaviour:
   stateTimeRemaining: 0
   patternData: {fileID: 11400000, guid: 6512e75ce6768434ea765c5d9a419215, type: 2}
   currentState: 0
-  selectedPattern: {fileID: 1876966170}
+  selectedPattern: {fileID: 1876966171}
 --- !u!114 &1876966165
 MonoBehaviour:
   m_ObjectHideFlags: 0
