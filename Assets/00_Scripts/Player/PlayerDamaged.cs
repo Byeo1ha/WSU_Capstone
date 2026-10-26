@@ -57,7 +57,7 @@ public class PlayerDamaged : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         playerAttributes.Damaged(damage);
-        Debug.Log($"{damage} 피해를 입었습니다! 남은 체력 {playerAttributes.Hp}");
+        Debug.Log($"{damage} 피해를 입었습니다! 남은 체력 {playerAttributes.hp}");
 
         playerAirAttack.CancelAirAttack();
         playerState.StartDamaged();
