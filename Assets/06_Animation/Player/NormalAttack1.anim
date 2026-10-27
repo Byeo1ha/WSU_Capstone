@@ -21,17 +21,17 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 6934013284892070054, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+      value: {fileID: 6951178911378622742, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
     - time: 0.083333336
-      value: {fileID: -7957278214813060823, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+      value: {fileID: 5875453275367695068, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
     - time: 0.16666667
-      value: {fileID: 1409549213185883415, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+      value: {fileID: -4804304518213913706, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
     - time: 0.25
-      value: {fileID: 4976274401295337057, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+      value: {fileID: 3168990128668354977, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
     - time: 0.33333334
-      value: {fileID: -5639509438907974925, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+      value: {fileID: -8095103267111837733, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
     - time: 0.41666666
-      value: {fileID: 452926297546027425, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+      value: {fileID: -5366683355867123480, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -54,12 +54,12 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 6934013284892070054, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
-    - {fileID: -7957278214813060823, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
-    - {fileID: 1409549213185883415, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
-    - {fileID: 4976274401295337057, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
-    - {fileID: -5639509438907974925, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
-    - {fileID: 452926297546027425, guid: 51b49d90ac1205e4a95685583350a53f, type: 3}
+    - {fileID: 6951178911378622742, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
+    - {fileID: 5875453275367695068, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
+    - {fileID: -4804304518213913706, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
+    - {fileID: 3168990128668354977, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
+    - {fileID: -8095103267111837733, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
+    - {fileID: -5366683355867123480, guid: eaa5364c59da6ce4b9fce0d07ef77f90, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -70,7 +70,7 @@ AnimationClip:
     m_Level: 0
     m_CycleOffset: 0
     m_HasAdditiveReferencePose: 0
-    m_LoopTime: 0
+    m_LoopTime: 1
     m_LoopBlend: 0
     m_LoopBlendOrientation: 0
     m_LoopBlendPositionY: 0
@@ -85,14 +85,14 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.16666667
+  - time: 0.25
     functionName: OnNormalAttackHitboxStart
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.25
+  - time: 0.33333334
     functionName: OpenNormalAttackComboInput
     data: 
     objectReferenceParameter: {fileID: 0}
