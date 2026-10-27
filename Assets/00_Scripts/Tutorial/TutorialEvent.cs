@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using R3;
@@ -8,6 +9,8 @@ using UnityEngine.Serialization;
 
 public class TutorialEvent : MonoBehaviour
 {
+    [SerializeField] private InputManager inputManager;
+
     [Header("튜토리얼 활성화 여부")]
     [SerializeField] private bool tutorial = true;
 
@@ -44,10 +47,17 @@ public class TutorialEvent : MonoBehaviour
     [SerializeField] private PlayerState playerState;
     [SerializeField] private PlayerDodge playerDodge;
 
+    [Header("튜토리얼 스킵")]
+    [SerializeField] private GameObject skipWindow;
+    [SerializeField] private CanvasGroup skipBtnCanvas;
+
     private int subjectCount;
     private bool isFinish;
     private bool isMissionActive;
     private bool wasJumping;
+
+    private bool openSkipWindow;
+    private CancellationTokenSource tutorialCancellation;
     
     private enum TutorialPhase
     {
@@ -70,6 +80,8 @@ public class TutorialEvent : MonoBehaviour
 
         subjectText
             .SetText("● 기본 공격 ({0} / {1})", subjectCount, maxNormalAttackSubject);
+
+        skipBtnCanvas.alpha = 0f;
     }
 
     private void Start()
@@ -104,7 +116,11 @@ public class TutorialEvent : MonoBehaviour
                 .AddTo(this);
         }
 
-        TutorialScript().Forget();
+        tutorialCancellation = CancellationTokenSource.CreateLinkedTokenSource(
+            this.GetCancellationTokenOnDestroy());
+        TutorialScript().SuppressCancellationThrow().Forget();
+        skipWindow.SetActive(false);
+        skipBtnCanvas.DOFade(1f, 0.5f);
     }
 
     private void Update()
@@ -121,12 +137,11 @@ public class TutorialEvent : MonoBehaviour
 
     private void OnDestroy()
     {
-        subjectBorder.DOKill();
-        normalAttackBorder.DOKill();
-        if (jumpBorder != null) jumpBorder.DOKill();
-        if (highAttackBorder != null) highAttackBorder.DOKill();
-        if (lowAttackBorder != null) lowAttackBorder.DOKill();
-        if (dodgeBorder != null) dodgeBorder.DOKill();
+        tutorialCancellation?.Cancel();
+        tutorialCancellation?.Dispose();
+        if (openSkipWindow && inputManager != null)
+            inputManager.SetGameplayInputBlocked(false);
+        HideTutorialUI(false);
     }
 
     // 현재 미션과 더미에 명중한 공격 종류가 일치하면 진행도를 갱신하는 함수
@@ -160,7 +175,7 @@ public class TutorialEvent : MonoBehaviour
         await subjectBorder.DOAnchorPos(new Vector2(170f, 0f), 1f)
             .AsyncWaitForCompletion()
             .AsUniTask()
-            .AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
+            .AttachExternalCancellation(tutorialCancellation.Token);
     }
 
     // 우측 목표 보더를 함께 숨기고 키 가이드가 완전히 사라질 때까지 기다리는 함수
@@ -172,12 +187,12 @@ public class TutorialEvent : MonoBehaviour
             return;
         }
 
-        HideSubjectBorder().Forget();
+        HideSubjectBorder().SuppressCancellationThrow().Forget();
         keyGuideBorder.DOKill();
         await keyGuideBorder.DOFade(0f, completeTime)
             .AsyncWaitForCompletion()
             .AsUniTask()
-            .AttachExternalCancellation(this.GetCancellationTokenOnDestroy());
+            .AttachExternalCancellation(tutorialCancellation.Token);
     }
 
     // 미션 패널을 표시하는 연출을 시작하는 함수
@@ -193,7 +208,7 @@ public class TutorialEvent : MonoBehaviour
     {
         await UniTask.Delay(
             TimeSpan.FromSeconds(1f),
-            cancellationToken: this.GetCancellationTokenOnDestroy());
+            cancellationToken: tutorialCancellation.Token);
 
         moveBorder.DOFade(1f, completeTime);
         BeginMission(TutorialPhase.Move);
@@ -235,6 +250,7 @@ public class TutorialEvent : MonoBehaviour
         BeginMission(TutorialPhase.Dodge);
 
         await TutorialFinish();
+        DisableSkipBtn();
         await HideKeyGuideBorder(dodgeBorder);
 
         tutorialPhase = TutorialPhase.Completed;
@@ -272,16 +288,16 @@ public class TutorialEvent : MonoBehaviour
     private async UniTask TutorialFinish()
     {
         await UniTask.WaitUntil(() => isFinish, 
-            cancellationToken: this.GetCancellationTokenOnDestroy());
+            cancellationToken: tutorialCancellation.Token);
 
         isFinish = false;
     }
 
     public void FinishMoveTutorial()
     {
-        if (tutorialPhase != TutorialPhase.Move) return;
+        if (!tutorial || !isMissionActive || tutorialPhase != TutorialPhase.Move) return;
 
-        CompleteMission().Forget();
+        CompleteMission().SuppressCancellationThrow().Forget();
     }
 
     // 일반 공격 명중 횟수를 갱신하고 목표 달성 여부를 확인하는 함수
@@ -296,7 +312,7 @@ public class TutorialEvent : MonoBehaviour
 
         if (subjectCount >= maxNormalAttackSubject)
         {
-            CompleteMission().Forget();
+            CompleteMission().SuppressCancellationThrow().Forget();
         }
     }
 
@@ -312,7 +328,7 @@ public class TutorialEvent : MonoBehaviour
 
         if (subjectCount >= maxAirAttackSubject)
         {
-            CompleteMission().Forget();
+            CompleteMission().SuppressCancellationThrow().Forget();
         }
     }
 
@@ -327,7 +343,7 @@ public class TutorialEvent : MonoBehaviour
 
         if (subjectCount >= maxJumpSubject)
         {
-            CompleteMission().Forget();
+            CompleteMission().SuppressCancellationThrow().Forget();
         }
     }
 
@@ -342,7 +358,7 @@ public class TutorialEvent : MonoBehaviour
 
         if (subjectCount >= maxHighAttackSubject)
         {
-            CompleteMission().Forget();
+            CompleteMission().SuppressCancellationThrow().Forget();
         }
     }
 
@@ -357,7 +373,7 @@ public class TutorialEvent : MonoBehaviour
 
         if (subjectCount >= maxLowAttackSubject)
         {
-            CompleteMission().Forget();
+            CompleteMission().SuppressCancellationThrow().Forget();
         }
     }
 
@@ -372,19 +388,147 @@ public class TutorialEvent : MonoBehaviour
 
         if (subjectCount >= maxDodgeSubject)
         {
-            CompleteMission().Forget();
+            CompleteMission().SuppressCancellationThrow().Forget();
         }
     }
 
     // 목표 달성 후 추가 집계를 중지하고 완료 상태를 표시하는 함수
     private async UniTask CompleteMission()
     {
+        if (!tutorial || !isMissionActive) return;
+
         isMissionActive = false;
         subjectText.color = Color.green;
 
         await UniTask.Delay(TimeSpan.FromSeconds(1f),
-            cancellationToken: this.GetCancellationTokenOnDestroy());
+            cancellationToken: tutorialCancellation.Token);
 
         isFinish = true;
+    }
+
+    public void TutorialSkip()
+    {
+        if (!tutorial || tutorialPhase == TutorialPhase.Completed || openSkipWindow) return;
+
+        inputManager.SetGameplayInputBlocked(true);
+        openSkipWindow = true;
+
+        skipWindow.transform.DOKill();
+        skipWindow.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        skipWindow.SetActive(true);
+
+        skipWindow
+            .transform
+            .DOScale(1f, 0.5f)
+            .SetEase(Ease.OutBack);
+    }
+
+    public void TutorialSkipDeny()
+    {
+        if (!openSkipWindow) return;
+
+        openSkipWindow = false;
+        inputManager.SetGameplayInputBlocked(false);
+
+        skipWindow.transform.DOKill();
+        skipWindow
+            .transform
+            .DOScale(0f, 0.2f)
+            .OnComplete(() => skipWindow.SetActive(false));
+    }
+
+    public void TutorialSkipConfirm()
+    {
+        if (!tutorial) return;
+
+        tutorial = false;
+        isMissionActive = false;
+        isFinish = false;
+        tutorialPhase = TutorialPhase.Completed;
+
+        tutorialCancellation?.Cancel();
+        HideTutorialUI();
+
+        if (openSkipWindow)
+        {
+            openSkipWindow = false;
+            inputManager.SetGameplayInputBlocked(false);
+        }
+
+        DisableSkipBtn();
+    }
+
+    private void DisableSkipBtn()
+    {
+        skipBtnCanvas.interactable = false;
+        
+        skipBtnCanvas
+            .DOFade(0f, 0.5f)
+            .OnComplete(
+                () => 
+                {
+                    skipBtnCanvas.gameObject.SetActive(false);
+                    tutorialPhase = TutorialPhase.Completed;
+                }
+            );
+    }
+
+    private void HideTutorialUI(bool animate = true)
+    {
+        HideKeyGuide(moveBorder, animate);
+        HideKeyGuide(normalAttackBorder, animate);
+        HideKeyGuide(jumpBorder, animate);
+        HideKeyGuide(airAttackBorder, animate);
+        HideKeyGuide(highAttackBorder, animate);
+        HideKeyGuide(lowAttackBorder, animate);
+        HideKeyGuide(dodgeBorder, animate);
+
+        if (subjectBorder != null)
+        {
+            subjectBorder.DOKill();
+            if (animate && subjectBorder.gameObject.activeInHierarchy)
+            {
+                subjectBorder.DOAnchorPos(new Vector2(170f, 0f), 1f)
+                    .OnComplete(() => subjectBorder.gameObject.SetActive(false));
+            }
+            else
+            {
+                subjectBorder.gameObject.SetActive(false);
+            }
+        }
+
+        if (skipWindow != null)
+        {
+            skipWindow.transform.DOKill();
+            if (animate && skipWindow.activeInHierarchy)
+            {
+                skipWindow.transform.DOScale(0f, 0.2f)
+                    .OnComplete(() => skipWindow.SetActive(false));
+            }
+            else
+            {
+                skipWindow.SetActive(false);
+            }
+        }
+    }
+
+    private void HideKeyGuide(CanvasGroup keyGuideBorder, bool animate)
+    {
+        if (keyGuideBorder == null) return;
+
+        keyGuideBorder.DOKill();
+        keyGuideBorder.interactable = false;
+        keyGuideBorder.blocksRaycasts = false;
+
+        if (animate && keyGuideBorder.gameObject.activeInHierarchy && keyGuideBorder.alpha > 0f)
+        {
+            keyGuideBorder.DOFade(0f, completeTime)
+                .OnComplete(() => keyGuideBorder.gameObject.SetActive(false));
+        }
+        else
+        {
+            keyGuideBorder.alpha = 0f;
+            keyGuideBorder.gameObject.SetActive(false);
+        }
     }
 }
