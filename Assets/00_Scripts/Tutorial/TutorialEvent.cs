@@ -59,7 +59,7 @@ public class TutorialEvent : MonoBehaviour
     private bool openSkipWindow;
     private CancellationTokenSource tutorialCancellation;
     
-    private enum TutorialPhase
+    public enum TutorialPhase
     {
         Move,
         NormalAttack,
@@ -72,6 +72,8 @@ public class TutorialEvent : MonoBehaviour
     }
 
     private TutorialPhase tutorialPhase;
+
+    public TutorialPhase GetTutorialPhase => tutorialPhase;
 
     private void Awake()
     {
@@ -120,7 +122,8 @@ public class TutorialEvent : MonoBehaviour
             this.GetCancellationTokenOnDestroy());
         TutorialScript().SuppressCancellationThrow().Forget();
         skipWindow.SetActive(false);
-        skipBtnCanvas.DOFade(1f, 0.5f);
+        skipBtnCanvas.DOFade(1f, 0.5f)
+            .SetLink(skipBtnCanvas.gameObject);
     }
 
     private void Update()
@@ -173,6 +176,7 @@ public class TutorialEvent : MonoBehaviour
     {
         subjectBorder.DOKill();
         await subjectBorder.DOAnchorPos(new Vector2(170f, 0f), 1f)
+            .SetLink(subjectBorder.gameObject)
             .AsyncWaitForCompletion()
             .AsUniTask()
             .AttachExternalCancellation(tutorialCancellation.Token);
@@ -190,6 +194,7 @@ public class TutorialEvent : MonoBehaviour
         HideSubjectBorder().SuppressCancellationThrow().Forget();
         keyGuideBorder.DOKill();
         await keyGuideBorder.DOFade(0f, completeTime)
+            .SetLink(keyGuideBorder.gameObject)
             .AsyncWaitForCompletion()
             .AsUniTask()
             .AttachExternalCancellation(tutorialCancellation.Token);
@@ -200,6 +205,7 @@ public class TutorialEvent : MonoBehaviour
     {
         subjectBorder.DOKill();
         subjectBorder.DOAnchorPos(new Vector2(-170f, 0f), 1f)
+            .SetLink(subjectBorder.gameObject)
             .SetEase(Ease.OutCubic);
     }
 
@@ -210,43 +216,54 @@ public class TutorialEvent : MonoBehaviour
             TimeSpan.FromSeconds(1f),
             cancellationToken: tutorialCancellation.Token);
 
-        moveBorder.DOFade(1f, completeTime);
+        moveBorder.DOFade(1f, completeTime)
+            .SetLink(moveBorder.gameObject);
         BeginMission(TutorialPhase.Move);
         
         await TutorialFinish();
         await HideKeyGuideBorder(moveBorder);
 
-        normalAttackBorder.DOFade(1f, completeTime);
+        normalAttackBorder.DOFade(1f, completeTime)
+            .SetLink(normalAttackBorder.gameObject);
         BeginMission(TutorialPhase.NormalAttack);
 
         await TutorialFinish();
         await HideKeyGuideBorder(normalAttackBorder);
 
-        if (jumpBorder != null) jumpBorder.DOFade(1f, completeTime);
+        if (jumpBorder != null)
+            jumpBorder.DOFade(1f, completeTime)
+                .SetLink(jumpBorder.gameObject);
         BeginMission(TutorialPhase.Jump);
 
         await TutorialFinish();
         await HideKeyGuideBorder(jumpBorder);
 
-        airAttackBorder.DOFade(1f, completeTime);
+        airAttackBorder.DOFade(1f, completeTime)
+            .SetLink(airAttackBorder.gameObject);
         BeginMission(TutorialPhase.AirAttack);
 
         await TutorialFinish();
         await HideKeyGuideBorder(airAttackBorder);
 
-        if (highAttackBorder != null) highAttackBorder.DOFade(1f, completeTime);
+        if (highAttackBorder != null)
+            highAttackBorder.DOFade(1f, completeTime)
+                .SetLink(highAttackBorder.gameObject);
         BeginMission(TutorialPhase.HighAttack);
 
         await TutorialFinish();
         await HideKeyGuideBorder(highAttackBorder);
 
-        if (lowAttackBorder != null) lowAttackBorder.DOFade(1f, completeTime);
+        if (lowAttackBorder != null)
+            lowAttackBorder.DOFade(1f, completeTime)
+                .SetLink(lowAttackBorder.gameObject);
         BeginMission(TutorialPhase.LowAttack);
 
         await TutorialFinish();
         await HideKeyGuideBorder(lowAttackBorder);
 
-        if (dodgeBorder != null) dodgeBorder.DOFade(1f, completeTime);
+        if (dodgeBorder != null)
+            dodgeBorder.DOFade(1f, completeTime)
+                .SetLink(dodgeBorder.gameObject);
         BeginMission(TutorialPhase.Dodge);
 
         await TutorialFinish();
@@ -420,6 +437,7 @@ public class TutorialEvent : MonoBehaviour
         skipWindow
             .transform
             .DOScale(1f, 0.5f)
+            .SetLink(skipWindow)
             .SetEase(Ease.OutBack);
     }
 
@@ -434,6 +452,7 @@ public class TutorialEvent : MonoBehaviour
         skipWindow
             .transform
             .DOScale(0f, 0.2f)
+            .SetLink(skipWindow)
             .OnComplete(() => skipWindow.SetActive(false));
     }
 
@@ -464,6 +483,7 @@ public class TutorialEvent : MonoBehaviour
         
         skipBtnCanvas
             .DOFade(0f, 0.5f)
+            .SetLink(skipBtnCanvas.gameObject)
             .OnComplete(
                 () => 
                 {
@@ -489,6 +509,7 @@ public class TutorialEvent : MonoBehaviour
             if (animate && subjectBorder.gameObject.activeInHierarchy)
             {
                 subjectBorder.DOAnchorPos(new Vector2(170f, 0f), 1f)
+                    .SetLink(subjectBorder.gameObject)
                     .OnComplete(() => subjectBorder.gameObject.SetActive(false));
             }
             else
@@ -503,6 +524,7 @@ public class TutorialEvent : MonoBehaviour
             if (animate && skipWindow.activeInHierarchy)
             {
                 skipWindow.transform.DOScale(0f, 0.2f)
+                    .SetLink(skipWindow)
                     .OnComplete(() => skipWindow.SetActive(false));
             }
             else
@@ -523,6 +545,7 @@ public class TutorialEvent : MonoBehaviour
         if (animate && keyGuideBorder.gameObject.activeInHierarchy && keyGuideBorder.alpha > 0f)
         {
             keyGuideBorder.DOFade(0f, completeTime)
+                .SetLink(keyGuideBorder.gameObject)
                 .OnComplete(() => keyGuideBorder.gameObject.SetActive(false));
         }
         else

@@ -13,6 +13,9 @@ public class InputManager : MonoBehaviour
     private Subject<Unit> onDodge = new();
     public Observable<Unit> OnDodge => onDodge;
 
+    private Subject<Unit> onInteract = new();
+    public Observable<Unit> OnInteract => onInteract;
+
     private ReactiveProperty<float> moveInput = new(0f);
     public ReadOnlyReactiveProperty<float> MoveInput => moveInput;
 
@@ -79,5 +82,12 @@ public class InputManager : MonoBehaviour
         
         if (context.started) downInput.Value = true;
         else if (context.canceled) downInput.Value = false;
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if (isGameplayInputBlocked) return;
+
+        if (context.performed) onInteract.OnNext(Unit.Default);
     }
 }
