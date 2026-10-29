@@ -608,6 +608,8 @@ GameObject:
   - component: {fileID: 1028047481}
   - component: {fileID: 1028047480}
   - component: {fileID: 1028047482}
+  - component: {fileID: 1028047484}
+  - component: {fileID: 1028047483}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -770,6 +772,57 @@ MonoBehaviour:
   muzzleOffset: {x: 0.7, y: 0}
   speed: 12
   lifetime: 3
+--- !u!50 &1028047483
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &1028047484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43986e19cb314d24d991b24b6143714d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossApproach
+  bossBody: {fileID: 1028047483}
+  bossHealth: {fileID: 1028047473}
+  phaseController: {fileID: 1028047475}
+  patternRunner: {fileID: 1028047477}
+  targetFinder: {fileID: 1028047481}
+  comboData: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
+  moveSpeed: 3
+  firstApproachDuration: 2
+  additionalApproachDuration: 2
+  result: 0
+  timeRemaining: 0
+  isAdditionalApproach: 0
 --- !u!1 &1342568435
 GameObject:
   m_ObjectHideFlags: 0
