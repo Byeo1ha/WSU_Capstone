@@ -24,7 +24,7 @@ public class TutorialPortalManager : MonoBehaviour
         {
             guideEnable = true;
             tutorialOutPortal.gameObject.SetActive(true);
-            GuideShow().Forget();
+            GuideShow().SuppressCancellationThrow().Forget();
         }
     }
 
@@ -33,6 +33,7 @@ public class TutorialPortalManager : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(1f),
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
-        completePortalGuide.DOFade(1f, 0.5f);
+        completePortalGuide.DOFade(1f, 0.5f)
+            .SetLink(completePortalGuide.gameObject);
     }
 }
