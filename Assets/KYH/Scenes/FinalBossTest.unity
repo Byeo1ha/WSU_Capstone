@@ -391,6 +391,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &636867835
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 636867836}
+  - component: {fileID: 636867837}
+  m_Layer: 0
+  m_Name: PistolPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &636867836
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636867835}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1816699459}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &636867837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636867835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb05df438e3c6144b6292f835725876, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossFireballPool
+  fireballPrefab: {fileID: 2134018254572446493, guid: 268b1315b4c10e742b567bf5f144878e, type: 3}
+  storageRoot: {fileID: 1816699459}
+  initialCount: 3
 --- !u!1 &678869789
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +584,7 @@ Transform:
   m_GameObject: {fileID: 678869789}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.39, y: 0.09, z: 0}
+  m_LocalPosition: {x: 5.13, y: 0.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -560,6 +607,9 @@ GameObject:
   - component: {fileID: 1028047479}
   - component: {fileID: 1028047481}
   - component: {fileID: 1028047480}
+  - component: {fileID: 1028047482}
+  - component: {fileID: 1028047484}
+  - component: {fileID: 1028047483}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -653,6 +703,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FinalBossPatternCoordinator
   phaseController: {fileID: 1028047475}
   patternRunner: {fileID: 1028047477}
+  approach: {fileID: 1028047484}
+  comboPattern: {fileID: 1028047480}
 --- !u!114 &1028047479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,6 +740,7 @@ MonoBehaviour:
   targetFinder: {fileID: 1028047481}
   data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
   slash: {fileID: 1028047479}
+  pistol: {fileID: 1028047482}
 --- !u!114 &1028047481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,6 +757,74 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   targetSearchRadius: 30
+--- !u!114 &1028047482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4e86635fdef90d41a379ecc2956d4cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossPistol
+  pistolpool: {fileID: 636867837}
+  fireOrigin: {fileID: 1028047474}
+  muzzleOffset: {x: 0.7, y: 0}
+  speed: 12
+  lifetime: 3
+--- !u!50 &1028047483
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &1028047484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43986e19cb314d24d991b24b6143714d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossApproach
+  bossBody: {fileID: 1028047483}
+  bossHealth: {fileID: 1028047473}
+  phaseController: {fileID: 1028047475}
+  patternRunner: {fileID: 1028047477}
+  targetFinder: {fileID: 1028047481}
+  comboData: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
+  moveSpeed: 3
+  firstApproachDuration: 2
+  additionalApproachDuration: 2
+  result: 0
+  timeRemaining: 0
+  isAdditionalApproach: 0
 --- !u!1 &1342568435
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +1037,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361954845}
   m_CullTransparentMesh: 1
+--- !u!1 &1816699458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1816699459}
+  m_Layer: 0
+  m_Name: FinalBossProjectiles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1816699459
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816699458}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 319.1018, y: 137.35567, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 636867836}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -925,3 +1078,4 @@ SceneRoots:
   - {fileID: 109522929}
   - {fileID: 525176158}
   - {fileID: 678869793}
+  - {fileID: 1816699459}

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BossFireball : MonoBehaviour
 {
+    [Header("탄환 그림 방향")]
+    [SerializeField] private SpriteRenderer projectileRenderer;
+    [SerializeField] private bool originalFacesRight = true;
     private Rigidbody2D rigid;
     private Vector2 moveDirection;
     private float moveSpeed;
@@ -35,10 +38,14 @@ public class BossFireball : MonoBehaviour
         moveDirection = direction.normalized;
         moveSpeed = Mathf.Max(0f, speed);
         this.damage = Mathf.Max(0, damage);
+
+        UpdateFacing();
     }
 
     public void launch()
     {
+        UpdateFacing();
+        
         rigid.linearVelocity = Vector2.zero;
         rigid.angularVelocity = 0f;
 
@@ -110,6 +117,27 @@ public class BossFireball : MonoBehaviour
         rigid.angularVelocity = 0f;
 
         ownerPool.Return(gameObject);
+    }
+
+    private void UpdateFacing()
+    {
+        if (projectileRenderer == null)
+            TryGetComponent<SpriteRenderer>(out projectileRenderer);
+
+        if (projectileRenderer == null)
+            return;
+
+        // 수직 발사라면 원본 방향으로 초기화한다.
+        if (Mathf.Abs(moveDirection.x) <= 0.0001f)
+        {
+            projectileRenderer.flipX = false;
+            return;
+        }
+
+        bool shouldFaceRight = moveDirection.x > 0f;
+
+        projectileRenderer.flipX =
+            shouldFaceRight != originalFacesRight;
     }
 
     [ContextMenu("테스트/풀로 반환")]

@@ -13,13 +13,14 @@ public class FinalBossComboPattern : MonoBehaviour
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private FinalBossComboData data;
     [SerializeField] private FinalBossSlash slash;
+    [SerializeField] private FinalBossPistol pistol;
 
     private Coroutine sequence;
     private bool ownsExecution;
     
     private void OnEnable()
     {
-        if(patternRunner == null || bossHealth == null || phaseController == null || targetFinder == null || data == null || slash == null)
+        if(patternRunner == null || bossHealth == null || phaseController == null || targetFinder == null || data == null || slash == null || pistol == null)
         {
             Debug.LogError("칼 연계에 필요한 참조를 모두 연결해 주세요.", this);
 
@@ -55,7 +56,8 @@ public class FinalBossComboPattern : MonoBehaviour
                !phaseController.IsTransforming &&
                phaseController.CurrentPhase == FinalBossPhase.Phase1 &&
                targetFinder.isActiveAndEnabled &&
-               slash.isActiveAndEnabled;
+               slash.isActiveAndEnabled &&
+               pistol != null && pistol.isActiveAndEnabled;
     }
 
     private void HandleStateChanged(BossPatternState state)
@@ -148,12 +150,41 @@ public class FinalBossComboPattern : MonoBehaviour
                 yield return new WaitForSeconds(data.BetweenSlashDelay);
         }
 
-        sequence = null;
+         yield return new WaitForSeconds(data.BeforePistolDelay);
 
-        if(!ownsExecution)
+        if (!ownsExecution)
             yield break;
 
-        if(!CanExecute())
+        if (!CanExecute() ||
+            !pistol.TryFire(direction, data.PistolDamage))
+        {
+            Debug.LogWarning("권총 발사를 시작하지 못했습니다.", this);
+            AbortPattern();
+            yield break;
+        }
+
+        Debug.Log("최종보스 권총 발사", this);
+
+        while (pistol.IsInFlight)
+        {
+            if (!ownsExecution)
+                yield break;
+
+            if (!CanExecute())
+            {
+                AbortPattern();
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        sequence = null;
+
+        if (!ownsExecution)
+            yield break;
+
+        if (!CanExecute())
         {
             AbortPattern();
             yield break;
@@ -179,8 +210,14 @@ public class FinalBossComboPattern : MonoBehaviour
             sequence = null;
         }
 
-        if(wasExecuting && slash != null)
-            slash.StopSlash();
+        if (wasExecuting)
+        {
+            if (slash != null)
+                slash.StopSlash();
+
+            if (pistol != null)
+                pistol.CancelShot();
+        }
     }
 
     private void AbortPattern()

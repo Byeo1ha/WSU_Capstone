@@ -5,7 +5,8 @@ public class BossHealth : MonoBehaviour, IDamageable
 {
     [Header("보스 데이터")]
     [SerializeField] private BossData bossData;
-
+    
+    private HitFlashEffect hitFlashEffect;
     private int maxHealth;
     private int currentHealth;
 
@@ -27,6 +28,8 @@ public class BossHealth : MonoBehaviour, IDamageable
 
         maxHealth = bossData.MaxHealth;
         currentHealth = maxHealth;
+
+        hitFlashEffect = GetComponent<HitFlashEffect>();
     }
 
     public void SetMinimumHealth(int value)
@@ -62,6 +65,7 @@ public class BossHealth : MonoBehaviour, IDamageable
         currentHealth = Mathf.Min(currentHealth, nextHealth);
 
         HealthChanged?.Invoke(currentHealth, maxHealth);
+        hitFlashEffect.PlayHitFlash();
 
         if (IsDead)
             Die();
