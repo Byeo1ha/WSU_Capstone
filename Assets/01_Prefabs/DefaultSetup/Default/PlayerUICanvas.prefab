@@ -403,7 +403,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 45
   m_TargetDisplay: 0
 --- !u!114 &104649711677368484
 MonoBehaviour:
@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a7edacdb885de54da3b25f7b398aade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIDie
+  titleSceneName: 01_TitleScene
 --- !u!225 &978105777499152896
 CanvasGroup:
   m_ObjectHideFlags: 0
