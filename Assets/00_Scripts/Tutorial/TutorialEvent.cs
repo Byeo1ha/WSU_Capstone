@@ -6,10 +6,11 @@ using R3;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer;
 
 public class TutorialEvent : MonoBehaviour
 {
-    [SerializeField] private InputManager inputManager;
+    private InputManager inputManager;
 
     [Header("튜토리얼 활성화 여부")]
     [SerializeField] private bool tutorial = true;
@@ -74,6 +75,12 @@ public class TutorialEvent : MonoBehaviour
     private TutorialPhase tutorialPhase;
 
     public TutorialPhase GetTutorialPhase => tutorialPhase;
+
+    [Inject]
+    public void Construct(InputManager inputManager)
+    {
+        this.inputManager = inputManager;
+    }
 
     private void Awake()
     {

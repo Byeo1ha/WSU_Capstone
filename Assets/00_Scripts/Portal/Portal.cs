@@ -5,19 +5,22 @@ using VContainer;
 
 public class Portal : MonoBehaviour
 {
-    [SerializeField] private InputManager inputManager;
     [SerializeField] private GameObject guideMsg;
     [SerializeField] private string nextSceneName;
 
     private SceneFlowService sceneFlowService;
     private int targetLayer;
     private bool isReady;
+    private InputManager inputManager;
 
     //GameLifetimeScope에 Auto Inject Game Objects의 대상으로 지정해둘 것.
     [Inject]
-    public void Construct(SceneFlowService sceneFlowService)
+    public void Construct(
+        SceneFlowService sceneFlowService,
+        InputManager inputManager)
     {
         this.sceneFlowService = sceneFlowService;
+        this.inputManager = inputManager;
     }
 
     private void Awake()
@@ -60,7 +63,6 @@ public class Portal : MonoBehaviour
     {
         if (!isReady) return;
 
-        inputManager.SetGameplayInputBlocked(true);
         sceneFlowService.LoadSceneAsync(nextSceneName).Forget();
     }
 }   
