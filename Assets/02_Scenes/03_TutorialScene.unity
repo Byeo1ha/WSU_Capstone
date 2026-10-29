@@ -7319,7 +7319,6 @@ GameObject:
   - component: {fileID: 4591006461906687429}
   - component: {fileID: 6229595620641798102}
   - component: {fileID: 3648692794878896215}
-  - component: {fileID: 1387792227032903660}
   m_Layer: 12
   m_Name: EnemyTest
   m_TagString: Enemy
@@ -7428,19 +7427,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7108dda7b383dfd4088324e3558d4943, type: 3}
---- !u!114 &1387792227032903660
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850005228861759856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53f0d983f1519c645b8936dcebddfa8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HitFlashEffect
-  flashDuration: 0.2
 --- !u!1001 &2302130674707927369
 PrefabInstance:
   m_ObjectHideFlags: 0
