@@ -94,6 +94,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void FixedUpdate()
     {
+        StopAirAttackAnim();
         RunAnimCheck();
         GroundCheck();
         FallCheck();
@@ -102,8 +103,7 @@ public class PlayerAnimation : MonoBehaviour
     // 달리는 상태를 체크하고 Run 애니메이션을 재생하는 함수
     private void RunAnimCheck()
     {
-        if (moveInput == 0) anim.SetBool("isRun", false);
-        else anim.SetBool("isRun", true);
+        anim.SetBool("isRun", playerState.IsGrounded && moveInput != 0);
     }
 
     // 점프 애니메이션을 재생하는 함수
@@ -170,7 +170,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void StopAirAttackAnim()
     {
-        anim.SetBool("isAirAttack", playerState.IsAttacking);
+        anim.SetBool("isAirAttack", playerState.IsAirAttacking);
     }
 
     private void StartDodgeAnim()

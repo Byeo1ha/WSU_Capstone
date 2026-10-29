@@ -1,94 +1,118 @@
 fileFormatVersion: 2
-guid: 51b49d90ac1205e4a95685583350a53f
+guid: e574a26296f86714abe872fe26a1a288
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6934013284892070054
-    second: Attack1_0
+      213: 8049244313370990213
+    second: AirAttack-Sheet-Sheet-export_0
   - first:
-      213: -7957278214813060823
-    second: Attack1_1
+      213: 599749131190278818
+    second: AirAttack-Sheet-Sheet-export_1
   - first:
-      213: 1409549213185883415
-    second: Attack1_2
+      213: -517876407206004659
+    second: AirAttack-Sheet-Sheet-export_2
   - first:
-      213: 4976274401295337057
-    second: Attack1_3
+      213: 4748802505482854829
+    second: AirAttack-Sheet-Sheet-export_3
   - first:
-      213: -5639509438907974925
-    second: Attack1_4
+      213: -1430648633183463607
+    second: AirAttack-Sheet-Sheet-export_4
   - first:
-      213: 452926297546027425
-    second: Attack1_5
+      213: -788332043499472959
+    second: AirAttack-Sheet-Sheet-export_5
   - first:
-      213: 6238536850125145498
-    second: Attack1_6
+      213: -2208827292138429768
+    second: AirAttack-Sheet-Sheet-export_6
   - first:
-      213: -7543445572115272496
-    second: Attack1_7
+      213: 426789717737126128
+    second: AirAttack-Sheet-Sheet-export_7
   - first:
-      213: 3650157944247549718
-    second: Attack1_8
+      213: -8048624742225825387
+    second: AirAttack-Sheet-Sheet-export_8
   - first:
-      213: -7367232305435581187
-    second: Attack1_9
+      213: 3377545227644303240
+    second: AirAttack-Sheet-Sheet-export_9
   - first:
-      213: -2140677535924406074
-    second: Attack1_10
+      213: 7256026716363784749
+    second: AirAttack-Sheet-Sheet-export_10
   - first:
-      213: 8783954347948720124
-    second: Attack1_11
+      213: -6796994439691178573
+    second: AirAttack-Sheet-Sheet-export_11
   - first:
-      213: -6287830092200510888
-    second: Attack1_12
+      213: 5514147560356260591
+    second: AirAttack-Sheet-Sheet-export_12
   - first:
-      213: -2359986511456683444
-    second: Attack1_13
+      213: -6575533594056147534
+    second: AirAttack-Sheet-Sheet-export_13
   - first:
-      213: -5056835073426596899
-    second: Attack1_14
+      213: -4629652823873598145
+    second: AirAttack-Sheet-Sheet-export_14
   - first:
-      213: 9049670758512633567
-    second: Attack1_15
+      213: 4618365716958183302
+    second: AirAttack-Sheet-Sheet-export_15
   - first:
-      213: -2319477856403320534
-    second: Attack1_16
+      213: 1060320293775555571
+    second: AirAttack-Sheet-Sheet-export_16
   - first:
-      213: -6797068946398743189
-    second: Attack1_17
+      213: -1130302695946262254
+    second: AirAttack-Sheet-Sheet-export_17
   - first:
-      213: 558825394321690419
-    second: Attack1_18
+      213: 4879504769655869222
+    second: AirAttack-Sheet-Sheet-export_18
   - first:
-      213: 2056674976728752401
-    second: Attack1_19
+      213: 5922674756594792917
+    second: AirAttack-Sheet-Sheet-export_19
   - first:
-      213: -1387995719642276863
-    second: Attack1_20
+      213: -7781975027823984523
+    second: AirAttack-Sheet-Sheet-export_20
   - first:
-      213: -8401009008518655037
-    second: Attack1_21
+      213: -847768484343330409
+    second: AirAttack-Sheet-Sheet-export_21
   - first:
-      213: -2101103270303191628
-    second: Attack1_22
+      213: -3314707359622104378
+    second: AirAttack-Sheet-Sheet-export_22
   - first:
-      213: -6384924177716200718
-    second: Attack1_23
+      213: 7365304087228808081
+    second: AirAttack-Sheet-Sheet-export_23
   - first:
-      213: 7728945663791646396
-    second: Attack1_24
+      213: -9124472448363092915
+    second: AirAttack-Sheet-Sheet-export_24
   - first:
-      213: -1662273724955309606
-    second: Attack1_25
+      213: -563547817965075823
+    second: AirAttack-Sheet-Sheet-export_25
   - first:
-      213: 6076638629741920391
-    second: Attack1_26
+      213: 4059187949228601060
+    second: AirAttack-Sheet-Sheet-export_26
   - first:
-      213: 6242589066752259946
-    second: Attack1_27
+      213: 4909130923890544967
+    second: AirAttack-Sheet-Sheet-export_27
   - first:
-      213: -8118909442114183852
-    second: Attack1_28
+      213: -3321668190611433530
+    second: AirAttack-Sheet-Sheet-export_28
+  - first:
+      213: 5851205798779853705
+    second: AirAttack-Sheet-Sheet-export_29
+  - first:
+      213: -7677384166408326791
+    second: AirAttack-Sheet-Sheet-export_30
+  - first:
+      213: 3594656821447266919
+    second: AirAttack-Sheet-Sheet-export_31
+  - first:
+      213: -7687732986259121629
+    second: AirAttack-Sheet-Sheet-export_32
+  - first:
+      213: -9138534893936495482
+    second: AirAttack-Sheet-Sheet-export_33
+  - first:
+      213: -488583506227769023
+    second: AirAttack-Sheet-Sheet-export_34
+  - first:
+      213: -266483723958350598
+    second: AirAttack-Sheet-Sheet-export_35
+  - first:
+      213: 2227799569509694757
+    second: AirAttack-Sheet-Sheet-export_36
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -184,419 +208,353 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Attack1_0
+      name: AirAttack-Sheet-Sheet-export_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a0d4d938509a3060800000000000000
-      internalID: 6934013284892070054
+      spriteID: 5869fc86e09a4bf60800000000000000
+      internalID: 8049244313370990213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_1
+      name: AirAttack-Sheet-Sheet-export_1
       rect:
         serializedVersion: 2
-        x: 185
+        x: 229
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 921fc138f91129190800000000000000
-      internalID: -7957278214813060823
+      spriteID: 2aa12fe38acb25800800000000000000
+      internalID: 599749131190278818
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_2
+      name: AirAttack-Sheet-Sheet-export_2
       rect:
         serializedVersion: 2
-        x: 370
+        x: 458
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 71d30619a89bf8310800000000000000
-      internalID: 1409549213185883415
+      spriteID: d483ee6c62220d8f0800000000000000
+      internalID: -517876407206004659
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_3
+      name: AirAttack-Sheet-Sheet-export_3
       rect:
         serializedVersion: 2
-        x: 555
+        x: 687
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 166041ad3374f0540800000000000000
-      internalID: 4976274401295337057
+      spriteID: da16acfe7b227e140800000000000000
+      internalID: 4748802505482854829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_4
+      name: AirAttack-Sheet-Sheet-export_4
       rect:
         serializedVersion: 2
-        x: 740
+        x: 916
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3fa7d627b007cb1b0800000000000000
-      internalID: -5639509438907974925
+      spriteID: 94793b4e5a0552ce0800000000000000
+      internalID: -1430648633183463607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_5
+      name: AirAttack-Sheet-Sheet-export_5
       rect:
         serializedVersion: 2
-        x: 925
+        x: 1145
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1a1f9a2611e194600800000000000000
-      internalID: 452926297546027425
+      spriteID: 1c7f726ee284f05f0800000000000000
+      internalID: -788332043499472959
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_6
+      name: AirAttack-Sheet-Sheet-export_6
       rect:
         serializedVersion: 2
-        x: 1110
+        x: 1374
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.05, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a95c4e5463cb39650800000000000000
-      internalID: 6238536850125145498
+      spriteID: 8b2a6e9d74ba851e0800000000000000
+      internalID: -2208827292138429768
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_7
+      name: AirAttack-Sheet-Sheet-export_7
       rect:
         serializedVersion: 2
-        x: 1295
+        x: 1603
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.05, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0dc6393183c405790800000000000000
-      internalID: -7543445572115272496
+      spriteID: 0f8b28facf24ce500800000000000000
+      internalID: 426789717737126128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_8
+      name: AirAttack-Sheet-Sheet-export_8
       rect:
         serializedVersion: 2
-        x: 1480
+        x: 1832
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.05, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 61ff1f89f47f7a230800000000000000
-      internalID: 3650157944247549718
+      spriteID: 591b53db07a8d4090800000000000000
+      internalID: -8048624742225825387
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_9
+      name: AirAttack-Sheet-Sheet-export_9
       rect:
         serializedVersion: 2
-        x: 1665
+        x: 2061
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.05, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: df4eab0604552c990800000000000000
-      internalID: -7367232305435581187
+      spriteID: 887fd825d737fde20800000000000000
+      internalID: 3377545227644303240
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_10
+      name: AirAttack-Sheet-Sheet-export_10
       rect:
         serializedVersion: 2
-        x: 1850
+        x: 2290
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c831947f19ca42e0800000000000000
-      internalID: -2140677535924406074
+      spriteID: d228b9dbad592b460800000000000000
+      internalID: 7256026716363784749
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_11
+      name: AirAttack-Sheet-Sheet-export_11
       rect:
         serializedVersion: 2
-        x: 2035
+        x: 2519
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cff3bb8a0ffd6e970800000000000000
-      internalID: 8783954347948720124
+      spriteID: 3bde6e1b1993ca1a0800000000000000
+      internalID: -6796994439691178573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_12
+      name: AirAttack-Sheet-Sheet-export_12
       rect:
         serializedVersion: 2
-        x: 2220
+        x: 2748
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85a706278d32db8a0800000000000000
-      internalID: -6287830092200510888
+      spriteID: fea2f1eadff268c40800000000000000
+      internalID: 5514147560356260591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_13
+      name: AirAttack-Sheet-Sheet-export_13
       rect:
         serializedVersion: 2
-        x: 2404
+        x: 2977
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c4a39e585c4af3fd0800000000000000
-      internalID: -2359986511456683444
+      spriteID: 2bdb2ade8030fb4a0800000000000000
+      internalID: -6575533594056147534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_14
+      name: AirAttack-Sheet-Sheet-export_14
       rect:
         serializedVersion: 2
-        x: 2590
+        x: 3206
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ddbdba00b4382d9b0800000000000000
-      internalID: -5056835073426596899
+      spriteID: f3d41af194b20cfb0800000000000000
+      internalID: -4629652823873598145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Attack1_15
+      name: AirAttack-Sheet-Sheet-export_15
       rect:
         serializedVersion: 2
-        x: 2775
+        x: 3435
         y: 0
-        width: 185
-        height: 116
+        width: 229
+        height: 137
       alignment: 9
-      pivot: {x: 0.15, y: 0.4}
+      pivot: {x: 0.4, y: 0.4}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd6a26f8b93e69d70800000000000000
-      internalID: 9049670758512633567
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack1_16
-      rect:
-        serializedVersion: 2
-        x: 2960
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.15, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a2112b0cd2f8fcfd0800000000000000
-      internalID: -2319477856403320534
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack1_17
-      rect:
-        serializedVersion: 2
-        x: 3145
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.15, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b6570104ec5fba1a0800000000000000
-      internalID: -6797068946398743189
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Attack1_18
-      rect:
-        serializedVersion: 2
-        x: 3330
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.15, y: 0.4}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 33f03004cb851c700800000000000000
-      internalID: 558825394321690419
+      spriteID: 68f7222862bb71040800000000000000
+      internalID: 4618365716958183302
       vertices: []
       indices: 
       edges: []
@@ -605,7 +563,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 2c9ddbbc90385e74189ac5bec0e1cca0
+    spriteID: aecf8434ff84dca4da2450f3173130a6
     internalID: 0
     vertices: []
     indices: 
@@ -615,27 +573,24 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":229.0,"y":137.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Attack1_0: 6934013284892070054
-      Attack1_1: -7957278214813060823
-      Attack1_10: -2140677535924406074
-      Attack1_11: 8783954347948720124
-      Attack1_12: -6287830092200510888
-      Attack1_13: -2359986511456683444
-      Attack1_14: -5056835073426596899
-      Attack1_15: 9049670758512633567
-      Attack1_16: -2319477856403320534
-      Attack1_17: -6797068946398743189
-      Attack1_18: 558825394321690419
-      Attack1_2: 1409549213185883415
-      Attack1_3: 4976274401295337057
-      Attack1_4: -5639509438907974925
-      Attack1_5: 452926297546027425
-      Attack1_6: 6238536850125145498
-      Attack1_7: -7543445572115272496
-      Attack1_8: 3650157944247549718
-      Attack1_9: -7367232305435581187
+      AirAttack-Sheet-Sheet-export_0: 8049244313370990213
+      AirAttack-Sheet-Sheet-export_1: 599749131190278818
+      AirAttack-Sheet-Sheet-export_10: 7256026716363784749
+      AirAttack-Sheet-Sheet-export_11: -6796994439691178573
+      AirAttack-Sheet-Sheet-export_12: 5514147560356260591
+      AirAttack-Sheet-Sheet-export_13: -6575533594056147534
+      AirAttack-Sheet-Sheet-export_14: -4629652823873598145
+      AirAttack-Sheet-Sheet-export_15: 4618365716958183302
+      AirAttack-Sheet-Sheet-export_2: -517876407206004659
+      AirAttack-Sheet-Sheet-export_3: 4748802505482854829
+      AirAttack-Sheet-Sheet-export_4: -1430648633183463607
+      AirAttack-Sheet-Sheet-export_5: -788332043499472959
+      AirAttack-Sheet-Sheet-export_6: -2208827292138429768
+      AirAttack-Sheet-Sheet-export_7: 426789717737126128
+      AirAttack-Sheet-Sheet-export_8: -8048624742225825387
+      AirAttack-Sheet-Sheet-export_9: 3377545227644303240
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
