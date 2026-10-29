@@ -26,6 +26,7 @@ public class InputManager : MonoBehaviour
     public ReadOnlyReactiveProperty<bool> DownInput => downInput;
 
     private bool isGameplayInputBlocked;
+    public bool IsGameplayInputBlocked => isGameplayInputBlocked;
 
     public void SetGameplayInputBlocked(bool blocked)
     {
@@ -38,7 +39,6 @@ public class InputManager : MonoBehaviour
             downInput.Value = false;
         }
     }
-
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {

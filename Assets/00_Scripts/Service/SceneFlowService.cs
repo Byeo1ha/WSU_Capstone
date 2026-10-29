@@ -2,6 +2,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
 public class SceneFlowService
 {
@@ -11,6 +12,14 @@ public class SceneFlowService
 
     public float Progress { get; private set; } // 로딩 진행도
     public bool IsTransitioning { get; private set; } // 씬 전환 중인지 여부
+
+    private InputManager inputManager;
+
+    [Inject]
+    public void Construct(InputManager inputManager)
+    {
+        this.inputManager = inputManager;
+    }
 
     // 생성자 함수
     public SceneFlowService(ScreenFader screenFader)
@@ -22,6 +31,8 @@ public class SceneFlowService
     public async UniTask LoadSceneAsync(string targetScene)
     {
         if (IsTransitioning) return;
+
+        inputManager.SetGameplayInputBlocked(true);
 
         IsTransitioning = true;
         Progress = 0f;
@@ -74,6 +85,7 @@ public class SceneFlowService
         finally
         {
             IsTransitioning = false;
+            inputManager.SetGameplayInputBlocked(false);
         }
     }
 }

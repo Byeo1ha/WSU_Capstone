@@ -17,7 +17,7 @@ public class UIHealth : MonoBehaviour
 
     private void Start()
     {
-        playerAttributes.hp
+        playerAttributes.Hp
             .Subscribe(SetHpGauge)
             .AddTo(this);
     }
