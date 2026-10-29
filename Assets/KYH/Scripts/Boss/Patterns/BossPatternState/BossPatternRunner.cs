@@ -14,6 +14,8 @@ public class BossPatternRunner : MonoBehaviour
     [Header("실행할 패턴")]
     [SerializeField] private MonoBehaviour selectedPattern;
     public BossPatternState CurrentState => currentState;
+    public float CurrentWindupDuration {get; private set;}
+    public float StateTimeRemaing => stateTimeRemaining;
 
     public bool IsStartAllowed => canStartPattern && isActiveAndEnabled;
 
@@ -107,7 +109,9 @@ public class BossPatternRunner : MonoBehaviour
 
         float scale = Mathf.Clamp(windupScale, 0.01f, 1f);
 
-        stateTimeRemaining = patternData.WindupDuration * scale;
+        CurrentWindupDuration = Mathf.Max(0f, patternData.WindupDuration * scale);
+
+        stateTimeRemaining = CurrentWindupDuration;
         ChangeState(BossPatternState.Windup);
     }
 

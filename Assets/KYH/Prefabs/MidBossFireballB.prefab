@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: -1209315960114537437, guid: 00bb3943a1a5c5f4f9b7531078db7a1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -107,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cf6231939c893a4cbdd45f3aa95aff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossFireball
+  projectileRenderer: {fileID: 1620386374642488553}
+  originalFacesRight: 1
 --- !u!50 &1187258773805503429
 Rigidbody2D:
   serializedVersion: 5

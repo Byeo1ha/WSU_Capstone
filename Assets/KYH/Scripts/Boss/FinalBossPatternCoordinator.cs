@@ -54,7 +54,7 @@ public class FinalBossPatternCoordinator : MonoBehaviour
             approach.CancelApproach();
     }
 
-    private async void HandleTransformationStarted()
+    private void HandleTransformationStarted()
     {
         patternRunner.SetPatternStartAllowed(false);
 

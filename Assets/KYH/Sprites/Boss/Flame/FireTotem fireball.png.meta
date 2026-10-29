@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: eba16a9d76f9ca141a88e1d449c74df6
+guid: 6a666544ed791664c8ad26c868eb474d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1761502850132991943
-    second: A-Sheet_0
-  - first:
-      213: -5620006624021862287
-    second: A-Sheet_1
-  - first:
-      213: 3695091558893925865
-    second: A-Sheet_2
-  - first:
-      213: 3644091259788674457
-    second: A-Sheet_3
+      213: -1701734700959038362
+    second: FireTotem fireball_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 48
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,89 +100,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: A-Sheet_0
+      name: FireTotem fireball_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.243, y: 0.694}
+        x: 86
+        y: 52
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9302cfa9d72ed87e0800000000000000
-      internalID: -1761502850132991943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: A-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 185
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.243, y: 0.694}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 178a5d360c9b102b0800000000000000
-      internalID: -5620006624021862287
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: A-Sheet_2
-      rect:
-        serializedVersion: 2
-        x: 371
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.243, y: 0.694}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9e5ba64023a974330800000000000000
-      internalID: 3695091558893925865
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: A-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 555
-        y: 0
-        width: 185
-        height: 116
-      alignment: 9
-      pivot: {x: 0.243, y: 0.694}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9954fcc81b9629230800000000000000
-      internalID: 3644091259788674457
+      spriteID: 664816f3e493268e0800000000000000
+      internalID: -1701734700959038362
       vertices: []
       indices: 
       edges: []
@@ -200,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f92966245d4913243aa6635f04cd5848
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -208,14 +133,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      A-Sheet_0: -1761502850132991943
-      A-Sheet_1: -5620006624021862287
-      A-Sheet_2: 3695091558893925865
-      A-Sheet_3: 3644091259788674457
+      FireTotem fireball_0: -1701734700959038362
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
