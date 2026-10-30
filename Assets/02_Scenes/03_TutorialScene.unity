@@ -7499,6 +7499,10 @@ PrefabInstance:
       propertyPath: hitEffectPool
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8711897884559434540, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
