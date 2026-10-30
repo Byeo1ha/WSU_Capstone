@@ -1,38 +1,42 @@
 using System;
-using System.Collections;
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MidBossFlamePillar : MonoBehaviour
 {
-    [Header("피해 대상")]
+    [Header("피해 설정")]
     [SerializeField] private LayerMask damageLayer;
-    [Header("공격 설정")]
     [SerializeField] private MidBossFlamePillarData data;
 
-    [Header("임시 표시")]
-    [SerializeField] private SpriteRenderer warningVisual;
-    [SerializeField] private SpriteRenderer pillarVisual;
+    [Header("같은 오브젝트의 표시와 Animator")]
+    [SerializeField] private SpriteRenderer effectVisual;
+    [SerializeField] private Animator effectAnimator;
+    [SerializeField] private AnimationClip effectClip;
 
-    private readonly List<Collider2D> foundColliders = new List<Collider2D>();
-    private readonly HashSet<IDamageable> damagedTargets = new HashSet<IDamageable>();
+    private readonly int effectState =
+        Animator.StringToHash("Base Layer.Effect");
+
+    private readonly List<Collider2D> foundColliders =
+        new List<Collider2D>();
+
+    private readonly HashSet<IDamageable> damagedTargets =
+        new HashSet<IDamageable>();
 
     private ContactFilter2D damageFilter;
-    private bool isDamageActive;
     private Vector2 attackSize;
     private int attackDamage;
 
-    private Coroutine sequence;
     private bool isPlaying;
+    private bool isWarning;
+    private bool isActive;
+    private bool isDamageActive;
 
     public bool IsPlaying => isPlaying;
     public event Action Finished;
 
-    
-
     private void Awake()
     {
-        HideVisuals();
+        Stop();
     }
 
     private void OnDisable()
@@ -40,149 +44,162 @@ public class MidBossFlamePillar : MonoBehaviour
         Stop();
     }
 
-    public bool PrepareWarning()
+    public bool PrepareWarning(float duration)
     {
         Stop();
 
-        if(!isActiveAndEnabled)
-            return false;
-
-        if(data == null || warningVisual == null || pillarVisual == null ||
-            warningVisual.sprite == null || pillarVisual.sprite == null || 
-            !warningVisual.gameObject.activeInHierarchy || !pillarVisual.gameObject.activeInHierarchy)
+        if (!isActiveAndEnabled ||
+            data == null ||
+            effectVisual == null ||
+            effectAnimator == null ||
+            effectClip == null)
         {
-            Debug.LogError("데이터와 두 표시 이미지를 연결하고" + "표시 오브젝트를 활성화해 주세요", this);
+            Debug.LogError(
+                "화염기둥 데이터와 표시·Animator·클립을 연결해 주세요.",
+                this);
+
             return false;
         }
 
-        Vector2 size = data.Size;
+        if (effectVisual.gameObject != gameObject ||
+            effectAnimator.gameObject != gameObject ||
+            !effectAnimator.isActiveAndEnabled ||
+            !effectAnimator.HasState(0, effectState))
+        {
+            Debug.LogError(
+                "같은 오브젝트에 표시와 Animator를 두고 " +
+                "Base Layer의 Effect 상태를 확인해 주세요.",
+                this);
 
-        attackSize = size;
-        attackDamage = data.Damage;
+            return false;
+        }
+
+        attackSize = new Vector2(Mathf.Max(0.01f, data.Size.x), Mathf.Max(0.01f, data.Size.y));
+
+        attackDamage = Mathf.Max(0, data.Damage);
 
         damageFilter = new ContactFilter2D();
         damageFilter.SetLayerMask(damageLayer);
         damageFilter.useTriggers = true;
 
-        SetVisualSize(warningVisual, size.x, 0.1f);
-        SetVisualSize(pillarVisual, size.x, size.y);
-
-        warningVisual.transform.localPosition = new Vector3(0f, 0.05f, 0f);
-
-        pillarVisual.transform.localPosition = new Vector3(0f, size.y * 0.5f, 0f);
-
         isPlaying = true;
-        warningVisual.enabled = true;
+        isWarning = true;
+        effectVisual.enabled = true;
+
+        effectAnimator.speed = 0.3f / Mathf.Max(0.001f, duration);
+        effectAnimator.Play(effectState, 0, 0f);
+        effectAnimator.Update(0f);
 
         return true;
     }
 
     public bool Activate()
     {
-        if(!isActiveAndEnabled || !isPlaying || isDamageActive || sequence != null)
+        if (!isActiveAndEnabled || !isPlaying || !isWarning)
             return false;
 
-        warningVisual.enabled = false;
-        pillarVisual.enabled = true;
-        isDamageActive = true;
+        isWarning = false;
+        isActive = true;
 
-        sequence = StartCoroutine(ActiveSequence());
+        effectAnimator.speed =
+            0.5f / Mathf.Max(0.01f, data.ActiveDuration);
 
-        CheckDamage();
+        effectAnimator.Play(
+            effectState,
+            0,
+            0.3f / Mathf.Max(0.001f, effectClip.length));
+
+        effectAnimator.Update(0f);
+
+        EnableDamage();
 
         return true;
     }
 
-    private IEnumerator ActiveSequence()
+    public void HoldWarning()
     {
-        yield return new WaitForSeconds(data.ActiveDuration);
+        if (isPlaying && isWarning)
+            effectAnimator.speed = 0f;
+    }
 
+    public void EnableDamage()
+    {
+        if (!isPlaying || !isActive || isDamageActive)
+            return;
+
+        isDamageActive = true;
+        CheckDamage();
+    }
+
+    public void DisableDamage()
+    {
         isDamageActive = false;
-        HideVisuals();
+    }
 
+    public void FinishEffect()
+    {
+        if (!isPlaying || !isActive)
+            return;
 
-        isPlaying = false;
-        sequence = null;
-
+        Stop();
         Finished?.Invoke();
     }
 
     private void FixedUpdate()
     {
-        if(isDamageActive)
+        if (isDamageActive)
             CheckDamage();
     }
 
     private void CheckDamage()
     {
+        if (!isDamageActive)
+            return;
+
         Vector2 center = (Vector2)transform.position + Vector2.up * (attackSize.y * 0.5f);
 
         foundColliders.Clear();
 
-        Physics2D.OverlapBox(center, attackSize, 0f, damageFilter, foundColliders);
+        Physics2D.OverlapBox(
+            center,
+            attackSize,
+            0f,
+            damageFilter,
+            foundColliders);
 
         foreach (Collider2D other in foundColliders)
         {
-            if(!isDamageActive)
-                return;
-
-            if(other == null || other.gameObject.layer != LayerMask.NameToLayer("Player"))
+            if (other == null ||
+                other.gameObject.layer !=
+                LayerMask.NameToLayer("Player"))
                 continue;
 
-            if(!other.TryGetComponent<IDamageable>(out var target))
+            if (!other.TryGetComponent<IDamageable>(out var target))
                 continue;
 
-            if(!damagedTargets.Add(target))
+            if (!damagedTargets.Add(target))
                 continue;
 
             target.TakeDamage(attackDamage);
+
+            if (!isDamageActive)
+                return;
         }
     }
 
     public void Stop()
     {
-        if(sequence != null)
-        {
-            StopCoroutine(sequence);
-            sequence = null;
-        }
-
         isPlaying = false;
+        isWarning = false;
+        isActive = false;
         isDamageActive = false;
+
         damagedTargets.Clear();
-        
-        HideVisuals();
-        
-    }
-    
-    private void HideVisuals()
-    {
-        if(warningVisual != null)
-            warningVisual.enabled = false;
 
-        if(pillarVisual != null)
-            pillarVisual.enabled = false;
-    }
+        if (effectAnimator != null)
+            effectAnimator.speed = 0f;
 
-    private void SetVisualSize(SpriteRenderer visual, float width, float height)
-    {
-        Vector2 originalSize = visual.sprite.bounds.size;
-
-        visual.transform.localRotation = Quaternion.identity;
-        visual.transform.localScale = new Vector3(width / originalSize.x, height / originalSize.y, 1f);
-    }
-
-    [ContextMenu("테스트/화염기둥 실행")]
-    private void TestPlay()
-    {
-        if(Application.isPlaying)
-            PrepareWarning();
-    }
-
-    [ContextMenu("테스트/ 화염기둥 중단")]
-    private void TestStop()
-    {
-        if(Application.isPlaying)
-            Stop();
+        if (effectVisual != null)
+            effectVisual.enabled = false;
     }
 }

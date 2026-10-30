@@ -1,0 +1,611 @@
+fileFormatVersion: 2
+guid: 96e34f5f6b57ba24a95802eda4a12e9f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1194688397352867245
+    second: BlinkFire-Sheet_0
+  - first:
+      213: -4207710707203027751
+    second: BlinkFire-Sheet_1
+  - first:
+      213: 1108677177028569744
+    second: BlinkFire-Sheet_2
+  - first:
+      213: 2585894840680233957
+    second: BlinkFire-Sheet_3
+  - first:
+      213: -1204327270018056245
+    second: BlinkFire-Sheet_4
+  - first:
+      213: -8559247228222834655
+    second: BlinkFire-Sheet_5
+  - first:
+      213: -540943918758518703
+    second: BlinkFire-Sheet_6
+  - first:
+      213: 6441783538929526865
+    second: BlinkFire-Sheet_7
+  - first:
+      213: -7482428609372877837
+    second: BlinkFire-Sheet_8
+  - first:
+      213: 3562082444598681677
+    second: BlinkFire-Sheet_9
+  - first:
+      213: -5643902841596010448
+    second: BlinkFire-Sheet_10
+  - first:
+      213: -8578510474224629668
+    second: BlinkFire-Sheet_11
+  - first:
+      213: 3955554983379349859
+    second: BlinkFire-Sheet_12
+  - first:
+      213: 2345218347312542845
+    second: BlinkFire-Sheet_13
+  - first:
+      213: 6573986722685270583
+    second: BlinkFire-Sheet_14
+  - first:
+      213: 792652299158015145
+    second: BlinkFire-Sheet_15
+  - first:
+      213: 8709054383532478868
+    second: BlinkFire-Sheet_16
+  - first:
+      213: 7937631680578903662
+    second: BlinkFire-Sheet_17
+  - first:
+      213: -7930152566712182419
+    second: BlinkFire-Sheet_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 97
+        width: 20
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da59f7584c2649010800000000000000
+      internalID: 1194688397352867245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_1
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 130
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dc4e8bb7653b95c0800000000000000
+      internalID: -4207710707203027751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 411
+        y: 97
+        width: 28
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09aee5bb400d26f00800000000000000
+      internalID: 1108677177028569744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 130
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ebb24d28a1f2e320800000000000000
+      internalID: 2585894840680233957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 97
+        width: 46
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bcff14d8abe594fe0800000000000000
+      internalID: -1204327270018056245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 130
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 128f709aef1773980800000000000000
+      internalID: -8559247228222834655
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 99
+        width: 17
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 150adf63f5e2e78f0800000000000000
+      internalID: -540943918758518703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 130
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1586ad5afffc56950800000000000000
+      internalID: 6441783538929526865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 0
+        width: 101
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fb0c19c2d2192890800000000000000
+      internalID: -7482428609372877837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 81
+        width: 13
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d40a5f25c1f0f6130800000000000000
+      internalID: 3562082444598681677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_10
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 91
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0302adba444dca1b0800000000000000
+      internalID: -5643902841596010448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 0
+        width: 102
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c588fd1bc2203f880800000000000000
+      internalID: -8578510474224629668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 81
+        width: 26
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3613ad9cc44f4e630800000000000000
+      internalID: 3955554983379349859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_13
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 81
+        width: 39
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d74fa4059a3eb8020800000000000000
+      internalID: 2345218347312542845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_14
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 0
+        width: 102
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73a3ac3081e7b3b50800000000000000
+      internalID: 6573986722685270583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 0
+        width: 102
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9acc5b10111100b00800000000000000
+      internalID: 792652299158015145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 81
+        width: 8
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 491130cb1d6ccd870800000000000000
+      internalID: 8709054383532478868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 97
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6edac645f1282e60800000000000000
+      internalID: 7937631680578903662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BlinkFire-Sheet_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 103
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d69d77e914072f190800000000000000
+      internalID: -7930152566712182419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      BlinkFire-Sheet_0: 1194688397352867245
+      BlinkFire-Sheet_1: -4207710707203027751
+      BlinkFire-Sheet_10: -5643902841596010448
+      BlinkFire-Sheet_11: -8578510474224629668
+      BlinkFire-Sheet_12: 3955554983379349859
+      BlinkFire-Sheet_13: 2345218347312542845
+      BlinkFire-Sheet_14: 6573986722685270583
+      BlinkFire-Sheet_15: 792652299158015145
+      BlinkFire-Sheet_16: 8709054383532478868
+      BlinkFire-Sheet_17: 7937631680578903662
+      BlinkFire-Sheet_18: -7930152566712182419
+      BlinkFire-Sheet_2: 1108677177028569744
+      BlinkFire-Sheet_3: 2585894840680233957
+      BlinkFire-Sheet_4: -1204327270018056245
+      BlinkFire-Sheet_5: -8559247228222834655
+      BlinkFire-Sheet_6: -540943918758518703
+      BlinkFire-Sheet_7: 6441783538929526865
+      BlinkFire-Sheet_8: -7482428609372877837
+      BlinkFire-Sheet_9: 3562082444598681677
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

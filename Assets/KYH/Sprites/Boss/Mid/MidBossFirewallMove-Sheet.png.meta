@@ -55,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -69,7 +69,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 48
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -121,12 +121,12 @@ TextureImporter:
       name: MidBossFirewallMove-Sheet_0
       rect:
         serializedVersion: 2
-        x: 187
+        x: 0
         y: 0
-        width: 110
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -143,12 +143,12 @@ TextureImporter:
       name: MidBossFirewallMove-Sheet_1
       rect:
         serializedVersion: 2
-        x: 371
+        x: 185
         y: 0
-        width: 102
-        height: 108
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -165,12 +165,12 @@ TextureImporter:
       name: MidBossFirewallMove-Sheet_2
       rect:
         serializedVersion: 2
-        x: 560
+        x: 370
         y: 0
-        width: 99
-        height: 95
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -187,12 +187,12 @@ TextureImporter:
       name: MidBossFirewallMove-Sheet_3
       rect:
         serializedVersion: 2
-        x: 642
-        y: 93
-        width: 15
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 555
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -211,10 +211,10 @@ TextureImporter:
         serializedVersion: 2
         x: 740
         y: 0
-        width: 104
-        height: 103
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.26, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -227,55 +227,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: MidBossFirewallMove-Sheet_5
-      rect:
-        serializedVersion: 2
-        x: 827
-        y: 93
-        width: 15
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 40a7e587e2f037190800000000000000
-      internalID: -7966006623625905660
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: MidBossFirewallMove-Sheet_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 103
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6e08208e542d43510800000000000000
-      internalID: 1528077371272495334
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 2b306ecc0c2a0b1419d30f44441e3677
     internalID: 0
     vertices: []
     indices: 
@@ -283,15 +239,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":146.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       MidBossFirewallMove-Sheet_0: -7618018078717957752
       MidBossFirewallMove-Sheet_1: -8900085538199552278
       MidBossFirewallMove-Sheet_2: -2754482103774887061
       MidBossFirewallMove-Sheet_3: 6999404766568708184
       MidBossFirewallMove-Sheet_4: 5829741659532300043
-      MidBossFirewallMove-Sheet_5: -7966006623625905660
-      MidBossFirewallMove-Sheet_6: 1528077371272495334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

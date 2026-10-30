@@ -95,7 +95,7 @@ public class MidBossFlamePillarPattern : MonoBehaviour
 
         pillar.transform.position = new Vector3(hit.point.x, hit.point.y, 0f);
 
-        if(!pillar.PrepareWarning())
+        if(!pillar.PrepareWarning(patternRunner.CurrentWindupDuration))
             AbortPattern("화염기둥 경고를 시작하지 못했습니다.");
     }
 
