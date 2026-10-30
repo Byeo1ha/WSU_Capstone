@@ -133,12 +133,12 @@ TextureImporter:
       name: Totem On_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 1
-        width: 6
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 0
+        width: 91
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: Totem On_1
       rect:
         serializedVersion: 2
-        x: 14
+        x: 91
         y: 0
-        width: 68
-        height: 35
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 91
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -177,12 +177,12 @@ TextureImporter:
       name: Totem On_2
       rect:
         serializedVersion: 2
-        x: 75
-        y: 6
-        width: 13
-        height: 12
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 182
+        y: 0
+        width: 91
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -199,12 +199,12 @@ TextureImporter:
       name: Totem On_3
       rect:
         serializedVersion: 2
-        x: 98
-        y: 5
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 273
+        y: 0
+        width: 91
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -221,12 +221,12 @@ TextureImporter:
       name: Totem On_4
       rect:
         serializedVersion: 2
-        x: 99
+        x: 364
         y: 0
-        width: 74
-        height: 72
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 91
+        height: 166
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -239,143 +239,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Totem On_5
-      rect:
-        serializedVersion: 2
-        x: 189
-        y: 5
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5a29f8c8ad0c9bcd0800000000000000
-      internalID: -2541788469780311387
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Totem On_6
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 72
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0c2f1b45695e14310800000000000000
-      internalID: 1387642594035626688
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Totem On_7
-      rect:
-        serializedVersion: 2
-        x: 280
-        y: 5
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7b25d6cfe007dd740800000000000000
-      internalID: 5178418356212814519
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Totem On_8
-      rect:
-        serializedVersion: 2
-        x: 282
-        y: 10
-        width: 11
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6d9b11569b17f0af0800000000000000
-      internalID: -427998398498358826
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Totem On_9
-      rect:
-        serializedVersion: 2
-        x: 283
-        y: 0
-        width: 72
-        height: 114
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1d3c865e54b056310800000000000000
-      internalID: 1397535654197904337
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Totem On_10
-      rect:
-        serializedVersion: 2
-        x: 365
-        y: 0
-        width: 86
-        height: 138
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 87e7555f477328550800000000000000
-      internalID: 6161548215668014712
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 083c63e1fe80ba349a492817b8041c37
     internalID: 0
     vertices: []
     indices: 
@@ -383,19 +251,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":91.0,"y":166.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Totem On_0: -1081630335397858961
       Totem On_1: -1732407113153402712
-      Totem On_10: 6161548215668014712
       Totem On_2: 5873694308870155278
       Totem On_3: 1499049962827717446
       Totem On_4: 4431304186439954823
-      Totem On_5: -2541788469780311387
-      Totem On_6: 1387642594035626688
-      Totem On_7: 5178418356212814519
-      Totem On_8: -427998398498358826
-      Totem On_9: 1397535654197904337
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

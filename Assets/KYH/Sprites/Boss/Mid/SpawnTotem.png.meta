@@ -142,12 +142,12 @@ TextureImporter:
       name: SpawnTotem_0
       rect:
         serializedVersion: 2
-        x: 26
+        x: 0
         y: 0
-        width: 104
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -164,12 +164,12 @@ TextureImporter:
       name: SpawnTotem_1
       rect:
         serializedVersion: 2
-        x: 211
+        x: 185
         y: 0
-        width: 104
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -186,12 +186,12 @@ TextureImporter:
       name: SpawnTotem_2
       rect:
         serializedVersion: 2
-        x: 398
+        x: 370
         y: 0
-        width: 102
-        height: 104
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -208,12 +208,12 @@ TextureImporter:
       name: SpawnTotem_3
       rect:
         serializedVersion: 2
-        x: 583
+        x: 555
         y: 0
-        width: 102
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -230,12 +230,12 @@ TextureImporter:
       name: SpawnTotem_4
       rect:
         serializedVersion: 2
-        x: 765
+        x: 740
         y: 0
-        width: 100
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -252,12 +252,12 @@ TextureImporter:
       name: SpawnTotem_5
       rect:
         serializedVersion: 2
-        x: 953
+        x: 925
         y: 0
-        width: 101
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -274,12 +274,12 @@ TextureImporter:
       name: SpawnTotem_6
       rect:
         serializedVersion: 2
-        x: 1138
+        x: 1110
         y: 0
-        width: 102
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -296,12 +296,12 @@ TextureImporter:
       name: SpawnTotem_7
       rect:
         serializedVersion: 2
-        x: 1310
-        y: 9
-        width: 11
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 1295
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -318,12 +318,12 @@ TextureImporter:
       name: SpawnTotem_8
       rect:
         serializedVersion: 2
-        x: 1320
+        x: 1480
         y: 0
-        width: 100
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -340,12 +340,12 @@ TextureImporter:
       name: SpawnTotem_9
       rect:
         serializedVersion: 2
-        x: 1508
+        x: 1665
         y: 0
-        width: 101
-        height: 99
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -362,12 +362,12 @@ TextureImporter:
       name: SpawnTotem_10
       rect:
         serializedVersion: 2
-        x: 1693
+        x: 1850
         y: 0
-        width: 102
-        height: 107
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.44, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -380,77 +380,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: SpawnTotem_11
-      rect:
-        serializedVersion: 2
-        x: 1852
-        y: 0
-        width: 25
-        height: 22
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2bd6d7089ba539c10800000000000000
-      internalID: 2059089207409601970
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpawnTotem_12
-      rect:
-        serializedVersion: 2
-        x: 1875
-        y: 0
-        width: 111
-        height: 92
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: beeca2e47f0f818b0800000000000000
-      internalID: -5181126426330738965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SpawnTotem_13
-      rect:
-        serializedVersion: 2
-        x: 1981
-        y: 0
-        width: 22
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2ab865c81acb59af0800000000000000
-      internalID: -390198390667441246
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4b4244eec5bd5d2448b86296d136af9e
     internalID: 0
     vertices: []
     indices: 
@@ -458,14 +392,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       SpawnTotem_0: -3990337394684072396
       SpawnTotem_1: -268969101732136540
       SpawnTotem_10: 9162955385276286345
-      SpawnTotem_11: 2059089207409601970
-      SpawnTotem_12: -5181126426330738965
-      SpawnTotem_13: -390198390667441246
       SpawnTotem_2: 8273461433861510336
       SpawnTotem_3: -5359414436271691283
       SpawnTotem_4: 3058863531413148533
