@@ -9,6 +9,12 @@ public class MidBossBlinkController : MonoBehaviour
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private MidBossBlinkArea blinkArea;
     [SerializeField] private Rigidbody2D bossBody;
+    [Header("블링크 모션")]
+    [SerializeField] private MidBossVisual bossVisual;
+
+    public bool IsBlinking {get; private set;}
+    public bool BlinkSucceeded {get; private set; }
+    private bool hasMovedDuringBlink;
     private readonly float[] healthRations = {0.75f, 0.5f, 0.25f};
 
     private int nextThresholdIndex;
@@ -47,6 +53,8 @@ public class MidBossBlinkController : MonoBehaviour
     {
         if(bossHealth != null)
             bossHealth.HealthChanged -= HandleHealthChanged;
+
+        CancelBlink();
     }
 
     private void CheckCurrentHealth()
@@ -59,6 +67,7 @@ public class MidBossBlinkController : MonoBehaviour
         if(maxHealth <= 0 || currentHealth <= 0)
         {
             pendingBlinkCount = 0;
+            CancelBlink();
             return;
         }
 
@@ -125,5 +134,60 @@ public class MidBossBlinkController : MonoBehaviour
 
         pendingBlinkCount--;
         return true;
+    }
+
+    public bool TryBeginBlink()
+    {
+        if (!isActiveAndEnabled ||
+            IsBlinking ||
+            bossHealth == null ||
+            bossHealth.IsDead ||
+            pendingBlinkCount <= 0)
+            return false;
+
+        if (patternRunner == null ||
+            !patternRunner.IsStartAllowed ||
+            patternRunner.CurrentState != BossPatternState.Idle ||
+            bossVisual == null)
+            return false;
+
+        BlinkSucceeded = false;
+        hasMovedDuringBlink = false;
+        IsBlinking = true;
+
+        if (!bossVisual.TryPlayBlink())
+        {
+            CancelBlink();
+            return false;
+        }
+
+        return true;
+    }
+
+    public void ExecuteBlinkMovement()
+    {
+        if (!IsBlinking || hasMovedDuringBlink)
+            return;
+
+        hasMovedDuringBlink = TryExecuteBlink();
+
+        if (!hasMovedDuringBlink)
+            CancelBlink();
+    }
+
+    public void FinishBlink()
+    {
+        if (!IsBlinking)
+            return;
+
+        BlinkSucceeded = hasMovedDuringBlink;
+        IsBlinking = false;
+    }
+
+    public void CancelBlink()
+    {
+        IsBlinking = false;
+        BlinkSucceeded = false;
+        hasMovedDuringBlink = false;
     }
 }

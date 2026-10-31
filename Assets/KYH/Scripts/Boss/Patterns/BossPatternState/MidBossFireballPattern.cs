@@ -6,6 +6,7 @@ public class MidBossFireballPattern : MonoBehaviour
 {
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
+    [SerializeField] private MidBossPatternSelector patternSelector;
 
     [Header("대상 탐색")]
     [SerializeField] private BossTargetFinder targetFinder;
@@ -77,11 +78,12 @@ public class MidBossFireballPattern : MonoBehaviour
     private bool ValidateReferences()
     {
         if (patternRunner == null ||
+            patternSelector == null ||
             targetFinder == null ||
             firePoint == null)
         {
             Debug.LogError(
-                "Pattern Runner, Target Finder, Fire Point를 연결해 주세요.",
+                "Pattern Runner, Target Finder, Fire Point, patternSelector를 연결해 주세요.",
                 this);
             return false;
         }
@@ -144,7 +146,10 @@ public class MidBossFireballPattern : MonoBehaviour
 
     private IEnumerator FireSequence()
     {
-        for (int i = 0; i < subscribedPools.Count; i++)
+        int shotCount =
+        patternSelector.CurrentPatternFollowsBlink ? 2 : 3;
+
+        for (int i = 0; i < shotCount; i++)
         {
             if (!ownsExecution ||
                 patternRunner.CurrentState != BossPatternState.Active)
@@ -152,18 +157,17 @@ public class MidBossFireballPattern : MonoBehaviour
 
             FireOne(subscribedPools[i]);
 
-            if (i < subscribedPools.Count - 1)
+            if (i < shotCount - 1)
                 yield return new WaitForSeconds(shotInterval);
         }
 
         hasFinishedFiring = true;
 
-        // StartCoroutine 호출 결과가 필드에 저장될 때까지 한 프레임 기다립니다.
         yield return null;
 
         firingCoroutine = null;
         TryCompleteActive();
-    }
+        }
 
     private void FireOne(BossFireballPool pool)
     {

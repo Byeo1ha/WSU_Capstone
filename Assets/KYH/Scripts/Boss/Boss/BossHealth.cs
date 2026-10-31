@@ -65,7 +65,10 @@ public class BossHealth : MonoBehaviour, IDamageable
         currentHealth = Mathf.Min(currentHealth, nextHealth);
 
         HealthChanged?.Invoke(currentHealth, maxHealth);
-        hitFlashEffect.PlayHitFlash();
+        if(hitFlashEffect != null)
+        {
+            hitFlashEffect.PlayHitFlash();
+        }
 
         if (IsDead)
             Die();

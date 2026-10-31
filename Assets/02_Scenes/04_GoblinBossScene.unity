@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 377539721}
   - component: {fileID: 377539720}
   - component: {fileID: 377539722}
+  - component: {fileID: 377539724}
   m_Layer: 12
   m_Name: MidBossTotem
   m_TagString: Enemy
@@ -271,7 +272,7 @@ Transform:
   m_GameObject: {fileID: 377539718}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.9537, y: 0.75244, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -293,6 +294,8 @@ MonoBehaviour:
   health: {fileID: 377539721}
   lifetime: 4
   shooter: {fileID: 427272566}
+  totemAnimator: {fileID: 377539724}
+  activeClip: {fileID: 7400000, guid: cff429ed72094484093aad8c8506db3d, type: 2}
 --- !u!114 &377539721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +402,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -411,6 +414,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &377539724
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377539718}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 544103cce0f86e04b909e621fe49eacb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &427272565
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +1019,7 @@ MonoBehaviour:
   targetFinder: {fileID: 939212559}
   blinkArea: {fileID: 548182766}
   bossBody: {fileID: 939212560}
+  bossVisual: {fileID: 939212573}
 --- !u!114 &939212563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1011,6 +1037,7 @@ MonoBehaviour:
   - {fileID: 939212567}
   - {fileID: 939212565}
   - {fileID: 939212564}
+  fireballPattern: {fileID: 939212567}
   firstPatternDelay: 1.5
   blinkController: {fileID: 939212562}
   windupScaleAfterBlink: 0.3
@@ -1078,6 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossFireballPattern
   patternRunner: {fileID: 939212568}
+  patternSelector: {fileID: 939212563}
   targetFinder: {fileID: 939212559}
   firePoint: {fileID: 1936918424}
   fireballPools:
@@ -1104,6 +1132,7 @@ MonoBehaviour:
   patternData: {fileID: 11400000, guid: 6512e75ce6768434ea765c5d9a419215, type: 2}
   currentState: 0
   selectedPattern: {fileID: 939212563}
+  patternSelector: {fileID: 939212563}
 --- !u!114 &939212569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1229,12 +1258,17 @@ MonoBehaviour:
   patternRunner: {fileID: 939212568}
   fireballPattern: {fileID: 939212567}
   flamePillarPattern: {fileID: 939212565}
+  totemPattern: {fileID: 939212564}
   bossAnimator: {fileID: 939212572}
   fireballWindupClip: {fileID: 7400000, guid: eccdaefaa7ffe25438853c0d59ac26a9, type: 2}
   flamePillarWindupClip: {fileID: 7400000, guid: d373bcc9bae65994e9ee219fcf83cf82, type: 2}
+  TotemWindupClip: {fileID: 7400000, guid: 0db30468f59dfa3468ec897e48d95860, type: 2}
   targetFinder: {fileID: 939212559}
   bossRenderer: {fileID: 939212570}
   originalFacesRight: 1
+  patternSelector: {fileID: 939212563}
+  blinkFireWindupClip: {fileID: 7400000, guid: 9f044c1649a39604db2b64a8a13df2a3, type: 2}
+  blinkController: {fileID: 939212562}
 --- !u!114 &939212574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,7 +1788,7 @@ Transform:
   m_GameObject: {fileID: 1662378137}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -3.93, z: 0}
+  m_LocalPosition: {x: -0.05, y: -4.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2149,7 +2183,7 @@ Transform:
   m_GameObject: {fileID: 1841980655}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2180,7 +2214,7 @@ Transform:
   m_GameObject: {fileID: 1936918423}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

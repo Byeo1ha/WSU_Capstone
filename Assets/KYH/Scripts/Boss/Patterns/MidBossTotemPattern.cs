@@ -62,11 +62,13 @@ public class MidBossTotemPattern : MonoBehaviour
                 CancelExecution();
                 ownsExecution = true;
                 hasTotemEnded = false;
+
+                PrepareTotem();
                 break;
 
             case BossPatternState.Active:
-                if(ownsExecution)
-                    ActivateTotem();
+                if(ownsExecution && !totem.ActiveCombat())
+                    AbortPattern();
                 break;
 
             case BossPatternState.Recovery:
@@ -76,7 +78,7 @@ public class MidBossTotemPattern : MonoBehaviour
         }
     }
 
-    private void ActivateTotem()
+    private void PrepareTotem()
     {
         if(totem == null || bossTransform == null || leftSpawnPoint == null || rightSpawnPoint == null || !totem.enabled || totem.gameObject.activeSelf)
         {
@@ -90,12 +92,21 @@ public class MidBossTotemPattern : MonoBehaviour
 
         totem.transform.position = selectedPoint.position;
         totem.gameObject.SetActive(true);
+
+        if(!totem.PrepareAppearance(patternRunner.CurrentWindupDuration))
+            AbortPattern();
     }
 
     private void HandleTotemEnded()
     {
         if (!ownsExecution)
             return;
+
+        if (patternRunner.CurrentState == BossPatternState.Windup)
+        {
+            AbortPattern();
+            return;
+        }
 
         hasTotemEnded = true;
         TryCompleteActive();
