@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class BossHealth : MonoBehaviour, IDamageable
 {
+    [Header("스테이지 클리어 알림 (임시)")]
+    [SerializeField] private StageClear stageClear;
+
     [Header("보스 데이터")]
     [SerializeField] private BossData bossData;
     
@@ -76,7 +79,9 @@ public class BossHealth : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Debug.Log("보스가 사망했습니다.", this);
+        if (stageClear == null) return;
+        
+        stageClear.EventStart();
     }
 
     [ContextMenu("테스트/피해 10 받기")]
