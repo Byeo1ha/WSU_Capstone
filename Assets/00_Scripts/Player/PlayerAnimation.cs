@@ -22,6 +22,7 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerAirAttack playerAirAttack;
     private PlayerDodge playerDodge;
     private PlayerHighAttack playerHighAttack;
+    private PlayerAttributes playerAttributes;
 
     private IDisposable normalAttackSubscription;
     private IDisposable airAttackSubscription;
@@ -31,9 +32,12 @@ public class PlayerAnimation : MonoBehaviour
     private float moveInput;
 
     [Inject]
-    public void Construct(InputManager inputManager)
+    public void Construct(
+        InputManager inputManager,
+        PlayerAttributes playerAttributes)
     {
         this.inputManager = inputManager;
+        this.playerAttributes = playerAttributes;
     }
 
     private void Awake()
@@ -69,6 +73,11 @@ public class PlayerAnimation : MonoBehaviour
 
         playerHighAttack.OnHighAttackStarted
             .Subscribe(_ => StartHighAttackAnim())
+            .AddTo(this);
+
+        playerAttributes.Hp
+            .Where(hp => hp <= 0)
+            .Subscribe(_ => StartDieAnim())
             .AddTo(this);
     }
 
@@ -194,5 +203,10 @@ public class PlayerAnimation : MonoBehaviour
         anim.ResetTrigger("highAttack");
         anim.ResetTrigger("dodge");
         anim.SetTrigger("damaged");
+    }
+
+    private void StartDieAnim()
+    {
+        anim.SetTrigger("die");
     }
 }

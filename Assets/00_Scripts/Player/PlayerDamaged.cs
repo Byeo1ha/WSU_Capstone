@@ -23,6 +23,7 @@ public class PlayerDamaged : MonoBehaviour, IDamageable
     private SpriteRenderer spriteRenderer;
 
     private float damageRecoveryTime;
+    private int targetLayer;
 
     [Inject]
     public void Construct(PlayerAttributes playerAttributes)
@@ -39,6 +40,11 @@ public class PlayerDamaged : MonoBehaviour, IDamageable
 
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
+        targetLayer = LayerMask.NameToLayer("Player_inv");
     }
 
     private void Update()
@@ -74,6 +80,11 @@ public class PlayerDamaged : MonoBehaviour, IDamageable
         rigid.AddForce(Vector2.up * backOffset, ForceMode2D.Impulse);
 
         hitFlashEffect.PlayHitFlash();
+
+        if (playerAttributes.Hp.CurrentValue <= 0)
+        {
+            gameObject.layer = targetLayer;
+        }
 
         playerAnimation.StartDamagedAnim();
     }
