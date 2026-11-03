@@ -9,7 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] private string nextSceneName;
 
     private SceneFlowService sceneFlowService;
-    private int targetLayer;
+    private (int layer1, int layer2) targetLayer;
     private bool isReady;
     private InputManager inputManager;
 
@@ -25,7 +25,9 @@ public class Portal : MonoBehaviour
 
     private void Awake()
     {
-        targetLayer = LayerMask.NameToLayer("Player");
+        targetLayer = 
+            (LayerMask.NameToLayer("Player"),
+            LayerMask.NameToLayer("Player_inv"));
         guideMsg.SetActive(false);
     }
 
@@ -38,7 +40,8 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == targetLayer)
+        if (collision.gameObject.layer == targetLayer.layer1 ||
+            collision.gameObject.layer == targetLayer.layer2)
         {
             PortalReady(true);
         }
@@ -46,7 +49,8 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == targetLayer)
+        if (collision.gameObject.layer == targetLayer.layer1 ||
+            collision.gameObject.layer == targetLayer.layer2)
         {
             PortalReady(false);
         }
@@ -63,6 +67,7 @@ public class Portal : MonoBehaviour
     {
         if (!isReady) return;
 
+        Debug.Log("욥");
         sceneFlowService.LoadSceneAsync(nextSceneName).Forget();
     }
 }   
