@@ -50,6 +50,12 @@ public class SceneFlowService
             // 1단계 : 페이드 아웃 진행
             await screenFader.FadeOutAsync();
 
+            if (type == LoadingSceneType.Long)
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            }
+            
+
             // 2단계 : 로딩씬으로 전환
             string loadingSceneName;
 
@@ -63,7 +69,8 @@ public class SceneFlowService
             }
 
             await SceneManager.LoadSceneAsync(loadingSceneName);
-
+            await UniTask.NextFrame();
+            
             // 3단계 : 페이드 인 진행
             await screenFader.FadeInAsync();
 
