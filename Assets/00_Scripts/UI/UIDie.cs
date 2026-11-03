@@ -4,27 +4,26 @@ using DG.Tweening;
 using R3;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using VContainer;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class UIDie : MonoBehaviour
 {
     [SerializeField] private string titleSceneName = "01_TitleScene";
+    [SerializeField] private Image blackBorder;
     private CanvasGroup gameOverPanel;
     
     private PlayerAttributes playerAttributes;
     private SceneFlowService sceneFlowService;
-    private InputManager inputManager;
 
     [Inject]
     public void Construct(
         PlayerAttributes playerAttributes,
-        SceneFlowService sceneFlowService,
-        InputManager inputManager)
+        SceneFlowService sceneFlowService)
     {
         this.playerAttributes = playerAttributes;
         this.sceneFlowService = sceneFlowService;
-        this.inputManager = inputManager;
     }
 
     private void Awake()
@@ -33,6 +32,7 @@ public class UIDie : MonoBehaviour
         gameOverPanel.interactable = false;  
 
         gameOverPanel.alpha = 0f;
+        blackBorder.color = new Color(0f, 0f, 0f, 0f);
     }
 
     private void Start()
@@ -53,6 +53,7 @@ public class UIDie : MonoBehaviour
 
     private void DieEvent()
     {
+        blackBorder.DOFade(0.5f, 0.5f);
         gameOverPanel.interactable = true;
         gameOverPanel.alpha = 1f;
         gameOverPanel.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);

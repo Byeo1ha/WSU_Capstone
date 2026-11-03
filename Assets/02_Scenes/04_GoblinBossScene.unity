@@ -233,10 +233,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8711897884559434540, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
-      propertyPath: m_SortingOrder
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1838,7 +1834,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!224 &1459927751
 RectTransform:
@@ -1951,10 +1947,6 @@ PrefabInstance:
     - target: {fileID: 4040242848118963231, guid: 7108dda7b383dfd4088324e3558d4943, type: 3}
       propertyPath: m_Name
       value: PlayerUICanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6362091341911014849, guid: 7108dda7b383dfd4088324e3558d4943, type: 3}
-      propertyPath: m_text
-      value: "\uC8FD\uC5C8\uC2B5\uB2C8\uB2E4."
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2098,7 +2090,7 @@ GameObject:
   - component: {fileID: 1689595744}
   - component: {fileID: 1689595743}
   m_Layer: 5
-  m_Name: Image
+  m_Name: StageClear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2512,7 +2504,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 2978779426835105025, guid: aec62c8300b647e4ca25e61e3a4d5e1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

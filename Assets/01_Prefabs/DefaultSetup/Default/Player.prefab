@@ -203,7 +203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fadca3dd07b24408d24b61d0ab5e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
-  jumpPower: 20
+  jumpPower: 10
   groundCheck: {fileID: 5123619737168597689}
   groundCheckSize: {x: 0.7, y: 0.08}
   groundLayer:
@@ -286,7 +286,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 10
   m_MaskInteraction: 0
   m_Sprite: {fileID: -8711662495156307565, guid: 90cd26781c3e4644ea3e929bac66e89d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
