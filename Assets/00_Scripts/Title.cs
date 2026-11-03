@@ -15,7 +15,10 @@ public class Title : MonoBehaviour
 
     public void StartBtn()
     {
-        sceneFlowService.LoadSceneAsync(startSceneName).Forget();
+        sceneFlowService.LoadSceneAsync(startSceneName,
+            SceneFlowService.LoadingSceneType.Long
+        )
+        .Forget();
     }
 
     public void QuitBtn()

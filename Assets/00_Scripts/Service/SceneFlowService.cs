@@ -8,12 +8,20 @@ public class SceneFlowService
 {
     private readonly ScreenFader screenFader;
 
-    private const string LoadingScene = "LoadingScene"; // 로딩 씬 이름
+    private const string LongTimeLoadingScene = "LongTimeLoadingScene"; // 로딩 씬 이름
+    private const string ShortTimeLoadingScene = "ShortTimeLoadingScene";
+    private const float waitingTime = 2f;
 
     public float Progress { get; private set; } // 로딩 진행도
     public bool IsTransitioning { get; private set; } // 씬 전환 중인지 여부
 
     private InputManager inputManager;
+
+    public enum LoadingSceneType
+    {
+        Short,
+        Long
+    }
 
     [Inject]
     public void Construct(InputManager inputManager)
@@ -28,7 +36,7 @@ public class SceneFlowService
     }
 
     // 로딩 씬 함수
-    public async UniTask LoadSceneAsync(string targetScene)
+    public async UniTask LoadSceneAsync(string targetScene, LoadingSceneType type)
     {
         if (IsTransitioning) return;
 
@@ -43,7 +51,18 @@ public class SceneFlowService
             await screenFader.FadeOutAsync();
 
             // 2단계 : 로딩씬으로 전환
-            await SceneManager.LoadSceneAsync(LoadingScene);
+            string loadingSceneName;
+
+            if (type == LoadingSceneType.Long)
+            {
+                loadingSceneName = LongTimeLoadingScene;
+            }
+            else
+            {
+                loadingSceneName = ShortTimeLoadingScene;
+            }
+
+            await SceneManager.LoadSceneAsync(loadingSceneName);
 
             // 3단계 : 페이드 인 진행
             await screenFader.FadeInAsync();
@@ -63,6 +82,9 @@ public class SceneFlowService
                 await UniTask.NextFrame();
             }
 
+            if (type == LoadingSceneType.Long)
+                await UniTask.Delay(TimeSpan.FromSeconds(waitingTime));
+            
             // 7단계 : 로드 진행도를 1로 만들고 페이드 아웃 진행
             Progress = 1f;
             await UniTask.NextFrame();

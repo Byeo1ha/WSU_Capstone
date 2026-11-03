@@ -54,7 +54,7 @@ public class TutorialEvent : MonoBehaviour
 
     [Header("튜토리얼 화살표")]
     [SerializeField] private TutorialArrow dummyArrow;
-    [SerializeField] private TutorialUIArrow uiArrow;
+    [SerializeField] private UIArrow uiArrow;
 
     private int subjectCount;
     private bool isFinish;

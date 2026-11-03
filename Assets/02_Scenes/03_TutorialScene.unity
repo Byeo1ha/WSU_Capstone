@@ -1648,7 +1648,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &481541829
 SpriteRenderer:
   serializedVersion: 2
@@ -2235,7 +2235,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 200, y: -100}
+  m_AnchoredPosition: {x: -200, y: -100}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &669030732
@@ -2805,7 +2805,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 343281039498549196, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
       propertyPath: nextSceneName
-      value: 04_GoblinBossScene
+      value: 04_BossClearEvent
       objectReference: {fileID: 0}
     - target: {fileID: 3033413017990837322, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3826,7 +3826,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -200, y: -100}
+  m_AnchoredPosition: {x: 200, y: -100}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1153217628
@@ -5439,7 +5439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1777827691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5509,6 +5509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe90cddff4f7b648b6b9210ad1d77d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialUIArrow
+  highlightDirection: 2
 --- !u!1 &1787106122
 GameObject:
   m_ObjectHideFlags: 0
@@ -6923,6 +6924,10 @@ PrefabInstance:
     - target: {fileID: 1120028035525337689, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1438161849243485664, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
+      propertyPath: jumpPower
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 2424492146608752445, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
       propertyPath: hitEffectPool

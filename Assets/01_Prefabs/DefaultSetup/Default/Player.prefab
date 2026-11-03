@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fadca3dd07b24408d24b61d0ab5e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
-  jumpPower: 15
+  jumpPower: 17
   groundCheck: {fileID: 5123619737168597689}
   groundCheckSize: {x: 0.7, y: 0.08}
   groundLayer:
