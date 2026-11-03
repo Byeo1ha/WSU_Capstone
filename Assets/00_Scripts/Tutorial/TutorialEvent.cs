@@ -52,6 +52,10 @@ public class TutorialEvent : MonoBehaviour
     [SerializeField] private GameObject skipWindow;
     [SerializeField] private CanvasGroup skipBtnCanvas;
 
+    [Header("튜토리얼 화살표")]
+    [SerializeField] private TutorialArrow dummyArrow;
+    [SerializeField] private TutorialUIArrow uiArrow;
+
     private int subjectCount;
     private bool isFinish;
     private bool isMissionActive;
@@ -91,6 +95,8 @@ public class TutorialEvent : MonoBehaviour
             .SetText("● 기본 공격 ({0} / {1})", subjectCount, maxNormalAttackSubject);
 
         skipBtnCanvas.alpha = 0f;
+        dummyArrow.gameObject.SetActive(false);
+        uiArrow.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -234,6 +240,8 @@ public class TutorialEvent : MonoBehaviour
             .SetLink(normalAttackBorder.gameObject);
         BeginMission(TutorialPhase.NormalAttack);
 
+        dummyArrow.gameObject.SetActive(true);
+
         await TutorialFinish();
         await HideKeyGuideBorder(normalAttackBorder);
 
@@ -278,6 +286,9 @@ public class TutorialEvent : MonoBehaviour
         await HideKeyGuideBorder(dodgeBorder);
 
         tutorialPhase = TutorialPhase.Completed;
+
+        dummyArrow.gameObject.SetActive(false);
+        uiArrow.gameObject.SetActive(true);
         Debug.Log("튜토리얼 완료");
     }
 
@@ -330,7 +341,7 @@ public class TutorialEvent : MonoBehaviour
         if (tutorialPhase != TutorialPhase.NormalAttack) return;
 
         subjectCount++;
-
+        
         subjectText
             .SetText("● 기본 공격 ({0} / {1})", subjectCount, maxNormalAttackSubject);
 
@@ -474,6 +485,8 @@ public class TutorialEvent : MonoBehaviour
 
         tutorialCancellation?.Cancel();
         HideTutorialUI();
+        dummyArrow.gameObject.SetActive(false);
+        uiArrow.gameObject.SetActive(true);
 
         if (openSkipWindow)
         {

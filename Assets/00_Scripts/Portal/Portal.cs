@@ -67,7 +67,6 @@ public class Portal : MonoBehaviour
     {
         if (!isReady) return;
 
-        Debug.Log("욥");
         sceneFlowService.LoadSceneAsync(nextSceneName).Forget();
     }
 }   
