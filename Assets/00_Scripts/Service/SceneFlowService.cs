@@ -9,8 +9,7 @@ public class SceneFlowService
     private readonly ScreenFader screenFader;
 
     private const string LongTimeLoadingScene = "LongTimeLoadingScene"; // 로딩 씬 이름
-    private const string ShortTimeLoadingScene = "ShortTimeLoadingScene";
-    private const float waitingTime = 2.5f;
+    private const float waitingTime = 3.5f;
 
     public float Progress { get; private set; } // 로딩 진행도
     public bool IsTransitioning { get; private set; } // 씬 전환 중인지 여부

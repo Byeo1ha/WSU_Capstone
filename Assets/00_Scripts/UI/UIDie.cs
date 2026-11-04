@@ -80,5 +80,7 @@ public class UIDie : MonoBehaviour
                 SceneFlowService.LoadingSceneType.Short
             )
             .Forget();
+
+        playerAttributes.ResetHp();
     }
 }
