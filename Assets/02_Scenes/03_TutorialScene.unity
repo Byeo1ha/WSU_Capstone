@@ -2805,7 +2805,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 343281039498549196, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
       propertyPath: nextSceneName
-      value: 04_BossClearEvent
+      value: 04_GoblinBossScene
       objectReference: {fileID: 0}
     - target: {fileID: 3033413017990837322, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2854,13 +2854,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6007612170072568679, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5221540257582994152, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
 --- !u!1 &923764216
 GameObject:
