@@ -35,6 +35,27 @@ TextureImporter:
   - first:
       213: 3839334161607525479
     second: MidBossDead-Sheet_10
+  - first:
+      213: 41086362306841157
+    second: MidBossDead-Sheet_11
+  - first:
+      213: -8202531104038903831
+    second: MidBossDead-Sheet_12
+  - first:
+      213: -4755977036234140368
+    second: MidBossDead-Sheet_13
+  - first:
+      213: 4639472256411571099
+    second: MidBossDead-Sheet_14
+  - first:
+      213: 7157048853907538852
+    second: MidBossDead-Sheet_15
+  - first:
+      213: -5413816976200985121
+    second: MidBossDead-Sheet_16
+  - first:
+      213: 279171397813650957
+    second: MidBossDead-Sheet_17
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -239,11 +260,55 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: MidBossDead-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1105
+        y: 0
+        width: 221
+        height: 116
+      alignment: 9
+      pivot: {x: 0.367, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd2ac554badbc3030800000000000000
+      internalID: 3475861555723936475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MidBossDead-Sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 0
+        width: 221
+        height: 116
+      alignment: 9
+      pivot: {x: 0.367, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea5a5af1b8a30c960800000000000000
+      internalID: 7620154938716693934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: ee547c0d8e7e40c4a8857ac44e123a7e
+    spriteID: 89a5c1a6740349e49950694701ef10b0
     internalID: 0
     vertices: []
     indices: 
@@ -260,6 +325,8 @@ TextureImporter:
       MidBossDead-Sheet_2: 1310262877112637118
       MidBossDead-Sheet_3: 2400538838278442293
       MidBossDead-Sheet_4: 1115810940054476480
+      MidBossDead-Sheet_5: 3475861555723936475
+      MidBossDead-Sheet_6: 7620154938716693934
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
