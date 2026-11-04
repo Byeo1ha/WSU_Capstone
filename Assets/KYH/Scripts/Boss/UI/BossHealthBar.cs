@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,16 @@ public class BossHealthBar : MonoBehaviour
     [SerializeField] private Image healthFill;
 
     private bool hasStarted;
+
+    private void Awake()
+    {
+        if (bossHealth == null || healthFill == null)
+        {
+            Debug.LogError("BossHealthBar: BossHealth 또는 HealthFill이 할당되지 않았습니다.", this);
+
+            enabled = false;
+        }
+    }
 
     private void OnEnable()
     {
@@ -27,11 +38,14 @@ public class BossHealthBar : MonoBehaviour
 
     private void OnDisable()
     {
+        if(bossHealth != null)
+        {
         bossHealth.HealthChanged -= UpdateHealthBar;
+        }
     }
 
-    private void UpdateHealthBar(int currentHealth, int MaxHealth)
+    private void UpdateHealthBar(int currentHealth, int maxHealth)
     {
-        healthFill.fillAmount = (float)currentHealth / MaxHealth;
+        healthFill.fillAmount = maxHealth > 0 ? Mathf.Clamp01((float)currentHealth / maxHealth) : 0f;
     } 
 }
