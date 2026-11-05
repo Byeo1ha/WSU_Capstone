@@ -292,6 +292,7 @@ MonoBehaviour:
   shooter: {fileID: 427272566}
   totemAnimator: {fileID: 377539724}
   activeClip: {fileID: 7400000, guid: cff429ed72094484093aad8c8506db3d, type: 2}
+  totemRenderer: {fileID: 377539723}
 --- !u!114 &377539721
 MonoBehaviour:
   m_ObjectHideFlags: 0
