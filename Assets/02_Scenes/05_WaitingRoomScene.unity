@@ -512,16 +512,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Portal
       objectReference: {fileID: 0}
+    - target: {fileID: 7841682533144859976, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6007612170072568679, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 5221540257582994152, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
 --- !u!1 &957777594
 GameObject:

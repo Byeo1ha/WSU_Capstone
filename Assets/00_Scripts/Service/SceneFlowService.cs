@@ -83,8 +83,10 @@ public class SceneFlowService
             await UniTask.NextFrame();
 
             if (type == LoadingSceneType.Long)
+            {
                 screenFader.ScreenActive();
-
+                await UniTask.Delay(TimeSpan.FromSeconds(0.3f));
+            }
             // 8단계 : 씬 전환을 가능하게 바꾸고, 전환이 완료되면 페이드 인 진행
             operation.allowSceneActivation = true;
             await operation;

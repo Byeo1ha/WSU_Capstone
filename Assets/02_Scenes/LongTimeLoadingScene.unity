@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 267455505}
   - component: {fileID: 267455504}
+  - component: {fileID: 267455506}
   m_Layer: 0
   m_Name: LoadingAnim
   m_TagString: Untagged
@@ -162,13 +163,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 42dfc3ea9b1ff8948abd415fd27cf122, type: 3}
   - {fileID: 21300000, guid: cbd3341ca3cc3a345974f261faf87da3, type: 3}
   frameDelay: 0.1
-  textDelay: 0.5
   targetImage: {fileID: 813649162}
-  targetText: {fileID: 666798842}
-  loadingText:
-  - "\uB9AC\uC544\uAC00 \uD0D1\uC744 \uC624\uB974\uB294 \uC911."
-  - "\uB9AC\uC544\uAC00 \uD0D1\uC744 \uC624\uB974\uB294 \uC911.."
-  - "\uB9AC\uC544\uAC00 \uD0D1\uC744 \uC624\uB974\uB294 \uC911..."
 --- !u!4 &267455505
 Transform:
   m_ObjectHideFlags: 0
@@ -184,6 +179,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &267455506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267455503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86a7692e472f77f4b9d11cdc614a7f24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TextAnim
+  targetText: {fileID: 666798842}
+  textDelay: 0.5
+  frameText:
+  - "\uB9AC\uC544\uAC00 \uD0D1\uC744 \uC624\uB974\uB294 \uC911."
+  - "\uB9AC\uC544\uAC00 \uD0D1\uC744 \uC624\uB974\uB294 \uC911.."
+  - "\uB9AC\uC544\uAC00 \uD0D1\uC744 \uC624\uB974\uB294 \uC911..."
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,8 @@ using VContainer;
 
 public class Title : MonoBehaviour
 {
-    [SerializeField] private string startSceneName = "SampleScene";
+    [SerializeField] private string startSceneName;
+
     private SceneFlowService sceneFlowService;
 
     [Inject]
@@ -19,6 +20,11 @@ public class Title : MonoBehaviour
             SceneFlowService.LoadingSceneType.Long
         )
         .Forget();
+    }
+
+    public void OptionBtn()
+    {
+        
     }
 
     public void QuitBtn()

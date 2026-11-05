@@ -174,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4e19a0aa73df6468f4d88c50ff27da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHighAttack
-  upperPower: 20
+  upperPower: 17
   offset: 0.5
 --- !u!114 &253738808692966132
 MonoBehaviour:
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormalAttack
   comboGraceDuration: 0.4
-  offset: 1
+  offset: 0.5
   finalAttackOffset: 1
 --- !u!114 &4371798799325757416
 MonoBehaviour:
