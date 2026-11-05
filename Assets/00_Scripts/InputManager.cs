@@ -16,6 +16,9 @@ public class InputManager : MonoBehaviour
     private Subject<Unit> onInteract = new();
     public Observable<Unit> OnInteract => onInteract;
 
+    private Subject<Unit> onPause = new();
+    public Observable<Unit> OnPause => onPause;
+
     private ReactiveProperty<float> moveInput = new(0f);
     public ReadOnlyReactiveProperty<float> MoveInput => moveInput;
 
@@ -88,6 +91,11 @@ public class InputManager : MonoBehaviour
     {
         if (isGameplayInputBlocked) return;
 
-        if (context.performed) onInteract.OnNext(Unit.Default);
+        if (context.performed) onInteract?.OnNext(Unit.Default);
+    }
+
+    public void OnPauseInput(InputAction.CallbackContext context)
+    {
+        if (context.performed) onPause?.OnNext(Unit.Default);
     }
 }

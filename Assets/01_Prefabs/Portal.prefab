@@ -670,7 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PortalLifetimeScope
   parentReference:
-    TypeName: 
+    TypeName: GameLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   portal: {fileID: 343281039498549196}

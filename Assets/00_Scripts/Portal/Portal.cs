@@ -10,6 +10,7 @@ public class Portal : MonoBehaviour
     [SerializeField] private LoadingSceneType loadingSceneType;
 
     private SceneFlowService sceneFlowService;
+    private PauseManager pauseManager;
     private (int layer1, int layer2) targetLayer;
     private bool isReady;
     private InputManager inputManager;
@@ -24,10 +25,12 @@ public class Portal : MonoBehaviour
     [Inject]
     public void Construct(
         SceneFlowService sceneFlowService,
-        InputManager inputManager)
+        InputManager inputManager,
+        PauseManager pauseManager)
     {
         this.sceneFlowService = sceneFlowService;
         this.inputManager = inputManager;
+        this.pauseManager = pauseManager;
     }
 
     private void Awake()
@@ -72,9 +75,11 @@ public class Portal : MonoBehaviour
 
     private void MoveNextScene()
     {
+        if (pauseManager.IsActive) return;
         if (!isReady) return;
 
-        
+        pauseManager.SetPauseTime(false);
+
         if (loadingSceneType == LoadingSceneType.Long)
         {
             sceneFlowService.LoadSceneAsync(
