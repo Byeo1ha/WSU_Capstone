@@ -106,13 +106,13 @@ public class FinalBossSlash : MonoBehaviour
             if(!damagedTargets.Add(target))
                 continue;
 
-                target.TakeDamage(attackDamage);
-
-            if(attackPushImpulse > 0f && other != null && other.attachedRigidbody != null && other.TryGetComponent<SpriteRenderer>(out var playerRenderer))
+            if (attackPushImpulse > 0f && target is PlayerDamaged playerDamaged)
             {
-                Vector2 pushDirection = playerRenderer.flipX ? Vector2.left : Vector2.right;
-
-                other.attachedRigidbody.AddForce(pushDirection * attackPushImpulse, ForceMode2D.Impulse);
+                playerDamaged.TakeDamage(attackDamage, attackPushImpulse);
+            }
+            else
+            {
+                target.TakeDamage(attackDamage);
             }
         }
     }

@@ -62,6 +62,11 @@ public class PlayerDamaged : MonoBehaviour, IDamageable
     // 외부에서 플레이어에게 피해를 입히기 위한 함수
     public void TakeDamage(int damage)
     {
+        TakeDamage(damage, 0f);
+    }
+
+    public void TakeDamage(int damage, float extraHorizontalImpulse)
+    {
         playerAttributes.Damaged(damage);
         Debug.Log($"{damage} 피해를 입었습니다! 남은 체력 {playerAttributes.Hp}");
 
@@ -76,7 +81,8 @@ public class PlayerDamaged : MonoBehaviour, IDamageable
         if (spriteRenderer.flipX) direct = 1;
         else direct = -1;
 
-        rigid.AddForce(Vector2.left * direct * upOffset, ForceMode2D.Impulse);
+        float horizontalImpulse = upOffset + Mathf.Max(0f, extraHorizontalImpulse);
+        rigid.AddForce(Vector2.left * direct * horizontalImpulse, ForceMode2D.Impulse);
         rigid.AddForce(Vector2.up * backOffset, ForceMode2D.Impulse);
 
         hitFlashEffect.PlayHitFlash();
