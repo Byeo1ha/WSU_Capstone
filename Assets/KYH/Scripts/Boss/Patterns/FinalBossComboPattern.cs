@@ -13,14 +13,13 @@ public class FinalBossComboPattern : MonoBehaviour
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private FinalBossComboData data;
     [SerializeField] private FinalBossSlash slash;
-    [SerializeField] private FinalBossPistol pistol;
 
     private Coroutine sequence;
     private bool ownsExecution;
     
     private void OnEnable()
     {
-        if(patternRunner == null || bossHealth == null || phaseController == null || targetFinder == null || data == null || slash == null || pistol == null)
+        if(patternRunner == null || bossHealth == null || phaseController == null || targetFinder == null || data == null || slash == null)
         {
             Debug.LogError("칼 연계에 필요한 참조를 모두 연결해 주세요.", this);
 
@@ -56,8 +55,7 @@ public class FinalBossComboPattern : MonoBehaviour
                !phaseController.IsTransforming &&
                phaseController.CurrentPhase == FinalBossPhase.Phase1 &&
                targetFinder.isActiveAndEnabled &&
-               slash.isActiveAndEnabled &&
-               pistol != null && pistol.isActiveAndEnabled;
+               slash.isActiveAndEnabled;
     }
 
     private void HandleStateChanged(BossPatternState state)
@@ -121,23 +119,28 @@ public class FinalBossComboPattern : MonoBehaviour
             if(!ownsExecution)
                 yield break;
 
-            if(!CanExecute() || !slash.BeginSlash(direction))
+            bool isFinisher = i == data.SlashCount - 1;
+            int damage = isFinisher ? data.FinisherDamage : data.SlashDamage;
+            float pushImpulse = isFinisher ? data.FinisherPushImpulse : 0f;
+
+
+            if(!CanExecute() || !slash.BeginSlash(direction, damage, pushImpulse))
             {
                 AbortPattern();
                 yield break;
             }
 
-            if(!ownsExecution)
+            if (!ownsExecution)
                 yield break;
 
-            Debug.Log($"최종보스 칼 공: {i + 1}타.", this);
+                Debug.Log($"최종 보스 베기 {i + 1}타. 설정 피해 {damage}", this);
 
             while (slash.IsAttacking)
             {
-                if(!ownsExecution)
+                if (!ownsExecution)
                     yield break;
 
-                if(!CanExecute())
+                if (!CanExecute())
                 {
                     AbortPattern();
                     yield break;
@@ -146,37 +149,8 @@ public class FinalBossComboPattern : MonoBehaviour
                 yield return null;
             }
 
-            if(i < data.SlashCount - 1)
+            if(!isFinisher)
                 yield return new WaitForSeconds(data.BetweenSlashDelay);
-        }
-
-         yield return new WaitForSeconds(data.BeforePistolDelay);
-
-        if (!ownsExecution)
-            yield break;
-
-        if (!CanExecute() ||
-            !pistol.TryFire(direction, data.PistolDamage))
-        {
-            Debug.LogWarning("권총 발사를 시작하지 못했습니다.", this);
-            AbortPattern();
-            yield break;
-        }
-
-        Debug.Log("최종보스 권총 발사", this);
-
-        while (pistol.IsInFlight)
-        {
-            if (!ownsExecution)
-                yield break;
-
-            if (!CanExecute())
-            {
-                AbortPattern();
-                yield break;
-            }
-
-            yield return null;
         }
 
         sequence = null;
@@ -214,9 +188,6 @@ public class FinalBossComboPattern : MonoBehaviour
         {
             if (slash != null)
                 slash.StopSlash();
-
-            if (pistol != null)
-                pistol.CancelShot();
         }
     }
 
