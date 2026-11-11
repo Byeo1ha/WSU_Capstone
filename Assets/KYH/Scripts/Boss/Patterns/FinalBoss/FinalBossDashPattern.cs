@@ -10,6 +10,10 @@ public class FinalBossDashPattern : MonoBehaviour
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private Rigidbody2D bossBody;
 
+    [Header("돌진 이동 한계")]
+    [SerializeField] private Transform leftDashLimit;
+    [SerializeField] private Transform rightDashLimit; 
+
     [Header("돌진 이동 - 임시값")]
     [SerializeField, Min(0.1f)] private float dashDistance = 4f;
     [SerializeField, Min(0.05f)] private float dashDuration = 0.25f;
@@ -65,9 +69,22 @@ public class FinalBossDashPattern : MonoBehaviour
                 return;
             }
 
+            if (leftDashLimit == null || rightDashLimit == null ||
+                leftDashLimit.position.x >= rightDashLimit.position.x)
+            {
+                Debug.LogError("돌진 한계를 왼쪽과 오른쪽 순서로 연결해 주세요.", this);
+                AbortPattern();
+                return;
+            }
+
             float startX = bossBody.position.x;
             int direction = targetPosition.x < startX ? -1 : 1;
-            destinationX = startX + direction * dashDistance;
+            float limitX = direction < 0 ? leftDashLimit.position.x : rightDashLimit.position.x;
+
+            float availableDistance = Mathf.Max(0f, (limitX - startX) * direction);
+            float travelDistance = Mathf.Min(dashDistance, availableDistance);
+
+            destinationX = startX + direction * travelDistance;
             return;
         }
 
