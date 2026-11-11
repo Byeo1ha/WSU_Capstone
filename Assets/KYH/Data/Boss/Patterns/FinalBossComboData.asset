@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: FinalBossComboData
   m_EditorClassIdentifier: Assembly-CSharp::FinalBossComboData
   slashDamage: 8
-  pistolDamage: 12
+  finisherDamage: 12
+  finisherPushImpulse: 5
   slashSize: {x: 2, y: 1.5}
   slashOffset: {x: 1, y: 0}
   slashDuration: 0.1
   betweenSlashDelay: 0.25
-  beforePistolDelay: 0.2

@@ -20,12 +20,18 @@ public class FinalBossSlash : MonoBehaviour
     private Vector2 attackCenter;
     private Vector2 attackSize;
     private int attackDamage;
+    private float attackPushImpulse;
     private float endTime;
     private bool isAttacking;
 
     public bool IsAttacking => isAttacking;
 
     public bool BeginSlash(int direction)
+    {
+        return BeginSlash(direction, data !=null ? data.SlashDamage : 0);
+    }
+
+    public bool BeginSlash(int direction, int damage, float pushImpulse = 0f)
     {
         if(!isActiveAndEnabled || isAttacking)
             return false;
@@ -46,7 +52,8 @@ public class FinalBossSlash : MonoBehaviour
         attackCenter = (Vector2)attackOrigin.position + offset;
         attackSize = new Vector2(Mathf.Max(0.01f, data.SlashSize.x), Mathf.Max(0.01f, data.SlashSize.y));
 
-        attackDamage = Mathf.Max(0, data.SlashDamage);
+        attackDamage = Mathf.Max(0, damage);
+        attackPushImpulse = Mathf.Max(0f, pushImpulse);
         endTime = Time.time + Mathf.Max(0.01f, data.SlashDuration);
 
         damageFilter = new ContactFilter2D();
@@ -99,7 +106,14 @@ public class FinalBossSlash : MonoBehaviour
             if(!damagedTargets.Add(target))
                 continue;
 
+            if (attackPushImpulse > 0f && target is PlayerDamaged playerDamaged)
+            {
+                playerDamaged.TakeDamage(attackDamage, attackPushImpulse);
+            }
+            else
+            {
                 target.TakeDamage(attackDamage);
+            }
         }
     }
 

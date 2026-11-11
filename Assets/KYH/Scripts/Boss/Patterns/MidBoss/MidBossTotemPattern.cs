@@ -91,6 +91,7 @@ public class MidBossTotemPattern : MonoBehaviour
         Transform selectedPoint = GetFartherSpawnPoint();
 
         totem.transform.position = selectedPoint.position;
+        totem.SetFacing(selectedPoint == rightSpawnPoint);
         totem.gameObject.SetActive(true);
 
         if(!totem.PrepareAppearance(patternRunner.CurrentWindupDuration))

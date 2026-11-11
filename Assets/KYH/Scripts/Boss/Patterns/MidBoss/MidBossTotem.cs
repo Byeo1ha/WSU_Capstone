@@ -17,17 +17,21 @@ public class MidBossTotem : MonoBehaviour
     [SerializeField] private Animator totemAnimator;
     [SerializeField] private AnimationClip activeClip;
 
+    [Header("토템 방향")]
+    [SerializeField] private SpriteRenderer totemRenderer;
+
     private float timeRemaining;
     private bool hasEnded = true;
     private bool isPreparing;
     private bool isLifeTimeActive;
+    private bool isEnding;
 
     public bool HasEnded => hasEnded;
     public event Action Ended;
 
     private readonly int ActiveState = Animator.StringToHash("Base Layer.Totem_Active");
     private readonly int LoopState = Animator.StringToHash("Base Layer.Totem_Loop");
-
+    private readonly int DeadState = Animator.StringToHash("Base Layer.Totem_Dead");
 
     private void Awake()
     {
@@ -46,7 +50,7 @@ public class MidBossTotem : MonoBehaviour
 
     public bool PrepareAppearance(float duration)
     {
-        if (!isActiveAndEnabled || !hasEnded)
+        if (!isActiveAndEnabled || !hasEnded || isEnding)
             return false;
 
         if (health == null ||
@@ -55,7 +59,8 @@ public class MidBossTotem : MonoBehaviour
             activeClip == null ||
             !totemAnimator.isActiveAndEnabled ||
             !totemAnimator.HasState(0, ActiveState) ||
-            !totemAnimator.HasState(0, LoopState))
+            !totemAnimator.HasState(0, LoopState) ||
+            !totemAnimator.HasState(0, DeadState))
         {
             Debug.LogError("토템 체력, 발사기와 애니메이션 연결을 확인해 주세요.", this);
             return false;
@@ -84,7 +89,7 @@ public class MidBossTotem : MonoBehaviour
 
     public bool ActiveCombat()
     {
-        if (!isActiveAndEnabled || hasEnded || !isPreparing)
+        if (!isActiveAndEnabled || hasEnded || isEnding ||!isPreparing)
             return false;
 
         isPreparing = false;
@@ -122,7 +127,7 @@ public class MidBossTotem : MonoBehaviour
             health.HealthChanged -= HandleHealthChanged;
 
         if(!hasEnded)
-            EndTotem();
+            FinishDisappearance();
     }
 
     private void HandleHealthChanged(int currentHealth, int maxHealth)
@@ -133,10 +138,10 @@ public class MidBossTotem : MonoBehaviour
 
     public void EndTotem()
     {
-        if(hasEnded)
+        if(hasEnded || isEnding)
             return;
 
-        hasEnded = true;
+        isEnding = true;
         isPreparing = false;
         isLifeTimeActive = false;
         timeRemaining = 0f;
@@ -144,12 +149,61 @@ public class MidBossTotem : MonoBehaviour
         if(shooter != null)
             shooter.StopShooting();
         if(health != null)
+            health.SetInvincible(true);
+
+        if (!isActiveAndEnabled ||
+            totemAnimator == null ||
+            !totemAnimator.isActiveAndEnabled ||
+            !totemAnimator.HasState(0, DeadState))
+            {
+                FinishDisappearance();
+                return;
+            }
+
+        totemAnimator.speed = 1f;
+        totemAnimator.Play(DeadState, 0, 0f);
+    }
+
+    public void OnDisappearanceFinished()
+    {
+        if(!isEnding)
+            return;
+
+        FinishDisappearance();
+    }
+
+    private void FinishDisappearance()
+    {
+        if(hasEnded)
+            return;
+
+        hasEnded = true;
+        isEnding = false;
+        isPreparing = false;
+        isLifeTimeActive = false;
+        timeRemaining = 0f;
+
+        if (shooter != null)
+            shooter.StopShooting();
+
+        if (health != null)
             health.SetInvincible(false);
 
-        if(totemAnimator != null)
+        if (totemAnimator != null)
             totemAnimator.speed = 1f;
 
         gameObject.SetActive(false);
         Ended?.Invoke();
+    }
+
+    public void SetFacing(bool isRightSpawn)
+    {
+        if (totemRenderer == null)
+        {
+            Debug.LogError("토템의 SpriteRenderer를 연결해 주세요.", this);
+            return;
+        }
+
+        totemRenderer.flipX = isRightSpawn;
     }
 }
