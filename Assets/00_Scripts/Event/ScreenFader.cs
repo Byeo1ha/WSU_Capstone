@@ -37,7 +37,6 @@ public class ScreenFader : MonoBehaviour
     public async UniTask FadeInAsync()
     {
         await canvasGroup.DOFade(0f, fadeDuration)
-
             .SetUpdate(true)
             .AsyncWaitForCompletion();
 

@@ -6,17 +6,24 @@ public class PauseManager : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel;
 
-    private InputManager inputManager;
     public bool IsActive { get; private set; }
     public bool CanPause { get; private set; } = true;
+
+    private InputManager inputManager;
+    private OptionUI optionUI;
 
     public void SetPauseTime(bool value) 
         => CanPause = value;
 
+    private bool blockCancel;
+
     [Inject]
-    public void Construct(InputManager inputManager)
+    public void Construct(
+        InputManager inputManager,
+        OptionUI optionUI)
     {
         this.inputManager = inputManager;
+        this.optionUI = optionUI;
     }
 
     private void Awake()
@@ -56,4 +63,10 @@ public class PauseManager : MonoBehaviour
     {
         ClosePauseUI();
     }
+
+    public void OptionBtn()
+    { 
+        optionUI.OpenUI();
+    }
+
 }

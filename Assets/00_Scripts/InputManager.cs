@@ -19,6 +19,9 @@ public class InputManager : MonoBehaviour
     private Subject<Unit> onPause = new();
     public Observable<Unit> OnPause => onPause;
 
+    private Subject<Unit> onCancel = new();
+    public Observable<Unit> OnCancel => onCancel;
+
     private ReactiveProperty<float> moveInput = new(0f);
     public ReadOnlyReactiveProperty<float> MoveInput => moveInput;
 
@@ -97,5 +100,10 @@ public class InputManager : MonoBehaviour
     public void OnPauseInput(InputAction.CallbackContext context)
     {
         if (context.performed) onPause?.OnNext(Unit.Default);
+    }
+
+    public void OnCancelInput(InputAction.CallbackContext context)
+    {
+        if (context.performed) onCancel?.OnNext(Unit.Default);
     }
 }

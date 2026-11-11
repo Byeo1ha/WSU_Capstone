@@ -7,11 +7,15 @@ public class Title : MonoBehaviour
     [SerializeField] private string startSceneName;
 
     private SceneFlowService sceneFlowService;
+    private OptionUI optionUI;
 
     [Inject]
-    public void Construct(SceneFlowService sceneFlowService)
+    public void Construct(
+        SceneFlowService sceneFlowService,
+        OptionUI optionUI)
     {
         this.sceneFlowService = sceneFlowService;
+        this.optionUI = optionUI;
     }
 
     public void StartBtn()
@@ -24,7 +28,7 @@ public class Title : MonoBehaviour
 
     public void OptionBtn()
     {
-        
+        optionUI.OpenUI();
     }
 
     public void QuitBtn()

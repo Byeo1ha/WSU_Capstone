@@ -7,5 +7,6 @@ public class GameLifetimeScope : LifetimeScope
     {
         builder.RegisterComponentInHierarchy<TargetCamera>();
         builder.RegisterComponentInHierarchy<PauseManager>();
+        builder.RegisterComponentInHierarchy<BGMStarter>();
     }
 }

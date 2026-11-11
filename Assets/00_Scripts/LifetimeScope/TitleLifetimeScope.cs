@@ -6,5 +6,6 @@ public class TitleLifetimeScope : LifetimeScope
     protected override void Configure(IContainerBuilder builder)
     {
         builder.RegisterComponentInHierarchy<Title>();
+        builder.RegisterComponentInHierarchy<BGMStarter>();
     }
 }
