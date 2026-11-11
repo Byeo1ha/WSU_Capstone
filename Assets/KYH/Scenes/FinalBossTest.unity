@@ -841,12 +841,12 @@ GameObject:
   - component: {fileID: 1028047476}
   - component: {fileID: 1028047477}
   - component: {fileID: 1028047478}
-  - component: {fileID: 1028047479}
   - component: {fileID: 1028047481}
   - component: {fileID: 1028047480}
-  - component: {fileID: 1028047482}
   - component: {fileID: 1028047484}
   - component: {fileID: 1028047483}
+  - component: {fileID: 1028047485}
+  - component: {fileID: 1028047486}
   m_Layer: 0
   m_Name: BossTest
   m_TagString: Untagged
@@ -944,23 +944,6 @@ MonoBehaviour:
   patternRunner: {fileID: 1028047477}
   approach: {fileID: 1028047484}
   comboPattern: {fileID: 1028047480}
---- !u!114 &1028047479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028047472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 804882d4db91f4044989768b906cd572, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FinalBossSlash
-  data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
-  attackOrigin: {fileID: 1028047474}
-  damageLayer:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!114 &1028047480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,7 +961,7 @@ MonoBehaviour:
   phaseController: {fileID: 1028047475}
   targetFinder: {fileID: 1028047481}
   data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
-  slash: {fileID: 1028047479}
+  slash: {fileID: 0}
 --- !u!114 &1028047481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -995,23 +978,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   targetSearchRadius: 30
---- !u!114 &1028047482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1028047472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4e86635fdef90d41a379ecc2956d4cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FinalBossPistol
-  pistolpool: {fileID: 636867837}
-  fireOrigin: {fileID: 1028047474}
-  muzzleOffset: {x: 0.7, y: 0}
-  speed: 12
-  lifetime: 3
 --- !u!50 &1028047483
 Rigidbody2D:
   serializedVersion: 5
@@ -1063,6 +1029,42 @@ MonoBehaviour:
   result: 0
   timeRemaining: 0
   isAdditionalApproach: 0
+--- !u!114 &1028047485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41292a4c89be044597265e8351cb98b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossDashPattern
+  patternRunner: {fileID: 1028047477}
+  bossHealth: {fileID: 1028047473}
+  phaseController: {fileID: 1028047475}
+  targetFinder: {fileID: 1028047481}
+  bossBody: {fileID: 1028047483}
+  dashDistance: 4
+  dashDuration: 0.25
+--- !u!114 &1028047486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1028047472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804882d4db91f4044989768b906cd572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossSlash
+  data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
+  attackOrigin: {fileID: 1028047474}
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1082112773
 GameObject:
   m_ObjectHideFlags: 0
