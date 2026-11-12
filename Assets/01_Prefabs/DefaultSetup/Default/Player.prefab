@@ -46,6 +46,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4055911553524251028}
   - {fileID: 5123619737168597689}
   - {fileID: 1648384010960518265}
   - {fileID: 6072725940411203941}
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f4e19a0aa73df6468f4d88c50ff27da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHighAttack
-  upperPower: 20
+  upperPower: 17
   offset: 0.5
 --- !u!114 &253738808692966132
 MonoBehaviour:
@@ -203,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62fadca3dd07b24408d24b61d0ab5e8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerJump
-  jumpPower: 15
+  jumpPower: 17
   groundCheck: {fileID: 5123619737168597689}
   groundCheckSize: {x: 0.7, y: 0.08}
   groundLayer:
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerNormalAttack
   comboGraceDuration: 0.4
-  offset: 1
+  offset: 0.5
   finalAttackOffset: 1
 --- !u!114 &4371798799325757416
 MonoBehaviour:
@@ -522,6 +523,76 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AttackHitboxPool
   attackHitbox: {fileID: 5523263523127427871, guid: c85e1e24e9432764faf90793d44eb55d, type: 3}
   hitEffectPool: {fileID: 0}
+--- !u!1 &2983430689421768205
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4055911553524251028}
+  - component: {fileID: 1148417953915507750}
+  - component: {fileID: 1700908598118623141}
+  m_Layer: 0
+  m_Name: LifetimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4055911553524251028
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2983430689421768205}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7129514314858802992}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1148417953915507750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2983430689421768205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddce30f584f573640b723ecb6ff31dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!114 &1700908598118623141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2983430689421768205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a7411f0e1d11bb449bdc8ed17827e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLifetimeScope
+  parentReference:
+    TypeName: GameLifetimeScope
+  autoRun: 1
+  autoInjectGameObjects: []
+  normalAttack: {fileID: 8502528184690490175}
+  finalNormalAttack: {fileID: 3402035049034493074}
+  highAttack: {fileID: 6589869997921548967}
+  airAttack: {fileID: 3406392976434295363}
+  lowAttack: {fileID: 2424492146608752445}
 --- !u!1 &3500105610922559910
 GameObject:
   m_ObjectHideFlags: 0

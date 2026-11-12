@@ -52,6 +52,10 @@ public class TutorialEvent : MonoBehaviour
     [SerializeField] private GameObject skipWindow;
     [SerializeField] private CanvasGroup skipBtnCanvas;
 
+    [Header("튜토리얼 화살표")]
+    [SerializeField] private TutorialArrow dummyArrow;
+    [SerializeField] private UIArrow uiArrow;
+
     private int subjectCount;
     private bool isFinish;
     private bool isMissionActive;
@@ -91,6 +95,8 @@ public class TutorialEvent : MonoBehaviour
             .SetText("● 기본 공격 ({0} / {1})", subjectCount, maxNormalAttackSubject);
 
         skipBtnCanvas.alpha = 0f;
+        dummyArrow.gameObject.SetActive(false);
+        uiArrow.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -223,29 +229,31 @@ public class TutorialEvent : MonoBehaviour
             TimeSpan.FromSeconds(1f),
             cancellationToken: tutorialCancellation.Token);
 
-        moveBorder.DOFade(1f, completeTime)
+        _ = moveBorder.DOFade(1f, completeTime)
             .SetLink(moveBorder.gameObject);
         BeginMission(TutorialPhase.Move);
         
         await TutorialFinish();
         await HideKeyGuideBorder(moveBorder);
 
-        normalAttackBorder.DOFade(1f, completeTime)
+        _ = normalAttackBorder.DOFade(1f, completeTime)
             .SetLink(normalAttackBorder.gameObject);
         BeginMission(TutorialPhase.NormalAttack);
+
+        dummyArrow.gameObject.SetActive(true);
 
         await TutorialFinish();
         await HideKeyGuideBorder(normalAttackBorder);
 
         if (jumpBorder != null)
-            jumpBorder.DOFade(1f, completeTime)
+            _ = jumpBorder.DOFade(1f, completeTime)
                 .SetLink(jumpBorder.gameObject);
         BeginMission(TutorialPhase.Jump);
 
         await TutorialFinish();
         await HideKeyGuideBorder(jumpBorder);
 
-        airAttackBorder.DOFade(1f, completeTime)
+        _ = airAttackBorder.DOFade(1f, completeTime)
             .SetLink(airAttackBorder.gameObject);
         BeginMission(TutorialPhase.AirAttack);
 
@@ -253,7 +261,7 @@ public class TutorialEvent : MonoBehaviour
         await HideKeyGuideBorder(airAttackBorder);
 
         if (highAttackBorder != null)
-            highAttackBorder.DOFade(1f, completeTime)
+            _ = highAttackBorder.DOFade(1f, completeTime)
                 .SetLink(highAttackBorder.gameObject);
         BeginMission(TutorialPhase.HighAttack);
 
@@ -261,7 +269,7 @@ public class TutorialEvent : MonoBehaviour
         await HideKeyGuideBorder(highAttackBorder);
 
         if (lowAttackBorder != null)
-            lowAttackBorder.DOFade(1f, completeTime)
+            _ = lowAttackBorder.DOFade(1f, completeTime)
                 .SetLink(lowAttackBorder.gameObject);
         BeginMission(TutorialPhase.LowAttack);
 
@@ -269,7 +277,7 @@ public class TutorialEvent : MonoBehaviour
         await HideKeyGuideBorder(lowAttackBorder);
 
         if (dodgeBorder != null)
-            dodgeBorder.DOFade(1f, completeTime)
+            _ = dodgeBorder.DOFade(1f, completeTime)
                 .SetLink(dodgeBorder.gameObject);
         BeginMission(TutorialPhase.Dodge);
 
@@ -278,6 +286,9 @@ public class TutorialEvent : MonoBehaviour
         await HideKeyGuideBorder(dodgeBorder);
 
         tutorialPhase = TutorialPhase.Completed;
+
+        dummyArrow.gameObject.SetActive(false);
+        uiArrow.gameObject.SetActive(true);
         Debug.Log("튜토리얼 완료");
     }
 
@@ -330,7 +341,7 @@ public class TutorialEvent : MonoBehaviour
         if (tutorialPhase != TutorialPhase.NormalAttack) return;
 
         subjectCount++;
-
+        
         subjectText
             .SetText("● 기본 공격 ({0} / {1})", subjectCount, maxNormalAttackSubject);
 
@@ -474,6 +485,8 @@ public class TutorialEvent : MonoBehaviour
 
         tutorialCancellation?.Cancel();
         HideTutorialUI();
+        dummyArrow.gameObject.SetActive(false);
+        uiArrow.gameObject.SetActive(true);
 
         if (openSkipWindow)
         {

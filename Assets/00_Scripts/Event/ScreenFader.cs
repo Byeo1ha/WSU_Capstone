@@ -13,6 +13,18 @@ public class ScreenFader : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
     }
 
+    public void ScreenActive()
+    {
+        canvasGroup.blocksRaycasts = true;
+        canvasGroup.alpha = 1f;
+    }
+
+    public void ScreenDeActive()
+    {
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.alpha = 0f;
+    }
+
     public async UniTask FadeOutAsync()
     {
         canvasGroup.blocksRaycasts = true;

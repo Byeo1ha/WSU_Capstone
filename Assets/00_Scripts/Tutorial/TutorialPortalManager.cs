@@ -33,7 +33,7 @@ public class TutorialPortalManager : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(1f),
             cancellationToken: this.GetCancellationTokenOnDestroy());
 
-        completePortalGuide.DOFade(1f, 0.5f)
+        _ = completePortalGuide.DOFade(1f, 0.5f)
             .SetLink(completePortalGuide.gameObject);
     }
 }

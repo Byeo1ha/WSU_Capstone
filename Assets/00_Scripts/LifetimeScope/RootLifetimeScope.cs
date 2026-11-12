@@ -7,6 +7,8 @@ public class RootLifetimeScope : LifetimeScope
     [SerializeField] private ScreenFader screenFader;
     [SerializeField] private PlayerAttributes playerAttributes;
     [SerializeField] private InputManager inputManager;
+    [SerializeField] private OptionUI optionUI;
+    [SerializeField] private SoundManager soundManager;
 
     private void Start()
     {
@@ -19,5 +21,7 @@ public class RootLifetimeScope : LifetimeScope
         builder.Register<SceneFlowService>(Lifetime.Singleton);
         builder.RegisterComponent(playerAttributes);
         builder.RegisterComponent(inputManager);
+        builder.RegisterComponent(optionUI);
+        builder.RegisterComponent(soundManager);
     }
 }

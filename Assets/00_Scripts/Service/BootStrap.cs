@@ -22,7 +22,10 @@ public class BootStrap : MonoBehaviour
 
         if (!bootStrap) Application.Quit();
 
-        sceneFlowService.LoadSceneAsync(nextSceneName).Forget();
+        sceneFlowService.LoadSceneAsync(nextSceneName,
+            SceneFlowService.LoadingSceneType.Short
+        )
+        .Forget();
     }
 
     // RootLifetimeScope 체크용 함수

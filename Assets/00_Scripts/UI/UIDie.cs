@@ -65,7 +65,9 @@ public class UIDie : MonoBehaviour
     public void RespawnBtn()
     {
         sceneFlowService
-            .LoadSceneAsync(SceneManager.GetActiveScene().name)
+            .LoadSceneAsync(SceneManager.GetActiveScene().name,
+                SceneFlowService.LoadingSceneType.Short
+            )
             .Forget();
 
         playerAttributes.ResetHp();
@@ -74,7 +76,11 @@ public class UIDie : MonoBehaviour
     public void TitleBtn()
     {
         sceneFlowService
-            .LoadSceneAsync(titleSceneName)
+            .LoadSceneAsync(titleSceneName,
+                SceneFlowService.LoadingSceneType.Short
+            )
             .Forget();
+
+        playerAttributes.ResetHp();
     }
 }
