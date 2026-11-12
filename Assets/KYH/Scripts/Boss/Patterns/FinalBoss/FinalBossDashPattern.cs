@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FinalBossDashPattern : MonoBehaviour
 {
@@ -18,6 +19,25 @@ public class FinalBossDashPattern : MonoBehaviour
     [SerializeField, Min(0.1f)] private float dashDistance = 4f;
     [SerializeField, Min(0.05f)] private float dashDuration = 0.25f;
 
+    [Header("돌긴 경고")]
+    [SerializeField] private BossLineWarning dashWarningPrefab; 
+    [SerializeField, Min(0.1f)] private float warningHeight = 1.5f;
+    [SerializeField] private float warningOffsetY;
+
+    [Header("돌진 피해")]
+    [SerializeField, Min(1)] private int dashDamage = 14;
+    [SerializeField] private LayerMask damageLayer;
+    [SerializeField] private Vector2 hitboxSize = new Vector2(1f, 1.5f);
+    [SerializeField] private float hitboxOffsetY;
+
+    private readonly List<Collider2D> dashHits = new List<Collider2D>();
+    private readonly HashSet<IDamageable> damagedTargets = new HashSet<IDamageable>();
+
+    private ContactFilter2D damageFilter;
+    private Vector2 lastHitPosition;
+    private BossLineWarning dashWarning;
+    private bool isDashHitting;
+    private bool dashMovementFinished;
     private bool ownsExecution;
     private float destinationX;
     private Tween dashTween;
@@ -25,11 +45,40 @@ public class FinalBossDashPattern : MonoBehaviour
     private void Awake()
     {
         if(patternRunner != null && bossHealth != null && phaseController != null && bossBody != null)
+        {
+            if (dashWarningPrefab != null)
+                dashWarning = Instantiate(dashWarningPrefab);
+
             return;
+        }
 
         Debug.LogError("돌진 발도에 필요한 참조를 모두 연결해 주세요", this);
         enabled = false;
     } 
+
+    private void Update()
+    {
+        if (ownsExecution && !CanExecute())
+        {
+            AbortPattern();
+            return;
+        }
+
+        if (!isDashHitting || !dashMovementFinished)
+            return;
+
+        CheckDashDamage();
+
+        if (ownsExecution && patternRunner.CurrentState == BossPatternState.Active)
+            patternRunner.CompleteActive();    
+    }
+
+    private void FixedUpdate()
+    {
+        if (isDashHitting && CanExecute())
+            CheckDashDamage();
+    }
+
 
     private void OnEnable()
     {
@@ -43,6 +92,12 @@ public class FinalBossDashPattern : MonoBehaviour
 
         if (ownsExecution)
             AbortPattern();
+    }
+
+    private void OnDestroy()
+    {
+        if (dashWarning != null)
+            Destroy(dashWarning.gameObject);
     }
 
     private bool CanExecute()
@@ -85,6 +140,7 @@ public class FinalBossDashPattern : MonoBehaviour
             float travelDistance = Mathf.Min(dashDistance, availableDistance);
 
             destinationX = startX + direction * travelDistance;
+            ShowDashWarning(startX);
             return;
         }
 
@@ -99,11 +155,27 @@ public class FinalBossDashPattern : MonoBehaviour
 
     private void BeginDash()
     {
+        HideDashWarning();
         if (!CanExecute())
         {
             AbortPattern();
             return;
         }
+
+        if (Mathf.Abs(destinationX - bossBody.position.x) <= 0.01f)
+        {
+            patternRunner.CompleteActive();
+            return;
+        }
+
+        damagedTargets.Clear();
+        damageFilter = new ContactFilter2D();
+        damageFilter.SetLayerMask(damageLayer);
+        damageFilter.useTriggers = true;
+
+        lastHitPosition = bossBody.position;
+        dashMovementFinished = false;
+        isDashHitting = true;
 
         dashTween = bossBody.DOMoveX(destinationX, dashDuration)
             .SetEase(Ease.Linear)
@@ -111,18 +183,42 @@ public class FinalBossDashPattern : MonoBehaviour
             .OnComplete(FinishDash);
     }
 
-    private void Update()
-    {
-        if (ownsExecution && !CanExecute())
-            AbortPattern();
-    }
-
     private void FinishDash()
     {
         dashTween = null;
 
-        if (ownsExecution && patternRunner.CurrentState == BossPatternState.Active)
-            patternRunner.CompleteActive();
+        dashMovementFinished = true;
+    }
+
+    private void CheckDashDamage()
+    {
+        Vector2 currentPosition = bossBody.position;
+        Vector2 center = (lastHitPosition + currentPosition) * 0.5f;
+        center.y += hitboxOffsetY;
+
+        Vector2 movement = currentPosition - lastHitPosition;
+        Vector2 size = new Vector2(Mathf.Max(0.01f, hitboxSize.x) + Mathf.Abs(movement.x), Mathf.Max(0.01f, hitboxSize.y) + Mathf.Abs(movement.y));
+
+        lastHitPosition = currentPosition;
+        dashHits.Clear();
+
+        Physics2D.OverlapBox(center, size, 0f, damageFilter, dashHits);
+
+        foreach (Collider2D hit in dashHits)
+        {
+            if (!isDashHitting)
+                return;
+
+            if (hit == null || hit.gameObject.layer != LayerMask.NameToLayer("Player"))
+                continue;
+
+            if (hit.TryGetComponent<IDamageable>(out var target) && damagedTargets.Add(target))
+            {
+                target.TakeDamage(dashDamage);
+            }
+        }
+
+
     }
 
     private void CancelExecution()
@@ -130,12 +226,31 @@ public class FinalBossDashPattern : MonoBehaviour
         ownsExecution = false;
         dashTween?.Kill(false);
         dashTween = null;
+        HideDashWarning();
+
+        isDashHitting = false;
+        dashMovementFinished = false;
+        damagedTargets.Clear();
     }
 
     private void AbortPattern()
     {
         CancelExecution();
         patternRunner.StopPattern();
+    }
+
+    private void ShowDashWarning(float startX)
+    {
+        if (dashWarning == null)
+            return;
+
+       dashWarning.Show(startX, destinationX, bossBody.position.y + warningOffsetY, warningHeight);
+    }
+
+    private void HideDashWarning()
+    {
+        if (dashWarning != null)
+            dashWarning.Hide();
     }
 
     [ContextMenu("테스트/돌진 발도 이동")]

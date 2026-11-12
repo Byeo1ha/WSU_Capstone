@@ -1083,6 +1083,15 @@ MonoBehaviour:
   rightDashLimit: {fileID: 1177675173}
   dashDistance: 4
   dashDuration: 0.25
+  dashWarningPrefab: {fileID: 3792776907292008447, guid: 6407a428bc77e834c9fa69198d525e76, type: 3}
+  warningHeight: 1.5
+  warningOffsetY: 0
+  dashDamage: 14
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  hitboxSize: {x: 1, y: 1.5}
+  hitboxOffsetY: 0
 --- !u!114 &1028047486
 MonoBehaviour:
   m_ObjectHideFlags: 0
