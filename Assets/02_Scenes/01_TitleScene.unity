@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e354b37cceff5e479be8af6900bf2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BGMStarter
-  bgm: {fileID: 8300000, guid: 0adfc57767541774ea138a421585dd29, type: 3}
+  bgm: {fileID: 8300000, guid: a50daf76f86210a48b6499e08898b18c, type: 3}
 --- !u!4 &210500493
 Transform:
   m_ObjectHideFlags: 0

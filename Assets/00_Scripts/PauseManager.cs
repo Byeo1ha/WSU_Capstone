@@ -20,7 +20,7 @@ public class PauseManager : MonoBehaviour
     public void SetPauseTime(bool value) 
         => CanPause = value;
 
-    private bool blockCancel;
+    private bool isTitleCheck;
 
     [Inject]
     public void Construct(
@@ -45,6 +45,11 @@ public class PauseManager : MonoBehaviour
             .Where(_ => CanPause)
             .Subscribe(_ => InputHandler())
             .AddTo(this);
+
+        inputManager.OnCancel
+            .Where(_ => isTitleCheck)
+            .Subscribe(_ => TitleDeny())
+            .AddTo(this);
     }
 
     private void InputHandler()
@@ -62,6 +67,8 @@ public class PauseManager : MonoBehaviour
 
     private void ClosePauseUI()
     {
+        if (optionUI.IsBusy || titleCheckPanel.gameObject.activeSelf) return;
+
         IsActive = false;
         Time.timeScale = 1f;
         pausePanel.SetActive(false);
@@ -75,16 +82,22 @@ public class PauseManager : MonoBehaviour
     }
 
     public void OptionBtn()
-    { 
+    {
+        if (!IsActive || optionUI.IsBusy || titleCheckPanel.gameObject.activeSelf) return;
+
         optionUI.OpenUI();
     }
 
     public void TitleBtn()
     {
+        if (!IsActive || optionUI.IsBusy || titleCheckPanel.gameObject.activeSelf) return;
+
         titleCheckPanel.transform.DOKill();
         titleCheckPanel.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
         titleCheckPanel.gameObject.SetActive(true);
         titleCheckPanel.alpha = 1f;
+
+        isTitleCheck = true;
 
         titleCheckPanel
             .transform
@@ -108,6 +121,7 @@ public class PauseManager : MonoBehaviour
 
     public void TitleDeny()
     {
+        isTitleCheck = false;
         titleCheckPanel.transform.DOKill();
         titleCheckPanel
             .DOFade(0f, 0.5f)

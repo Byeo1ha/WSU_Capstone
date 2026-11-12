@@ -14,16 +14,22 @@ public class BGMStarter : MonoBehaviour
 
     private void Awake()
     {
+        if (soundManager == null) return;
+
         soundManager.SetBGM(bgm);
     }
 
     private void OnEnable()
     {
+        if (soundManager == null) return;
+
         soundManager.FadeIn();
     }
 
     private void OnDisable()
     {
+        if (soundManager == null) return;
+
         soundManager.FadeOut();
     }
 }

@@ -99,6 +99,8 @@ public class InputManager : MonoBehaviour
 
     public void OnPauseInput(InputAction.CallbackContext context)
     {
+        if (isGameplayInputBlocked) return;
+        
         if (context.performed) onPause?.OnNext(Unit.Default);
     }
 

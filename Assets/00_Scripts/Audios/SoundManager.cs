@@ -14,11 +14,15 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) return;
+
         originalValue = audioSource.volume;
     }
 
     public void SetBGM(AudioClip audio)
     {
+        if (audioSource == null) return;
+
         audioSource.clip = audio;
         audioSource.Play();
     }
@@ -26,6 +30,7 @@ public class SoundManager : MonoBehaviour
     public void FadeOut()
     {
         tween?.Kill();
+        if (audioSource == null) return;
 
         originalValue = audioSource.volume;
         tween = audioSource.DOFade(0f, 0.5f)
@@ -35,6 +40,7 @@ public class SoundManager : MonoBehaviour
     public void FadeIn()
     {
         tween?.Kill();
+        if (audioSource == null) return;
         
         tween = audioSource.DOFade(originalValue, 0.5f)
             .SetLink(gameObject);
