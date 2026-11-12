@@ -19,6 +19,7 @@ public class FinalBossComboData : ScriptableObject
     [Header("칼 공격 시간 - 임시값")]
     [SerializeField, Min(0.01f)] private float slashDuration = 0.1f;
     [SerializeField, Min(0f)] private float betweenSlashDelay = 0.25f;
+    [SerializeField, Min(0f)] private float windupDuration = 0.2f;
 
     public int SlashCount => 4;
     public int SlashDamage => slashDamage;
@@ -30,5 +31,6 @@ public class FinalBossComboData : ScriptableObject
     public float SlashDuration => slashDuration;
     public float BetweenSlashDelay => betweenSlashDelay;
     public float FinisherPushImpulse => finisherPushImpulse;
+    public float WindupDuration => windupDuration;
 
 }

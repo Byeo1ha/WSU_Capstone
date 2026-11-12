@@ -199,4 +199,12 @@ public class FinalBossComboPattern : MonoBehaviour
         if(shouldStopRunner && patternRunner != null)
             patternRunner.StopPattern();
     }
+
+    public void StartCombo()
+    {
+        if (!CanExecute() || !patternRunner.TrySelectPattern(this))
+            return;
+
+        patternRunner.StartPatternWithWindupDuration(data.WindupDuration);
+    }
 }

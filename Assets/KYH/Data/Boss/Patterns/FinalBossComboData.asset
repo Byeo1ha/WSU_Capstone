@@ -19,3 +19,4 @@ MonoBehaviour:
   slashOffset: {x: 1, y: 0}
   slashDuration: 0.1
   betweenSlashDelay: 0.25
+  windupDuration: 0.1

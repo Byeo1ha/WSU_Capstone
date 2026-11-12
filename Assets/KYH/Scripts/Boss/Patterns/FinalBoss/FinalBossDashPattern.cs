@@ -30,8 +30,14 @@ public class FinalBossDashPattern : MonoBehaviour
     [SerializeField] private Vector2 hitboxSize = new Vector2(1f, 1.5f);
     [SerializeField] private float hitboxOffsetY;
 
+    [Header("중거리 공격 시작 범위")]
+    [SerializeField, Min(0.1f)] private float approachStartRangeX = 4f;
+    [SerializeField, Min(0.1f)] private float approachStartRangeY = 0.75f;
+
     private readonly List<Collider2D> dashHits = new List<Collider2D>();
     private readonly HashSet<IDamageable> damagedTargets = new HashSet<IDamageable>();
+
+    public Vector2 ApproachStartRange => new Vector2(approachStartRangeX, approachStartRangeY);
 
     private ContactFilter2D damageFilter;
     private Vector2 lastHitPosition;
@@ -253,11 +259,20 @@ public class FinalBossDashPattern : MonoBehaviour
             dashWarning.Hide();
     }
 
+    public bool TryStartDash()
+    {
+        if (!CanExecute() || !patternRunner.TrySelectPattern(this))
+            return false;
+
+        patternRunner.StartPattern();
+
+        return ownsExecution && patternRunner.CurrentState == BossPatternState.Windup;
+    }
+
     [ContextMenu("테스트/돌진 발도 이동")]
     private void TestDash()
     {
-        if (Application.isPlaying && CanExecute() &&
-            patternRunner.TrySelectPattern(this))
-            patternRunner.StartPattern();
+        if (Application.isPlaying)
+            TryStartDash();
     }
 }

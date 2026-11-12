@@ -12,6 +12,16 @@ public class FinalBossPatternCoordinator : MonoBehaviour
     [SerializeField] private FinalBossApproach approach;
     [SerializeField] private FinalBossComboPattern comboPattern;
 
+    [Header("1페이즈 중거리 패턴")]
+    [UnityEngine.Serialization.FormerlySerializedAs("rangedDashPattern")]
+    [SerializeField] private FinalBossDashPattern midRangeDashPattern;
+    [SerializeField, Range(0f, 1f)] private float meleeSelectionChance = 0.7f;
+
+    [Header("1페이즈 자동 공격")]
+    [SerializeField] private bool autoStartPhase1Patterns;
+    [SerializeField] private BossHealth bossHealth;
+
+    private float nextAutoAttempTime;
     private bool awaitingApproach;
     private void Awake()
     {
@@ -21,6 +31,30 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
             enabled = false;
         }
+    }
+
+    private void Update()
+    {
+        if (!autoStartPhase1Patterns || bossHealth == null || bossHealth.IsDead)
+            return;
+
+        if (awaitingApproach || (approach != null && approach.IsApproaching))
+            return;
+
+        if (!patternRunner.IsStartAllowed ||
+            patternRunner.CurrentState != BossPatternState.Idle ||
+            !phaseController.isActiveAndEnabled ||
+            phaseController.IsTransforming ||
+            phaseController.CurrentPhase != FinalBossPhase.Phase1)
+                return;
+
+        if (Time.time < nextAutoAttempTime)
+            return;
+
+        bool started = Random.value < 0.4f ? TryStartMeleeApproach() : TryStartRangedPattern();
+
+        if (!started)
+            nextAutoAttempTime = Time.time + 0.25f;
     }
 
     private void OnEnable()
@@ -117,23 +151,42 @@ public class FinalBossPatternCoordinator : MonoBehaviour
         switch(result)
         {
             case FinalBossApproach.ApproachResult.ReadyForMelee:
-                if(comboPattern == null || !comboPattern.isActiveAndEnabled)
-                    return;
+                if(comboPattern != null && comboPattern.isActiveAndEnabled)
+                    comboPattern.StartCombo();
+                break;
 
-                if(!patternRunner.TrySelectPattern(comboPattern))
-                    return;
-
-                patternRunner.StartPattern();
+            case FinalBossApproach.ApproachResult.ReadyForMidRange:
+                if (midRangeDashPattern == null || !midRangeDashPattern.TryStartDash())
+                    nextAutoAttempTime = Time.time + 0.25f;
                 break;
 
             case FinalBossApproach.ApproachResult.NeedsRanged:
-                Debug.Log("원거리 패턴 전환 필요:" + "전환할 패턴은 다음 단계에서 연결합니다.", this);
+                nextAutoAttempTime = Time.time + 0.25f;
                 break;
-            
+
             case FinalBossApproach.ApproachResult.Cancelled:
                 Debug.Log("근접 공격 접근이 취소됐습니다.", this);
                 break;
         }
+    }
+
+    public bool TryStartRangedPattern()
+    {
+        if (!isActiveAndEnabled || awaitingApproach || approach == null || approach.IsApproaching ||
+            midRangeDashPattern == null || !midRangeDashPattern.isActiveAndEnabled || !patternRunner.IsStartAllowed ||
+            patternRunner.CurrentState != BossPatternState.Idle || phaseController.IsTransforming || phaseController.CurrentPhase != FinalBossPhase.Phase1)
+            return false;
+
+        awaitingApproach = approach.BeginMidRangeApproach(midRangeDashPattern.ApproachStartRange);
+
+        return awaitingApproach;
+    }
+
+    [ContextMenu("테스트/제자리에서 원거리 패턴 시작")]
+    private void TestRangedPattern()
+    {
+        if (Application.isPlaying)
+            TryStartRangedPattern();
     }
 
     [ContextMenu("테스트/접근 후 칼 권총 연계")]

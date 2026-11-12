@@ -10,7 +10,8 @@ public class FinalBossApproach : MonoBehaviour
         Approaching,
         ReadyForMelee,
         NeedsRanged,
-        Cancelled
+        Cancelled,
+        ReadyForMidRange
     }
 
     [Header("보스 연결")]
@@ -25,6 +26,7 @@ public class FinalBossApproach : MonoBehaviour
 
     [Header("접근 설정 - 임시값")]
     [SerializeField, Min(0.01f)] private float moveSpeed = 3f;
+    [SerializeField, Min(0.1f)] private float meleeStartDistance = 1f;
     [SerializeField, Min(0.01f)] private float firstApproachDuration = 2f;
     [SerializeField, Min(0.1f)] private float additionalApproachDuration = 2f;
 
@@ -34,12 +36,24 @@ public class FinalBossApproach : MonoBehaviour
     [SerializeField] private bool isAdditionalApproach;
 
     private Tweener movementTween;
+    private bool isMidRangeApproach;
+    private Vector2 midRangeStartRange;
     public ApproachResult Result => result;
     public bool IsApproaching => result == ApproachResult.Approaching;
     
     public event Action<ApproachResult> Finished;
 
     public bool BeginApproach()
+    {
+        return BeginApproachInternal(false, Vector2.zero);
+    }
+
+    public bool BeginMidRangeApproach(Vector2 startRange)
+    {
+        return BeginApproachInternal(true, startRange);
+    }
+
+    private bool BeginApproachInternal(bool forMidRange, Vector2 startRange)
     {
         if(!isActiveAndEnabled || IsApproaching)
             return false;
@@ -57,6 +71,8 @@ public class FinalBossApproach : MonoBehaviour
         StopHorizontalMovement();
 
         isAdditionalApproach = false;
+        isMidRangeApproach = forMidRange;
+        midRangeStartRange = startRange;
         timeRemaining = firstApproachDuration;
         result = ApproachResult.Approaching;
 
@@ -96,9 +112,15 @@ public class FinalBossApproach : MonoBehaviour
 
         int direction = targetPosition.x < bossBody.position.x ? -1 :1;
 
-        if(IsInsideMeleeRange(targetPosition, direction))
+        Vector2 distanceToTarget = targetPosition - bossBody.position;
+
+        float horizontalDistance = Mathf.Abs(targetPosition.x - bossBody.position.x);
+        float startDistance = isMidRangeApproach ? midRangeStartRange.x : meleeStartDistance;
+        bool isInsiderStartRange = horizontalDistance <= startDistance;
+
+        if (isInsiderStartRange)
         {
-            Finish(ApproachResult.ReadyForMelee);
+            Finish(isMidRangeApproach ? ApproachResult.ReadyForMidRange : ApproachResult.ReadyForMelee);
             return;
         }
 
@@ -106,6 +128,11 @@ public class FinalBossApproach : MonoBehaviour
 
         if(timeRemaining <= 0f)
         {
+            if(isMidRangeApproach)
+            {
+                Finish(ApproachResult.Cancelled);
+                return;
+            }
             if(isAdditionalApproach || UnityEngine.Random.value < 0.5f)
             {
                 Finish(ApproachResult.NeedsRanged);
