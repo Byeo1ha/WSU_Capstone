@@ -8,7 +8,7 @@ public class BossHealthBar : MonoBehaviour
     [SerializeField] private BossHealth bossHealth;
 
     [Header("체력 표시 이미지")]
-    [SerializeField] private Image healthFill;
+    [SerializeField] private Slider healthFill;
 
     private bool hasStarted;
 
@@ -46,6 +46,8 @@ public class BossHealthBar : MonoBehaviour
 
     private void UpdateHealthBar(int currentHealth, int maxHealth)
     {
-        healthFill.fillAmount = maxHealth > 0 ? Mathf.Clamp01((float)currentHealth / maxHealth) : 0f;
+        float ratio = maxHealth > 0 ? Mathf.Clamp01((float)currentHealth / maxHealth) : 0f;
+
+        healthFill.SetValueWithoutNotify(ratio);
     } 
 }
