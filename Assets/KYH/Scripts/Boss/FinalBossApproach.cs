@@ -17,7 +17,6 @@ public class FinalBossApproach : MonoBehaviour
     [Header("보스 연결")]
     [SerializeField] private Rigidbody2D bossBody;
     [SerializeField] private BossHealth bossHealth;
-    [SerializeField] private FinalBossPhaseController phaseController;
     [SerializeField] private BossPatternRunner patternRunner;
 
     [Header("대상과 현재 근접 공격")]
@@ -36,6 +35,7 @@ public class FinalBossApproach : MonoBehaviour
     [SerializeField] private bool isAdditionalApproach;
 
     private Tweener movementTween;
+    private float movementDestinationX;
     private bool isMidRangeApproach;
     private Vector2 midRangeStartRange;
     public ApproachResult Result => result;
@@ -58,7 +58,7 @@ public class FinalBossApproach : MonoBehaviour
         if(!isActiveAndEnabled || IsApproaching)
             return false;
 
-        if(bossBody == null || bossHealth == null || phaseController == null || patternRunner == null || targetFinder == null || comboData == null)
+        if(bossBody == null || bossHealth == null || patternRunner == null || targetFinder == null || comboData == null)
         {
             Debug.LogError("접근 이동에 필요한 참조를 모두 연결해 주세요.", this);
 
@@ -88,10 +88,6 @@ public class FinalBossApproach : MonoBehaviour
                bossBody.bodyType != RigidbodyType2D.Static &&
                bossHealth != null &&
                !bossHealth.IsDead &&
-               phaseController != null &&
-               phaseController.isActiveAndEnabled &&
-               !phaseController.IsTransforming &&
-               patternRunner != null &&
                patternRunner.IsStartAllowed &&
                patternRunner.CurrentState == BossPatternState.Idle &&
                targetFinder != null &&
@@ -116,7 +112,7 @@ public class FinalBossApproach : MonoBehaviour
 
         float horizontalDistance = Mathf.Abs(targetPosition.x - bossBody.position.x);
         float startDistance = isMidRangeApproach ? midRangeStartRange.x : meleeStartDistance;
-        bool isInsiderStartRange = horizontalDistance <= startDistance;
+        bool isInsiderStartRange = horizontalDistance <= startDistance + 0.001f;
 
         if (isInsiderStartRange)
         {
@@ -128,14 +124,9 @@ public class FinalBossApproach : MonoBehaviour
 
         if(timeRemaining <= 0f)
         {
-            if(isMidRangeApproach)
+            if(isAdditionalApproach)
             {
-                Finish(ApproachResult.Cancelled);
-                return;
-            }
-            if(isAdditionalApproach || UnityEngine.Random.value < 0.5f)
-            {
-                Finish(ApproachResult.NeedsRanged);
+                Finish(isMidRangeApproach ? ApproachResult.ReadyForMidRange : ApproachResult.ReadyForMelee);
                 return;
             }
 
@@ -145,7 +136,7 @@ public class FinalBossApproach : MonoBehaviour
             Debug.Log("추가 접근선택: 한 번 더 추적합니다", this);
         }
 
-        UpdateMovement(targetPosition.x);
+        UpdateMovement(targetPosition.x, startDistance);
     }
 
     private bool IsInsideMeleeRange(Vector2 targetPosition, int direction)
@@ -160,33 +151,26 @@ public class FinalBossApproach : MonoBehaviour
         return Mathf.Abs(targetPosition.x - center.x) <= halfSize.x && Mathf.Abs(targetPosition.y - center.y) <= halfSize.y;
     }
 
-    private void UpdateMovement(float targetX)
+    private void UpdateMovement(float targetX, float startDistance)
     {
-        float distance = Mathf.Abs(targetX - bossBody.position.x);
+        float currentX = bossBody.position.x;
+        float direction = Mathf.Sign(targetX - currentX);
+        float destinationX = targetX - direction * startDistance;
 
-        if(distance <= 0.001f)
-        {
-            StopHorizontalMovement();
+        if (movementTween != null && movementTween.IsActive() && Mathf.Abs(destinationX - movementDestinationX) <= 0.001f)
             return;
-        }
 
-        float duration = distance / Mathf.Max(0.1f, moveSpeed);
+        movementTween?.Kill(false);
 
-        if(movementTween == null || !movementTween.IsActive())
-        {
-            movementTween = bossBody
-                .DOMoveX(targetX, duration)
-                .SetEase(Ease.Linear)
-                .SetUpdate(UpdateType.Fixed)
-                .SetAutoKill(false)
-                .SetLink(gameObject, LinkBehaviour.KillOnDisable);
+        movementDestinationX = destinationX;
+        float duration = Mathf.Abs(destinationX - currentX) / Mathf.Max(0.01f, moveSpeed);
 
-            return;
-        }
-
-        movementTween.ChangeEndValue(new Vector2(targetX, bossBody.position.y), duration, true);
-
-        movementTween.Play();
+        movementTween = bossBody
+            .DOMoveX(destinationX, duration)
+            .SetEase(Ease.Linear)
+            .SetUpdate(UpdateType.Fixed)
+            .SetAutoKill(true)
+            .SetLink(gameObject, LinkBehaviour.KillOnDisable);
     }
 
     private void Finish(ApproachResult nextResult)

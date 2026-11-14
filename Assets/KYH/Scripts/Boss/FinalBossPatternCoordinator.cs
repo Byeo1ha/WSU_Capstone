@@ -1,33 +1,52 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class FinalBossPatternCoordinator : MonoBehaviour
 {
-    [Header("최종보스 페이즈 관리")]
-    [SerializeField] private FinalBossPhaseController phaseController;
 
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
 
     [Header("근접 공격 접근")]
     [SerializeField] private FinalBossApproach approach;
-    [SerializeField] private FinalBossComboPattern comboPattern;
 
     [Header("1페이즈 중거리 패턴")]
-    [UnityEngine.Serialization.FormerlySerializedAs("rangedDashPattern")]
-    [SerializeField] private FinalBossDashPattern midRangeDashPattern;
-    [SerializeField, Range(0f, 1f)] private float meleeSelectionChance = 0.7f;
+    
+    [Header("거리별 공격 목록")]
+    [SerializeField] private BossAttackPattern[] meleePatterns;
+    [SerializeField] private BossAttackPattern[] midRangePatterns;
+    [SerializeField] private BossAttackPattern[] rangePatterns;
 
-    [Header("1페이즈 자동 공격")]
-    [SerializeField] private bool autoStartPhase1Patterns;
+    private BossAttackPattern pendingPattern;
+
+    [Header("최종보스 자동 공격")]
+    [UnityEngine.Serialization.FormerlySerializedAs("autoStartPhase1Patterns")]
+    [SerializeField] private bool autoStartPatterns;
+    [SerializeField, Range(0f, 1f)]
+    private float immediateAttackChance = 0.5f; 
+
+    [Header("보스 체력")]
     [SerializeField] private BossHealth bossHealth;
 
     private float nextAutoAttempTime;
     private bool awaitingApproach;
+
+    private enum AttackRange
+    {
+        Melee,
+        MidRange,
+        Ranged
+    }
+
+    private readonly List<(BossAttackPattern pattern, AttackRange range)>
+        candidates = new();
+
+    private readonly HashSet<BossAttackPattern> registeredCandidates = new();
     private void Awake()
     {
-        if(phaseController == null || patternRunner == null)
+        if(patternRunner == null || bossHealth == null)
         {
-            Debug.LogError("Phase Controller와 Pattern Runner를 모두 연결해 주세요", this);
+            Debug.LogError("패턴 실행기와 보스 체력을 연결해 주세요", this);
 
             enabled = false;
         }
@@ -35,23 +54,20 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
     private void Update()
     {
-        if (!autoStartPhase1Patterns || bossHealth == null || bossHealth.IsDead)
+        if (!autoStartPatterns || bossHealth == null || bossHealth.IsDead)
             return;
 
         if (awaitingApproach || (approach != null && approach.IsApproaching))
             return;
 
         if (!patternRunner.IsStartAllowed ||
-            patternRunner.CurrentState != BossPatternState.Idle ||
-            !phaseController.isActiveAndEnabled ||
-            phaseController.IsTransforming ||
-            phaseController.CurrentPhase != FinalBossPhase.Phase1)
+            patternRunner.CurrentState != BossPatternState.Idle)
                 return;
 
         if (Time.time < nextAutoAttempTime)
             return;
 
-        bool started = Random.value < 0.4f ? TryStartMeleeApproach() : TryStartRangedPattern();
+        bool started = TryStartRandomPattern();
 
         if (!started)
             nextAutoAttempTime = Time.time + 0.25f;
@@ -59,127 +75,156 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
     private void OnEnable()
     {
-        phaseController.TransformationStarted += HandleTransformationStarted;
-        phaseController.TransformationEnded += HanldeTransformationEnded;
 
         if(approach != null)
             approach.Finished += HandleApproachFinished;
-
-        if(phaseController.IsTransforming)
-            HandleTransformationStarted();
-        else
-            HanldeTransformationEnded();
+        
+        bossHealth.HealthChanged += HandleHealthChanged;
     }
 
     private void OnDisable()
     {
-        if(phaseController != null)
-        {
-        phaseController.TransformationStarted -= HandleTransformationStarted;
-        phaseController.TransformationEnded -= HanldeTransformationEnded;
-        }
 
         if(approach != null)
             approach.Finished -= HandleApproachFinished;
 
+        if (bossHealth != null)
+            bossHealth.HealthChanged -= HandleHealthChanged;
+
         awaitingApproach = false;
 
         if(approach != null)
             approach.CancelApproach();
     }
 
-    private void HandleTransformationStarted()
+    private void HandleHealthChanged(int currentHealth, int maxHealth)
     {
+        if (currentHealth > 0)
+            return;
+
+        awaitingApproach = false;
         patternRunner.SetPatternStartAllowed(false);
 
-        awaitingApproach = false;
-
-        if(approach != null)
+        if (approach != null)
             approach.CancelApproach();
+        
         patternRunner.StopPattern();
-    }
-
-    private void HanldeTransformationEnded()
-    {
-        patternRunner.SetPatternStartAllowed(true);
     }
 
     public bool TryStartMeleeApproach()
     {
-        if(!isActiveAndEnabled || awaitingApproach)
-            return false;
-        if(approach == null || comboPattern == null)
-        {
-            Debug.LogError("접근 컴포넌트와 칼 연계 패턴을 연결해 주세요.", this);
-
-            return false;
-        }
-
-        if(!patternRunner.IsStartAllowed ||
-           patternRunner.CurrentState != BossPatternState.Idle ||
-           phaseController.IsTransforming ||
-           phaseController.CurrentPhase != FinalBossPhase.Phase1 ||
-           !comboPattern.isActiveAndEnabled ||
-           approach.IsApproaching)
-            return false;
-
-        awaitingApproach = true;
-
-        if (!approach.BeginApproach())
-        {
-            awaitingApproach = false;
-            return false;
-        }
-
-        return true;
+        return TryBeginApproach(meleePatterns, false);
     }
 
+    public bool TryStartRangedPattern()
+    {
+        return TryBeginApproach(midRangePatterns, true);
+    }
+
+    private bool TryBeginApproach(BossAttackPattern[] patterns, bool isMidRange)
+    {
+        if (!isActiveAndEnabled || bossHealth.IsDead || awaitingApproach || approach == null ||
+            approach.IsApproaching || !patternRunner.IsStartAllowed || patternRunner.CurrentState != BossPatternState.Idle ||
+            patterns == null)
+            return false;
+
+        BossAttackPattern selected = null;
+        int availableCount = 0;
+
+        foreach (BossAttackPattern pattern in patterns)
+        {
+            if (pattern == null || !pattern.isActiveAndEnabled)
+                continue;
+
+            if (isMidRange && !(pattern is IBossApproachRange))
+                continue;
+
+            availableCount++;
+
+            if (Random.Range(0, availableCount) == 0)
+                selected = pattern;
+        }    
+        return TryBeginApproach(selected, isMidRange);
+    }
+
+    private bool TryBeginApproach(BossAttackPattern selected, bool isMidRange)
+    {
+        if (selected == null || approach == null || approach.IsApproaching)
+            return false;
+
+        pendingPattern = selected;
+        awaitingApproach = true;
+
+        bool started = isMidRange ? approach.BeginMidRangeApproach(((IBossApproachRange)selected).ApproachStartRange) : approach.BeginApproach();
+
+        if (!started)
+        {
+            awaitingApproach = false;
+            pendingPattern = null;
+        }
+
+        return started;
+    }
     private void HandleApproachFinished(FinalBossApproach.ApproachResult result)
     {
         if(!awaitingApproach)
             return;
 
+        BossAttackPattern selected = pendingPattern;
         awaitingApproach =false;
+        pendingPattern = null;
 
-        if (!isActiveAndEnabled ||
+        if (!isActiveAndEnabled || bossHealth.IsDead ||
             !patternRunner.IsStartAllowed ||
-            patternRunner.CurrentState != BossPatternState.Idle ||
-            phaseController.IsTransforming ||
-            phaseController.CurrentPhase != FinalBossPhase.Phase1)
+            patternRunner.CurrentState != BossPatternState.Idle)
             return;
 
-        switch(result)
-        {
-            case FinalBossApproach.ApproachResult.ReadyForMelee:
-                if(comboPattern != null && comboPattern.isActiveAndEnabled)
-                    comboPattern.StartCombo();
-                break;
+            bool ready = result == FinalBossApproach.ApproachResult.ReadyForMelee ||
+                         result == FinalBossApproach.ApproachResult.ReadyForMidRange;
 
-            case FinalBossApproach.ApproachResult.ReadyForMidRange:
-                if (midRangeDashPattern == null || !midRangeDashPattern.TryStartDash())
-                    nextAutoAttempTime = Time.time + 0.25f;
-                break;
+            if (ready && selected != null &&
+                selected.isActiveAndEnabled && selected.TryStartAttack())
+                return;
 
-            case FinalBossApproach.ApproachResult.NeedsRanged:
-                nextAutoAttempTime = Time.time + 0.25f;
-                break;
-
-            case FinalBossApproach.ApproachResult.Cancelled:
-                Debug.Log("근접 공격 접근이 취소됐습니다.", this);
-                break;
-        }
+            nextAutoAttempTime = Time.time + 0.25f;
     }
 
-    public bool TryStartRangedPattern()
+    private bool TryStartRandomPattern()
     {
-        if (!isActiveAndEnabled || awaitingApproach || approach == null || approach.IsApproaching ||
-            midRangeDashPattern == null || !midRangeDashPattern.isActiveAndEnabled || !patternRunner.IsStartAllowed ||
-            patternRunner.CurrentState != BossPatternState.Idle || phaseController.IsTransforming || phaseController.CurrentPhase != FinalBossPhase.Phase1)
+        candidates.Clear();
+        registeredCandidates.Clear();
+
+        AddCandidates(meleePatterns, AttackRange.Melee);
+        AddCandidates(midRangePatterns, AttackRange.MidRange);
+        AddCandidates(rangePatterns, AttackRange.Ranged);
+
+        if (candidates.Count == 0)
             return false;
 
-        awaitingApproach = approach.BeginMidRangeApproach(midRangeDashPattern.ApproachStartRange);
+        var selected = candidates[Random.Range(0, candidates.Count)];
 
-        return awaitingApproach;
+        if (selected.range == AttackRange.Ranged || Random.value < immediateAttackChance)
+            return selected.pattern.TryStartAttack();
+
+        return TryBeginApproach(selected.pattern, selected.range == AttackRange.MidRange);
+    }
+
+    private void AddCandidates(BossAttackPattern[] patterns, AttackRange range)
+    {
+        if (patterns == null)
+            return;
+
+        foreach (BossAttackPattern pattern in patterns)
+        {
+            if (pattern == null || !pattern.isActiveAndEnabled)
+                continue;
+
+            if (range == AttackRange.MidRange && !(pattern is IBossApproachRange))
+                continue;
+
+            if (registeredCandidates.Add(pattern))
+                candidates.Add((pattern, range));
+        }
     }
 
     [ContextMenu("테스트/제자리에서 원거리 패턴 시작")]

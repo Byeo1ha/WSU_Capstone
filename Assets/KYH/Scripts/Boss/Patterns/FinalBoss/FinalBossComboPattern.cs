@@ -2,12 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Analytics;
 
-public class FinalBossComboPattern : MonoBehaviour
+public class FinalBossComboPattern : BossAttackPattern
 {
     [Header("실행 연결")]
     [SerializeField] private BossPatternRunner patternRunner;
     [SerializeField] private BossHealth bossHealth;
-    [SerializeField] private FinalBossPhaseController phaseController;
 
     [Header("공격 연결")]
     [SerializeField] private BossTargetFinder targetFinder;
@@ -19,7 +18,7 @@ public class FinalBossComboPattern : MonoBehaviour
     
     private void OnEnable()
     {
-        if(patternRunner == null || bossHealth == null || phaseController == null || targetFinder == null || data == null || slash == null)
+        if(patternRunner == null || bossHealth == null || targetFinder == null || data == null || slash == null)
         {
             Debug.LogError("칼 연계에 필요한 참조를 모두 연결해 주세요.", this);
 
@@ -51,9 +50,6 @@ public class FinalBossComboPattern : MonoBehaviour
         return isActiveAndEnabled &&
                patternRunner.isActiveAndEnabled &&
                !bossHealth.IsDead &&
-               phaseController.isActiveAndEnabled &&
-               !phaseController.IsTransforming &&
-               phaseController.CurrentPhase == FinalBossPhase.Phase1 &&
                targetFinder.isActiveAndEnabled &&
                slash.isActiveAndEnabled;
     }
@@ -202,9 +198,16 @@ public class FinalBossComboPattern : MonoBehaviour
 
     public void StartCombo()
     {
+        TryStartAttack();
+    }
+
+    public override bool TryStartAttack()
+    {
         if (!CanExecute() || !patternRunner.TrySelectPattern(this))
-            return;
+            return false;
 
         patternRunner.StartPatternWithWindupDuration(data.WindupDuration);
+
+        return ownsExecution && patternRunner.CurrentState == BossPatternState.Windup;   
     }
 }
