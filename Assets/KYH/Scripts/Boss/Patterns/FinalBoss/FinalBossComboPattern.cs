@@ -1,4 +1,4 @@
-using System.Collections;
+using UnityEditor.Build;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -13,7 +13,14 @@ public class FinalBossComboPattern : BossAttackPattern
     [SerializeField] private FinalBossComboData data;
     [SerializeField] private FinalBossSlash slash;
 
-    private Coroutine sequence;
+    [SerializeField] private Animator ComboAnimator;
+
+    private readonly int ComboState = Animator.StringToHash("Base Layer.FinalBoss_Combo");
+    private readonly int idleState = Animator.StringToHash("Base Layer.FinalBoss_Idle");
+
+    private int comboDirection;
+    private int completedHits;
+    private bool animationFinished;
     private bool ownsExecution;
     
     private void OnEnable()
@@ -85,84 +92,75 @@ public class FinalBossComboPattern : BossAttackPattern
 
     private void BeginCombo()
     {
-        if(sequence != null)
-            return;
-
-        if (!CanExecute())
+        if (!CanExecute() || ComboAnimator == null || !ComboAnimator.isActiveAndEnabled ||
+            !ComboAnimator.HasState(0, ComboState) || !targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
         {
+            Debug.LogWarning("콤보 대상과 Animator의 연결을 확인해주세요.", this);
             AbortPattern();
             return;
         }
 
-        if(!targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
-        {
-            Debug.LogWarning("칼 연계의 대상을 찾지 못했습니다.", this);
-            AbortPattern();
-            return;
-        }   
+        comboDirection = targetPosition.x < slash.transform.position.x ? -1 : 1;
+        completedHits = 0;
+        animationFinished = false;
 
-        int direction = targetPosition.x < slash.transform.position.x ? -1 : 1;
-
-        sequence = StartCoroutine(PlayCombo(direction));
+        ComboAnimator.Play(ComboState, 0, 0f);
     }
 
-    private IEnumerator PlayCombo(int direction)
+    public void HandleComboHit(int hitNumber)
     {
-        yield return null;
+        if (!ownsExecution || patternRunner.CurrentState != BossPatternState.Active)
+        return;
 
-        for(int i = 0; i < data.SlashCount; i++)
+        if (hitNumber != completedHits + 1 || hitNumber > data.SlashCount)
         {
-            if(!ownsExecution)
-                yield break;
-
-            bool isFinisher = i == data.SlashCount - 1;
-            int damage = isFinisher ? data.FinisherDamage : data.SlashDamage;
-            float pushImpulse = isFinisher ? data.FinisherPushImpulse : 0f;
-
-
-            if(!CanExecute() || !slash.BeginSlash(direction, damage, pushImpulse))
-            {
-                AbortPattern();
-                yield break;
-            }
-
-            if (!ownsExecution)
-                yield break;
-
-                Debug.Log($"최종 보스 베기 {i + 1}타. 설정 피해 {damage}", this);
-
-            while (slash.IsAttacking)
-            {
-                if (!ownsExecution)
-                    yield break;
-
-                if (!CanExecute())
-                {
-                    AbortPattern();
-                    yield break;
-                }
-
-                yield return null;
-            }
-
-            if(!isFinisher)
-                yield return new WaitForSeconds(data.BetweenSlashDelay);
+            Debug.LogWarning($"콤보 타격 이벤트 순서를 확인해 주세요. 받은 값 {hitNumber}", this);
+            AbortPattern();
+            return;
         }
 
-        sequence = null;
+        bool isFinisher = hitNumber == data.SlashCount;
+        int damage = isFinisher ? data.FinisherDamage : data.SlashDamage;
+        float pushImpulse = isFinisher ? data.FinisherPushImpulse : 0f;
 
-        if (!ownsExecution)
-            yield break;
+        if (!CanExecute() || !slash.BeginSlash(comboDirection, damage, pushImpulse))
+        {
+            Debug.LogWarning("콤보 타격을 시작하지 못했습니다. 타격 간격을 확인해 주세요,", this);
+            AbortPattern();
+            return;
+        }
 
-        if (!CanExecute())
+        completedHits = hitNumber;
+    }
+
+    public void HandleComboAnimationFinished()
+    {
+        if (ownsExecution && patternRunner.CurrentState == BossPatternState.Active)
+            animationFinished = true;
+    }
+
+    private void Update()
+    {
+        if (!ownsExecution || patternRunner.CurrentState != BossPatternState.Active)
+            return;
+
+        if (!CanExecute() || ComboAnimator == null || !ComboAnimator.isActiveAndEnabled)
         {
             AbortPattern();
-            yield break;
+            return;
         }
+
+        AnimatorStateInfo state = ComboAnimator.GetCurrentAnimatorStateInfo(0);
+        bool reachedClipEnd = state.fullPathHash == ComboState && state.normalizedTime >= 1f;
+
+        if ((!animationFinished && !reachedClipEnd) || slash.IsAttacking)
+            return;
+
+        if (completedHits != data.SlashCount)
+            Debug.LogWarning("콤보 클립에 1~4타 이벤트가 모두 있는지 확인해 주세요.", this);
 
         patternRunner.CompleteActive();
-    }
-
+    }   
     private void HandleHealthChanged(int currentHealth, int maxHealth)
     {
         if(currentHealth <= 0 && ownsExecution)
@@ -172,13 +170,13 @@ public class FinalBossComboPattern : BossAttackPattern
     private void CancelExecution()
     {
         bool wasExecuting = ownsExecution;
+        if (wasExecuting && ComboAnimator != null)
+            ComboAnimator.Play(idleState, 0, 0f);
+
         ownsExecution = false;
 
-        if(sequence != null)
-        {
-            StopCoroutine(sequence);
-            sequence = null;
-        }
+        completedHits = 0;
+        animationFinished = false;
 
         if (wasExecuting)
         {
