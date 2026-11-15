@@ -735,7 +735,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossPatternRunner
   stateTimeRemaining: 0
-  patternData: {fileID: 11400000, guid: 337d080f864bedf4a8b07a66ce250035, type: 2}
+  patternData: {fileID: 11400000, guid: 012b35a21bb00b844843768fc5eb682a, type: 2}
   currentState: 0
   selectedPattern: {fileID: 1028047480}
   patternSelector: {fileID: 0}

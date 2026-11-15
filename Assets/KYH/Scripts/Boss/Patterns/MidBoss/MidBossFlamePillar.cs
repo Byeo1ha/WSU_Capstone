@@ -202,4 +202,6 @@ public class MidBossFlamePillar : MonoBehaviour
         if (effectVisual != null)
             effectVisual.enabled = false;
     }
+
+    
 }

@@ -7,8 +7,12 @@ public class MidBossPatternSelector : MonoBehaviour
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
 
-    [Header("파이어볼, 화염기둥, 토템")]
-    [SerializeField] private MonoBehaviour[] patterns = new MonoBehaviour[3];
+    [Header("거리별 공격 목록")]
+    [SerializeField] private BossAttackPattern[] meleePatterns;
+    [SerializeField] private BossAttackPattern[] midRangePatterns;
+
+    [UnityEngine.Serialization.FormerlySerializedAs("patterns")]
+    [SerializeField] private BossAttackPattern[] rangedPatterns;
     [Header("블링크 직후 고정 패턴")]
     [SerializeField] private MidBossFireballPattern fireballPattern;
 
@@ -22,11 +26,11 @@ public class MidBossPatternSelector : MonoBehaviour
 
     public bool CurrentPatternFollowsBlink {get; private set;}
 
-    private readonly List<MonoBehaviour> candidates = new List<MonoBehaviour>();
+    private readonly List<BossAttackPattern> candidates = new List<BossAttackPattern>();
 
-    private MonoBehaviour lastPattern;
     private float timeRemaining;
     private bool waitingForBlink;
+    private BossAttackPattern lastPattern;
 
     private void OnEnable()
     {
@@ -62,31 +66,65 @@ public class MidBossPatternSelector : MonoBehaviour
             Debug.LogError("블링크 관리기를 연결해 주세요.", this);
             return false;
         }
-        if(patternRunner == null || patterns == null || patterns.Length != 3)
+        if(patternRunner == null )
         {
-            Debug.LogError("실행기와 서로 다른 세 패턴을 연결해 주세요.", this);
+            Debug.LogError("패턴 실행기를 연결해 주세요.", this);
             return false;
         }
 
-        for(int i = 0; i < patterns.Length; i++)
+        if (patternRunner == null)
         {
-            if(patterns[i] == null)
-            {
-                Debug.LogError($"패턴 배열의 {i}번을 연결해 주세요.", this);
-                return false;
-            }
-
-            for(int j = 0; j < i; j++)
-            {
-                if(patterns[i] == patterns[j])
-                {
-                    Debug.LogError("같은 패턴을 중복 연결할 수 없습니다.", this);
-                    return false;
-                }
-            }
+            Debug.LogError("패턴 실행기를 연결해 주세요.", this);
+            return false;
+        }
+        
+       if (!HasAssignedPattern(meleePatterns) && !HasAssignedPattern(midRangePatterns) &&
+            !HasAssignedPattern(rangedPatterns))
+        {
+            Debug.LogError("중간보스 패턴을 하나 이상 연결해 주세요.", this);
+            return false;
         }
 
         return true;
+    }
+
+    private bool HasAssignedPattern(BossAttackPattern[] patterns)
+    {
+        if (patterns == null)
+            return false;
+
+        foreach (BossAttackPattern pattern in patterns)
+        {
+            if (pattern != null)
+                return true;
+        }
+        
+        return false;
+    }
+
+    private void CollectCandidates(bool excludeLast)
+    {
+        candidates.Clear();
+
+        AddCandidates(meleePatterns, excludeLast);
+        AddCandidates(midRangePatterns, excludeLast);
+        AddCandidates(rangedPatterns, excludeLast);
+    }
+
+    private void AddCandidates(BossAttackPattern[] patterns, bool excludeLast)
+    {
+        if (patterns == null)
+            return;
+
+        foreach (BossAttackPattern pattern in patterns)
+        {
+            if (pattern == null || !pattern.isActiveAndEnabled ||
+                (excludeLast && pattern == lastPattern) ||
+                candidates.Contains(pattern))
+                continue;
+
+            candidates.Add(pattern); 
+        }
     }
 
     private void Update()
@@ -157,7 +195,7 @@ public class MidBossPatternSelector : MonoBehaviour
         return;
     }
 
-    MonoBehaviour selected;
+    BossAttackPattern selected;
 
     if (followsBlink)
     {
@@ -165,34 +203,25 @@ public class MidBossPatternSelector : MonoBehaviour
     }
     else
     {
-        candidates.Clear();
-
-        foreach (MonoBehaviour pattern in patterns)
-        {
-            if (pattern != null && pattern.isActiveAndEnabled && pattern != lastPattern)
-            {
-                candidates.Add(pattern);
-            }
-        }
+        CollectCandidates(excludeLast: true);
 
         if (candidates.Count == 0)
-        {
-            Debug.LogWarning("직전 패턴을 제외한 실행 가능한 패턴이 없습니다.", this);
-            enabled = false;
-            return;
-        }
+            CollectCandidates(excludeLast: false);
 
         selected = candidates[Random.Range(0, candidates.Count)];
     }
 
-    if (!patternRunner.TrySelectPattern(selected))
-        return;
-
     CurrentPatternFollowsBlink = followsBlink;
 
-    float windupScale = followsBlink ? windupScaleAfterBlink : 1f;
+    bool started = followsBlink ? fireballPattern.TryStartAttack(windupScaleAfterBlink) : selected.TryStartAttack();
 
-    patternRunner.StartPattern(windupScale);
+    if (!started)
+        {
+            CurrentPatternFollowsBlink = false;
+            Debug.LogWarning("패턴 시작에 실패했습니다. 연결과 설정을 확인해 주세요.", this);
+            enabled = false;
+            return;
+        }
 
     if (patternRunner.CurrentState != BossPatternState.Windup)
     {
