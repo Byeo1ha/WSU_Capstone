@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MidBossTotemPattern : MonoBehaviour
+public class MidBossTotemPattern : BossAttackPattern
 {
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
@@ -181,5 +181,16 @@ public class MidBossTotemPattern : MonoBehaviour
             return leftSpawnPoint;
 
         return rightSpawnPoint;
+    }
+
+    public override bool TryStartAttack()
+    {
+        if (!isActiveAndEnabled || patternRunner == null ||
+        !patternRunner.IsStartAllowed || !patternRunner.TrySelectPattern(this))
+        return false;
+
+        patternRunner.StartPattern();
+
+        return patternRunner.CurrentState == BossPatternState.Windup && patternRunner.IsSelectedPattern(this);
     }
 }

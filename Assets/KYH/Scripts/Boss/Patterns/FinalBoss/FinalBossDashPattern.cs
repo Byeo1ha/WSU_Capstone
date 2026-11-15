@@ -2,12 +2,11 @@ using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
 
-public class FinalBossDashPattern : MonoBehaviour
+public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 {
     [Header("실행 연결")]
     [SerializeField] private BossPatternRunner patternRunner;
     [SerializeField] private BossHealth bossHealth;
-    [SerializeField] private FinalBossPhaseController phaseController;
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private Rigidbody2D bossBody;
 
@@ -50,7 +49,7 @@ public class FinalBossDashPattern : MonoBehaviour
 
     private void Awake()
     {
-        if(patternRunner != null && bossHealth != null && phaseController != null && bossBody != null)
+        if(patternRunner != null && bossHealth != null && bossBody != null)
         {
             if (dashWarningPrefab != null)
                 dashWarning = Instantiate(dashWarningPrefab);
@@ -111,9 +110,6 @@ public class FinalBossDashPattern : MonoBehaviour
         return isActiveAndEnabled &&
                patternRunner.IsStartAllowed &&
                !bossHealth.IsDead &&
-               phaseController.isActiveAndEnabled &&
-               !phaseController.IsTransforming &&
-               phaseController.CurrentPhase == FinalBossPhase.Phase1 &&
                bossBody.simulated &&
                bossBody.bodyType != RigidbodyType2D.Static;
     }
@@ -267,6 +263,11 @@ public class FinalBossDashPattern : MonoBehaviour
         patternRunner.StartPattern();
 
         return ownsExecution && patternRunner.CurrentState == BossPatternState.Windup;
+    }
+
+    public override bool TryStartAttack()
+    {
+        return TryStartDash();
     }
 
     [ContextMenu("테스트/돌진 발도 이동")]

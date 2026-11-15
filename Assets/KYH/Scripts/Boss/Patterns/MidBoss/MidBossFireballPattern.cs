@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class MidBossFireballPattern : MonoBehaviour
+public class MidBossFireballPattern : BossAttackPattern
 {
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
@@ -255,4 +255,21 @@ public class MidBossFireballPattern : MonoBehaviour
             }
         }
     }
+
+    public override bool TryStartAttack()
+    {
+        return TryStartAttack(1f);
+    }
+
+    public bool TryStartAttack(float windupScale)
+    {
+        if (!isActiveAndEnabled || patternRunner == null ||
+            !patternRunner.IsStartAllowed || !patternRunner.TrySelectPattern(this))
+            return false;
+
+        patternRunner.StartPattern(windupScale);
+
+        return patternRunner.CurrentState == BossPatternState.Windup && patternRunner.IsSelectedPattern(this);
+    }
+
 }

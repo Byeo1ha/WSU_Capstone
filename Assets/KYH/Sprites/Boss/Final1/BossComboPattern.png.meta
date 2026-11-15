@@ -1,0 +1,777 @@
+fileFormatVersion: 2
+guid: 9e4bbbcdcf511ca4a8bf5b403bf4bd6f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3078221246618757648
+    second: BossComboPattern_0
+  - first:
+      213: 3799227045204370369
+    second: BossComboPattern_1
+  - first:
+      213: -7160342037486736448
+    second: BossComboPattern_2
+  - first:
+      213: -2021396536121687446
+    second: BossComboPattern_3
+  - first:
+      213: 4739730636460030205
+    second: BossComboPattern_4
+  - first:
+      213: 596466255204699654
+    second: BossComboPattern_5
+  - first:
+      213: -6132369343686789487
+    second: BossComboPattern_6
+  - first:
+      213: 8837011145139436539
+    second: BossComboPattern_7
+  - first:
+      213: -8055367698911612537
+    second: BossComboPattern_8
+  - first:
+      213: -2252535568674268492
+    second: BossComboPattern_9
+  - first:
+      213: -746511859415479933
+    second: BossComboPattern_10
+  - first:
+      213: -5645794369523961395
+    second: BossComboPattern_11
+  - first:
+      213: 9013821969619383216
+    second: BossComboPattern_12
+  - first:
+      213: -2097067376224248968
+    second: BossComboPattern_13
+  - first:
+      213: -8032836662110101471
+    second: BossComboPattern_14
+  - first:
+      213: 5413404563700051739
+    second: BossComboPattern_15
+  - first:
+      213: -3366626595584414811
+    second: BossComboPattern_16
+  - first:
+      213: -7449682705794623006
+    second: BossComboPattern_17
+  - first:
+      213: -1394600579167377234
+    second: BossComboPattern_18
+  - first:
+      213: -6365227182189856643
+    second: BossComboPattern_19
+  - first:
+      213: -5820209379684981674
+    second: BossComboPattern_20
+  - first:
+      213: -3118959758064001992
+    second: BossComboPattern_21
+  - first:
+      213: 9209981679197638823
+    second: BossComboPattern_22
+  - first:
+      213: -8707509633751880608
+    second: BossComboPattern_23
+  - first:
+      213: 2422092500679505348
+    second: BossComboPattern_24
+  - first:
+      213: 7276239394579849584
+    second: BossComboPattern_25
+  - first:
+      213: 6959020982023793012
+    second: BossComboPattern_26
+  - first:
+      213: -7986183867773112769
+    second: BossComboPattern_27
+  - first:
+      213: 8477485485193423291
+    second: BossComboPattern_28
+  - first:
+      213: -6793786003674699693
+    second: BossComboPattern_29
+  - first:
+      213: 30135887192900485
+    second: BossComboPattern_30
+  - first:
+      213: -350391838872996279
+    second: BossComboPattern_31
+  - first:
+      213: -6543313632318644365
+    second: BossComboPattern_32
+  - first:
+      213: -8964711584363599674
+    second: BossComboPattern_33
+  - first:
+      213: -5365843542343984130
+    second: BossComboPattern_34
+  - first:
+      213: 759451094080720595
+    second: BossComboPattern_35
+  - first:
+      213: 827801707355607166
+    second: BossComboPattern_36
+  - first:
+      213: 6445230291234225086
+    second: BossComboPattern_37
+  - first:
+      213: 7758268289300193006
+    second: BossComboPattern_38
+  - first:
+      213: 1839498892222587670
+    second: BossComboPattern_39
+  - first:
+      213: -4513426882071700819
+    second: BossComboPattern_40
+  - first:
+      213: -4714907592911042625
+    second: BossComboPattern_41
+  - first:
+      213: -4605760270583040008
+    second: BossComboPattern_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BossComboPattern_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01a65c82ae908ba20800000000000000
+      internalID: 3078221246618757648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3a6725ed099b430800000000000000
+      internalID: 3799227045204370369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_2
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cb6e41aada51ac90800000000000000
+      internalID: -7160342037486736448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_3
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62034a6f8e82f3e0800000000000000
+      internalID: -2021396536121687446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_4
+      rect:
+        serializedVersion: 2
+        x: 802
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df87c35d6e7e6c140800000000000000
+      internalID: 4739730636460030205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_5
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ecbfd16e2174800800000000000000
+      internalID: 596466255204699654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_6
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 196bd06929275eaa0800000000000000
+      internalID: -6132369343686789487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_7
+      rect:
+        serializedVersion: 2
+        x: 1400
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfb3436e0de53aa70800000000000000
+      internalID: 8837011145139436539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_8
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 781b73bc1c5953090800000000000000
+      internalID: -8055367698911612537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_9
+      rect:
+        serializedVersion: 2
+        x: 1800
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4badc31b5d26db0e0800000000000000
+      internalID: -2252535568674268492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_10
+      rect:
+        serializedVersion: 2
+        x: 2000
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3898ce64b6bd3a5f0800000000000000
+      internalID: -746511859415479933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_11
+      rect:
+        serializedVersion: 2
+        x: 2200
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc1bf910feb16a1b0800000000000000
+      internalID: -5645794369523961395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_12
+      rect:
+        serializedVersion: 2
+        x: 2400
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b376c7f257871d70800000000000000
+      internalID: 9013821969619383216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_13
+      rect:
+        serializedVersion: 2
+        x: 2600
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87bd7120558b5e2e0800000000000000
+      internalID: -2097067376224248968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_14
+      rect:
+        serializedVersion: 2
+        x: 2800
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12061389d91a58090800000000000000
+      internalID: -8032836662110101471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_15
+      rect:
+        serializedVersion: 2
+        x: 3000
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1fe1dce4c6402b40800000000000000
+      internalID: 5413404563700051739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_16
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5abeecec2f65741d0800000000000000
+      internalID: -3366626595584414811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_17
+      rect:
+        serializedVersion: 2
+        x: 3400
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e99db79c096d9890800000000000000
+      internalID: -7449682705794623006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_18
+      rect:
+        serializedVersion: 2
+        x: 3600
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea8ac23892265ace0800000000000000
+      internalID: -1394600579167377234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_19
+      rect:
+        serializedVersion: 2
+        x: 3800
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d78b9ea2a9b2aa7a0800000000000000
+      internalID: -6365227182189856643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_20
+      rect:
+        serializedVersion: 2
+        x: 4000
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 654ea7de7667a3fa0800000000000000
+      internalID: -5820209379684981674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_21
+      rect:
+        serializedVersion: 2
+        x: 4200
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c5bdfff9a37b4d0800000000000000
+      internalID: -3118959758064001992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BossComboPattern_22
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 0
+        width: 200
+        height: 116
+      alignment: 9
+      pivot: {x: 0.28, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a05e686a8d60df70800000000000000
+      internalID: 9209981679197638823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: f2ccbc398a164cb4aa5182794b836e51
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":200.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BossComboPattern_0: 3078221246618757648
+      BossComboPattern_1: 3799227045204370369
+      BossComboPattern_10: -746511859415479933
+      BossComboPattern_11: -5645794369523961395
+      BossComboPattern_12: 9013821969619383216
+      BossComboPattern_13: -2097067376224248968
+      BossComboPattern_14: -8032836662110101471
+      BossComboPattern_15: 5413404563700051739
+      BossComboPattern_16: -3366626595584414811
+      BossComboPattern_17: -7449682705794623006
+      BossComboPattern_18: -1394600579167377234
+      BossComboPattern_19: -6365227182189856643
+      BossComboPattern_2: -7160342037486736448
+      BossComboPattern_20: -5820209379684981674
+      BossComboPattern_21: -3118959758064001992
+      BossComboPattern_22: 9209981679197638823
+      BossComboPattern_3: -2021396536121687446
+      BossComboPattern_4: 4739730636460030205
+      BossComboPattern_5: 596466255204699654
+      BossComboPattern_6: -6132369343686789487
+      BossComboPattern_7: 8837011145139436539
+      BossComboPattern_8: -8055367698911612537
+      BossComboPattern_9: -2252535568674268492
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

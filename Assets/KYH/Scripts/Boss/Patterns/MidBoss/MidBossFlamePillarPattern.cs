@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MidBossFlamePillarPattern : MonoBehaviour
+public class MidBossFlamePillarPattern : BossAttackPattern
 {
     [Header("실행 연결")]
     [SerializeField] private BossPatternRunner patternRunner;
@@ -124,5 +124,17 @@ public class MidBossFlamePillarPattern : MonoBehaviour
 
         if(pillar != null)
             pillar.Stop();
+    }
+
+    public override bool TryStartAttack()
+    {
+        if (!isActiveAndEnabled || patternRunner == null ||
+            !patternRunner.IsStartAllowed ||
+            !patternRunner.TrySelectPattern(this))
+            return false;
+
+            patternRunner.StartPattern();
+
+            return patternRunner.CurrentState == BossPatternState.Windup && patternRunner.IsSelectedPattern(this);
     }
 }
