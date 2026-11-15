@@ -1,22 +1,30 @@
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using VContainer;
 
 public class StageClear : MonoBehaviour
 {
-    [SerializeField] private GameObject TargetText;
-    [SerializeField] private Portal portal;
-    [SerializeField] private RectTransform uiArrow;
+    [SerializeField] private string nextSceneName = "Actor1";
+    [SerializeField] private float nextSceneTime = 3f;
 
-    private void Awake()
+    private SceneFlowService sceneFlowService;
+
+    [Inject]
+    public void Construct(SceneFlowService sceneFlowService)
     {
-        TargetText.SetActive(false);
-        portal.gameObject.SetActive(false);
-        uiArrow.gameObject.SetActive(false);
+        this.sceneFlowService = sceneFlowService;
     }
-    
+
     public void EventStart()
     {
-        TargetText.SetActive(true);
-        portal.gameObject.SetActive(true);
-        uiArrow.gameObject.SetActive(true);
+        EventStartAsync().Forget();
+    }
+
+    private async UniTask EventStartAsync()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(nextSceneTime));
+
+        sceneFlowService.LoadSceneAsync(nextSceneName, SceneFlowService.LoadingSceneType.Short).Forget();
     }
 }

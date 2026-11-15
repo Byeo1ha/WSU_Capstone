@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ria
   m_EditorClassIdentifier: Assembly-CSharp::CutsceneSpeakerData
   displayName: "\uB9AC\uC544"
-  portrait: {fileID: 21300000, guid: 53e09d911583c35429e20b27d925300c, type: 3}
+  portrait: {fileID: 21300000, guid: 238b2112cf9acb5459bbb2fd7cf91cdd, type: 3}

@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/02_Scenes/Test/04_BossClearEvent.unity
     guid: fda572562c3a61049a96f682dfbbdf88
+  - enabled: 1
+    path: Assets/02_Scenes/CutScene/Act1.unity
+    guid: 4ba4665e8955ea24597ec4325e48c7f0
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: d8e33e025d4ec08408706258df7d284a, type: 3}
   m_UseUCBPForAssetBundles: 0

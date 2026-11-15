@@ -15,6 +15,7 @@ public class BGMStarter : MonoBehaviour
     private void Awake()
     {
         if (soundManager == null) return;
+        if (bgm == null) return;
 
         soundManager.SetBGM(bgm);
     }
