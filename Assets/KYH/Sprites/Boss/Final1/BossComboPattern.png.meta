@@ -229,7 +229,7 @@ TextureImporter:
       name: BossComboPattern_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
         width: 200
         height: 116
@@ -273,7 +273,7 @@ TextureImporter:
       name: BossComboPattern_2
       rect:
         serializedVersion: 2
-        x: 400
+        x: 402
         y: 0
         width: 200
         height: 116
@@ -295,7 +295,7 @@ TextureImporter:
       name: BossComboPattern_3
       rect:
         serializedVersion: 2
-        x: 600
+        x: 604
         y: 0
         width: 200
         height: 116
@@ -317,7 +317,7 @@ TextureImporter:
       name: BossComboPattern_4
       rect:
         serializedVersion: 2
-        x: 800
+        x: 802
         y: 0
         width: 200
         height: 116

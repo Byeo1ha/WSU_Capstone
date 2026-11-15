@@ -155,7 +155,8 @@ public class FinalBossApproach : MonoBehaviour
     {
         float currentX = bossBody.position.x;
         float direction = Mathf.Sign(targetX - currentX);
-        float destinationX = targetX - direction * startDistance;
+        float destinationDistance = Mathf.Max(0f, startDistance - 0.05f);
+        float destinationX = targetX - direction * destinationDistance;
 
         if (movementTween != null && movementTween.IsActive() && Mathf.Abs(destinationX - movementDestinationX) <= 0.001f)
             return;

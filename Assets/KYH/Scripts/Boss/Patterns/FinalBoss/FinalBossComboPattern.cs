@@ -14,6 +14,7 @@ public class FinalBossComboPattern : BossAttackPattern
     [SerializeField] private FinalBossSlash slash;
 
     [SerializeField] private Animator ComboAnimator;
+    [SerializeField] private SpriteRenderer comboRenderer;
 
     private readonly int ComboState = Animator.StringToHash("Base Layer.FinalBoss_Combo");
     private readonly int idleState = Animator.StringToHash("Base Layer.FinalBoss_Idle");
@@ -101,6 +102,8 @@ public class FinalBossComboPattern : BossAttackPattern
         }
 
         comboDirection = targetPosition.x < slash.transform.position.x ? -1 : 1;
+        if (comboRenderer != null)
+            comboRenderer.flipX = comboDirection <0;
         completedHits = 0;
         animationFinished = false;
 
@@ -170,7 +173,7 @@ public class FinalBossComboPattern : BossAttackPattern
     private void CancelExecution()
     {
         bool wasExecuting = ownsExecution;
-        if (wasExecuting && ComboAnimator != null)
+        if (wasExecuting && ComboAnimator != null && ComboAnimator.isActiveAndEnabled)
             ComboAnimator.Play(idleState, 0, 0f);
 
         ownsExecution = false;
