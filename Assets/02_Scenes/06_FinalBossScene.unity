@@ -2040,6 +2040,7 @@ GameObject:
   - component: {fileID: 1808303652}
   - component: {fileID: 1808303651}
   - component: {fileID: 1808303665}
+  - component: {fileID: 1808303666}
   m_Layer: 12
   m_Name: BossTest
   m_TagString: Enemy
@@ -2329,6 +2330,7 @@ MonoBehaviour:
   midRangePatterns:
   - {fileID: 1808303656}
   rangePatterns: []
+  priorityPatterns: []
   autoStartPatterns: 1
   immediateAttackChance: 0.2
   initialActionDelay: 2
@@ -2352,7 +2354,6 @@ MonoBehaviour:
   patternData: {fileID: 11400000, guid: 012b35a21bb00b844843768fc5eb682a, type: 2}
   currentState: 0
   selectedPattern: {fileID: 1808303659}
-  patternSelector: {fileID: 0}
 --- !u!114 &1808303663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2395,6 +2396,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitFlashEffect
   flashDuration: 0.15
+--- !u!114 &1808303666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808303650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e60e278df809b645bc4a205b946330b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinalBossWalkMotionVisual
+  approach: {fileID: 1808303658}
 --- !u!1 &1813787737
 GameObject:
   m_ObjectHideFlags: 0
