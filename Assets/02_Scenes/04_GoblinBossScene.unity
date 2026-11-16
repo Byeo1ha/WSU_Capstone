@@ -1237,12 +1237,12 @@ GameObject:
   - component: {fileID: 939212566}
   - component: {fileID: 939212565}
   - component: {fileID: 939212564}
-  - component: {fileID: 939212563}
   - component: {fileID: 939212562}
   - component: {fileID: 939212561}
   - component: {fileID: 939212560}
   - component: {fileID: 939212572}
   - component: {fileID: 939212573}
+  - component: {fileID: 939212575}
   m_Layer: 12
   m_Name: MidBoss
   m_TagString: Enemy
@@ -1348,29 +1348,8 @@ MonoBehaviour:
   blinkArea: {fileID: 548182766}
   bossBody: {fileID: 939212560}
   bossVisual: {fileID: 939212573}
---- !u!114 &939212563
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 939212558}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 191523294eed9284a8d707ab5a172a8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MidBossPatternSelector
-  patternRunner: {fileID: 939212568}
-  meleePatterns: []
-  midRangePatterns: []
-  rangedPatterns:
-  - {fileID: 939212567}
-  - {fileID: 939212565}
-  - {fileID: 939212564}
-  fireballPattern: {fileID: 939212567}
-  firstPatternDelay: 1.5
-  blinkController: {fileID: 939212562}
-  windupScaleAfterBlink: 0.3
+  followUpFireball: {fileID: 939212567}
+  followUpWindupScale: 0.3
 --- !u!114 &939212564
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1437,7 +1416,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossFireballPattern
   patternRunner: {fileID: 939212568}
-  patternSelector: {fileID: 939212563}
   targetFinder: {fileID: 939212559}
   firePoint: {fileID: 1936918424}
   fireballPools:
@@ -1463,8 +1441,7 @@ MonoBehaviour:
   stateTimeRemaining: 0
   patternData: {fileID: 11400000, guid: 6512e75ce6768434ea765c5d9a419215, type: 2}
   currentState: 0
-  selectedPattern: {fileID: 939212563}
-  patternSelector: {fileID: 939212563}
+  selectedPattern: {fileID: 0}
 --- !u!114 &939212569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1599,7 +1576,6 @@ MonoBehaviour:
   targetFinder: {fileID: 939212559}
   bossRenderer: {fileID: 939212570}
   originalFacesRight: 1
-  patternSelector: {fileID: 939212563}
   blinkFireWindupClip: {fileID: 7400000, guid: 9f044c1649a39604db2b64a8a13df2a3, type: 2}
   blinkController: {fileID: 939212562}
   deathShakeDuration: 1.24
@@ -1618,6 +1594,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitFlashEffect
   flashDuration: 0.15
+--- !u!114 &939212575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939212558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806b5833bcd441e498d7b80dae85651b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossPatternCoordinator
+  patternRunner: {fileID: 939212568}
+  approach: {fileID: 0}
+  meleePatterns: []
+  midRangePatterns: []
+  rangePatterns:
+  - {fileID: 939212565}
+  - {fileID: 939212564}
+  - {fileID: 939212567}
+  priorityPatterns:
+  - {fileID: 939212562}
+  autoStartPatterns: 1
+  immediateAttackChance: 0.5
+  initialActionDelay: 1.5
+  excludeLastPattern: 1
+  bossHealth: {fileID: 939212569}
+  facingTargetFinder: {fileID: 0}
+  bossRenderer: {fileID: 0}
 --- !u!1 &948679596
 GameObject:
   m_ObjectHideFlags: 0

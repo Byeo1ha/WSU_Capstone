@@ -3,7 +3,7 @@ using DG.Tweening;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
-public class FinalBossApproach : MonoBehaviour
+public class BossApproach : MonoBehaviour
 {
     public enum ApproachResult
     {
@@ -25,13 +25,11 @@ public class FinalBossApproach : MonoBehaviour
     [Header("접근 설정 - 임시값")]
     [SerializeField, Min(0.01f)] private float moveSpeed = 3f;
     [SerializeField, Min(0.1f)] private float meleeStartDistance = 1f;
-    [SerializeField, Min(0.01f)] private float firstApproachDuration = 2f;
-    [SerializeField, Min(0.1f)] private float additionalApproachDuration = 2f;
+    [SerializeField, Min(0.01f)] private float firstApproachDuration = 5f;
 
     [Header("현재 상태")]
     [SerializeField] private ApproachResult result;
     [SerializeField] private float timeRemaining;
-    [SerializeField] private bool isAdditionalApproach;
 
     private Tweener movementTween;
     private float movementDestinationX;
@@ -58,7 +56,6 @@ public class FinalBossApproach : MonoBehaviour
 
         StopHorizontalMovement();
 
-        isAdditionalApproach = false;
         approachStartDistance = startDistance;
         timeRemaining = firstApproachDuration;
         result = ApproachResult.Approaching;
@@ -106,16 +103,8 @@ public class FinalBossApproach : MonoBehaviour
 
         if(timeRemaining <= 0f)
         {
-            if(isAdditionalApproach)
-            {
-                Finish(ApproachResult.TimedOut);
-                return;
-            }
-
-            isAdditionalApproach = true;
-            timeRemaining = additionalApproachDuration;
-
-            Debug.Log("추가 접근선택: 한 번 더 추적합니다", this);
+            Finish(ApproachResult.TimedOut);
+            return;
         }
 
         UpdateMovement(targetPosition.x, startDistance);

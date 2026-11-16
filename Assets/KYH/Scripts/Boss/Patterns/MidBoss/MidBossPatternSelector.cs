@@ -213,7 +213,7 @@ public class MidBossPatternSelector : MonoBehaviour
 
     CurrentPatternFollowsBlink = followsBlink;
 
-    bool started = followsBlink ? fireballPattern.TryStartAttack(windupScaleAfterBlink) : selected.TryStartAttack();
+    bool started = followsBlink ? fireballPattern.TryStartAfterBlink(windupScaleAfterBlink) : selected.TryStartAttack();
 
     if (!started)
         {

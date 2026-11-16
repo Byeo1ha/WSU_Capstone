@@ -2270,14 +2270,11 @@ MonoBehaviour:
   bossHealth: {fileID: 1808303663}
   patternRunner: {fileID: 1808303662}
   targetFinder: {fileID: 1808303660}
-  comboData: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
   moveSpeed: 3
   meleeStartDistance: 1.5
-  firstApproachDuration: 2
-  additionalApproachDuration: 2
+  firstApproachDuration: 5
   result: 0
   timeRemaining: 0
-  isAdditionalApproach: 0
 --- !u!114 &1808303659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2335,6 +2332,7 @@ MonoBehaviour:
   autoStartPatterns: 1
   immediateAttackChance: 0.2
   initialActionDelay: 2
+  excludeLastPattern: 0
   bossHealth: {fileID: 1808303663}
   facingTargetFinder: {fileID: 1808303660}
   bossRenderer: {fileID: 1808303653}

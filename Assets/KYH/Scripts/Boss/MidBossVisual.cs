@@ -20,7 +20,6 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private SpriteRenderer bossRenderer;
 
     [SerializeField] private bool originalFacesRight = true;
-    [SerializeField] private MidBossPatternSelector patternSelector;
     [SerializeField] private AnimationClip blinkFireWindupClip;
     [Header("블링크 이벤트 연결")]
     [SerializeField] private MidBossBlinkController blinkController;
@@ -54,7 +53,6 @@ public class MidBossVisual : MonoBehaviour
             flamePillarWindupClip == null ||
             totemPattern == null ||
             TotemWindupClip == null ||
-            patternSelector == null ||
             blinkFireWindupClip == null ||
             blinkController == null)
         {
@@ -132,7 +130,7 @@ public class MidBossVisual : MonoBehaviour
         {
             if (patternRunner.IsSelectedPattern(fireballPattern))
             {
-                if(patternSelector.CurrentPatternFollowsBlink)
+                if(fireballPattern.IsBlinkFollowUp)
                 {
                 selectedState = blinkFireWindupState;
                 selectedClip = blinkFireWindupClip;

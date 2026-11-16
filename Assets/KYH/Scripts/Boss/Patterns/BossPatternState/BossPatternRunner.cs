@@ -14,7 +14,6 @@ public class BossPatternRunner : MonoBehaviour
     [Header("실행할 패턴")]
     [SerializeField] private MonoBehaviour selectedPattern;
 
-    [SerializeField] private MidBossPatternSelector patternSelector;
     public BossPatternState CurrentState => currentState;
     public float CurrentWindupDuration {get; private set;}
     public float StateTimeRemaing => stateTimeRemaining;

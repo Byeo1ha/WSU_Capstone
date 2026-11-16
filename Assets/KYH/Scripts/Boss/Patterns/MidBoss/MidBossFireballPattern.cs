@@ -6,7 +6,6 @@ public class MidBossFireballPattern : BossAttackPattern
 {
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
-    [SerializeField] private MidBossPatternSelector patternSelector;
 
     [Header("대상 탐색")]
     [SerializeField] private BossTargetFinder targetFinder;
@@ -29,6 +28,8 @@ public class MidBossFireballPattern : BossAttackPattern
 
     private readonly HashSet<GameObject> activeFireballs =
         new HashSet<GameObject>();
+
+    public bool IsBlinkFollowUp { get; private set; }
 
     private Coroutine firingCoroutine;
     private bool hasFinishedFiring;
@@ -78,12 +79,11 @@ public class MidBossFireballPattern : BossAttackPattern
     private bool ValidateReferences()
     {
         if (patternRunner == null ||
-            patternSelector == null ||
             targetFinder == null ||
             firePoint == null)
         {
             Debug.LogError(
-                "Pattern Runner, Target Finder, Fire Point, patternSelector를 연결해 주세요.",
+                "Pattern Runner, Target Finder, Fire Point를 연결해 주세요.",
                 this);
             return false;
         }
@@ -146,8 +146,7 @@ public class MidBossFireballPattern : BossAttackPattern
 
     private IEnumerator FireSequence()
     {
-        int shotCount =
-        patternSelector.CurrentPatternFollowsBlink ? 2 : 3;
+        int shotCount = IsBlinkFollowUp ? 2 : 3;
 
         for (int i = 0; i < shotCount; i++)
         {
@@ -258,18 +257,29 @@ public class MidBossFireballPattern : BossAttackPattern
 
     public override bool TryStartAttack()
     {
-        return TryStartAttack(1f);
+        return TryStartFireball(1f, false);
     }
 
-    public bool TryStartAttack(float windupScale)
+    public bool TryStartAfterBlink(float windupScale)
+    {
+        return TryStartFireball(windupScale, true);
+    }
+
+    private bool TryStartFireball(float windupScale, bool followsBlink)
     {
         if (!isActiveAndEnabled || patternRunner == null ||
             !patternRunner.IsStartAllowed || !patternRunner.TrySelectPattern(this))
             return false;
 
+        IsBlinkFollowUp = followsBlink;
         patternRunner.StartPattern(windupScale);
 
-        return patternRunner.CurrentState == BossPatternState.Windup && patternRunner.IsSelectedPattern(this);
+        bool started = patternRunner.CurrentState == BossPatternState.Windup && patternRunner.IsSelectedPattern(this);
+
+        if (!started)
+            IsBlinkFollowUp = false;
+
+        return started;
     }
 
 }

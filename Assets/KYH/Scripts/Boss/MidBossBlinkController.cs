@@ -11,7 +11,11 @@ public class MidBossBlinkController : BossPriorityPattern
     [SerializeField] private Rigidbody2D bossBody;
     [Header("블링크 모션")]
     [SerializeField] private MidBossVisual bossVisual;
+    [Header("우선 블링크 후속 공격")]
+    [SerializeField] private MidBossFireballPattern followUpFireball;
+    [SerializeField, Range(0.01f, 1f)] private float followUpWindupScale = 0.3f;
 
+    private bool startFollowUpOnFinish;
     public bool IsBlinking {get; private set;}
     public bool BlinkSucceeded {get; private set; }
     private bool hasMovedDuringBlink;
@@ -23,6 +27,24 @@ public class MidBossBlinkController : BossPriorityPattern
 
     public int PendingBlinkCount => pendingBlinkCount;
     public override bool IsPending => PendingBlinkCount > 0;
+    public override bool IsRunning => IsBlinking;
+
+    public override bool TryStartPriority()
+    {
+        if (followUpFireball == null || !followUpFireball.isActiveAndEnabled)
+            return false;
+
+        if (!TryBeginBlink())
+            return false;
+
+        startFollowUpOnFinish = true;
+        return true;
+    }
+
+    public override void CancelPriority()
+    {
+        CancelBlink();
+    }
 
     private void Awake()
     {
@@ -183,10 +205,19 @@ public class MidBossBlinkController : BossPriorityPattern
 
         BlinkSucceeded = hasMovedDuringBlink;
         IsBlinking = false;
+
+        bool shouldStartFollowUp = startFollowUpOnFinish && BlinkSucceeded;
+        startFollowUpOnFinish = false;
+
+        if (shouldStartFollowUp && (followUpFireball == null || !followUpFireball.TryStartAfterBlink(followUpWindupScale)))
+        {
+            Debug.LogWarning("블링크 후속 파이어볼을 시작하지 못했습니다.", this);
+        }
     }
 
     public void CancelBlink()
     {
+        startFollowUpOnFinish = false;
         IsBlinking = false;
         BlinkSucceeded = false;
         hasMovedDuringBlink = false;

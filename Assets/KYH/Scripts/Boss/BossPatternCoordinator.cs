@@ -1,14 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
-public class FinalBossPatternCoordinator : MonoBehaviour
+public class BossPatternCoordinator : MonoBehaviour
 {
 
     [Header("패턴 실행기")]
     [SerializeField] private BossPatternRunner patternRunner;
 
     [Header("근접 공격 접근")]
-    [SerializeField] private FinalBossApproach approach;
+    [SerializeField] private BossApproach approach;
 
     [Header("1페이즈 중거리 패턴")]
     
@@ -17,7 +18,11 @@ public class FinalBossPatternCoordinator : MonoBehaviour
     [SerializeField] private BossAttackPattern[] midRangePatterns;
     [SerializeField] private BossAttackPattern[] rangePatterns;
 
+    [Header("조건부 우선 패턴")]
+    [SerializeField] private List<BossPriorityPattern> priorityPatterns = new();
+
     private BossAttackPattern pendingPattern;
+    private BossPriorityPattern runningPriorityPattern;
 
     [Header("최종보스 자동 공격")]
     [UnityEngine.Serialization.FormerlySerializedAs("autoStartPhase1Patterns")]
@@ -25,6 +30,9 @@ public class FinalBossPatternCoordinator : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     private float immediateAttackChance = 0.5f; 
     [SerializeField, Min(0f)] private float initialActionDelay = 2f;
+    [SerializeField] private bool excludeLastPattern;
+
+    private BossAttackPattern lastPattern;
 
     [Header("보스 체력")]
     [SerializeField] private BossHealth bossHealth;
@@ -64,23 +72,52 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
     private void Update()
     {
+        if (runningPriorityPattern != null)
+        {
+            if (!patternRunner.IsStartAllowed || bossHealth == null || bossHealth.IsDead)
+            {
+                CancelRunningPriorityPattern();
+                return;
+            }
+
+            if (runningPriorityPattern.IsRunning)
+                return;
+
+            runningPriorityPattern = null;
+        }
+
         if (!autoStartPatterns || bossHealth == null || bossHealth.IsDead)
             return;
 
         if (awaitingApproach || (approach != null && approach.IsApproaching))
             return;
 
-        if (!patternRunner.IsStartAllowed ||
-            patternRunner.CurrentState != BossPatternState.Idle)
-                return;
+        if (!patternRunner.IsStartAllowed || patternRunner.CurrentState != BossPatternState.Idle)
+            return;
 
         if (Time.time < nextAutoAttempTime)
             return;
 
-        bool started = TryStartRandomPattern();
+        BossPriorityPattern priority = FindPendingPriorityPattern();
 
-        if (!started)
-            nextAutoAttempTime = Time.time + 0.25f;
+        if (priority != null && priority.TryStartPriority())
+        {
+            runningPriorityPattern = priority;
+            return;
+        }
+
+        if (!TryStartRandomPattern())
+            nextAutoAttempTime = Time.time + 0.25f; 
+    }
+
+
+    private void CancelRunningPriorityPattern()
+    {
+        BossPriorityPattern running = runningPriorityPattern;
+        runningPriorityPattern = null;
+
+        if (running != null)
+            running.CancelPriority();
     }
 
     private void LateUpdate()
@@ -113,6 +150,7 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
     private void OnDisable()
     {
+        CancelRunningPriorityPattern();
 
         if(approach != null)
             approach.Finished -= HandleApproachFinished;
@@ -130,6 +168,8 @@ public class FinalBossPatternCoordinator : MonoBehaviour
     {
         if (currentHealth > 0)
             return;
+        
+        CancelRunningPriorityPattern();
 
         awaitingApproach = false;
         patternRunner.SetPatternStartAllowed(false);
@@ -199,7 +239,7 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
         return started;
     }
-    private void HandleApproachFinished(FinalBossApproach.ApproachResult result)
+    private void HandleApproachFinished(BossApproach.ApproachResult result)
     {
         if(!awaitingApproach)
             return;
@@ -213,11 +253,11 @@ public class FinalBossPatternCoordinator : MonoBehaviour
             patternRunner.CurrentState != BossPatternState.Idle)
             return;
 
-            bool ready = result == FinalBossApproach.ApproachResult.ReachedRange ||
-                         result == FinalBossApproach.ApproachResult.TimedOut;
+            bool ready = result == BossApproach.ApproachResult.ReachedRange ||
+                         result == BossApproach.ApproachResult.TimedOut;
 
             if (ready && selected != null &&
-                selected.isActiveAndEnabled && selected.TryStartAttack())
+                selected.isActiveAndEnabled && TryStartAndRemember(selected))
                 return;
 
             nextAutoAttempTime = Time.time + 0.25f;
@@ -225,25 +265,49 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
     private bool TryStartRandomPattern()
     {
-        candidates.Clear();
-        registeredCandidates.Clear();
+        CollectCandidates(excludeLastPattern);
 
-        AddCandidates(meleePatterns, AttackRange.Melee);
-        AddCandidates(midRangePatterns, AttackRange.MidRange);
-        AddCandidates(rangePatterns, AttackRange.Ranged);
+        if (candidates.Count == 0 && excludeLastPattern)
+            CollectCandidates(false);
 
         if (candidates.Count == 0)
             return false;
 
         var selected = candidates[Random.Range(0, candidates.Count)];
 
-        if (selected.range == AttackRange.Ranged || Random.value < immediateAttackChance)
-            return selected.pattern.TryStartAttack();
+        if (approach == null || selected.range == AttackRange.Ranged ||
+            Random.value < immediateAttackChance)
+            return TryStartAndRemember(selected.pattern);
 
         return TryBeginApproach(selected.pattern, selected.range == AttackRange.MidRange);
+
     }
 
-    private void AddCandidates(BossAttackPattern[] patterns, AttackRange range)
+    private BossPriorityPattern FindPendingPriorityPattern()
+    {
+        foreach (BossPriorityPattern pattern in priorityPatterns)
+        {
+            if (pattern == null || !pattern.isActiveAndEnabled)
+                continue;
+            
+            if (pattern.IsPending)
+                return pattern;
+        }
+
+        return null;
+    }
+
+    private void CollectCandidates(bool excludeLast)
+    {
+        candidates.Clear();
+        registeredCandidates.Clear();
+
+        AddCandidates(meleePatterns, AttackRange.Melee, excludeLast);
+        AddCandidates(midRangePatterns, AttackRange.MidRange, excludeLast);
+        AddCandidates(rangePatterns, AttackRange.Ranged, excludeLast);
+    }
+
+    private void AddCandidates(BossAttackPattern[] patterns, AttackRange range, bool excludeLast)
     {
         if (patterns == null)
             return;
@@ -253,12 +317,24 @@ public class FinalBossPatternCoordinator : MonoBehaviour
             if (pattern == null || !pattern.isActiveAndEnabled)
                 continue;
 
-            if (range == AttackRange.MidRange && !(pattern is IBossApproachRange))
+            if (excludeLast && pattern == lastPattern)
+                continue;
+
+            if (approach != null && range == AttackRange.MidRange && !(pattern is IBossApproachRange))
                 continue;
 
             if (registeredCandidates.Add(pattern))
                 candidates.Add((pattern, range));
         }
+    }
+
+    private bool TryStartAndRemember(BossAttackPattern pattern)
+    {
+        if (!pattern.TryStartAttack())
+            return false;
+
+        lastPattern = pattern;
+        return true;
     }
 
     [ContextMenu("테스트/제자리에서 원거리 패턴 시작")]

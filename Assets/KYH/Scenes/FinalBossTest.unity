@@ -564,7 +564,10 @@ MonoBehaviour:
   rangePatterns: []
   autoStartPatterns: 1
   immediateAttackChance: 0.2
+  initialActionDelay: 2
   bossHealth: {fileID: 1028047473}
+  facingTargetFinder: {fileID: 0}
+  bossRenderer: {fileID: 0}
 --- !u!114 &1028047480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -643,14 +646,11 @@ MonoBehaviour:
   bossHealth: {fileID: 1028047473}
   patternRunner: {fileID: 1028047477}
   targetFinder: {fileID: 1028047481}
-  comboData: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
   moveSpeed: 3
   meleeStartDistance: 1.5
-  firstApproachDuration: 2
-  additionalApproachDuration: 2
+  firstApproachDuration: 5
   result: 0
   timeRemaining: 0
-  isAdditionalApproach: 0
 --- !u!114 &1028047485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,6 +667,7 @@ MonoBehaviour:
   bossHealth: {fileID: 1028047473}
   targetFinder: {fileID: 1028047481}
   bossBody: {fileID: 1028047483}
+  bossRenderer: {fileID: 0}
   leftDashLimit: {fileID: 1663271711}
   rightDashLimit: {fileID: 1177675173}
   dashDistance: 4
