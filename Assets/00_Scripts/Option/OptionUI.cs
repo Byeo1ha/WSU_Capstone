@@ -32,6 +32,8 @@ public class OptionUI : MonoBehaviour
 
     private void Start()
     {
+        RestoreVolumes();
+
         inputManager.OnCancel
             .Subscribe(_ => CloseUI())
             .AddTo(this);
@@ -131,7 +133,7 @@ public class OptionUI : MonoBehaviour
     {
         foreach (VolumeSlider volumeSlider in volumeSliders)
         {
-            if (volumeSlider.HasUnsavedChanges) volumeSlider.RestoreVolume();
+            volumeSlider.RestoreVolume();
         }
     }
 
