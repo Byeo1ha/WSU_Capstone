@@ -29,6 +29,10 @@ public class FinalBossPatternCoordinator : MonoBehaviour
     [Header("보스 체력")]
     [SerializeField] private BossHealth bossHealth;
 
+    [Header("보스 방향")]
+    [SerializeField] private BossTargetFinder facingTargetFinder;
+    [SerializeField] private SpriteRenderer bossRenderer;
+
     private float nextAutoAttempTime;
     private bool awaitingApproach;
 
@@ -77,6 +81,25 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
         if (!started)
             nextAutoAttempTime = Time.time + 0.25f;
+    }
+
+    private void LateUpdate()
+    {
+        if (bossHealth == null || bossHealth.IsDead || patternRunner == null ||
+            facingTargetFinder == null || bossRenderer == null)
+            return;
+
+        BossPatternState state = patternRunner.CurrentState;
+        if (state == BossPatternState.Windup || state == BossPatternState.Active)
+            return;
+
+        if (!facingTargetFinder.TryGetTargetPosition(out Vector2 targetPosition))
+            return;
+
+        float horizontalDifference = targetPosition.x - bossRenderer.transform.position.x;
+
+        if (Mathf.Abs(horizontalDifference) > 0.01f)
+            bossRenderer.flipX = horizontalDifference < 0f;
     }
 
     private void OnEnable()
@@ -161,7 +184,12 @@ public class FinalBossPatternCoordinator : MonoBehaviour
         pendingPattern = selected;
         awaitingApproach = true;
 
-        bool started = isMidRange ? approach.BeginMidRangeApproach(((IBossApproachRange)selected).ApproachStartRange) : approach.BeginApproach();
+        float startDistance = approach.MeleeStartDistance;
+
+        if (isMidRange)
+            startDistance = ((IBossApproachRange)selected). ApproachStartRange.x;
+
+        bool started = approach.BeginApproach(startDistance);
 
         if (!started)
         {
@@ -185,8 +213,8 @@ public class FinalBossPatternCoordinator : MonoBehaviour
             patternRunner.CurrentState != BossPatternState.Idle)
             return;
 
-            bool ready = result == FinalBossApproach.ApproachResult.ReadyForMelee ||
-                         result == FinalBossApproach.ApproachResult.ReadyForMidRange;
+            bool ready = result == FinalBossApproach.ApproachResult.ReachedRange ||
+                         result == FinalBossApproach.ApproachResult.TimedOut;
 
             if (ready && selected != null &&
                 selected.isActiveAndEnabled && selected.TryStartAttack())

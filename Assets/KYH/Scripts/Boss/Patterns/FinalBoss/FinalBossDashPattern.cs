@@ -9,6 +9,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
     [SerializeField] private BossHealth bossHealth;
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private Rigidbody2D bossBody;
+    [SerializeField] private SpriteRenderer bossRenderer;
 
     [Header("돌진 이동 한계")]
     [SerializeField] private Transform leftDashLimit;
@@ -142,6 +143,9 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             float travelDistance = Mathf.Min(dashDistance, availableDistance);
 
             destinationX = startX + direction * travelDistance;
+
+            if (bossRenderer != null)
+                bossRenderer.flipX = direction < 0;
             ShowDashWarning(startX);
             return;
         }

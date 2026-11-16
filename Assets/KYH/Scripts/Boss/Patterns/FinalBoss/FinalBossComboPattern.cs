@@ -73,9 +73,15 @@ public class FinalBossComboPattern : BossAttackPattern
                 CancelExecution();
                 ownsExecution = true;
 
-                if(!CanExecute())
+                if(!CanExecute() ||!targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
+                {
                     AbortPattern();
-                
+                    return;
+                }
+
+                comboDirection = targetPosition.x < slash.transform.position.x ? -1 : 1;
+                if (comboRenderer != null)
+                    comboRenderer.flipX = comboDirection < 0;
                 break;
 
             case BossPatternState.Active:
@@ -94,16 +100,12 @@ public class FinalBossComboPattern : BossAttackPattern
     private void BeginCombo()
     {
         if (!CanExecute() || ComboAnimator == null || !ComboAnimator.isActiveAndEnabled ||
-            !ComboAnimator.HasState(0, ComboState) || !targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
+            !ComboAnimator.HasState(0, ComboState))
         {
-            Debug.LogWarning("콤보 대상과 Animator의 연결을 확인해주세요.", this);
+            Debug.LogWarning("콤보 실행 상태와 Animator의 연결을 확인해주세요.", this);
             AbortPattern();
             return;
         }
-
-        comboDirection = targetPosition.x < slash.transform.position.x ? -1 : 1;
-        if (comboRenderer != null)
-            comboRenderer.flipX = comboDirection <0;
         completedHits = 0;
         animationFinished = false;
 

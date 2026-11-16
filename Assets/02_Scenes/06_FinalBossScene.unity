@@ -2211,6 +2211,7 @@ MonoBehaviour:
   bossHealth: {fileID: 1808303663}
   targetFinder: {fileID: 1808303660}
   bossBody: {fileID: 1808303657}
+  bossRenderer: {fileID: 0}
   leftDashLimit: {fileID: 720221217}
   rightDashLimit: {fileID: 1192600504}
   dashDistance: 4
@@ -2335,6 +2336,8 @@ MonoBehaviour:
   immediateAttackChance: 0.2
   initialActionDelay: 2
   bossHealth: {fileID: 1808303663}
+  facingTargetFinder: {fileID: 1808303660}
+  bossRenderer: {fileID: 1808303653}
 --- !u!114 &1808303662
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MidBossBlinkController : MonoBehaviour
+public class MidBossBlinkController : BossPriorityPattern
 {
     [Header("중간보스 체력")]
     [SerializeField] private BossHealth bossHealth;
@@ -22,6 +22,7 @@ public class MidBossBlinkController : MonoBehaviour
     private bool hasStarted;
 
     public int PendingBlinkCount => pendingBlinkCount;
+    public override bool IsPending => PendingBlinkCount > 0;
 
     private void Awake()
     {
