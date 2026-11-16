@@ -24,6 +24,7 @@ public class FinalBossPatternCoordinator : MonoBehaviour
     [SerializeField] private bool autoStartPatterns;
     [SerializeField, Range(0f, 1f)]
     private float immediateAttackChance = 0.5f; 
+    [SerializeField, Min(0f)] private float initialActionDelay = 2f;
 
     [Header("보스 체력")]
     [SerializeField] private BossHealth bossHealth;
@@ -50,6 +51,11 @@ public class FinalBossPatternCoordinator : MonoBehaviour
 
             enabled = false;
         }
+    }
+
+    private void Start()
+    {
+        nextAutoAttempTime = Time.time + initialActionDelay;
     }
 
     private void Update()

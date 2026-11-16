@@ -696,17 +696,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
---- !u!114 &558617269 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 343281039498549196, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
-  m_PrefabInstance: {fileID: 558617268}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54ef8801a70a9434683f3abb7f5807bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Portal
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,9 +1807,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2540bc9c2ea15a34894c7f00efe84feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageClear
-  TargetText: {fileID: 1689595741}
-  portal: {fileID: 558617269}
-  uiArrow: {fileID: 932675058}
+  nextSceneName: Actor1
+  nextSceneTime: 3
 --- !u!4 &1538479783
 Transform:
   m_ObjectHideFlags: 0
@@ -2145,7 +2133,7 @@ SpriteRenderer:
   m_MaskInteraction: 0
   m_Sprite: {fileID: 3078221246618757648, guid: 9e4bbbcdcf511ca4a8bf5b403bf4bd6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -2229,7 +2217,7 @@ MonoBehaviour:
   dashDuration: 0.25
   dashWarningPrefab: {fileID: 3792776907292008447, guid: 6407a428bc77e834c9fa69198d525e76, type: 3}
   warningHeight: 1.5
-  warningOffsetY: 0
+  warningOffsetY: 1
   dashDamage: 14
   damageLayer:
     serializedVersion: 2
@@ -2345,6 +2333,7 @@ MonoBehaviour:
   rangePatterns: []
   autoStartPatterns: 1
   immediateAttackChance: 0.2
+  initialActionDelay: 2
   bossHealth: {fileID: 1808303663}
 --- !u!114 &1808303662
 MonoBehaviour:
