@@ -1771,8 +1771,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.010730803, y: 0.89555985}
-  m_Size: {x: 0.6716887, y: 1.7842015}
+  m_Offset: {x: 0.010730803, y: 0.07917875}
+  m_Size: {x: 0.6716887, y: 1.8349084}
   m_Direction: 0
 --- !u!114 &1808303655
 MonoBehaviour:
@@ -1814,7 +1814,7 @@ MonoBehaviour:
   dashDuration: 0.25
   dashWarningPrefab: {fileID: 3792776907292008447, guid: 6407a428bc77e834c9fa69198d525e76, type: 3}
   warningHeight: 1.5
-  warningOffsetY: 1
+  warningOffsetY: 0
   dashDamage: 14
   damageLayer:
     serializedVersion: 2
@@ -1972,7 +1972,7 @@ Transform:
   m_GameObject: {fileID: 1808303650}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.23, y: -4.04, z: 0}
+  m_LocalPosition: {x: 4.21, y: -2.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
