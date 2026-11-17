@@ -16,6 +16,7 @@ public class PauseManager : MonoBehaviour
     private InputManager inputManager;
     private OptionUI optionUI;
     private SceneFlowService sceneFlowService;
+    private PlayerAttributes playerAttributes;
 
     public void SetPauseTime(bool value) 
         => CanPause = value;
@@ -26,11 +27,13 @@ public class PauseManager : MonoBehaviour
     public void Construct(
         InputManager inputManager,
         OptionUI optionUI,
-        SceneFlowService sceneFlowService)
+        SceneFlowService sceneFlowService,
+        PlayerAttributes playerAttributes)
     {
         this.inputManager = inputManager;
         this.optionUI = optionUI;
         this.sceneFlowService = sceneFlowService;
+        this.playerAttributes = playerAttributes;
     }
 
     private void Awake()
@@ -109,6 +112,9 @@ public class PauseManager : MonoBehaviour
 
     public void TitleConfirm()
     {
+        playerAttributes.ResetHp();
+        playerAttributes.ResetPotion();
+
         sceneFlowService
             .LoadSceneAsync(
                 titleSceneName, 
