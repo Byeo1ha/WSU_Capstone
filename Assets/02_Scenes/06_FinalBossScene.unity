@@ -1327,7 +1327,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 483cd03c953646d4caa2a535899ffedb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e565e2485873a874a8bd1468399e78b7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1929,7 +1929,7 @@ MonoBehaviour:
   autoStartPatterns: 1
   immediateAttackChance: 0.2
   initialActionDelay: 2
-  excludeLastPattern: 0
+  excludeLastPattern: 1
   bossHealth: {fileID: 1808303663}
   facingTargetFinder: {fileID: 1808303660}
   bossRenderer: {fileID: 1808303653}
