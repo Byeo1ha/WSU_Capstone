@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -11,7 +12,7 @@ public class BossLineWarning : MonoBehaviour
         Hide();
     }
 
-    public void Show(float startX, float endX, float centerY, float height)
+    public void Show(float startX, float endX, float centerY, float height, bool flipX=false)
     {
         float length = Mathf.Abs(endX - startX);
 
@@ -27,6 +28,7 @@ public class BossLineWarning : MonoBehaviour
         transform.position = position;
 
         warningRenderer.size = new Vector2(length, height);
+        warningRenderer.flipX = flipX;
         warningRenderer.enabled = true;
     }
 

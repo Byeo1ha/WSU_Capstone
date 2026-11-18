@@ -155,13 +155,16 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             if (bossRenderer != null)
                 bossRenderer.flipX = direction < 0;
             
-            if (dashAnimator != null && dashAnimator.isActiveAndEnabled &&
-                dashAnimator.HasState(0, dashWindupState))
+            if (dashAnimator != null && dashAnimator.isActiveAndEnabled)
             {
-                dashAnimator.Play(dashWindupState, 0, 0f);
+                dashAnimator.ResetTrigger("CancelDash");
+                dashAnimator.ResetTrigger("FinishDash");
+                dashAnimator.ResetTrigger("StartDashAttack");
+                dashAnimator.SetTrigger("StartDashWindup");
+
                 playedDashMotion = true;
             }
-            ShowDashWarning(startX);
+            ShowDashWarning(startX, direction < 0);
             return;
         }
 
@@ -193,7 +196,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
         if (dashAnimator != null && dashAnimator.isActiveAndEnabled && dashAnimator.HasState(0, dashAttackState))
         {
-            dashAnimator.Play(dashAttackState, 0, 0f);
+            dashAnimator.SetTrigger("StartDashAttack");
             playedDashMotion = true;
         }
 
@@ -266,10 +269,15 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         if (!shouldResetMotion || dashAnimator == null || !dashAnimator.isActiveAndEnabled)
             return;
 
-        int nextState = playFinishMotion && dashAnimator.HasState(0, dashFinishState)? dashFinishState: dashIdleState;
+        dashAnimator.ResetTrigger("StartDashWindup");
+        dashAnimator.ResetTrigger("StartDashAttack");
+        dashAnimator.ResetTrigger("FinishDash");
+        dashAnimator.ResetTrigger("CanelDash");
 
-        if (dashAnimator.HasState(0, nextState))
-            dashAnimator.Play(nextState, 0, 0f);
+        if (playFinishMotion)
+            dashAnimator.SetTrigger("FinishDash");
+        else 
+            dashAnimator.SetTrigger("CancelDash");
     }
 
     // 돌진 종료 함수
@@ -291,12 +299,12 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         patternRunner.StopPattern();
     }
 
-    private void ShowDashWarning(float startX)
+    private void ShowDashWarning(float startX, bool flipX)
     {
         if (dashWarning == null)
             return;
 
-       dashWarning.Show(startX, destinationX, bossBody.position.y + warningOffsetY, warningHeight);
+       dashWarning.Show(startX, destinationX, bossBody.position.y + warningOffsetY, warningHeight, flipX);
     }
 
     private void HideDashWarning()
