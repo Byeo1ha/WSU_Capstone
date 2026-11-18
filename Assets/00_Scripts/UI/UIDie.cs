@@ -79,6 +79,7 @@ public class UIDie : MonoBehaviour
             .Forget();
 
         playerAttributes.ResetHp();
+        playerAttributes.ResetPotion();
     }
 
     public void TitleBtn()
@@ -91,5 +92,6 @@ public class UIDie : MonoBehaviour
             .Forget();
 
         playerAttributes.ResetHp();
+        playerAttributes.ResetPotion();
     }
 }

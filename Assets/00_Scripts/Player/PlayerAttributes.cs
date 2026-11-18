@@ -8,6 +8,10 @@ public class PlayerAttributes : MonoBehaviour
 
     private ReactiveProperty<int> hp;
     public ReadOnlyReactiveProperty<int> Hp => hp;
+    public int MaxHp => data.Hp;
+
+    private ReactiveProperty<int> potionCount;
+    public ReadOnlyReactiveProperty<int> PotionCount => potionCount;
 
     private InputManager inputManager;
 
@@ -20,6 +24,7 @@ public class PlayerAttributes : MonoBehaviour
     private void Awake()
     {
         hp = new (data.Hp);
+        potionCount = new (data.PotionCount);
     }
 
     public void Damaged(int damage)
@@ -37,8 +42,31 @@ public class PlayerAttributes : MonoBehaviour
         }
     }
 
+    public void Healed(int heal)
+    {
+        if (hp.Value + heal > data.Hp)
+        {
+            hp.Value = data.Hp;
+            Debug.Log($"풀피 || 피 : {hp.Value}");
+            return;
+        }
+
+        hp.Value += heal;
+        Debug.Log($"회복 완 || 피 : {hp.Value}");
+    }
+
+    public void DecreasePotionCount()
+    {
+        potionCount.Value = Mathf.Max(0, potionCount.Value - 1);
+    }
+
     public void ResetHp()
     {
         hp.Value = data.Hp;
+    }
+
+    public void ResetPotion()
+    {
+        potionCount.Value = data.PotionCount;
     }
 }

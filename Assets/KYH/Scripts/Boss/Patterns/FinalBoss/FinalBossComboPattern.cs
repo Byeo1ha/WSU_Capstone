@@ -1,6 +1,4 @@
-using UnityEditor.Build;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public class FinalBossComboPattern : BossAttackPattern
 {

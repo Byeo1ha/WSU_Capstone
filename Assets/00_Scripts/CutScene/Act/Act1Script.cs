@@ -19,6 +19,8 @@ public class Act1Script : MonoBehaviour
     [SerializeField] private Transform cameraMovePoint2;
     [SerializeField] private Transform cameraMovePoint3;
 
+    [SerializeField] private StageClear stageClear;
+
     private SpriteRenderer actorASprite;
 
     private void Awake()
@@ -75,5 +77,7 @@ public class Act1Script : MonoBehaviour
         await dialogue.ShowLineAsync(actorC.Speaker, false, "그걸 보이기엔 지금은 너무나도 부끄러운 실력 같군.");
         await dialogue.ShowLineAsync(actorC.Speaker, false, "보여봐라. 그 증명이란걸 말이야.");
         await dialogue.HideAsync();
+
+        stageClear.EventStart();
     }
 }

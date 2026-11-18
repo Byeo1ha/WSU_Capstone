@@ -193,7 +193,19 @@ MonoBehaviour:
     m_ActionId: 1b981d1b-ea42-4fda-9e9f-ff9d0612aecd
     m_ActionName: 'Action/DownInput[/Keyboard/downArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4293217880640169751}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnPotionInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 96b9d57d-9a14-4676-8cf8-8616afe8f09d
     m_ActionName: 'Action/Potion[/Keyboard/c]'
   - m_PersistentCalls:

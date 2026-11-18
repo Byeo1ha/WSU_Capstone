@@ -1,6 +1,5 @@
 using System;
 using DG.Tweening;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class BossApproach : MonoBehaviour
