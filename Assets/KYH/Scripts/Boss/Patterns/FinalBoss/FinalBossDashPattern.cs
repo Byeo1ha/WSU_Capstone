@@ -1,6 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using System;
 
 public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 {
@@ -10,6 +12,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private Rigidbody2D bossBody;
     [SerializeField] private SpriteRenderer bossRenderer;
+    [SerializeField] private Animator dashAnimator;
 
     [Header("돌진 이동 한계")]
     [SerializeField] private Transform leftDashLimit;
@@ -36,6 +39,10 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
     private readonly List<Collider2D> dashHits = new List<Collider2D>();
     private readonly HashSet<IDamageable> damagedTargets = new HashSet<IDamageable>();
+    private readonly int dashWindupState = Animator.StringToHash("Base Layer.FinalBoss_DashWindup");
+    private readonly int dashAttackState = Animator.StringToHash("Base Layer.FinalBoss_Dash");
+    private readonly int dashIdleState = Animator.StringToHash("Base Layer.FinalBoss_Idle");
+    private readonly int dashFinishState = Animator.StringToHash("Base Layer.FinalBoss_DashFinish");
 
     public Vector2 ApproachStartRange => new Vector2(approachStartRangeX, approachStartRangeY);
 
@@ -45,6 +52,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
     private bool isDashHitting;
     private bool dashMovementFinished;
     private bool ownsExecution;
+    private bool playedDashMotion;
     private float destinationX;
     private Tween dashTween;
 
@@ -146,6 +154,13 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
             if (bossRenderer != null)
                 bossRenderer.flipX = direction < 0;
+            
+            if (dashAnimator != null && dashAnimator.isActiveAndEnabled &&
+                dashAnimator.HasState(0, dashWindupState))
+            {
+                dashAnimator.Play(dashWindupState, 0, 0f);
+                playedDashMotion = true;
+            }
             ShowDashWarning(startX);
             return;
         }
@@ -155,7 +170,9 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
         if (state == BossPatternState.Active)
             BeginDash();
-        else if (state == BossPatternState.Recovery || state == BossPatternState.Idle)
+        else if (state == BossPatternState.Recovery)
+            CancelExecution(playFinishMotion: dashMovementFinished);
+        else if (state == BossPatternState.Idle)
             CancelExecution();
     }
 
@@ -174,6 +191,12 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             return;
         }
 
+        if (dashAnimator != null && dashAnimator.isActiveAndEnabled && dashAnimator.HasState(0, dashAttackState))
+        {
+            dashAnimator.Play(dashAttackState, 0, 0f);
+            playedDashMotion = true;
+        }
+
         damagedTargets.Clear();
         damageFilter = new ContactFilter2D();
         damageFilter.SetLayerMask(damageLayer);
@@ -184,7 +207,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         isDashHitting = true;
 
         dashTween = bossBody.DOMoveX(destinationX, dashDuration)
-            .SetEase(Ease.Linear)
+            
             .SetUpdate(UpdateType.Fixed)
             .OnComplete(FinishDash);
     }
@@ -227,7 +250,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
     }
 
-    private void CancelExecution()
+    private void CancelExecution(bool playFinishMotion = false)
     {
         ownsExecution = false;
         dashTween?.Kill(false);
@@ -237,6 +260,29 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         isDashHitting = false;
         dashMovementFinished = false;
         damagedTargets.Clear();
+        bool shouldResetMotion = playedDashMotion;
+        playedDashMotion = false;
+
+        if (!shouldResetMotion || dashAnimator == null || !dashAnimator.isActiveAndEnabled)
+            return;
+
+        int nextState = playFinishMotion && dashAnimator.HasState(0, dashFinishState)? dashFinishState: dashIdleState;
+
+        if (dashAnimator.HasState(0, nextState))
+            dashAnimator.Play(nextState, 0, 0f);
+    }
+
+    // 돌진 종료 함수
+    public void DashFinishAnimFrame()
+    {
+        if (dashAnimator == null || !dashAnimator.isActiveAndEnabled)
+            return;
+
+        if (dashAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash != dashFinishState)
+            return;
+
+        if (dashAnimator.HasState(0, dashIdleState))
+            dashAnimator.Play(dashIdleState, 0, 0f);
     }
 
     private void AbortPattern()

@@ -53,17 +53,25 @@ public class UIDie : MonoBehaviour
 
     private void DieEvent()
     {
-        blackBorder.DOFade(0.5f, 0.5f);
+        Time.timeScale = 0f;
+        blackBorder.DOFade(0.5f, 0.5f)
+            .SetUpdate(this)
+            .SetLink(gameObject);
+
         gameOverPanel.interactable = true;
         gameOverPanel.alpha = 1f;
         gameOverPanel.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
         gameOverPanel.transform
             .DOScale(1f, 0.5f)
-            .SetEase(Ease.OutBack);
+            .SetEase(Ease.OutBack)
+            .SetUpdate(this)
+            .SetLink(gameObject);
     }
 
     public void RespawnBtn()
     {
+        Time.timeScale = 1f;
         sceneFlowService
             .LoadSceneAsync(SceneManager.GetActiveScene().name,
                 SceneFlowService.LoadingSceneType.Short
@@ -75,6 +83,7 @@ public class UIDie : MonoBehaviour
 
     public void TitleBtn()
     {
+        Time.timeScale = 1f;
         sceneFlowService
             .LoadSceneAsync(titleSceneName,
                 SceneFlowService.LoadingSceneType.Short
