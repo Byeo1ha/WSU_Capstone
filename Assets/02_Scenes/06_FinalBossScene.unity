@@ -1743,7 +1743,7 @@ MonoBehaviour:
   targetFinder: {fileID: 1808303660}
   bossBody: {fileID: 1808303657}
   bossRenderer: {fileID: 1808303653}
-  dashAnimator: {fileID: 1808303652}
+  bossAnimation: {fileID: 1808303666}
   leftDashLimit: {fileID: 720221217}
   rightDashLimit: {fileID: 1192600504}
   dashDistance: 4
@@ -1825,6 +1825,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
   slash: {fileID: 1808303655}
   ComboAnimator: {fileID: 1808303652}
+  bossAnimation: {fileID: 1808303666}
   comboRenderer: {fileID: 1808303653}
 --- !u!114 &1808303660
 MonoBehaviour:

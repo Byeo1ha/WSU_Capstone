@@ -1,8 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using System;
 
 public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 {
@@ -12,7 +10,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private Rigidbody2D bossBody;
     [SerializeField] private SpriteRenderer bossRenderer;
-    [SerializeField] private Animator dashAnimator;
+    [SerializeField] private FinalBossAnimation bossAnimation;
 
     [Header("돌진 이동 한계")]
     [SerializeField] private Transform leftDashLimit;
@@ -54,7 +52,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
     private void Awake()
     {
-        if(patternRunner != null && bossHealth != null && bossBody != null)
+        if(patternRunner != null && bossHealth != null && bossBody != null && bossAnimation != null)
         {
             if (dashWarningPrefab != null)
                 dashWarning = Instantiate(dashWarningPrefab);
@@ -151,14 +149,9 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             if (bossRenderer != null)
                 bossRenderer.flipX = direction < 0;
             
-            if (dashAnimator != null && dashAnimator.isActiveAndEnabled)
-            {
-                dashAnimator.ResetTrigger("CancelDash");
-                dashAnimator.ResetTrigger("FinishDash");
-                dashAnimator.SetTrigger("StartDashWindup");
-
-                playedDashMotion = true;
-            }
+            bossAnimation.StartDashAnim();
+            playedDashMotion = true;
+            
             ShowDashWarning(startX, direction < 0);
             return;
         }
@@ -263,17 +256,15 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         bool shouldResetMotion = playedDashMotion;
         playedDashMotion = false;
 
-        if (!shouldResetMotion || dashAnimator == null || !dashAnimator.isActiveAndEnabled)
+        if (!shouldResetMotion || bossAnimation == null)
             return;
 
-        dashAnimator.ResetTrigger("StartDashWindup");
-        dashAnimator.ResetTrigger("FinishDash");
-        dashAnimator.ResetTrigger("CancelDash");
-
         if (playFinishMotion)
-            dashAnimator.SetTrigger("FinishDash");
-        else 
-            dashAnimator.SetTrigger("CancelDash");
+            bossAnimation.FinishDashAnim();
+        else
+            bossAnimation.CancelDashAnim();
+
+        
     }
 
     private void AbortPattern()
