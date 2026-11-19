@@ -173,7 +173,7 @@ public class FinalBossComboPattern : BossAttackPattern
     private void CancelExecution()
     {
         bool wasExecuting = ownsExecution;
-        if (wasExecuting && ComboAnimator != null && ComboAnimator.isActiveAndEnabled)
+        if (wasExecuting && ComboAnimator != null && ComboAnimator.gameObject.activeInHierarchy && ComboAnimator.isActiveAndEnabled)
             ComboAnimator.Play(idleState, 0, 0f);
 
         ownsExecution = false;

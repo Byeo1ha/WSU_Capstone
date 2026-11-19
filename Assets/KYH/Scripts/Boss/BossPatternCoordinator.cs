@@ -40,6 +40,7 @@ public class BossPatternCoordinator : MonoBehaviour
     [Header("보스 방향")]
     [SerializeField] private BossTargetFinder facingTargetFinder;
     [SerializeField] private SpriteRenderer bossRenderer;
+    [SerializeField] private Animator facingAnimator;
 
     private float nextAutoAttempTime;
     private bool awaitingApproach;
@@ -129,7 +130,15 @@ public class BossPatternCoordinator : MonoBehaviour
         BossPatternState state = patternRunner.CurrentState;
         if (state == BossPatternState.Windup || state == BossPatternState.Active)
             return;
+        
+        if (facingAnimator != null && facingAnimator.isActiveAndEnabled)
+        {
+            if (facingAnimator.GetCurrentAnimatorStateInfo(0).IsTag("LockFacing"))
+                return;
 
+            if (facingAnimator.IsInTransition(0) && facingAnimator.GetNextAnimatorStateInfo(0).IsTag("LockFacing"))
+                return;
+        }
         if (!facingTargetFinder.TryGetTargetPosition(out Vector2 targetPosition))
             return;
 

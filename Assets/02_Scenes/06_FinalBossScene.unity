@@ -1869,6 +1869,7 @@ MonoBehaviour:
   bossHealth: {fileID: 1808303663}
   facingTargetFinder: {fileID: 1808303660}
   bossRenderer: {fileID: 1808303653}
+  facingAnimator: {fileID: 1808303652}
 --- !u!114 &1808303662
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,10 +39,6 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
     private readonly List<Collider2D> dashHits = new List<Collider2D>();
     private readonly HashSet<IDamageable> damagedTargets = new HashSet<IDamageable>();
-    private readonly int dashWindupState = Animator.StringToHash("Base Layer.FinalBoss_DashWindup");
-    private readonly int dashAttackState = Animator.StringToHash("Base Layer.FinalBoss_Dash");
-    private readonly int dashIdleState = Animator.StringToHash("Base Layer.FinalBoss_Idle");
-    private readonly int dashFinishState = Animator.StringToHash("Base Layer.FinalBoss_DashFinish");
 
     public Vector2 ApproachStartRange => new Vector2(approachStartRangeX, approachStartRangeY);
 
@@ -159,7 +155,6 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             {
                 dashAnimator.ResetTrigger("CancelDash");
                 dashAnimator.ResetTrigger("FinishDash");
-                dashAnimator.ResetTrigger("StartDashAttack");
                 dashAnimator.SetTrigger("StartDashWindup");
 
                 playedDashMotion = true;
@@ -179,6 +174,14 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             CancelExecution();
     }
 
+    public void OnDashAttackFrame()
+    {
+        if (!ownsExecution || !CanExecute())
+            return;
+
+        patternRunner.EnterActiveFromEvent(this);
+    }
+
     private void BeginDash()
     {
         HideDashWarning();
@@ -192,12 +195,6 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         {
             patternRunner.CompleteActive();
             return;
-        }
-
-        if (dashAnimator != null && dashAnimator.isActiveAndEnabled && dashAnimator.HasState(0, dashAttackState))
-        {
-            dashAnimator.SetTrigger("StartDashAttack");
-            playedDashMotion = true;
         }
 
         damagedTargets.Clear();
@@ -270,27 +267,13 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
             return;
 
         dashAnimator.ResetTrigger("StartDashWindup");
-        dashAnimator.ResetTrigger("StartDashAttack");
         dashAnimator.ResetTrigger("FinishDash");
-        dashAnimator.ResetTrigger("CanelDash");
+        dashAnimator.ResetTrigger("CancelDash");
 
         if (playFinishMotion)
             dashAnimator.SetTrigger("FinishDash");
         else 
             dashAnimator.SetTrigger("CancelDash");
-    }
-
-    // 돌진 종료 함수
-    public void DashFinishAnimFrame()
-    {
-        if (dashAnimator == null || !dashAnimator.isActiveAndEnabled)
-            return;
-
-        if (dashAnimator.GetCurrentAnimatorStateInfo(0).fullPathHash != dashFinishState)
-            return;
-
-        if (dashAnimator.HasState(0, dashIdleState))
-            dashAnimator.Play(dashIdleState, 0, 0f);
     }
 
     private void AbortPattern()
@@ -318,7 +301,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         if (!CanExecute() || !patternRunner.TrySelectPattern(this))
             return false;
 
-        patternRunner.StartPattern();
+        patternRunner.StartPatternWaitingForActiveEvent();
 
         return ownsExecution && patternRunner.CurrentState == BossPatternState.Windup;
     }
