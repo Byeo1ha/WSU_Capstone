@@ -8,6 +8,7 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private MidBossFireballPattern fireballPattern;
     [SerializeField] private MidBossFlamePillarPattern flamePillarPattern;
     [SerializeField] private MidBossTotemPattern totemPattern;
+    [SerializeField] private BossAttackPattern fireWavePattern;
 
     [Header("애니메이션 연결")]
     [SerializeField] private Animator bossAnimator;
@@ -117,6 +118,10 @@ public class MidBossVisual : MonoBehaviour
         if (!bossAnimator.isActiveAndEnabled)
             return;
 
+        if (fireWavePattern != null && patternRunner.IsSelectedPattern(fireWavePattern) &&
+            patternRunner.CurrentState != BossPatternState.Idle)
+            return;
+
         if (!bossAnimator.HasState(0, IdleState))
         {
             Debug.LogError("Animator의 Base Layer에 Idle 상태가 필요합니다.", this);
@@ -189,6 +194,42 @@ public class MidBossVisual : MonoBehaviour
         bossAnimator.speed = selectedClip.length / duration;
 
         bossAnimator.Play(selectedState, 0, normalizedTime);
+    }
+
+    public void StartFireWaveAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+        bossAnimator.ResetTrigger("FinishFireWave");
+        bossAnimator.ResetTrigger("CancelFireWave");
+        bossAnimator.ResetTrigger("StartFireWave");
+        bossAnimator.SetTrigger("StartFireWave");
+    }
+
+    public void FinishFireWaveAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireWave");
+        bossAnimator.ResetTrigger("CancelFireWave");
+        bossAnimator.SetTrigger("FinishFireWave");
+    }
+
+    public void CancelFireWaveAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireWave");
+        bossAnimator.ResetTrigger("FinishFireWave");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelFireWave");
     }
 
     private void FaceTarget()

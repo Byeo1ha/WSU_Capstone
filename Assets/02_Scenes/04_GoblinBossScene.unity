@@ -290,6 +290,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &339638292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339638293}
+  - component: {fileID: 339638294}
+  m_Layer: 0
+  m_Name: FireWavePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &339638293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339638292}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1951833357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339638294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339638292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c907820d03f971e429c9d022a7b86f50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossFireWavePool
+  pillarPrefab: {fileID: 5690497912167661251, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+  storageRoot: {fileID: 339638293}
+  initialCount: 10
 --- !u!1 &377539718
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1089,7 @@ GameObject:
   - component: {fileID: 939212572}
   - component: {fileID: 939212573}
   - component: {fileID: 939212575}
+  - component: {fileID: 939212576}
   m_Layer: 12
   m_Name: MidBoss
   m_TagString: Enemy
@@ -1368,6 +1416,7 @@ MonoBehaviour:
   fireballPattern: {fileID: 939212567}
   flamePillarPattern: {fileID: 939212565}
   totemPattern: {fileID: 939212564}
+  fireWavePattern: {fileID: 0}
   bossAnimator: {fileID: 939212572}
   fireballWindupClip: {fileID: 7400000, guid: eccdaefaa7ffe25438853c0d59ac26a9, type: 2}
   flamePillarWindupClip: {fileID: 7400000, guid: d373bcc9bae65994e9ee219fcf83cf82, type: 2}
@@ -1415,13 +1464,33 @@ MonoBehaviour:
   - {fileID: 939212567}
   priorityPatterns:
   - {fileID: 939212562}
-  autoStartPatterns: 1
+  autoStartPatterns: 0
   immediateAttackChance: 0.5
   initialActionDelay: 1.5
-  excludeLastPattern: 1
+  excludeLastPattern: 0
   bossHealth: {fileID: 939212569}
   facingTargetFinder: {fileID: 0}
   bossRenderer: {fileID: 0}
+  facingAnimator: {fileID: 0}
+--- !u!114 &939212576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939212558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96a5454a373847540a20daf3661a2c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossFireWavePattern
+  patternRunner: {fileID: 939212568}
+  bossHealth: {fileID: 939212569}
+  targetFinder: {fileID: 939212559}
+  bossBossVisual: {fileID: 939212573}
+  data: {fileID: 11400000, guid: 18971e4b0eb98744f99d2f0839f988e7, type: 2}
+  pillarPool: {fileID: 339638294}
+  waveArea: {fileID: 548182766}
 --- !u!1 &948679596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1649,6 +1718,67 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &1236317537
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.36162
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.01571
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5690497912167661251, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: damageLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8213233669427496969, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
+      propertyPath: m_Name
+      value: MidBossFireWavePillar
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
 --- !u!4 &1238308240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7129514314858802992, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
@@ -2639,7 +2769,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951833357}
   m_Layer: 0
-  m_Name: FireballPools
+  m_Name: FirePools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2662,6 +2792,7 @@ Transform:
   - {fileID: 1536648003}
   - {fileID: 567664792}
   - {fileID: 1709109557}
+  - {fileID: 339638293}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966675024
@@ -2899,3 +3030,4 @@ SceneRoots:
   - {fileID: 1773273823}
   - {fileID: 152587807}
   - {fileID: 1558258875}
+  - {fileID: 1236317537}

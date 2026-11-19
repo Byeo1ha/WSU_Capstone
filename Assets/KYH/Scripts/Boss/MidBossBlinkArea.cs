@@ -13,6 +13,20 @@ public class MidBossBlinkArea : MonoBehaviour
     [Header("무작위 위치 선택 횟수")]
     [SerializeField, Min(1)] private int maxAttempts = 32;
 
+    public bool TryGetBounds(out float minX, out float maxX)
+    {
+        minX = 0f;
+        maxX = 0f;
+
+        if (!isActiveAndEnabled || leftLimit == null || rightLimit == null)
+            return false;
+
+        minX = Mathf.Min(leftLimit.position.x, rightLimit.position.x);
+        maxX = Mathf.Max(leftLimit.position.x, rightLimit.position.x);
+
+        return maxX - minX > 0.001f;
+    }
+
     public bool TryGetRandomX(float currentX, float playerX, out float destinationX)
     {
         destinationX = currentX;
