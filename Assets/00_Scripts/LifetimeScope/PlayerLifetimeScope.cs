@@ -33,6 +33,7 @@ public class PlayerLifetimeScope : LifetimeScope
         builder.RegisterComponentInHierarchy<PlayerAttackFeedback>();
         builder.RegisterComponentInHierarchy<PlayerDamaged>();
         builder.RegisterComponentInHierarchy<PlayerPotion>();
+        builder.RegisterComponentInHierarchy<PlayerCamera>();
 
         builder.RegisterComponent(normalAttack).Keyed(PoolKey.NormalAttack);
         builder.RegisterComponent(finalNormalAttack).Keyed(PoolKey.FinalNormalAttack);

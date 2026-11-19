@@ -1,0 +1,530 @@
+fileFormatVersion: 2
+guid: a4fcba2629ea2d84d933d0ff729b20b7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3475706097617314615
+    second: HealEFX_0
+  - first:
+      213: 6029860512778581318
+    second: HealEFX_1
+  - first:
+      213: 7302444327775545021
+    second: HealEFX_2
+  - first:
+      213: 4951154860922510236
+    second: HealEFX_3
+  - first:
+      213: 2733408699210394872
+    second: HealEFX_4
+  - first:
+      213: -3587011914336698140
+    second: HealEFX_5
+  - first:
+      213: 6359037432766010489
+    second: HealEFX_6
+  - first:
+      213: -1925603443735439498
+    second: HealEFX_7
+  - first:
+      213: -2054508214781529258
+    second: HealEFX_8
+  - first:
+      213: 571550183658701526
+    second: HealEFX_9
+  - first:
+      213: 2016836863790307081
+    second: HealEFX_10
+  - first:
+      213: -8908111386451162949
+    second: HealEFX_11
+  - first:
+      213: 6256107131540572665
+    second: HealEFX_12
+  - first:
+      213: 5066673416587707742
+    second: HealEFX_13
+  - first:
+      213: -4422478383320034700
+    second: HealEFX_14
+  - first:
+      213: -3036000015642192703
+    second: HealEFX_15
+  - first:
+      213: 7534551412259000476
+    second: HealEFX_16
+  - first:
+      213: 8344298319779769511
+    second: HealEFX_17
+  - first:
+      213: -3062142279551209431
+    second: HealEFX_18
+  - first:
+      213: -5235449842792249604
+    second: HealEFX_19
+  - first:
+      213: -5577215468846374756
+    second: HealEFX_20
+  - first:
+      213: -659947949808136621
+    second: HealEFX_21
+  - first:
+      213: 4581451326932011598
+    second: HealEFX_22
+  - first:
+      213: -8203256957793348425
+    second: HealEFX_23
+  - first:
+      213: 8298463590952209446
+    second: HealEFX_24
+  - first:
+      213: -6464337239629573201
+    second: HealEFX_25
+  - first:
+      213: -136306499873972414
+    second: HealEFX_26
+  - first:
+      213: -7748237531560096423
+    second: HealEFX_27
+  - first:
+      213: -742969447315667525
+    second: HealEFX_28
+  - first:
+      213: -9046108179683865349
+    second: HealEFX_29
+  - first:
+      213: 3805625459602540366
+    second: HealEFX_30
+  - first:
+      213: 1290756624331303053
+    second: HealEFX_31
+  - first:
+      213: 6989581690108402396
+    second: HealEFX_32
+  - first:
+      213: -5855200728289998078
+    second: HealEFX_33
+  - first:
+      213: -8176257130957477365
+    second: HealEFX_34
+  - first:
+      213: 3131847426777544491
+    second: HealEFX_35
+  - first:
+      213: -1740386734837108862
+    second: HealEFX_36
+  - first:
+      213: 1811585130792110334
+    second: HealEFX_37
+  - first:
+      213: 3219841186241667950
+    second: HealEFX_38
+  - first:
+      213: -8625803872191447128
+    second: HealEFX_39
+  - first:
+      213: -3713510008954158315
+    second: HealEFX_40
+  - first:
+      213: 8826879048095083043
+    second: HealEFX_41
+  - first:
+      213: 9122953073182014164
+    second: HealEFX_42
+  - first:
+      213: 5555245006138222018
+    second: HealEFX_43
+  - first:
+      213: 8803186143274934766
+    second: HealEFX_44
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HealEFX_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cc5cd328bfc3cfc0800000000000000
+      internalID: -3475706097617314615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6457255503e5ea350800000000000000
+      internalID: 6029860512778581318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_2
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db6a0251d6e775560800000000000000
+      internalID: 7302444327775545021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_3
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9b1c391d1906b440800000000000000
+      internalID: 4951154860922510236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_4
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fce56ecab40fe520800000000000000
+      internalID: 2733408699210394872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_5
+      rect:
+        serializedVersion: 2
+        x: 355
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e00ed03baf583ec0800000000000000
+      internalID: -3587011914336698140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_6
+      rect:
+        serializedVersion: 2
+        x: 426
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9741e6d7ad6df3850800000000000000
+      internalID: 6359037432766010489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_7
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67751e5ced1e645e0800000000000000
+      internalID: -1925603443735439498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_8
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65333d5f9abec73e0800000000000000
+      internalID: -2054508214781529258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_9
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d249442ddd8ee700800000000000000
+      internalID: 571550183658701526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_10
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9075224217e3dfb10800000000000000
+      internalID: 2016836863790307081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealEFX_11
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 0
+        width: 71
+        height: 116
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb847f624e7006480800000000000000
+      internalID: -8908111386451162949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6c31eefbbf2f4dc41aebb57b4ff943c0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":71.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      HealEFX_0: -3475706097617314615
+      HealEFX_1: 6029860512778581318
+      HealEFX_10: 2016836863790307081
+      HealEFX_11: -8908111386451162949
+      HealEFX_2: 7302444327775545021
+      HealEFX_3: 4951154860922510236
+      HealEFX_4: 2733408699210394872
+      HealEFX_5: -3587011914336698140
+      HealEFX_6: 6359037432766010489
+      HealEFX_7: -1925603443735439498
+      HealEFX_8: -2054508214781529258
+      HealEFX_9: 571550183658701526
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

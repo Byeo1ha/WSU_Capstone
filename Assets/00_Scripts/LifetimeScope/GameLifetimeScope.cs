@@ -5,7 +5,6 @@ public class GameLifetimeScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterComponentInHierarchy<TargetCamera>();
         builder.RegisterComponentInHierarchy<PauseManager>();
         builder.RegisterComponentInHierarchy<BGMStarter>();
     }
