@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TargetCamera : MonoBehaviour
+public class PlayerCamera : MonoBehaviour
 {
     [Header("추적 대상")]
     [SerializeField] private Transform target;

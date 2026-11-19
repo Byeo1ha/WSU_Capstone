@@ -61,6 +61,8 @@ public class AttackHitboxPool : MonoBehaviour
 
     private void OnDestroyAttack(AttackHitbox normalAttack)
     {
+        if (normalAttack == null) return;
+
         Destroy(normalAttack.gameObject);
     }
 }

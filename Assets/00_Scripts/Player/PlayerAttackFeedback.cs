@@ -12,7 +12,7 @@ public class PlayerAttackFeedback : MonoBehaviour
     [Header("히트 스톱 시간")]
     [SerializeField, Min(0f)] private float duration = 0.05f;
 
-    private TargetCamera targetCamera;
+    private PlayerCamera playerCamera;
 
     private Animator anim;
     private Rigidbody2D rigid;
@@ -26,9 +26,9 @@ public class PlayerAttackFeedback : MonoBehaviour
     public bool IsHitStopping => isHitStopping;
 
     [Inject]
-    public void Construct(TargetCamera targetCamera)
+    public void Construct(PlayerCamera playerCamera)
     {
-        this.targetCamera = targetCamera;
+        this.playerCamera = playerCamera;
     }
 
     private void Awake()
@@ -58,9 +58,9 @@ public class PlayerAttackFeedback : MonoBehaviour
     private void CameraShaking(ShakingType type)
     {
         if (type == ShakingType.Power)
-            targetCamera.PowerShaking();
+            playerCamera.PowerShaking();
         else
-            targetCamera.NormalShaking();
+            playerCamera.NormalShaking();
     }
 
     // 히트 스톱 함수
