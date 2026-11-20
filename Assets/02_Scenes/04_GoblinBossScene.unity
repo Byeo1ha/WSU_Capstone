@@ -193,6 +193,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1120028035525337689, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 5861851637218174454, guid: 937782d5ee1ee2246a67a3b68a38f715, type: 3}
       propertyPath: cooldown
       value: 2
@@ -1416,7 +1420,7 @@ MonoBehaviour:
   fireballPattern: {fileID: 939212567}
   flamePillarPattern: {fileID: 939212565}
   totemPattern: {fileID: 939212564}
-  fireWavePattern: {fileID: 0}
+  fireWavePattern: {fileID: 939212576}
   bossAnimator: {fileID: 939212572}
   fireballWindupClip: {fileID: 7400000, guid: eccdaefaa7ffe25438853c0d59ac26a9, type: 2}
   flamePillarWindupClip: {fileID: 7400000, guid: d373bcc9bae65994e9ee219fcf83cf82, type: 2}
@@ -1462,12 +1466,13 @@ MonoBehaviour:
   - {fileID: 939212565}
   - {fileID: 939212564}
   - {fileID: 939212567}
+  - {fileID: 939212576}
   priorityPatterns:
   - {fileID: 939212562}
-  autoStartPatterns: 0
+  autoStartPatterns: 1
   immediateAttackChance: 0.5
   initialActionDelay: 1.5
-  excludeLastPattern: 0
+  excludeLastPattern: 1
   bossHealth: {fileID: 939212569}
   facingTargetFinder: {fileID: 0}
   bossRenderer: {fileID: 0}
@@ -1765,10 +1770,6 @@ PrefabInstance:
     - target: {fileID: 3104008761771221982, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5690497912167661251, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
-      propertyPath: damageLayer.m_Bits
-      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 8213233669427496969, guid: 3f34c24c093f7f149a773e1d121909fb, type: 3}
       propertyPath: m_Name

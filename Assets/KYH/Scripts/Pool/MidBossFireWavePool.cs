@@ -13,6 +13,7 @@ public class MidBossFireWavePool : MonoBehaviour
 
     public event Action<MidBossFireWavePillar> EffectStarted;
     public event Action<MidBossFireWavePillar> PillarReturned;
+    public event Action<MidBossFireWavePillar, IDamageable> DamageTargetDetected;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class MidBossFireWavePool : MonoBehaviour
 
         pillar.EffectStarted += HandleEffectStarted;
         pillar.Finished += Return;
+        pillar.DamageTargetDetected += HandleDamageTargetDetected;
 
         return pillar;
     }
@@ -81,6 +83,12 @@ public class MidBossFireWavePool : MonoBehaviour
     {
         if (rentedPillars.Contains(pillar))
             EffectStarted?.Invoke(pillar);
+    }
+
+    private void HandleDamageTargetDetected(MidBossFireWavePillar pillar, IDamageable target)
+    {
+        if (rentedPillars.Contains(pillar))
+            DamageTargetDetected?.Invoke(pillar, target);
     }
 
     [ContextMenu("테스트/불꽃파동 기둥 하나 실행")]

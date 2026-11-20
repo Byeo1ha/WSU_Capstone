@@ -220,3 +220,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossFireWavePillar
   warningVisual: {fileID: 6228102241497576882}
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024

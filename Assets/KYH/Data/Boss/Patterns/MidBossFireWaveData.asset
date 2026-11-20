@@ -16,3 +16,7 @@ MonoBehaviour:
   spawnOffsetY: 0
   pillarWidth: 2
   pillarSpacing: 2
+  warningDuration: 0.5
+  damage: 10
+  damageHeight: 3
+  damageOffset: {x: 0, y: 1}

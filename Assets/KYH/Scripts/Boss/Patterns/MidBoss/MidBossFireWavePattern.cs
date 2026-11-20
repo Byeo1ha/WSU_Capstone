@@ -23,6 +23,7 @@ public class MidBossFireWavePattern : BossAttackPattern
     private float waveMaxX;
 
     private readonly HashSet<MidBossFireWavePillar> activePillars = new();
+    private readonly HashSet<IDamageable> damagedTargets = new();
     private MidBossFireWavePillar leadingPillar;
     private bool hasReachedEnd;
     private void OnEnable()
@@ -38,6 +39,7 @@ public class MidBossFireWavePattern : BossAttackPattern
         patternRunner.StateChanged += HandleStateChanged;
         pillarPool.PillarReturned += HandlePillarReturned;
         pillarPool.EffectStarted += HandleEffectStarted;
+        pillarPool.DamageTargetDetected += HandleDamageTargetDetected;
     }
 
     private void OnDisable()
@@ -49,6 +51,7 @@ public class MidBossFireWavePattern : BossAttackPattern
         {
             pillarPool.PillarReturned -= HandlePillarReturned;
             pillarPool.EffectStarted -= HandleEffectStarted;
+            pillarPool.DamageTargetDetected -= HandleDamageTargetDetected;
         }
         AbortPattern();
     }
@@ -64,6 +67,7 @@ public class MidBossFireWavePattern : BossAttackPattern
         if (state == BossPatternState.Windup && patternRunner.IsSelectedPattern(this))
         {
             ownsExecution = true;
+            damagedTargets.Clear();
 
             if (!targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
             {
@@ -133,8 +137,6 @@ public class MidBossFireWavePattern : BossAttackPattern
         float minCenterX = waveMinX + halfWidth;
         float maxCenterX = waveMaxX - halfWidth;
 
-        position.x = Mathf.Clamp(position.x, minCenterX, maxCenterX);
-
         hasReachedEnd = waveDirection > 0 ? position.x >= maxCenterX - 0.001f
             : position.x <= minCenterX + 0.001f;
 
@@ -175,6 +177,18 @@ public class MidBossFireWavePattern : BossAttackPattern
         nextPosition.x += waveDirection * Mathf.Max(0.01f, data.PillarSpacing);
 
         SpawnPillar(nextPosition);
+    }
+
+    private void HandleDamageTargetDetected(MidBossFireWavePillar pillar, IDamageable target)
+    {
+        if (!ownsExecution || patternRunner.CurrentState != BossPatternState.Active || !activePillars.Contains(pillar) ||
+            target == null)
+            return;
+
+        if (!damagedTargets.Add(target))
+            return;
+        
+        target.TakeDamage(data.Damage);
     }
 
     private void StopExecution(bool completedNormally = false)
