@@ -19,5 +19,5 @@ MonoBehaviour:
   visualOffsetY: 0.2
   damage: 4
   damageInterval: 0.5
-  damageSize: {x: 1.5, y: 0.5}
+  damageSize: {x: 1.3, y: 0.5}
   damageOffset: {x: 0, y: 0.25}
