@@ -16,7 +16,7 @@ MonoBehaviour:
   spawnInterval: 0.5
   warningDuration: 0.2
   activeDuration: 3
-  visualOffsetY: 0
+  visualOffsetY: 0.2
   damage: 4
   damageInterval: 0.5
   damageSize: {x: 1.5, y: 0.5}

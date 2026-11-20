@@ -9,6 +9,7 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private MidBossFlamePillarPattern flamePillarPattern;
     [SerializeField] private MidBossTotemPattern totemPattern;
     [SerializeField] private BossAttackPattern fireWavePattern;
+    [SerializeField] private BossAttackPattern fireFieldPattern;
 
     [Header("애니메이션 연결")]
     [SerializeField] private Animator bossAnimator;
@@ -122,6 +123,10 @@ public class MidBossVisual : MonoBehaviour
             patternRunner.CurrentState != BossPatternState.Idle)
             return;
 
+        if (fireFieldPattern != null && patternRunner.IsSelectedPattern(fireFieldPattern) &&
+            patternRunner.CurrentState != BossPatternState.Idle)
+            return;
+
         if (!bossAnimator.HasState(0, IdleState))
         {
             Debug.LogError("Animator의 Base Layer에 Idle 상태가 필요합니다.", this);
@@ -230,6 +235,44 @@ public class MidBossVisual : MonoBehaviour
             return;
 
         bossAnimator.SetTrigger("CancelFireWave");
+    }
+
+    public void StartFireFieldAnim()
+    {
+        if (isDying || bossAnimator == null ||
+            !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+        bossAnimator.ResetTrigger("FinishFireField");
+        bossAnimator.ResetTrigger("CancelFireField");
+        bossAnimator.ResetTrigger("StartFireField");
+        bossAnimator.SetTrigger("StartFireField");
+    }
+
+    public void FinishFireFieldAnim()
+    {
+        if (isDying || bossAnimator == null ||
+            !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireField");
+        bossAnimator.ResetTrigger("CancelFireField");
+        bossAnimator.SetTrigger("FinishFireField");
+    }
+
+    public void CancelFireFieldAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireField");
+        bossAnimator.ResetTrigger("FinishFireField");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelFireField");
     }
 
     private void FaceTarget()
