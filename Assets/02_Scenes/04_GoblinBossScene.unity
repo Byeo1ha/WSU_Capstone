@@ -1423,6 +1423,7 @@ MonoBehaviour:
   totemPattern: {fileID: 939212564}
   fireWavePattern: {fileID: 939212576}
   fireFieldPattern: {fileID: 939212577}
+  bombFieldPattern: {fileID: 0}
   bossAnimator: {fileID: 939212572}
   fireballWindupClip: {fileID: 7400000, guid: eccdaefaa7ffe25438853c0d59ac26a9, type: 2}
   flamePillarWindupClip: {fileID: 7400000, guid: d373bcc9bae65994e9ee219fcf83cf82, type: 2}
@@ -1472,10 +1473,10 @@ MonoBehaviour:
   - {fileID: 939212577}
   priorityPatterns:
   - {fileID: 939212562}
-  autoStartPatterns: 1
+  autoStartPatterns: 0
   immediateAttackChance: 0.5
   initialActionDelay: 1.5
-  excludeLastPattern: 1
+  excludeLastPattern: 0
   bossHealth: {fileID: 939212569}
   facingTargetFinder: {fileID: 0}
   bossRenderer: {fileID: 0}
@@ -2580,6 +2581,33 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1831183717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1587365425454474422, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+  m_PrefabInstance: {fileID: 7520684610227398322}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1831183721
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831183717}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4eb0bbf831bf0fb48b9e1dcda4d5c7bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1839345398
 GameObject:
   m_ObjectHideFlags: 0
@@ -3025,6 +3053,78 @@ MonoBehaviour:
   fireballPrefab: {fileID: 2527840830018875757, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
   storageRoot: {fileID: 948679597}
   initialCount: 3
+--- !u!1001 &7520684610227398322
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1002598904267973192, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: testSpawnPoint
+      value: 
+      objectReference: {fileID: 1936918424}
+    - target: {fileID: 1002598904267973192, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: testTargetFinder
+      value: 
+      objectReference: {fileID: 939212559}
+    - target: {fileID: 1002598904267973192, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: damageLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1587365425454474422, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_Name
+      value: MidBossBombFieldProjectile
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2775692642026136532, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1587365425454474422, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1831183721}
+  m_SourcePrefab: {fileID: 100100000, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3048,3 +3148,4 @@ SceneRoots:
   - {fileID: 1773273823}
   - {fileID: 152587807}
   - {fileID: 1558258875}
+  - {fileID: 7520684610227398322}

@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class MidBossVisual : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private MidBossTotemPattern totemPattern;
     [SerializeField] private BossAttackPattern fireWavePattern;
     [SerializeField] private BossAttackPattern fireFieldPattern;
+    [SerializeField] private BossPriorityPattern bombFieldPattern;
 
     [Header("애니메이션 연결")]
     [SerializeField] private Animator bossAnimator;
@@ -117,6 +119,9 @@ public class MidBossVisual : MonoBehaviour
             return;
 
         if (!bossAnimator.isActiveAndEnabled)
+            return;
+
+        if (bombFieldPattern != null && bombFieldPattern.IsRunning)
             return;
 
         if (fireWavePattern != null && patternRunner.IsSelectedPattern(fireWavePattern) &&
@@ -273,6 +278,42 @@ public class MidBossVisual : MonoBehaviour
             return;
 
         bossAnimator.SetTrigger("CancelFireField");
+    }
+
+    public void StartBombFieldAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+        bossAnimator.ResetTrigger("ContinueBombField");
+        bossAnimator.ResetTrigger("CancelBombField");
+        bossAnimator.ResetTrigger("StartBombField");
+        bossAnimator.SetTrigger("StartBombField");
+    }
+
+    public void ContinueBombFieldAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.ResetTrigger("StartBombField");
+        bossAnimator.ResetTrigger("CancelBombField");
+        bossAnimator.SetTrigger("ContinueBombField");
+    }
+
+    public void CancelBombFieldAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartBombField");
+        bossAnimator.ResetTrigger("ContinueBombField");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelBombField");
     }
 
     private void FaceTarget()

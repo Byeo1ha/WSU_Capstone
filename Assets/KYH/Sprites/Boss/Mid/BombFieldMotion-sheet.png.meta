@@ -1,0 +1,539 @@
+fileFormatVersion: 2
+guid: fd313b33e98f3984595d647c44b3442c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -114570099941803242
+    second: BombFieldMotion-sheet_0
+  - first:
+      213: 3334193070973700202
+    second: BombFieldMotion-sheet_1
+  - first:
+      213: 5671707713001664961
+    second: BombFieldMotion-sheet_2
+  - first:
+      213: 7636952658857389860
+    second: BombFieldMotion-sheet_3
+  - first:
+      213: -8088061750399550657
+    second: BombFieldMotion-sheet_4
+  - first:
+      213: 8937114645063660499
+    second: BombFieldMotion-sheet_5
+  - first:
+      213: 1832731649122184987
+    second: BombFieldMotion-sheet_6
+  - first:
+      213: -5740920438961995294
+    second: BombFieldMotion-sheet_7
+  - first:
+      213: 5650271240052474474
+    second: BombFieldMotion-sheet_8
+  - first:
+      213: 7138474562843188623
+    second: BombFieldMotion-sheet_9
+  - first:
+      213: -8257699159341094
+    second: BombFieldMotion-sheet_10
+  - first:
+      213: 3796140728038986269
+    second: BombFieldMotion-sheet_11
+  - first:
+      213: -5864009820563437681
+    second: BombFieldMotion-sheet_12
+  - first:
+      213: -8497606598195739527
+    second: BombFieldMotion-sheet_13
+  - first:
+      213: 3933883670408646093
+    second: BombFieldMotion-sheet_14
+  - first:
+      213: 7482754106810072248
+    second: BombFieldMotion-sheet_15
+  - first:
+      213: -3613523475770334142
+    second: BombFieldMotion-sheet_16
+  - first:
+      213: -4537384745678383837
+    second: BombFieldMotion-sheet_17
+  - first:
+      213: 4807478606897735469
+    second: BombFieldMotion-sheet_18
+  - first:
+      213: -4856736239534494611
+    second: BombFieldMotion-sheet_19
+  - first:
+      213: 8389844793120502925
+    second: BombFieldMotion-sheet_20
+  - first:
+      213: 2949613080681328776
+    second: BombFieldMotion-sheet_21
+  - first:
+      213: 4331598970569383403
+    second: BombFieldMotion-sheet_22
+  - first:
+      213: -2914587216271100380
+    second: BombFieldMotion-sheet_23
+  - first:
+      213: 5012860231242137739
+    second: BombFieldMotion-sheet_24
+  - first:
+      213: 3838113278868960863
+    second: BombFieldMotion-sheet_25
+  - first:
+      213: 2460759903237276599
+    second: BombFieldMotion-sheet_26
+  - first:
+      213: 8231266127720867723
+    second: BombFieldMotion-sheet_27
+  - first:
+      213: -4422619884856019407
+    second: BombFieldMotion-sheet_28
+  - first:
+      213: -4951153940018192171
+    second: BombFieldMotion-sheet_29
+  - first:
+      213: -4775310983987523105
+    second: BombFieldMotion-sheet_30
+  - first:
+      213: -3735358092751437776
+    second: BombFieldMotion-sheet_31
+  - first:
+      213: 3306786291156352592
+    second: BombFieldMotion-sheet_32
+  - first:
+      213: -4596872861467583825
+    second: BombFieldMotion-sheet_33
+  - first:
+      213: -1768361014723900953
+    second: BombFieldMotion-sheet_34
+  - first:
+      213: 3362775288740317797
+    second: BombFieldMotion-sheet_35
+  - first:
+      213: -4836792279840652645
+    second: BombFieldMotion-sheet_36
+  - first:
+      213: 8419744866358718663
+    second: BombFieldMotion-sheet_37
+  - first:
+      213: 2676499056813843501
+    second: BombFieldMotion-sheet_38
+  - first:
+      213: -5823686582050816845
+    second: BombFieldMotion-sheet_39
+  - first:
+      213: -700912964834642661
+    second: BombFieldMotion-sheet_40
+  - first:
+      213: -7866333568004310577
+    second: BombFieldMotion-sheet_41
+  - first:
+      213: 3269944022041205405
+    second: BombFieldMotion-sheet_42
+  - first:
+      213: -697962423233341920
+    second: BombFieldMotion-sheet_43
+  - first:
+      213: 3235374232985568612
+    second: BombFieldMotion-sheet_44
+  - first:
+      213: 5061869845560054718
+    second: BombFieldMotion-sheet_45
+  - first:
+      213: 3546696968574370102
+    second: BombFieldMotion-sheet_46
+  - first:
+      213: -241718978588366191
+    second: BombFieldMotion-sheet_47
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61b7613e917f86ef0800000000000000
+      internalID: -114570099941803242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a68c4f7ceee654e20800000000000000
+      internalID: 3334193070973700202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_2
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c1be4f6d14f5be40800000000000000
+      internalID: 5671707713001664961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 42f6bad1bf7ebf960800000000000000
+      internalID: 7636952658857389860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3bb20eb0be61cf80800000000000000
+      internalID: -8088061750399550657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_5
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d3f5f73b62070c70800000000000000
+      internalID: 8937114645063660499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1109
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1f2b8289bb2f6910800000000000000
+      internalID: 1832731649122184987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e104e707472450b0800000000000000
+      internalID: -5740920438961995294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_8
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a620fe3a1cbc96e40800000000000000
+      internalID: 5650271240052474474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_9
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8d1e6c2bc4f01360800000000000000
+      internalID: 7138474562843188623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_10
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad702f69aa9a2eff0800000000000000
+      internalID: -8257699159341094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BombFieldMotion-sheet_11
+      rect:
+        serializedVersion: 2
+        x: 2035
+        y: 0
+        width: 185
+        height: 146
+      alignment: 9
+      pivot: {x: 0.45, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d12182c11e99ea430800000000000000
+      internalID: 3796140728038986269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 57dc2f822ee3e9e45ac3e78e03f7a467
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":146.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      BombFieldMotion-sheet_0: -114570099941803242
+      BombFieldMotion-sheet_1: 3334193070973700202
+      BombFieldMotion-sheet_10: -8257699159341094
+      BombFieldMotion-sheet_11: 3796140728038986269
+      BombFieldMotion-sheet_2: 5671707713001664961
+      BombFieldMotion-sheet_3: 7636952658857389860
+      BombFieldMotion-sheet_4: -8088061750399550657
+      BombFieldMotion-sheet_5: 8937114645063660499
+      BombFieldMotion-sheet_6: 1832731649122184987
+      BombFieldMotion-sheet_7: -5740920438961995294
+      BombFieldMotion-sheet_8: 5650271240052474474
+      BombFieldMotion-sheet_9: 7138474562843188623
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

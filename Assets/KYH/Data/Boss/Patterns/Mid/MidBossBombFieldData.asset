@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6ca759125e5cff40947e09468dd1486, type: 3}
+  m_Name: MidBossBombFieldData
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossBombFieldData
+  projectileSpeed: 2
+  projectileRadius: 0.5
+  explossionDelay: 0.3
+  explosionRadiusMultiplier: 1.5
+  afterExplosionDely: 1
+  fieldDuration: 2
+  fieldDamageHeight: 0.5
+  projectileDamage: 4
+  explosionDamage: 4
+  fieldDamage: 4
