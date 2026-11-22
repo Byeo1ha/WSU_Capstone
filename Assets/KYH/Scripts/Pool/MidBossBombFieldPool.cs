@@ -6,11 +6,6 @@ public class MidBossBombFieldPool : MonoBehaviour
     [Header("구체 보관")]
     [SerializeField] private MidBossBombFieldProjectile projectilePrefab;
     [SerializeField] private Transform storageRoot;
-    
-    [Header("수동 테스트")]
-    [SerializeField] private MidBossBombFieldData testData;
-    [SerializeField] private BossTargetFinder testTargetFinder;
-    [SerializeField] private Transform testSpawnPoint;
 
     private MidBossBombFieldProjectile projectile;
     private bool isRented;
@@ -55,8 +50,6 @@ public class MidBossBombFieldPool : MonoBehaviour
 
         isRented = false;
 
-        projectile.GrowthFinished -= HandleTestGrowthFinished;
-
         projectile.Stop();
         projectile.gameObject.SetActive(false);
     }
@@ -77,42 +70,6 @@ public class MidBossBombFieldPool : MonoBehaviour
     private void OnDisable()
     {
         Return();
-    }
-
-    [ContextMenu("테스트/BombField 구체 발사")]
-    private void TestLaunch()
-    {
-        if (!Application.isPlaying || testData == null ||
-            testTargetFinder == null || testSpawnPoint == null)
-        {
-            return;
-        }
-
-        MidBossBombFieldProjectile rentedProjectile = Rent(testSpawnPoint.position);
-
-        if (rentedProjectile == null)
-            return;
-
-        rentedProjectile.GrowthFinished += HandleTestGrowthFinished;
-
-        if (!rentedProjectile.BeginGrowth(testData.GrowthDuration))
-            Return();
-    }
-
-    private void HandleTestGrowthFinished(MidBossBombFieldProjectile grownProjectile)
-    {
-        grownProjectile.GrowthFinished -= HandleTestGrowthFinished;
-
-        if (!testTargetFinder.TryGetTargetPosition(out Vector2 targetPosition))
-        {
-            Return();
-            return;
-        }
-
-        Vector2 direction = targetPosition - (Vector2)grownProjectile.transform.position;
-
-        if (!grownProjectile.Launch(direction, testData))
-            Return();
     }
 
     private void OnDestroy()

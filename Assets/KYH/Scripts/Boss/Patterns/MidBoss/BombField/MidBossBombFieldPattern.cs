@@ -15,6 +15,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     [SerializeField] private MidBossBombFieldPool projectilePool;
     [SerializeField] private MidBossBombFieldFloor floor;
     [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Collider2D groundCollider;
 
     private MidBossBombFieldProjectile activeProjectile;
     private Coroutine explosionWait;
@@ -36,7 +37,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     {
         if (bossHealth == null || patternRunner == null || targetFinder == null ||
             bossVisual == null || data == null || projectilePool == null ||
-            floor == null || spawnPoint == null)
+            floor == null || spawnPoint == null || groundCollider == null)
         {
             Debug.LogError("BombField실행 참조를 모두 연결해 주세요.", this);
             enabled = false;
@@ -151,9 +152,9 @@ public class MidBossBombFieldPattern : BossPriorityPattern
             return;
         }
 
-        Vector2 direction = targetPosition - (Vector2)projectile.transform.position;
+        Vector2 destination = new Vector2(targetPosition.x, groundCollider.bounds.max.y);
 
-        if (!projectile.Launch(direction, data))
+        if (!projectile.Launch(destination, data))
             CancelPriority();
     }
 

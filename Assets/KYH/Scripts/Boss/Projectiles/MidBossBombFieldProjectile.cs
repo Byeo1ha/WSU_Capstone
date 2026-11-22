@@ -21,35 +21,23 @@ public class MidBossBombFieldProjectile : MonoBehaviour
     private float explosionScaleMultiplier;
     private Tween growthTween;
 
-    [Header("충돌할 지형")]
-    [SerializeField] private LayerMask terrainLayer;
     [Header("구체 피해 대상")]
     [SerializeField] private LayerMask damageLayer;
-
-    [Header("수동 테스트")]
-    [SerializeField] private MidBossBombFieldData testData;
-    [SerializeField] private BossTargetFinder testTargetFinder;
-    [SerializeField] private Transform testSpawnPoint;
 
     [Header("폭발 범위 경고")]
     [SerializeField] private BombFieldWarning warningPrefab;
 
     private BombFieldWarning warningInstance;
 
-    private Vector2 moveDirection;
     private float moveSpeed;
-    private float explosionDelay;
-    private float timeUntilExplosion;
-
+    private Vector2 destination;
     private bool hasGrown;
     private bool isFlying;
-    private bool hasDetectedTerrain;
 
     public event Action<MidBossBombFieldProjectile> GrowthFinished;
     public event Action<MidBossBombFieldProjectile, Vector3> ExplosionRequested;
     public event Action<MidBossBombFieldProjectile> ExplosionFinished;
 
-    private readonly List<RaycastHit2D> predictionHits = new();
     private readonly HashSet<IDamageable> damagedTargets = new();
     private int attackDamage;
     private int explosionDamage;
@@ -131,40 +119,32 @@ public class MidBossBombFieldProjectile : MonoBehaviour
         GrowthFinished?.Invoke(this);
     }
 
-    public bool Launch(Vector2 direction, MidBossBombFieldData data)
+    public bool Launch(Vector2 targetPosition, MidBossBombFieldData data)
     {
         if (!isActiveAndEnabled || !hasGrown || isFlying ||
-            data == null || direction.sqrMagnitude <= 0.0001f)
+            data == null)
             return false;
 
-        moveDirection = direction.normalized;
+        destination = targetPosition;
+
         moveSpeed = Mathf.Max(0.01f, data.ProjectileSpeed);
-        explosionDelay = Mathf.Max(0f, data.ExplosionDelay);
         explosionScaleMultiplier = data.ExplosionRadiusMultiplier;
+        
         attackDamage = data.ProjectileDamage;
         explosionDamage = data.ExplosionDamage;
         damagedTargets.Clear();
 
         hasGrown = false;
-        hasDetectedTerrain = false;
-        timeUntilExplosion = 0f;
         isFlying = true;
 
         hitCollider.enabled = true;
         Physics2D.SyncTransforms();
 
-        if (!TryPredictExplosionPosition(out predictedExplosionPosition))
-        {
-            Debug.LogWarning("진행 방향에서 Wll 또는 Ground를 찾지 못했습니다.", this);
-
-
-            Stop();
-            return false;
-        }
-
         float colliderRadius = Mathf.Max(hitCollider.bounds.extents.x, hitCollider.bounds.extents.y);
 
         explosionRadius = colliderRadius * data.ExplosionRadiusMultiplier;
+        
+        predictedExplosionPosition = new Vector3(destination.x, destination.y, transform.position.z);
         hasPrediction = true;
         warningInstance.Show(predictedExplosionPosition, explosionRadius);
 
@@ -176,69 +156,19 @@ public class MidBossBombFieldProjectile : MonoBehaviour
         if (!isFlying)
             return;
 
-        if (hasDetectedTerrain)
-        {
-           timeUntilExplosion -= Time.fixedDeltaTime;
+        float moveDistance = moveSpeed * Time.fixedDeltaTime;
 
-           if (timeUntilExplosion <= 0f)
-            {
-                RequestExplosion();
-                return;
-            }
+        if (Vector2.Distance(body.position, destination) <= moveDistance)
+        {
+            body.position = destination;
+            RequestExplosion();
+            return;
         }
 
-       Vector2 nextPosition = body.position + moveDirection * moveSpeed * Time.fixedDeltaTime;
+        Vector2 nextPosition = Vector2.MoveTowards(body.position, destination, moveDistance);
 
        body.MovePosition(nextPosition);
     } 
-
-    private bool TryPredictExplosionPosition(out Vector3 position)
-    {
-        position = transform.position;
-
-        ContactFilter2D filter = new ContactFilter2D();
-        filter.SetLayerMask(terrainLayer);
-        filter.useTriggers = false;
-
-        predictionHits.Clear();
-
-        hitCollider.Cast(
-            moveDirection,
-            filter,
-            predictionHits,
-            Mathf.Infinity);
-
-        float nearestDistance = Mathf.Infinity;
-        bool found = false;
-
-        foreach (RaycastHit2D hit in predictionHits)
-        {
-            if (hit.collider == null)
-                continue;
-
-            bool isTerrain = hit.collider.CompareTag("Wall") || hit.collider.CompareTag("Ground");
-
-            if (!isTerrain || hit.distance >= nearestDistance)
-                continue;
-
-            nearestDistance = hit.distance;
-            found = true;
-        }
-
-        if (!found)
-            return false;
-
-        float travelDistance = nearestDistance + moveSpeed * explosionDelay;
-
-        Vector2 predictedPosition = body.position + moveDirection * travelDistance;
-
-        position = new Vector3(
-            predictedPosition.x,
-            predictedPosition.y,
-            transform.position.z);
-
-        return true;
-    }
 
     private void TryDamagePlayer(Collider2D other)
     {
@@ -260,27 +190,7 @@ public class MidBossBombFieldProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!isActiveAndEnabled || (!isFlying && !isExploding))
-            return;
-
         TryDamagePlayer(other);
-
-        if (!isFlying || hasDetectedTerrain)
-            return;
-
-        if ((terrainLayer.value &(1 << other.gameObject.layer)) == 0)
-            return;
-
-        bool isTerrain = other.CompareTag("Wall") || other.CompareTag("Ground");
-
-        if (!isTerrain)
-            return;
-
-        hasDetectedTerrain = true;
-        timeUntilExplosion = explosionDelay;
-
-        if (explosionDelay <= 0f)
-            RequestExplosion();
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -339,8 +249,6 @@ public class MidBossBombFieldProjectile : MonoBehaviour
         hasPrediction = false;
         isFlying = false;
         hasGrown = false;
-        hasDetectedTerrain = false;
-        timeUntilExplosion = 0f;
         growthTween?.Kill(false);
         growthTween = null;
 
@@ -368,44 +276,6 @@ public class MidBossBombFieldProjectile : MonoBehaviour
     {
         if (Application.isPlaying)
             BeginGrowth(1f);
-    }
-
-    [ContextMenu("테스트/성장 후 플레이어 방향 발사")]
-    private void TestGrowthAndLaunch()
-    {
-        if (!Application.isPlaying || testData == null ||
-            testTargetFinder == null || testSpawnPoint == null)
-            return;
-
-        Stop();
-
-        body.position = testSpawnPoint.position;
-
-        GrowthFinished -= HandleTestGrowthFinished;
-        GrowthFinished += HandleTestGrowthFinished;
-
-        if (!BeginGrowth(testData.GrowthDuration))
-            GrowthFinished -= HandleTestGrowthFinished;
-    }
-
-    private void HandleTestGrowthFinished(MidBossBombFieldProjectile projectile)
-    {
-        GrowthFinished -= HandleTestGrowthFinished;
-
-        if (!testTargetFinder.TryGetTargetPosition(out Vector2 targetPosition))
-        {
-            Debug.LogWarning("테스트할 플레이어를 찾지 못했습니다.", this);
-            Stop();
-            return;
-        }
-
-        Vector2 direction = targetPosition - (Vector2)transform.position;
-
-        if (!Launch(direction, testData))
-        {
-            Debug.LogWarning("테스트 구체를 발사하지 못했습니다.", this);
-            Stop();
-        }
     }
 
     private void OnDrawGizmosSelected()

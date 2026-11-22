@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ca759125e5cff40947e09468dd1486, type: 3}
   m_Name: MidBossBombFieldData
   m_EditorClassIdentifier: Assembly-CSharp::MidBossBombFieldData
+  growthDuration: 1
   projectileSpeed: 2
-  projectileRadius: 0.5
-  explossionDelay: 0.3
+  explossionDelay: 2
   explosionRadiusMultiplier: 1.5
   afterExplosionDely: 1
   fieldDuration: 2
