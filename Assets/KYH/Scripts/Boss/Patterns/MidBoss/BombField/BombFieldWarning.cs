@@ -1,4 +1,3 @@
-using R3.Triggers;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
@@ -30,8 +29,10 @@ public class BombFieldWarning : MonoBehaviour
 
         float diameter = radius * 2f;
 
+        float scale = diameter /spriteSize.x;
+
         transform.position = position;
-        transform.localScale = new Vector3(diameter / spriteSize.x, diameter / spriteSize.y, 1f);
+        transform.localScale = new Vector3(scale, scale, 1f);
 
         warningRenderer.enabled = true;
     }
