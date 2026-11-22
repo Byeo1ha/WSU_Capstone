@@ -1,5 +1,4 @@
 using System;
-using DG.Tweening;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -11,15 +10,12 @@ public class MidBossBombFieldProjectile : MonoBehaviour
     [SerializeField] private CircleCollider2D hitCollider;
     private Rigidbody2D body;
 
-    [Header("성장 시작 크기")]
-    [SerializeField, Range(0.01f, 1f)] private float StartScaleRatio = 0.1f;
-
     private Vector3 originalScale;
     private Animator orbAnimator;
     private Color originalColor;
     private bool isExploding;
+    private bool isGrowing;
     private float explosionScaleMultiplier;
-    private Tween growthTween;
 
     [Header("구체 피해 대상")]
     [SerializeField] private LayerMask damageLayer;
@@ -90,9 +86,10 @@ public class MidBossBombFieldProjectile : MonoBehaviour
         transform.position = currentPosition;
     }
 
-    public bool BeginGrowth(float duration)
+    public bool BeginGrowth()
     {
-        if (!isActiveAndEnabled || orbVisual == null)
+        if (!isActiveAndEnabled || orbVisual == null ||
+            orbAnimator == null || !orbAnimator.isActiveAndEnabled)
             return false;
 
         Stop();
@@ -100,21 +97,27 @@ public class MidBossBombFieldProjectile : MonoBehaviour
         orbAnimator.Update(0f);
         orbVisual.color = originalColor;
 
-        orbVisual.transform.localScale = originalScale * StartScaleRatio;
+        orbVisual.transform.localScale = new Vector3(0f, 0f, 1f);
         orbVisual.enabled = true;
 
-        growthTween = orbVisual.transform
-            .DOScale(originalScale, Mathf.Max(0.01f, duration))
-            .SetEase(Ease.Linear)
-            .OnComplete(HandleGrowthFinished);
+       isGrowing = true;
+
+       orbAnimator.SetTrigger("StartGrowth");
 
         return true;
     }
 
-    private void HandleGrowthFinished()
+    public void OnGrowthFinished()
     {
-        growthTween = null;
+        if (!isActiveAndEnabled || !isGrowing)
+            return;
+
+        isGrowing = false;
         hasGrown = true;
+
+        orbVisual.transform.localScale = Vector3.one;
+
+        orbAnimator.SetTrigger("StartFly");
 
         GrowthFinished?.Invoke(this);
     }
@@ -245,12 +248,11 @@ public class MidBossBombFieldProjectile : MonoBehaviour
 
     public void Stop()
     {
+        isGrowing = false;
         isExploding = false;
         hasPrediction = false;
         isFlying = false;
         hasGrown = false;
-        growthTween?.Kill(false);
-        growthTween = null;
 
         if (orbVisual != null)
             orbVisual.enabled = false;
@@ -275,7 +277,7 @@ public class MidBossBombFieldProjectile : MonoBehaviour
     private void TestGrowth()
     {
         if (Application.isPlaying)
-            BeginGrowth(1f);
+            BeginGrowth();
     }
 
     private void OnDrawGizmosSelected()

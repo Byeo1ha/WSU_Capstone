@@ -135,7 +135,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
 
         patternRunner.EnterActiveFromEvent(this);
 
-        if (!activeProjectile.BeginGrowth(data.GrowthDuration))
+        if (!activeProjectile.BeginGrowth())
             CancelPriority();
     }
 
