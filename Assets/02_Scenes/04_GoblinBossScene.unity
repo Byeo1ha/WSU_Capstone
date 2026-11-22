@@ -959,6 +959,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &650924107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 650924108}
+  - component: {fileID: 650924109}
+  m_Layer: 0
+  m_Name: BombFieldPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &650924108
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650924107}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1951833357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &650924109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650924107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a054b8448108e849b2f9f622c7f336e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossBombFieldPool
+  projectilePrefab: {fileID: 1002598904267973192, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
+  storageRoot: {fileID: 650924108}
+  testData: {fileID: 11400000, guid: cc764be6ee7e3834abcd37b77e9e7fd1, type: 2}
+  testTargetFinder: {fileID: 939212559}
+  testSpawnPoint: {fileID: 1936918424}
 --- !u!1 &796669384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1095,6 +1144,7 @@ GameObject:
   - component: {fileID: 939212575}
   - component: {fileID: 939212576}
   - component: {fileID: 939212577}
+  - component: {fileID: 939212578}
   m_Layer: 12
   m_Name: MidBoss
   m_TagString: Enemy
@@ -1423,7 +1473,7 @@ MonoBehaviour:
   totemPattern: {fileID: 939212564}
   fireWavePattern: {fileID: 939212576}
   fireFieldPattern: {fileID: 939212577}
-  bombFieldPattern: {fileID: 0}
+  bombFieldPattern: {fileID: 939212578}
   bossAnimator: {fileID: 939212572}
   fireballWindupClip: {fileID: 7400000, guid: eccdaefaa7ffe25438853c0d59ac26a9, type: 2}
   flamePillarWindupClip: {fileID: 7400000, guid: d373bcc9bae65994e9ee219fcf83cf82, type: 2}
@@ -1473,10 +1523,11 @@ MonoBehaviour:
   - {fileID: 939212577}
   priorityPatterns:
   - {fileID: 939212562}
-  autoStartPatterns: 0
+  - {fileID: 939212578}
+  autoStartPatterns: 1
   immediateAttackChance: 0.5
   initialActionDelay: 1.5
-  excludeLastPattern: 0
+  excludeLastPattern: 1
   bossHealth: {fileID: 939212569}
   facingTargetFinder: {fileID: 0}
   bossRenderer: {fileID: 0}
@@ -1522,6 +1573,26 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundSearchDisstance: 30
+--- !u!114 &939212578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939212558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecaab5e5e8c11d74aa1b5db3f2c98da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossBombFieldPattern
+  bossHealth: {fileID: 939212569}
+  patternRunner: {fileID: 939212568}
+  targetFinder: {fileID: 939212559}
+  bossVisual: {fileID: 939212573}
+  data: {fileID: 11400000, guid: cc764be6ee7e3834abcd37b77e9e7fd1, type: 2}
+  projectilePool: {fileID: 650924109}
+  floor: {fileID: 1699457356}
+  spawnPoint: {fileID: 1936918424}
 --- !u!1 &948679596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2350,6 +2421,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 548182767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1699457355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1699457357}
+  - component: {fileID: 1699457356}
+  m_Layer: 0
+  m_Name: BombFieldFloor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1699457356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699457355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7685bec581e4fef4a90c34311c14dac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossBombFieldFloor
+  blinkArea: {fileID: 548182766}
+  groundPoint: {fileID: 512217024}
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!4 &1699457357
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699457355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.40228, y: -0.23233, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709109555
 GameObject:
   m_ObjectHideFlags: 0
@@ -2581,33 +2701,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &1831183717 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1587365425454474422, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
-  m_PrefabInstance: {fileID: 7520684610227398322}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1831183721
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831183717}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4eb0bbf831bf0fb48b9e1dcda4d5c7bc, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1839345398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2839,6 +2932,7 @@ Transform:
   - {fileID: 1709109557}
   - {fileID: 339638293}
   - {fileID: 1269568126}
+  - {fileID: 650924108}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966675024
@@ -3069,10 +3163,6 @@ PrefabInstance:
       propertyPath: testTargetFinder
       value: 
       objectReference: {fileID: 939212559}
-    - target: {fileID: 1002598904267973192, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
-      propertyPath: damageLayer.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 1587365425454474422, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
       propertyPath: m_Name
       value: MidBossBombFieldProjectile
@@ -3120,10 +3210,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1587365425454474422, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1831183721}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04fbe671905a1a94b94170ce632ffc1b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -3149,3 +3236,4 @@ SceneRoots:
   - {fileID: 152587807}
   - {fileID: 1558258875}
   - {fileID: 7520684610227398322}
+  - {fileID: 1699457357}

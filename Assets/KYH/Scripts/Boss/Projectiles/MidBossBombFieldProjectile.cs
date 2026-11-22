@@ -91,6 +91,17 @@ public class MidBossBombFieldProjectile : MonoBehaviour
         Stop();
     }
 
+    public void PrepareAt(Vector3 position)
+    {
+        Stop();
+        
+        body.position = new Vector2(position.x, position.y);
+
+        Vector3 currentPosition = transform.position;
+        currentPosition.z = position.z;
+        transform.position = currentPosition;
+    }
+
     public bool BeginGrowth(float duration)
     {
         if (!isActiveAndEnabled || orbVisual == null)

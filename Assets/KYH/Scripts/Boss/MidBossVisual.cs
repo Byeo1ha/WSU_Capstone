@@ -11,7 +11,7 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private MidBossTotemPattern totemPattern;
     [SerializeField] private BossAttackPattern fireWavePattern;
     [SerializeField] private BossAttackPattern fireFieldPattern;
-    [SerializeField] private BossPriorityPattern bombFieldPattern;
+    [SerializeField] private MidBossBombFieldPattern bombFieldPattern;
 
     [Header("애니메이션 연결")]
     [SerializeField] private Animator bossAnimator;
@@ -278,6 +278,18 @@ public class MidBossVisual : MonoBehaviour
             return;
 
         bossAnimator.SetTrigger("CancelFireField");
+    }
+
+    public void BeginBombFieldOrb()
+    {
+        if (bombFieldPattern != null)
+            bombFieldPattern.BeginOrbGrowth();
+    }
+
+    public void BeginBombFieldFloor()
+    {
+        if (bombFieldPattern != null)
+            bombFieldPattern.BeginFloorFromAnimation();
     }
 
     public void StartBombFieldAnim()

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2775692642026136532}
   - component: {fileID: 1002598904267973192}
   - component: {fileID: 3518398792212027033}
+  - component: {fileID: 741438509333459996}
   m_Layer: 0
   m_Name: MidBossBombFieldProjectile
   m_TagString: Untagged
@@ -52,6 +53,9 @@ MonoBehaviour:
   terrainLayer:
     serializedVersion: 2
     m_Bits: 64
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   testData: {fileID: 11400000, guid: cc764be6ee7e3834abcd37b77e9e7fd1, type: 2}
   testTargetFinder: {fileID: 0}
   testSpawnPoint: {fileID: 0}
@@ -83,6 +87,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &741438509333459996
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1587365425454474422}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4eb0bbf831bf0fb48b9e1dcda4d5c7bc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4659949003538853018
 GameObject:
   m_ObjectHideFlags: 0
