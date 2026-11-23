@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MidBossFireFieldData
   m_EditorClassIdentifier: Assembly-CSharp::MidBossFireFieldData
   spawnCount: 3
-  spawnInterval: 0.5
-  warningDuration: 0.2
+  spawnInterval: 1
+  warningDuration: 0.5
   activeDuration: 3
   visualOffsetY: 0.2
   damage: 4
