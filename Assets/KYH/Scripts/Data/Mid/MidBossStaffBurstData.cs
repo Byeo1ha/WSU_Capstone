@@ -11,7 +11,7 @@ public class MidBossStaffBurstData : ScriptableObject
     [Header("패턴 전체에서 대상당 1회 피해")]
     [SerializeField, Min(0)] private int damage = 12;
 
-    public float BeanWidth => beamWidth;
+    public float BeamWidth => beamWidth;
     public float MaxDistance => maxDistance;
     public int Damage => damage;
 }
