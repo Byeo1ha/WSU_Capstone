@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 32aef3556a1ed1249be525b30d944217
+guid: cffd49afd7f4b6a45a517a12f94904b0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4376707814212475302
-    second: FireFieldEffect-sheet_0
+      213: 5875431778441130573
+    second: FireFieldEffect2-sheet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,67 +100,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FireFieldEffect-sheet_0
+      name: FireFieldEffect2-sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 30
         height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a99fc771903dbc30800000000000000
-      internalID: 4376707814212475302
+      spriteID: d427608b21ab98150800000000000000
+      internalID: 5875431778441130573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireFieldEffect-sheet_1
+      name: FireFieldEffect2-sheet_1
       rect:
         serializedVersion: 2
         x: 30
         y: 0
         width: 30
         height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b5b9a29d90552a847963d293856426c8
-      internalID: -1117481171
+      spriteID: 9ab1e391807ab514f8682b6df2781035
+      internalID: 1486500305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: FireFieldEffect-sheet_2
+      name: FireFieldEffect2-sheet_2
       rect:
         serializedVersion: 2
         x: 60
         y: 0
         width: 30
         height: 15
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 40ba58ccd57e46b4a8f192f2e0b0aac6
-      internalID: -1734852259
+      spriteID: ee29e78e09138c14c8c1bb813b2d2de9
+      internalID: 1335983593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireFieldEffect2-sheet_3
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 0
+        width: 30
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1908b3138efb114081f238b8986c03d
+      internalID: 1073638664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FireFieldEffect2-sheet_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 0
+        width: 30
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: accf655393af83c45ac61effd0d4211c
+      internalID: -877319073
       vertices: []
       indices: 
       edges: []
@@ -169,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3485c36a526dadd458cd8ad3202f6d1f
+    spriteID: 942c853140b85944592a43743a478444
     internalID: 0
     vertices: []
     indices: 
@@ -179,11 +223,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":30.0,"y":15.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":30.0,"y":15.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      FireFieldEffect-sheet_0: 4376707814212475302
-      FireFieldEffect-sheet_1: -1117481171
-      FireFieldEffect-sheet_2: -1734852259
+      FireFieldEffect2-sheet_0: 5875431778441130573
+      FireFieldEffect2-sheet_1: 1486500305
+      FireFieldEffect2-sheet_2: 1335983593
+      FireFieldEffect2-sheet_3: 1073638664
+      FireFieldEffect2-sheet_4: -877319073
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

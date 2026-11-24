@@ -19,6 +19,6 @@ MonoBehaviour:
   afterExplosionDely: 1
   fieldDuration: 2
   fieldDamageHeight: 0.5
-  projectileDamage: 4
-  explosionDamage: 4
-  fieldDamage: 4
+  projectileDamage: 14
+  explosionDamage: 14
+  fieldDamage: 10

@@ -8,6 +8,8 @@ public class MidBossStaffBurstPattern : BossAttackPattern
     [SerializeField] private BossHealth bossHealth;
     [SerializeField] private SpriteRenderer bossRenderer;
     [SerializeField] private Transform staffBurstPoint;
+    [Tooltip("발사점을 배치할 떄 보스의 FlipX 상태")]
+    [SerializeField] private bool pointReferenceFlipX;
 
     [Header("광선 연결")]
     [SerializeField] private MidBossStaffBurstData data;
@@ -103,7 +105,7 @@ public class MidBossStaffBurstPattern : BossAttackPattern
     {
         Vector3 localPoint = staffBurstPoint.localPosition;
 
-        if (bossRenderer.flipX)
+        if (bossRenderer.flipX != pointReferenceFlipX)
             localPoint.x = -localPoint.x;
 
         castPosition = staffBurstPoint.parent.TransformPoint(localPoint);

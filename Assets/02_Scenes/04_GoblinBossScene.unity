@@ -1312,6 +1312,7 @@ GameObject:
   - component: {fileID: 939212576}
   - component: {fileID: 939212577}
   - component: {fileID: 939212578}
+  - component: {fileID: 939212579}
   m_Layer: 12
   m_Name: MidBoss
   m_TagString: Enemy
@@ -1762,6 +1763,32 @@ MonoBehaviour:
   floor: {fileID: 1699457356}
   spawnPoint: {fileID: 1936918424}
   groundCollider: {fileID: 512217025}
+--- !u!114 &939212579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939212558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8529c56428f77ae4781846f2bdcbcb6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstPattern
+  patternRunner: {fileID: 939212568}
+  bossHealth: {fileID: 939212569}
+  bossRenderer: {fileID: 939212570}
+  staffBurstPoint: {fileID: 1674449517}
+  pointReferenceFlipX: 1
+  data: {fileID: 11400000, guid: 937a99bc95197f04aa70b1f4a4329856, type: 2}
+  beamPrefab: {fileID: 4113238246552416835}
+  beamRoot: {fileID: 1007077476}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 5120
 --- !u!1 &948679596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1898,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1007077475
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007077476}
+  m_Layer: 0
+  m_Name: StaffBurstBeams
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007077476
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007077475}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1951833357}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1044981434
 GameObject:
@@ -3133,6 +3191,7 @@ Transform:
   - {fileID: 339638293}
   - {fileID: 1269568126}
   - {fileID: 650924108}
+  - {fileID: 1007077476}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1966675024
@@ -3359,13 +3418,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: MidBossStaffBurstBeam
       objectReference: {fileID: 0}
+    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: attackSprite
+      value: 
+      objectReference: {fileID: 6127091781583093504, guid: c1cbcb6968efc014494f89f7d8884067, type: 3}
+    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: attackColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: attackColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: attackColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370671823626098595, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: m_Size.x
+      value: 6.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4370671823626098595, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: m_Size.y
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196224611147309509, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: fdd820c3bc493ce4d8e14b0ef425f0c3, type: 2}
     - target: {fileID: 8458279864036407540, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 16.02
       objectReference: {fileID: 0}
     - target: {fileID: 8458279864036407540, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.74
       objectReference: {fileID: 0}
     - target: {fileID: 8458279864036407540, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3404,6 +3491,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+--- !u!114 &4113238246552416835 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+  m_PrefabInstance: {fileID: 4113238246552416834}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d6478fe9aea754881f341290c45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstBeam
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8458279864036407540}
   - component: {fileID: 4370671823626098595}
   - component: {fileID: 2185784732783939972}
+  - component: {fileID: 7196224611147309509}
   m_Layer: 0
   m_Name: MidBossStaffBurstBeam
   m_TagString: Untagged
@@ -87,7 +88,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 6.25, y: 0.33333334}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -105,6 +106,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstBeam
   warningSprite: {fileID: 7482667652216324306, guid: 75e7518e89393984bb494bf981331498, type: 3}
-  attackSprite: {fileID: 7482667652216324306, guid: 75e7518e89393984bb494bf981331498, type: 3}
+  attackSprite: {fileID: 6127091781583093504, guid: c1cbcb6968efc014494f89f7d8884067, type: 3}
   warningColor: {r: 1, g: 0.15, b: 0.1, a: 0.35}
-  attackColor: {r: 1, g: 0.8, b: 0.2, a: 1}
+  attackColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!95 &7196224611147309509
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822518817703037536}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fdd820c3bc493ce4d8e14b0ef425f0c3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
