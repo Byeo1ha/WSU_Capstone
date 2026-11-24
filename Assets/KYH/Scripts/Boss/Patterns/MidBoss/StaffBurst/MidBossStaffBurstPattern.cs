@@ -8,7 +8,7 @@ public class MidBossStaffBurstPattern : BossAttackPattern
     [SerializeField] private BossHealth bossHealth;
     [SerializeField] private SpriteRenderer bossRenderer;
     [SerializeField] private Transform staffBurstPoint;
-    [Tooltip("발사점을 배치할 떄 보스의 FlipX 상태")]
+    [Tooltip("발사점을 배치할 때 보스의 FlipX 상태")]
     [SerializeField] private bool pointReferenceFlipX;
 
     [Header("광선 연결")]
@@ -20,12 +20,12 @@ public class MidBossStaffBurstPattern : BossAttackPattern
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private LayerMask damageLayer;
 
-    private readonly Vector2[] directions = {Vector2.left, 
+    private readonly Vector2[] directions = {Vector2.left,
         Vector2.right, Vector2.up, new Vector2(-1f, 1f).normalized,
         new Vector2(1f, 1f).normalized};
-    
+
     private readonly MidBossStaffBurstBeam[] beams = new MidBossStaffBurstBeam[5];
-    private readonly float[] beamLengths = new float[5];
+
 
     private readonly List<RaycastHit2D> terrainHits = new();
     private readonly List<Collider2D> foundColliders = new();
@@ -73,7 +73,26 @@ public class MidBossStaffBurstPattern : BossAttackPattern
         if (state != BossPatternState.Windup && state != BossPatternState.Active)
         {
             AbortPattern();
+            return;
         }
+
+        if (!hasFired || Time.timeScale <= 0f)
+            return;
+
+        bool hasRunningBeam = false;
+
+        for (int i = 0; i < beams.Length; i++)
+        {
+            if (!ownsExecution || bossHealth.IsDead || Time.timeScale <= 0f)
+                return;
+
+            beams[i].Tick(Time.deltaTime);
+            CheckBeamDamage(i);
+            hasRunningBeam |= beams[i].IsRunning;
+        }
+
+        if (!hasRunningBeam)
+            TryCompleteActive();
     }
 
     public override bool TryStartAttack()
@@ -83,6 +102,15 @@ public class MidBossStaffBurstPattern : BossAttackPattern
             !patternRunner.TrySelectPattern(this))
         {
             return false;
+        }
+
+        foreach (MidBossStaffBurstBeam beam in beams)
+        {
+            if (beam == null || !beam.IsReady || !beam.isActiveAndEnabled)
+            {
+                Debug.LogError("광선 프리팹의 레이저 그림과 Renderer 연결을 확인해 주세요.", this);
+                return false;
+            }
         }
 
         ownsExecution = true;
@@ -123,11 +151,10 @@ public class MidBossStaffBurstPattern : BossAttackPattern
         for (int i = 0; i < directions.Length; i++)
         {
             float length = FindBeamLength(directions[i]);
-            beamLengths[i] = length;
 
-            Vector3 enddPosition = castPosition + (Vector3)(directions[i] * length);
+            Vector3 endPosition = castPosition + (Vector3)(directions[i] * length);
 
-            beams[i].ShowWarning(castPosition, enddPosition, castWidth);
+            beams[i].ShowWarning(castPosition, endPosition, castWidth);
         }
     }
 
@@ -174,21 +201,22 @@ public class MidBossStaffBurstPattern : BossAttackPattern
                 return;
             }
 
-            beams[i].ShowAttack();
-            CheckBeamDamage(i);
+            beams[i].ShowAttack(data.EmissionDuration, data.MoveSpeed);
         }
     }
 
     private void CheckBeamDamage(int index)
     {
-        float length = beamLengths[index];
+        float length = beams[index].VisibleLength;
 
         if (length <= 0.001f)
             return;
 
         Vector2 direction = directions[index];
 
-        Vector2 center = (Vector2)castPosition + direction * (length * 0.5f);
+        float centerDistance = beams[index].VisibleStart + length * 0.5f;
+
+        Vector2 center = (Vector2)castPosition + direction * centerDistance;
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -220,11 +248,23 @@ public class MidBossStaffBurstPattern : BossAttackPattern
 
     public void OnAnimationFinished()
     {
+        TryCompleteActive();
+    }
+
+    private void TryCompleteActive()
+    {
         if (!ownsExecution || !hasFired ||
             !patternRunner.IsSelectedPattern(this) ||
             patternRunner.CurrentState != BossPatternState.Active)
         {
             return;
+        }
+
+        // 보스 모션이 먼저 끝나도 레이저의 마지막 꼬리까지 기다립니다.
+        foreach (MidBossStaffBurstBeam beam in beams)
+        {
+            if (beam != null && beam.IsRunning)
+                return;
         }
 
         ClearExecution();

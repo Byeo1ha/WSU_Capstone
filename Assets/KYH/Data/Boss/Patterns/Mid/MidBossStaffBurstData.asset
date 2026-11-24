@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef8c5b78f8f69f0449ac6adbc022a933, type: 3}
   m_Name: MidBossStaffBurstData
   m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstData
-  beamWidth: 0.3
+  beamWidth: 0.5
   maxDistance: 30
+  emissionDuration: 0.3
+  moveSpeed: 20
   damage: 12

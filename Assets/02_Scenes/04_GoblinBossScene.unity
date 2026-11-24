@@ -1781,14 +1781,14 @@ MonoBehaviour:
   staffBurstPoint: {fileID: 1674449517}
   pointReferenceFlipX: 1
   data: {fileID: 11400000, guid: 937a99bc95197f04aa70b1f4a4329856, type: 2}
-  beamPrefab: {fileID: 4113238246552416835}
+  beamPrefab: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
   beamRoot: {fileID: 1007077476}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   damageLayer:
     serializedVersion: 2
-    m_Bits: 5120
+    m_Bits: 1024
 --- !u!1 &948679596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2881,6 +2881,35 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb2d7ed3438476439d4f02b9c380767, type: 3}
+--- !u!1 &1799781117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1822518817703037536, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+  m_PrefabInstance: {fileID: 7142074273909733128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1799781119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+  m_PrefabInstance: {fileID: 7142074273909733128}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799781117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12d6478fe9aea754881f341290c45baa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstBeam
+--- !u!210 &1799781122
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1799781117}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &1813787737
 GameObject:
   m_ObjectHideFlags: 0
@@ -3406,7 +3435,7 @@ MonoBehaviour:
   fireballPrefab: {fileID: 2527840830018875757, guid: c16ab456356b80949a5674ecddeb914f, type: 3}
   storageRoot: {fileID: 948679597}
   initialCount: 3
---- !u!1001 &4113238246552416834
+--- !u!1001 &7142074273909733128
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -3418,34 +3447,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MidBossStaffBurstBeam
       objectReference: {fileID: 0}
-    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: attackSprite
-      value: 
-      objectReference: {fileID: 6127091781583093504, guid: c1cbcb6968efc014494f89f7d8884067, type: 3}
-    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: attackColor.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: attackColor.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: attackColor.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4370671823626098595, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: m_Size.x
-      value: 6.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 4370671823626098595, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: m_Size.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 7196224611147309509, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: fdd820c3bc493ce4d8e14b0ef425f0c3, type: 2}
     - target: {fileID: 8458279864036407540, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.02
@@ -3489,19 +3490,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1822518817703037536, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1799781122}
   m_SourcePrefab: {fileID: 100100000, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
---- !u!114 &4113238246552416835 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-  m_PrefabInstance: {fileID: 4113238246552416834}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d6478fe9aea754881f341290c45baa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstBeam
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3527,4 +3520,4 @@ SceneRoots:
   - {fileID: 1558258875}
   - {fileID: 1699457357}
   - {fileID: 332412386}
-  - {fileID: 4113238246552416834}
+  - {fileID: 7142074273909733128}
