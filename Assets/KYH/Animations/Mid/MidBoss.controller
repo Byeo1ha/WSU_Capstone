@@ -104,6 +104,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &-7368118949131508694
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MidBoss_StaffBurst
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 01d56462a150481459f0a8e9b2336ac8, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-7000009338030592263
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -416,6 +442,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 4138766030088144281}
     m_Position: {x: 670, y: 340, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7368118949131508694}
+    m_Position: {x: 705, y: 405, z: 0}
   m_ChildStateMachines:
   - serializedVersion: 1
     m_StateMachine: {fileID: 7568447467341615416}
@@ -432,15 +461,15 @@ AnimatorStateMachine:
   - {fileID: 3899760333362264668}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: -8764427243515088935}
-    second:
-    - {fileID: 7158355952754125135}
   - first: {fileID: 7568447467341615416}
     second:
     - {fileID: 6344807881994045184}
   - first: {fileID: -6694492976192158321}
     second:
     - {fileID: 9216141422204317814}
+  - first: {fileID: -8764427243515088935}
+    second:
+    - {fileID: 7158355952754125135}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
