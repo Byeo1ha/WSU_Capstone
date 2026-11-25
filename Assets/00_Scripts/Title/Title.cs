@@ -21,7 +21,7 @@ public class Title : MonoBehaviour
     public void StartBtn()
     {
         sceneFlowService.LoadSceneAsync(startSceneName,
-            SceneFlowService.LoadingSceneType.Long
+            SceneFlowService.LoadingSceneType.Short
         )
         .Forget();
     }
