@@ -6,6 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
+public enum PortraitSide
+{
+    None,
+    Right,
+    Left
+}
+
 public class CutsceneDialogue : MonoBehaviour
 {
     [SerializeField] private CanvasGroup textBox;
@@ -21,6 +28,7 @@ public class CutsceneDialogue : MonoBehaviour
     private bool isTyping;
     private bool isWaiting;
     private bool nextRequested;
+    private bool cantInteract;
 
     [Inject]
     public void Construct(InputManager inputManager)
@@ -40,7 +48,8 @@ public class CutsceneDialogue : MonoBehaviour
     private void Start()
     {
         inputManager.OnInteract
-            .Where(_ => isActiveAndEnabled)
+            .Where(_ => 
+                isActiveAndEnabled && !cantInteract)
             .Subscribe(_ => HandleInteract())
             .AddTo(this);
     }
@@ -60,6 +69,11 @@ public class CutsceneDialogue : MonoBehaviour
         }
     }
 
+    public void SetCantInteract(bool value)
+    {
+        cantInteract = value;
+    }
+
     public async UniTask ShowAsync()
     {
         speakerName.SetText("");
@@ -74,13 +88,16 @@ public class CutsceneDialogue : MonoBehaviour
         await textBox.DOFade(0f, 0.5f).SetLink(gameObject).AsyncWaitForCompletion();
     }
 
-    public async UniTask ShowLineAsync(CutsceneSpeakerData speaker, bool isLeft, string text)
+    public async UniTask ShowLineAsync(CutsceneSpeakerData speaker, PortraitSide side, string text,
+        float autoAdvanceDelay = float.PositiveInfinity)
     {
         speakerName.SetText(speaker.DisplayName);
+        bool isLeft = side == PortraitSide.Left;
+        bool isRight = side == PortraitSide.Right;
         leftPortraitBox.SetActive(isLeft);
-        rightPortraitBox.SetActive(!isLeft);
+        rightPortraitBox.SetActive(isRight);
         if (isLeft) leftPortrait.sprite = speaker.Portrait;
-        else rightPortrait.sprite = speaker.Portrait;
+        else if (isRight) rightPortrait.sprite = speaker.Portrait;
 
         dialogueText.SetText(text);
         dialogueText.maxVisibleCharacters = 0;
@@ -103,7 +120,8 @@ public class CutsceneDialogue : MonoBehaviour
             await UniTask.NextFrame(cancellationToken: this.GetCancellationTokenOnDestroy());
         }
 
-        await UniTask.WaitUntil(() => nextRequested,
+        float advanceAt = Time.time + autoAdvanceDelay;
+        await UniTask.WaitUntil(() => nextRequested || Time.time >= advanceAt,
             cancellationToken: this.GetCancellationTokenOnDestroy());
         isWaiting = false;
     }

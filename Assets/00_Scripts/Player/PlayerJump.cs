@@ -14,9 +14,6 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private Vector2 groundCheckSize = new Vector2(0.7f, 0.08f); //바닥 감지용 크기
     [SerializeField] private LayerMask groundLayer; //바닥 레이어 지정
 
-    [Header("근접 판정")]
-    [SerializeField] private float nearGroundDistance = 1f; //바닥이랑 가까워지는 거리
-
     private InputManager inputManager;
     private PlayerState playerState;
 
@@ -59,18 +56,5 @@ public class PlayerJump : MonoBehaviour
     {
         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         playerState.StartJump();
-    }
-
-    // 외부에서 지면에 가까운지 확인하고 반환해주는 함수 
-    public bool IsNearGround()
-    {
-        if (rigid.linearVelocity.y >= 0f) return false;
-
-        Vector2 checkSize = new Vector2(groundCheckSize.x, nearGroundDistance);
-
-        Vector2 checkPosition = (Vector2)groundCheck.position
-            + Vector2.down * nearGroundDistance * 0.5f;
-
-        return Physics2D.OverlapBox(checkPosition, checkSize, 0f, groundLayer);
     }
 }

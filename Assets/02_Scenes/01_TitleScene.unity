@@ -862,7 +862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3052a09e6da2d41a6924b5ac6fbc0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Title
-  startSceneName: 03_TutorialScene
+  startSceneName: Act1
 --- !u!4 &643050925
 Transform:
   m_ObjectHideFlags: 0
