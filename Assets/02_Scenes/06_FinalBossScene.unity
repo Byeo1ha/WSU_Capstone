@@ -1742,11 +1742,12 @@ MonoBehaviour:
   bossHealth: {fileID: 1808303663}
   targetFinder: {fileID: 1808303660}
   bossBody: {fileID: 1808303657}
-  bossRenderer: {fileID: 0}
+  bossRenderer: {fileID: 1808303653}
+  bossAnimation: {fileID: 1808303666}
   leftDashLimit: {fileID: 720221217}
   rightDashLimit: {fileID: 1192600504}
   dashDistance: 4
-  dashDuration: 0.25
+  dashDuration: 0.15
   dashWarningPrefab: {fileID: 3792776907292008447, guid: 6407a428bc77e834c9fa69198d525e76, type: 3}
   warningHeight: 1.5
   warningOffsetY: 0
@@ -1824,6 +1825,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: 05ee43efb91765c4c8ee8bfe77cd38bc, type: 2}
   slash: {fileID: 1808303655}
   ComboAnimator: {fileID: 1808303652}
+  bossAnimation: {fileID: 1808303666}
   comboRenderer: {fileID: 1808303653}
 --- !u!114 &1808303660
 MonoBehaviour:
@@ -1868,6 +1870,7 @@ MonoBehaviour:
   bossHealth: {fileID: 1808303663}
   facingTargetFinder: {fileID: 1808303660}
   bossRenderer: {fileID: 1808303653}
+  facingAnimator: {fileID: 1808303652}
 --- !u!114 &1808303662
 MonoBehaviour:
   m_ObjectHideFlags: 0

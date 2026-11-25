@@ -4,6 +4,7 @@ using System;
 public class BossPatternRunner : MonoBehaviour
 {
     private bool canStartPattern = true;
+    private bool waitForActiveEvent;
 
     [Header("단계 타이머")]
     [SerializeField] private float stateTimeRemaining;
@@ -68,6 +69,9 @@ public class BossPatternRunner : MonoBehaviour
            currentState == BossPatternState.Active)
             return;
 
+        if (currentState == BossPatternState.Windup && waitForActiveEvent) 
+            return;
+
         stateTimeRemaining = Mathf.Max(0f, stateTimeRemaining - Time.deltaTime);
 
         if(stateTimeRemaining > 0f)
@@ -101,7 +105,7 @@ public class BossPatternRunner : MonoBehaviour
         StartPatternInternal(1f, duration);
     }
 
-    private void StartPatternInternal(float windupScale, float? windupDurationOverride)
+    private void StartPatternInternal(float windupScale, float? windupDurationOverride, bool useActiveEvent = false)
     {
          if(!IsStartAllowed || currentState != BossPatternState.Idle)
             return;
@@ -123,7 +127,24 @@ public class BossPatternRunner : MonoBehaviour
         CurrentWindupDuration = Mathf.Max(0f, windupDurationOverride ?? (patternData.WindupDuration * scale));
 
         stateTimeRemaining = CurrentWindupDuration;
+        waitForActiveEvent = useActiveEvent;
         ChangeState(BossPatternState.Windup);
+    }
+
+    public void StartPatternWaitingForActiveEvent()
+    {
+        StartPatternInternal(1f, null, useActiveEvent: true);
+    }
+
+    public void EnterActiveFromEvent(MonoBehaviour pattern)
+    {
+        if (!IsStartAllowed || !waitForActiveEvent || currentState != BossPatternState.Windup ||
+            pattern == null || !pattern.isActiveAndEnabled || !IsSelectedPattern(pattern))
+                return;
+
+            waitForActiveEvent = false;
+            stateTimeRemaining = 0f;
+            ChangeState(BossPatternState.Active);
     }
 
     public void CompleteActive()
@@ -140,6 +161,7 @@ public class BossPatternRunner : MonoBehaviour
 
     public void StopPattern()
     {
+        waitForActiveEvent = false;
         stateTimeRemaining = 0f;
         ChangeState(BossPatternState.Idle);
     }

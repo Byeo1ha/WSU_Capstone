@@ -10,6 +10,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private Rigidbody2D bossBody;
     [SerializeField] private SpriteRenderer bossRenderer;
+    [SerializeField] private FinalBossAnimation bossAnimation;
 
     [Header("돌진 이동 한계")]
     [SerializeField] private Transform leftDashLimit;
@@ -45,12 +46,13 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
     private bool isDashHitting;
     private bool dashMovementFinished;
     private bool ownsExecution;
+    private bool playedDashMotion;
     private float destinationX;
     private Tween dashTween;
 
     private void Awake()
     {
-        if(patternRunner != null && bossHealth != null && bossBody != null)
+        if(patternRunner != null && bossHealth != null && bossBody != null && bossAnimation != null)
         {
             if (dashWarningPrefab != null)
                 dashWarning = Instantiate(dashWarningPrefab);
@@ -146,7 +148,11 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
             if (bossRenderer != null)
                 bossRenderer.flipX = direction < 0;
-            ShowDashWarning(startX);
+            
+            bossAnimation.StartDashAnim();
+            playedDashMotion = true;
+            
+            ShowDashWarning(startX, direction < 0);
             return;
         }
 
@@ -155,8 +161,18 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
         if (state == BossPatternState.Active)
             BeginDash();
-        else if (state == BossPatternState.Recovery || state == BossPatternState.Idle)
+        else if (state == BossPatternState.Recovery)
+            CancelExecution(playFinishMotion: dashMovementFinished);
+        else if (state == BossPatternState.Idle)
             CancelExecution();
+    }
+
+    public void OnDashAttackFrame()
+    {
+        if (!ownsExecution || !CanExecute())
+            return;
+
+        patternRunner.EnterActiveFromEvent(this);
     }
 
     private void BeginDash()
@@ -184,7 +200,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         isDashHitting = true;
 
         dashTween = bossBody.DOMoveX(destinationX, dashDuration)
-            .SetEase(Ease.Linear)
+            
             .SetUpdate(UpdateType.Fixed)
             .OnComplete(FinishDash);
     }
@@ -227,7 +243,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
 
     }
 
-    private void CancelExecution()
+    private void CancelExecution(bool playFinishMotion = false)
     {
         ownsExecution = false;
         dashTween?.Kill(false);
@@ -237,6 +253,18 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         isDashHitting = false;
         dashMovementFinished = false;
         damagedTargets.Clear();
+        bool shouldResetMotion = playedDashMotion;
+        playedDashMotion = false;
+
+        if (!shouldResetMotion || bossAnimation == null)
+            return;
+
+        if (playFinishMotion)
+            bossAnimation.FinishDashAnim();
+        else
+            bossAnimation.CancelDashAnim();
+
+        
     }
 
     private void AbortPattern()
@@ -245,12 +273,12 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         patternRunner.StopPattern();
     }
 
-    private void ShowDashWarning(float startX)
+    private void ShowDashWarning(float startX, bool flipX)
     {
         if (dashWarning == null)
             return;
 
-       dashWarning.Show(startX, destinationX, bossBody.position.y + warningOffsetY, warningHeight);
+       dashWarning.Show(startX, destinationX, bossBody.position.y + warningOffsetY, warningHeight, flipX);
     }
 
     private void HideDashWarning()
@@ -264,7 +292,7 @@ public class FinalBossDashPattern : BossAttackPattern, IBossApproachRange
         if (!CanExecute() || !patternRunner.TrySelectPattern(this))
             return false;
 
-        patternRunner.StartPattern();
+        patternRunner.StartPatternWaitingForActiveEvent();
 
         return ownsExecution && patternRunner.CurrentState == BossPatternState.Windup;
     }

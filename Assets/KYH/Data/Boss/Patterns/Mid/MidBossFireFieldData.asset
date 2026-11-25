@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 313488b436d20a449b6c38176cafd1f7, type: 3}
+  m_Name: MidBossFireFieldData
+  m_EditorClassIdentifier: Assembly-CSharp::MidBossFireFieldData
+  spawnCount: 3
+  spawnInterval: 1
+  warningDuration: 0.5
+  activeDuration: 3
+  visualOffsetY: 0
+  damage: 4
+  damageInterval: 0.5
+  damageSize: {x: 1.3, y: 0.5}
+  damageOffset: {x: 0, y: 0.25}

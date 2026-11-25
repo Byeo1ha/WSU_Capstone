@@ -1,0 +1,254 @@
+using System.Collections;
+using UnityEngine;
+
+
+public class MidBossBombFieldPattern : BossPriorityPattern
+{
+    [Header("보스 연결")]
+    [SerializeField] private BossHealth bossHealth;
+    [SerializeField] private BossPatternRunner patternRunner;
+    [SerializeField] private BossTargetFinder targetFinder;
+    [SerializeField] private MidBossVisual bossVisual;
+
+    [Header("BombField 연결")]
+    [SerializeField] private MidBossBombFieldData data;
+    [SerializeField] private MidBossBombFieldPool projectilePool;
+    [SerializeField] private MidBossBombFieldFloor floor;
+    [SerializeField] private Transform spawnPoint;
+    [SerializeField] private Collider2D groundCollider;
+
+    private MidBossBombFieldProjectile activeProjectile;
+    private Coroutine explosionWait;
+
+    private bool isPending;
+    private bool hasStartedGrowth;
+    private bool canStartFloor;
+    private bool hasStartedFloor;
+
+    private Vector2 explosionPosition;
+    private float explosionRadius;
+
+    public override bool IsPending => isPending;
+    public override bool IsRunning => isRunning;
+
+    private bool isRunning;
+
+    private void OnEnable()
+    {
+        if (bossHealth == null || patternRunner == null || targetFinder == null ||
+            bossVisual == null || data == null || projectilePool == null ||
+            floor == null || spawnPoint == null || groundCollider == null)
+        {
+            Debug.LogError("BombField실행 참조를 모두 연결해 주세요.", this);
+            enabled = false;
+            return;
+        }
+
+        projectilePool.ExplosionFinished += HandleExplosionFinished;
+        floor.Finished += HandleFloorFinished;
+        patternRunner.StateChanged += HandleStateChanged;
+    }
+
+    private void OnDisable()
+    {
+        if (projectilePool != null)
+            projectilePool.ExplosionFinished -= HandleExplosionFinished;
+
+        if (floor != null)
+            floor.Finished -= HandleFloorFinished;
+
+        if (patternRunner != null)
+            patternRunner.StateChanged -= HandleStateChanged;
+
+        CancelPriority();
+    }
+
+    private void Update()
+    {
+        if (bossHealth.IsDead)
+        {
+            isPending = false;
+
+            if (isRunning)
+                CancelPriority();
+            
+            return;
+        }
+
+        if (isRunning && !patternRunner.IsStartAllowed)
+            CancelPriority();
+    } 
+
+    public void RequestPattern()
+    {
+        if (!isActiveAndEnabled || bossHealth.IsDead)
+            return;
+
+        isPending = true;
+    }
+
+    public override bool TryStartPriority()
+    {
+        if (!isActiveAndEnabled || !isPending || isRunning ||
+            bossHealth.IsDead || !patternRunner.IsStartAllowed ||
+            patternRunner.CurrentState != BossPatternState.Idle ||
+            !projectilePool.isActiveAndEnabled || !floor.isActiveAndEnabled ||
+            !patternRunner.TrySelectPattern(this))
+        {
+            return false;
+        }
+
+        isRunning = true;
+        hasStartedGrowth = false;
+        canStartFloor = false;
+        hasStartedFloor = false;
+
+        patternRunner.StartPatternWaitingForActiveEvent();
+
+        if (patternRunner.CurrentState != BossPatternState.Windup)
+        {
+            CancelPriority();
+            return false;
+        }
+
+        isPending = false;
+        bossVisual.StartBombFieldAnim();
+        return true;
+    }
+
+    public void BeginOrbGrowth()
+    {
+        if (!isRunning || hasStartedGrowth || bossHealth.IsDead)
+            return;
+
+        hasStartedGrowth = true;
+
+        activeProjectile = projectilePool.Rent(spawnPoint.position);
+
+        if (activeProjectile == null)
+        {
+            CancelPriority();
+            return;
+        }
+
+        activeProjectile.GrowthFinished += HandleGrowthFinished;
+
+        patternRunner.EnterActiveFromEvent(this);
+
+        if (!activeProjectile.BeginGrowth())
+            CancelPriority();
+    }
+
+    private void HandleGrowthFinished(MidBossBombFieldProjectile projectile)
+    {
+        projectile.GrowthFinished -= HandleGrowthFinished;
+
+        if (!isRunning || projectile != activeProjectile)
+            return;
+
+        if (!targetFinder.TryGetTargetPosition(out Vector2 targetPosition))
+        {
+            CancelPriority();
+            return;
+        }
+
+        Vector2 destination = new Vector2(targetPosition.x, groundCollider.bounds.max.y);
+
+        if (!projectile.Launch(destination, data))
+            CancelPriority();
+    }
+
+    private void HandleExplosionFinished(Vector3 position, float radius)
+    {
+        if (!isRunning || activeProjectile == null)
+            return;
+
+        activeProjectile.GrowthFinished -= HandleGrowthFinished;
+        activeProjectile = null;
+
+        explosionPosition = position;
+        explosionRadius = radius;
+
+        explosionWait = StartCoroutine(WaitForFloor());
+    }
+
+    private IEnumerator WaitForFloor()
+    {
+        yield return new WaitForSeconds(data.AfterExplosionDelay);
+
+        explosionWait = null;
+
+        if (!isRunning || bossHealth.IsDead)
+            yield break;
+
+        canStartFloor = true;
+        bossVisual.ContinueBombFieldAnim();
+    }
+
+    public void BeginFloorFromAnimation()
+    {
+        if (!isRunning || !canStartFloor || hasStartedFloor || bossHealth.IsDead)
+        {
+            return;
+        }
+
+        hasStartedFloor = true;
+
+        if (!floor.Begin(data, explosionPosition, explosionRadius))
+            CancelPriority();
+    }
+
+    private void HandleFloorFinished()
+    {
+        if (!isRunning || !hasStartedFloor)
+            return;
+
+        isRunning = false;
+
+        if (patternRunner.IsSelectedPattern(this))
+            patternRunner.CompleteActive();
+    }
+
+    private void HandleStateChanged(BossPatternState state)
+    {
+        if (isRunning && state == BossPatternState.Idle)
+            CancelPriority();
+    }
+
+    public override void CancelPriority()
+    {
+        bool wasRunning = isRunning;
+        isRunning = false;
+
+        if (explosionWait != null)
+        {
+            StopCoroutine(explosionWait);
+            explosionWait = null;
+        }
+
+        if (activeProjectile != null)
+        {
+            activeProjectile.GrowthFinished -= HandleGrowthFinished;
+            activeProjectile = null;
+        }
+
+        if (!wasRunning)
+            return;
+
+        projectilePool.Return();
+        floor.Stop();
+        bossVisual.CancelBombFieldAnim();
+
+        if (patternRunner.IsSelectedPattern(this))
+            patternRunner.StopPattern();
+    }     
+
+    [ContextMenu("테스트/BombField 다음 패턴으로 예약")]
+    private void TestRequest()
+    {
+        if (Application.isPlaying)
+            RequestPattern();
+    }
+
+
+}

@@ -11,10 +11,9 @@ public class FinalBossComboPattern : BossAttackPattern
     [SerializeField] private FinalBossComboData data;
     [SerializeField] private FinalBossSlash slash;
 
-    [SerializeField] private Animator ComboAnimator;
+    [SerializeField] private FinalBossAnimation bossAnimation;
     [SerializeField] private SpriteRenderer comboRenderer;
 
-    private readonly int ComboState = Animator.StringToHash("Base Layer.FinalBoss_Combo");
     private readonly int idleState = Animator.StringToHash("Base Layer.FinalBoss_Idle");
 
     private int comboDirection;
@@ -24,7 +23,7 @@ public class FinalBossComboPattern : BossAttackPattern
     
     private void OnEnable()
     {
-        if(patternRunner == null || bossHealth == null || targetFinder == null || data == null || slash == null)
+        if(patternRunner == null || bossHealth == null || targetFinder == null || data == null || slash == null || bossAnimation == null)
         {
             Debug.LogError("칼 연계에 필요한 참조를 모두 연결해 주세요.", this);
 
@@ -89,6 +88,9 @@ public class FinalBossComboPattern : BossAttackPattern
                 break;
 
             case BossPatternState.Recovery:
+                CancelExecution(completedNormally: true);
+                break;
+
             case BossPatternState.Idle:
                 CancelExecution();
                 break;
@@ -97,8 +99,7 @@ public class FinalBossComboPattern : BossAttackPattern
 
     private void BeginCombo()
     {
-        if (!CanExecute() || ComboAnimator == null || !ComboAnimator.isActiveAndEnabled ||
-            !ComboAnimator.HasState(0, ComboState))
+        if (!CanExecute() || bossAnimation == null || !bossAnimation.CanPlayCombo)
         {
             Debug.LogWarning("콤보 실행 상태와 Animator의 연결을 확인해주세요.", this);
             AbortPattern();
@@ -107,7 +108,7 @@ public class FinalBossComboPattern : BossAttackPattern
         completedHits = 0;
         animationFinished = false;
 
-        ComboAnimator.Play(ComboState, 0, 0f);
+        bossAnimation.StartComboAnim();
     }
 
     public void HandleComboHit(int hitNumber)
@@ -147,14 +148,13 @@ public class FinalBossComboPattern : BossAttackPattern
         if (!ownsExecution || patternRunner.CurrentState != BossPatternState.Active)
             return;
 
-        if (!CanExecute() || ComboAnimator == null || !ComboAnimator.isActiveAndEnabled)
+        if (!CanExecute() || bossAnimation == null || !bossAnimation.CanPlayCombo)
         {
             AbortPattern();
             return;
         }
 
-        AnimatorStateInfo state = ComboAnimator.GetCurrentAnimatorStateInfo(0);
-        bool reachedClipEnd = state.fullPathHash == ComboState && state.normalizedTime >= 1f;
+        bool reachedClipEnd = bossAnimation.HasComboClipEnded;
 
         if ((!animationFinished && !reachedClipEnd) || slash.IsAttacking)
             return;
@@ -170,22 +170,24 @@ public class FinalBossComboPattern : BossAttackPattern
             AbortPattern();
     }
 
-    private void CancelExecution()
+    private void CancelExecution(bool completedNormally = false)
     {
         bool wasExecuting = ownsExecution;
-        if (wasExecuting && ComboAnimator != null && ComboAnimator.isActiveAndEnabled)
-            ComboAnimator.Play(idleState, 0, 0f);
-
         ownsExecution = false;
 
         completedHits = 0;
         animationFinished = false;
 
-        if (wasExecuting)
-        {
-            if (slash != null)
-                slash.StopSlash();
-        }
+        if (wasExecuting && slash != null)
+            slash.StopSlash();
+
+        if (!wasExecuting || bossAnimation == null)
+            return;
+        
+        if (completedNormally)
+            bossAnimation.FinishComboAnim();
+        else
+            bossAnimation.CancelComboAnim();
     }
 
     private void AbortPattern()

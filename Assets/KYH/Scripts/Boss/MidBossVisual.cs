@@ -1,5 +1,6 @@
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UIElements;
 
 public class MidBossVisual : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private MidBossFireballPattern fireballPattern;
     [SerializeField] private MidBossFlamePillarPattern flamePillarPattern;
     [SerializeField] private MidBossTotemPattern totemPattern;
+    [SerializeField] private BossAttackPattern fireWavePattern;
+    [SerializeField] private BossAttackPattern fireFieldPattern;
+    [SerializeField] private MidBossBombFieldPattern bombFieldPattern;
+    [SerializeField] private MidBossStaffBurstPattern staffBurstPattern;
 
     [Header("애니메이션 연결")]
     [SerializeField] private Animator bossAnimator;
@@ -116,6 +121,24 @@ public class MidBossVisual : MonoBehaviour
 
         if (!bossAnimator.isActiveAndEnabled)
             return;
+        
+        if (staffBurstPattern != null &&
+            patternRunner.IsSelectedPattern(staffBurstPattern) &&
+            patternRunner.CurrentState != BossPatternState.Idle)
+        {
+            return;
+        }
+
+        if (bombFieldPattern != null && bombFieldPattern.IsRunning)
+            return;
+
+        if (fireWavePattern != null && patternRunner.IsSelectedPattern(fireWavePattern) &&
+            patternRunner.CurrentState != BossPatternState.Idle)
+            return;
+
+        if (fireFieldPattern != null && patternRunner.IsSelectedPattern(fireFieldPattern) &&
+            patternRunner.CurrentState != BossPatternState.Idle)
+            return;
 
         if (!bossAnimator.HasState(0, IdleState))
         {
@@ -189,6 +212,179 @@ public class MidBossVisual : MonoBehaviour
         bossAnimator.speed = selectedClip.length / duration;
 
         bossAnimator.Play(selectedState, 0, normalizedTime);
+    }
+
+    public void StartStaffBurstAnim()
+    {
+        if (isDying || bossAnimator == null ||
+            !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+
+        bossAnimator.ResetTrigger("FinishStaffBurst");
+        bossAnimator.ResetTrigger("CancelStaffBurst");
+        bossAnimator.ResetTrigger("StartStaffBurst");
+
+        bossAnimator.SetTrigger("StartStaffBurst");
+    }
+
+    public void OnStaffBurstAttack()
+    {
+        if (isDying || staffBurstPattern == null)
+            return;
+
+        staffBurstPattern.OnAttackFrame();
+    }
+
+    public void FinishStaffBurstAnim()
+    {
+        if (isDying || bossAnimator == null ||
+        !bossAnimator.isActiveAndEnabled)
+        return;
+
+        bossAnimator.ResetTrigger("StartStaffBurst");
+        bossAnimator.ResetTrigger("CancelStaffBurst");
+        bossAnimator.SetTrigger("FinishStaffBurst");
+
+        if (staffBurstPattern != null)
+            staffBurstPattern.OnAnimationFinished();
+    }
+
+    public void CancelStaffBurstAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartStaffBurst");
+        bossAnimator.ResetTrigger("FinishStaffBurst");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelStaffBurst");
+    }
+
+    public void StartFireWaveAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+        bossAnimator.ResetTrigger("FinishFireWave");
+        bossAnimator.ResetTrigger("CancelFireWave");
+        bossAnimator.ResetTrigger("StartFireWave");
+        bossAnimator.SetTrigger("StartFireWave");
+    }
+
+    public void FinishFireWaveAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireWave");
+        bossAnimator.ResetTrigger("CancelFireWave");
+        bossAnimator.SetTrigger("FinishFireWave");
+    }
+
+    public void CancelFireWaveAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireWave");
+        bossAnimator.ResetTrigger("FinishFireWave");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelFireWave");
+    }
+
+    public void StartFireFieldAnim()
+    {
+        if (isDying || bossAnimator == null ||
+            !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+        bossAnimator.ResetTrigger("FinishFireField");
+        bossAnimator.ResetTrigger("CancelFireField");
+        bossAnimator.ResetTrigger("StartFireField");
+        bossAnimator.SetTrigger("StartFireField");
+    }
+
+    public void FinishFireFieldAnim()
+    {
+        if (isDying || bossAnimator == null ||
+            !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireField");
+        bossAnimator.ResetTrigger("CancelFireField");
+        bossAnimator.SetTrigger("FinishFireField");
+    }
+
+    public void CancelFireFieldAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartFireField");
+        bossAnimator.ResetTrigger("FinishFireField");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelFireField");
+    }
+
+    public void BeginBombFieldOrb()
+    {
+        if (bombFieldPattern != null)
+            bombFieldPattern.BeginOrbGrowth();
+    }
+
+    public void BeginBombFieldFloor()
+    {
+        if (bombFieldPattern != null)
+            bombFieldPattern.BeginFloorFromAnimation();
+    }
+
+    public void StartBombFieldAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+        bossAnimator.ResetTrigger("ContinueBombField");
+        bossAnimator.ResetTrigger("CancelBombField");
+        bossAnimator.ResetTrigger("StartBombField");
+        bossAnimator.SetTrigger("StartBombField");
+    }
+
+    public void ContinueBombFieldAnim()
+    {
+        if (isDying || bossAnimator == null || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.ResetTrigger("StartBombField");
+        bossAnimator.ResetTrigger("CancelBombField");
+        bossAnimator.SetTrigger("ContinueBombField");
+    }
+
+    public void CancelBombFieldAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartBombField");
+        bossAnimator.ResetTrigger("ContinueBombField");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelBombField");
     }
 
     private void FaceTarget()
