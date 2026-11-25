@@ -2711,11 +2711,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7685bec581e4fef4a90c34311c14dac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MidBossBombFieldFloor
-  blinkArea: {fileID: 548182766}
   groundPoint: {fileID: 512217024}
   damageLayer:
     serializedVersion: 2
     m_Bits: 1024
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!4 &1699457357
 Transform:
   m_ObjectHideFlags: 0
