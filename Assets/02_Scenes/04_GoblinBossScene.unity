@@ -1691,13 +1691,14 @@ MonoBehaviour:
   - {fileID: 939212567}
   - {fileID: 939212576}
   - {fileID: 939212577}
+  - {fileID: 939212579}
   priorityPatterns:
   - {fileID: 939212562}
   - {fileID: 939212578}
-  autoStartPatterns: 0
+  autoStartPatterns: 1
   immediateAttackChance: 0.5
   initialActionDelay: 1.5
-  excludeLastPattern: 0
+  excludeLastPattern: 1
   bossHealth: {fileID: 939212569}
   facingTargetFinder: {fileID: 0}
   bossRenderer: {fileID: 0}
@@ -2644,7 +2645,7 @@ Transform:
   m_GameObject: {fileID: 1674449516}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.02, y: 1.62, z: 0}
+  m_LocalPosition: {x: -1.07, y: 0.88, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2883,24 +2884,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beb2d7ed3438476439d4f02b9c380767, type: 3}
---- !u!1 &1799781117 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1822518817703037536, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-  m_PrefabInstance: {fileID: 7142074273909733128}
-  m_PrefabAsset: {fileID: 0}
---- !u!210 &1799781122
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799781117}
-  m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
 --- !u!1 &1813787737
 GameObject:
   m_ObjectHideFlags: 0
@@ -3481,10 +3464,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1822518817703037536, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1799781122}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

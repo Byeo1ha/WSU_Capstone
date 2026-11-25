@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8458279864036407540}
   - component: {fileID: 2185784732783939972}
-  - component: {fileID: 1390136745274270616}
+  - component: {fileID: 6510957162953820232}
   m_Layer: 0
   m_Name: MidBossStaffBurstBeam
   m_TagString: Untagged
@@ -50,10 +50,10 @@ MonoBehaviour:
   warningRenderer: {fileID: 761521480873237566}
   segmentTemplate: {fileID: 7609193936745404005}
   laserSprites:
-  - {fileID: 6127091781583093504, guid: c1cbcb6968efc014494f89f7d8884067, type: 3}
+  - {fileID: 166934580894378549, guid: 1cac9865c6010d44ea009389a1d52148, type: 3}
   warningColor: {r: 1, g: 0.15, b: 0.1, a: 0.35}
   attackColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!210 &1390136745274270616
+--- !u!210 &6510957162953820232
 SortingGroup:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
