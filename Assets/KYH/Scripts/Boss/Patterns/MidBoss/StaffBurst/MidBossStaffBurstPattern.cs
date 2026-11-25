@@ -6,6 +6,7 @@ public class MidBossStaffBurstPattern : BossAttackPattern
     [Header("보스 연결")]
     [SerializeField] private BossPatternRunner patternRunner;
     [SerializeField] private BossHealth bossHealth;
+    [SerializeField] private MidBossVisual bossVisual;
     [SerializeField] private SpriteRenderer bossRenderer;
     [SerializeField] private Transform staffBurstPoint;
     [Tooltip("발사점을 배치할 때 보스의 FlipX 상태")]
@@ -42,7 +43,7 @@ public class MidBossStaffBurstPattern : BossAttackPattern
 
     private void Awake()
     {
-        if (patternRunner == null || bossHealth == null ||
+        if (patternRunner == null || bossHealth == null || bossVisual == null ||
             bossRenderer == null || staffBurstPoint == null ||
             staffBurstPoint.parent == null || data == null ||
             beamPrefab == null || beamRoot == null)
@@ -126,6 +127,8 @@ public class MidBossStaffBurstPattern : BossAttackPattern
         }
 
         PrepareWarnings();
+        bossVisual.StartStaffBurstAnim();
+        
         return true;
     }
 
@@ -289,6 +292,9 @@ public class MidBossStaffBurstPattern : BossAttackPattern
     {
         bool shouldStopRunner = ownsExecution;
         ClearExecution();
+
+        if (shouldStopRunner && bossVisual != null)
+            bossVisual.CancelStaffBurstAnim();
 
         if (shouldStopRunner && patternRunner != null &&
             patternRunner.IsSelectedPattern(this))

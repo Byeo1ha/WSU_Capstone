@@ -12,6 +12,7 @@ public class MidBossVisual : MonoBehaviour
     [SerializeField] private BossAttackPattern fireWavePattern;
     [SerializeField] private BossAttackPattern fireFieldPattern;
     [SerializeField] private MidBossBombFieldPattern bombFieldPattern;
+    [SerializeField] private MidBossStaffBurstPattern staffBurstPattern;
 
     [Header("애니메이션 연결")]
     [SerializeField] private Animator bossAnimator;
@@ -120,6 +121,13 @@ public class MidBossVisual : MonoBehaviour
 
         if (!bossAnimator.isActiveAndEnabled)
             return;
+        
+        if (staffBurstPattern != null &&
+            patternRunner.IsSelectedPattern(staffBurstPattern) &&
+            patternRunner.CurrentState != BossPatternState.Idle)
+        {
+            return;
+        }
 
         if (bombFieldPattern != null && bombFieldPattern.IsRunning)
             return;
@@ -204,6 +212,57 @@ public class MidBossVisual : MonoBehaviour
         bossAnimator.speed = selectedClip.length / duration;
 
         bossAnimator.Play(selectedState, 0, normalizedTime);
+    }
+
+    public void StartStaffBurstAnim()
+    {
+        if (isDying || bossAnimator == null ||
+            !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.speed = 1f;
+
+        bossAnimator.ResetTrigger("FinishStaffBurst");
+        bossAnimator.ResetTrigger("CancelStaffBurst");
+        bossAnimator.ResetTrigger("StartStaffBurst");
+
+        bossAnimator.SetTrigger("StartStaffBurst");
+    }
+
+    public void OnStaffBurstAttack()
+    {
+        if (isDying || staffBurstPattern == null)
+            return;
+
+        staffBurstPattern.OnAttackFrame();
+    }
+
+    public void FinishStaffBurstAnim()
+    {
+        if (isDying || bossAnimator == null ||
+        !bossAnimator.isActiveAndEnabled)
+        return;
+
+        bossAnimator.ResetTrigger("StartStaffBurst");
+        bossAnimator.ResetTrigger("CancelStaffBurst");
+        bossAnimator.SetTrigger("FinishStaffBurst");
+
+        if (staffBurstPattern != null)
+            staffBurstPattern.OnAnimationFinished();
+    }
+
+    public void CancelStaffBurstAnim()
+    {
+        if (bossAnimator == null)
+            return;
+
+        bossAnimator.ResetTrigger("StartStaffBurst");
+        bossAnimator.ResetTrigger("FinishStaffBurst");
+
+        if (isDying || !bossAnimator.isActiveAndEnabled)
+            return;
+
+        bossAnimator.SetTrigger("CancelStaffBurst");
     }
 
     public void StartFireWaveAnim()

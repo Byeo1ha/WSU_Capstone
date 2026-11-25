@@ -1643,6 +1643,7 @@ MonoBehaviour:
   fireWavePattern: {fileID: 939212576}
   fireFieldPattern: {fileID: 939212577}
   bombFieldPattern: {fileID: 939212578}
+  staffBurstPattern: {fileID: 939212579}
   bossAnimator: {fileID: 939212572}
   fireballWindupClip: {fileID: 7400000, guid: eccdaefaa7ffe25438853c0d59ac26a9, type: 2}
   flamePillarWindupClip: {fileID: 7400000, guid: d373bcc9bae65994e9ee219fcf83cf82, type: 2}
@@ -1777,6 +1778,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstPattern
   patternRunner: {fileID: 939212568}
   bossHealth: {fileID: 939212569}
+  bossVisual: {fileID: 939212573}
   bossRenderer: {fileID: 939212570}
   staffBurstPoint: {fileID: 1674449517}
   pointReferenceFlipX: 1
@@ -2886,17 +2888,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1822518817703037536, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
   m_PrefabInstance: {fileID: 7142074273909733128}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1799781119 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2185784732783939972, guid: c5a1c65638604c84fbd4ebd8235a97e8, type: 3}
-  m_PrefabInstance: {fileID: 7142074273909733128}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799781117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12d6478fe9aea754881f341290c45baa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MidBossStaffBurstBeam
 --- !u!210 &1799781122
 SortingGroup:
   m_ObjectHideFlags: 0
