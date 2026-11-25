@@ -2862,7 +2862,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 343281039498549196, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
       propertyPath: nextSceneName
-      value: 04_GoblinBossScene
+      value: Act5
       objectReference: {fileID: 0}
     - target: {fileID: 3033413017990837322, guid: a405fce01ade9734c8a9288f3da01ff6, type: 3}
       propertyPath: m_LocalPosition.x
