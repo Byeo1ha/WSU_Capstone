@@ -18,13 +18,18 @@ public class StageClear : MonoBehaviour
 
     public void EventStart()
     {
-        EventStartAsync().Forget();
+        EventStartAsync(SceneFlowService.LoadingSceneType.Short).Forget();
     }
 
-    private async UniTask EventStartAsync()
+    public void EventStartLongTime()
+    {
+        EventStartAsync(SceneFlowService.LoadingSceneType.Long).Forget();
+    }
+
+    private async UniTask EventStartAsync(SceneFlowService.LoadingSceneType type)
     {
         await UniTask.Delay(TimeSpan.FromSeconds(nextSceneTime));
 
-        sceneFlowService.LoadSceneAsync(nextSceneName, SceneFlowService.LoadingSceneType.Short).Forget();
+        sceneFlowService.LoadSceneAsync(nextSceneName, type).Forget();
     }
 }
