@@ -1693,6 +1693,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundSearchDistance: 30
+  pillarOffsetY: -0.2
 --- !u!114 &939212566
 MonoBehaviour:
   m_ObjectHideFlags: 0
