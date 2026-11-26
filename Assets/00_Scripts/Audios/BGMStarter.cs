@@ -4,6 +4,7 @@ using VContainer;
 public class BGMStarter : MonoBehaviour
 {
     [SerializeField] private AudioClip bgm;
+    [SerializeField] private bool bgmPlay = true;
     private SoundManager soundManager;
 
     [Inject]
@@ -23,6 +24,8 @@ public class BGMStarter : MonoBehaviour
     private void OnEnable()
     {
         if (soundManager == null) return;
+
+        if (!bgmPlay) return;
 
         soundManager.FadeIn();
     }
