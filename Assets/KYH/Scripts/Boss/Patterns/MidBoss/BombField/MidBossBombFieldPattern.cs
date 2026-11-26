@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -20,7 +22,11 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     private MidBossBombFieldProjectile activeProjectile;
     private Coroutine explosionWait;
 
-    private bool isPending;
+    private readonly float[] healthRatios = {0.7f, 0.4f, 0.2f};
+
+    private int nextThresholdIndex;
+    private int pendingCount;
+    private bool hasStarted;
     private bool hasStartedGrowth;
     private bool canStartFloor;
     private bool hasStartedFloor;
@@ -28,7 +34,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     private Vector2 explosionPosition;
     private float explosionRadius;
 
-    public override bool IsPending => isPending;
+    public override bool IsPending => pendingCount > 0;
     public override bool IsRunning => isRunning;
 
     private bool isRunning;
@@ -47,6 +53,11 @@ public class MidBossBombFieldPattern : BossPriorityPattern
         projectilePool.ExplosionFinished += HandleExplosionFinished;
         floor.Finished += HandleFloorFinished;
         patternRunner.StateChanged += HandleStateChanged;
+
+        bossHealth.HealthChanged += HandleHealthChanged;
+
+        if (hasStarted)
+            CheckCurrentHealth();
     }
 
     private void OnDisable()
@@ -60,14 +71,57 @@ public class MidBossBombFieldPattern : BossPriorityPattern
         if (patternRunner != null)
             patternRunner.StateChanged -= HandleStateChanged;
 
+        if (bossHealth != null)
+            bossHealth.HealthChanged -= HandleHealthChanged;
+
         CancelPriority();
+    }
+
+    private void Start()
+    {
+        hasStarted = true;
+        CheckCurrentHealth();
+    }
+
+    private void CheckCurrentHealth()
+    {
+        HandleHealthChanged(bossHealth.CurrentHealth, bossHealth.MaxHealth);
+    }
+
+    private void HandleHealthChanged(int currentHealth, int maxHealth)
+    {
+        if (currentHealth <= 0)
+        {
+            pendingCount = 0;
+
+            if (isRunning)
+                CancelPriority();
+
+            return;
+        }
+
+        if (maxHealth <= 0)
+            return;
+
+        while (nextThresholdIndex < healthRatios.Length)
+        {
+            float threshold = maxHealth * healthRatios[nextThresholdIndex];
+
+            if (currentHealth > threshold)
+                break;
+
+            nextThresholdIndex++;
+            pendingCount++;
+
+            Debug.Log($"BombField 예약: 남은 예약 {pendingCount}", this);
+        }
     }
 
     private void Update()
     {
         if (bossHealth.IsDead)
         {
-            isPending = false;
+            pendingCount = 0;
 
             if (isRunning)
                 CancelPriority();
@@ -84,12 +138,12 @@ public class MidBossBombFieldPattern : BossPriorityPattern
         if (!isActiveAndEnabled || bossHealth.IsDead)
             return;
 
-        isPending = true;
+        pendingCount++;
     }
 
     public override bool TryStartPriority()
     {
-        if (!isActiveAndEnabled || !isPending || isRunning ||
+        if (!isActiveAndEnabled || pendingCount <= 0 || isRunning ||
             bossHealth.IsDead || !patternRunner.IsStartAllowed ||
             patternRunner.CurrentState != BossPatternState.Idle ||
             !projectilePool.isActiveAndEnabled || !floor.isActiveAndEnabled ||
@@ -111,7 +165,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
             return false;
         }
 
-        isPending = false;
+        pendingCount--;
         bossVisual.StartBombFieldAnim();
         return true;
     }
@@ -132,6 +186,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
         }
 
         activeProjectile.GrowthFinished += HandleGrowthFinished;
+        activeProjectile.ExplosionRequested += HandleExplosionStarted;
 
         patternRunner.EnterActiveFromEvent(this);
 
@@ -158,12 +213,25 @@ public class MidBossBombFieldPattern : BossPriorityPattern
             CancelPriority();
     }
 
+    private void HandleExplosionStarted(MidBossBombFieldProjectile projectile, Vector3 position)
+    {
+        if (!isRunning || projectile != activeProjectile || bossHealth.IsDead)
+            return;
+
+        explosionPosition = position;
+        explosionRadius = projectile.ExplosionRadius;
+
+        if (!floor.PrepareWarning(data, explosionPosition, explosionRadius))
+            CancelPriority();
+    }
+
     private void HandleExplosionFinished(Vector3 position, float radius)
     {
         if (!isRunning || activeProjectile == null)
             return;
 
         activeProjectile.GrowthFinished -= HandleGrowthFinished;
+        activeProjectile.ExplosionRequested -= HandleExplosionStarted;
         activeProjectile = null;
 
         explosionPosition = position;
@@ -174,7 +242,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
 
     private IEnumerator WaitForFloor()
     {
-        yield return new WaitForSeconds(data.AfterExplosionDelay);
+        yield return new WaitForSeconds(Mathf.Max(0f, data.AfterExplosionDelay));
 
         explosionWait = null;
 
@@ -229,6 +297,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
         if (activeProjectile != null)
         {
             activeProjectile.GrowthFinished -= HandleGrowthFinished;
+            activeProjectile.ExplosionRequested -= HandleExplosionStarted;
             activeProjectile = null;
         }
 

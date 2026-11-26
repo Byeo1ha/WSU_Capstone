@@ -10,6 +10,7 @@ public class MidBossFlamePillarPattern : BossAttackPattern
     [Header("바닥 탐색")]
     [SerializeField] private LayerMask groundLayer;
     [SerializeField, Min(0.1f)] private float groundSearchDistance = 30f;
+    [SerializeField] private float pillarOffsetY = -0.2f;
 
     private bool ownsExecution;
 
@@ -93,7 +94,7 @@ public class MidBossFlamePillarPattern : BossAttackPattern
             return;
         }
 
-        pillar.transform.position = new Vector3(hit.point.x, hit.point.y, 0f);
+        pillar.transform.position = new Vector3(hit.point.x, hit.point.y + pillarOffsetY, 0f);
 
         if(!pillar.PrepareWarning(patternRunner.CurrentWindupDuration))
             AbortPattern("화염기둥 경고를 시작하지 못했습니다.");

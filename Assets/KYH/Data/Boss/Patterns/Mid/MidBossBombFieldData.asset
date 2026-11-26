@@ -18,7 +18,9 @@ MonoBehaviour:
   explosionRadiusMultiplier: 1.5
   afterExplosionDely: 1
   fieldDuration: 2
-  fieldDamageHeight: 0.5
+  fieldDamageHeight: 10
+  fieldWarningDuration: 1
+  fieldSearchDistance: 50
   projectileDamage: 14
   explosionDamage: 14
   fieldDamage: 10
