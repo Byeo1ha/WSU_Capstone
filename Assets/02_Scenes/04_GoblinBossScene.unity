@@ -1693,6 +1693,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   groundSearchDistance: 30
+  pillarOffsetY: -0.2
 --- !u!114 &939212566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,7 +3078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2540bc9c2ea15a34894c7f00efe84feb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageClear
-  nextSceneName: Act1
+  nextSceneName: Act6
   nextSceneTime: 3
 --- !u!4 &1538479783
 Transform:
