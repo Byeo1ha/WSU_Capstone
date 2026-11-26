@@ -19,6 +19,7 @@ public class Act5Script : MonoBehaviour
     [Header("기타")]
     [SerializeField] private Transform playerPoint;
     [SerializeField] private Transform cameraPoint;
+    [SerializeField] private CutSceneSkip cutSceneSkip;
 
     private Animator playerAnim;
 
@@ -56,6 +57,8 @@ public class Act5Script : MonoBehaviour
         await dialogue.HideAsync();
 
         await UniTask.Delay(TimeSpan.FromSeconds(1f));
+
+        if (cutSceneSkip.StageLoadingStart) return;
 
         stageClear.EventStart();
     }

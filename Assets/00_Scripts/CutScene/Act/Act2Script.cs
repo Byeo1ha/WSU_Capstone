@@ -7,8 +7,6 @@ public class Act2Script : MonoBehaviour
 {
     [Header("기본")]
     [SerializeField] private CutsceneDialogue dialogue;
-    [SerializeField] private CutsceneBackgroundFade backgroundFade;
-    [SerializeField] private SpriteRenderer changeBackground;
     [SerializeField] private CutsceneCamera cutsceneCamera;
     [SerializeField] private CutsceneCameraZoom cameraZoom;
     [SerializeField] private CutsceneCameraShake cameraShake;
@@ -28,6 +26,7 @@ public class Act2Script : MonoBehaviour
     [SerializeField] private CanvasGroup fadeScreen;
     [SerializeField] private CanvasGroup cutScene1;
     [SerializeField] private StageClear stageClear;
+    [SerializeField] private CutSceneSkip cutSceneSkip;
 
     private Animator playerAnim;
 
@@ -106,6 +105,8 @@ public class Act2Script : MonoBehaviour
         await dialogue.ShowLineAsync(player.Speaker, PortraitSide.Left,
             "하... 도대체 왜 올라가고 싶은 건데? 이유라도 말해 봐.");  
         await dialogue.HideAsync();    
+
+        if (cutSceneSkip.StageLoadingStart) return;
 
         stageClear.EventStart();
     }

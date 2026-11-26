@@ -24,6 +24,7 @@ public class Act3Script : MonoBehaviour
     [SerializeField] private GameObject cutScene2;
     [SerializeField] private GameObject cutScene3;
     [SerializeField] private StageClear stageClear;
+    [SerializeField] private CutSceneSkip cutSceneSkip;
 
     private void Awake()
     {
@@ -125,6 +126,8 @@ public class Act3Script : MonoBehaviour
         await dialogue.ShowLineAsync(player, PortraitSide.Left,
             "그놈의 비밀, 얼굴 보고 들을 거야.");
         await dialogue.HideAsync();
+
+        if (cutSceneSkip.StageLoadingStart) return;
 
         stageClear.EventStart();
     }

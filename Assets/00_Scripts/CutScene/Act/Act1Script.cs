@@ -16,6 +16,9 @@ public class Act1Script : MonoBehaviour
     [Header("카메라 포인트")]
     [SerializeField] private Transform cameraPoint1;
 
+    [Header("기타")]
+    [SerializeField] private CutSceneSkip cutSceneSkip;
+
     private void Start()
     {
         ScriptStart().Forget();
@@ -42,6 +45,8 @@ public class Act1Script : MonoBehaviour
             "다만 문 앞에 서면, 안쪽에서 이름을 부르는 소리가 들린다고들 했다.", autoAdvanceDelay: 2f);
         await dialogue.HideAsync();
 
+        if (cutSceneSkip.StageLoadingStart) return;
+        
         stageClear.EventStart();
     }
 }

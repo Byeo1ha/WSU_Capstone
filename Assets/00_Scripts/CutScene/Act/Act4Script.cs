@@ -22,6 +22,7 @@ public class Act4Script : MonoBehaviour
     [SerializeField] private Transform cameraPoint1;
     [SerializeField] private Transform playerPoint2;
     [SerializeField] private StageClear stageClear;
+    [SerializeField] private CutSceneSkip cutSceneSkip;
 
     private Animator playerAnim;
 
@@ -63,6 +64,8 @@ public class Act4Script : MonoBehaviour
         playerAnim.SetBool("isRun", true);
         player.MoveXAsync(playerPoint2.position.x, 2f).Forget();
         
+        if (cutSceneSkip.StageLoadingStart) return;
+
         stageClear.EventStartLongTime();
     }
 }
