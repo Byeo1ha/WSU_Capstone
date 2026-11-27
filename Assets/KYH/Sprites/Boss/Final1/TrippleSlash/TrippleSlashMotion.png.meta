@@ -1,0 +1,687 @@
+fileFormatVersion: 2
+guid: f4367a0bab2b94c449229c7f7104a95c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9035217589613933102
+    second: TrippleSlashMotion_0
+  - first:
+      213: -5597439520548977256
+    second: TrippleSlashMotion_1
+  - first:
+      213: 7883808494079873364
+    second: TrippleSlashMotion_2
+  - first:
+      213: 5187668103558827301
+    second: TrippleSlashMotion_3
+  - first:
+      213: 6115394788178868846
+    second: TrippleSlashMotion_4
+  - first:
+      213: -2253372572055532852
+    second: TrippleSlashMotion_5
+  - first:
+      213: 2687239956396810158
+    second: TrippleSlashMotion_6
+  - first:
+      213: 4209170345139982335
+    second: TrippleSlashMotion_7
+  - first:
+      213: 8330992102938321787
+    second: TrippleSlashMotion_8
+  - first:
+      213: 4592620508032314463
+    second: TrippleSlashMotion_9
+  - first:
+      213: -2258090464405091836
+    second: TrippleSlashMotion_10
+  - first:
+      213: 7771121279255647661
+    second: TrippleSlashMotion_11
+  - first:
+      213: 1863725506578556784
+    second: TrippleSlashMotion_12
+  - first:
+      213: 1063268584617492536
+    second: TrippleSlashMotion_13
+  - first:
+      213: 1684671194478793597
+    second: TrippleSlashMotion_14
+  - first:
+      213: 1093038913622252804
+    second: TrippleSlashMotion_15
+  - first:
+      213: -5095001700500490138
+    second: TrippleSlashMotion_16
+  - first:
+      213: 5153912134604158287
+    second: TrippleSlashMotion_17
+  - first:
+      213: -6159037856423853398
+    second: TrippleSlashMotion_18
+  - first:
+      213: 3070401322450404685
+    second: TrippleSlashMotion_19
+  - first:
+      213: -3767700216664356279
+    second: TrippleSlashMotion_20
+  - first:
+      213: 165257084149940842
+    second: TrippleSlashMotion_21
+  - first:
+      213: -3730999757722162306
+    second: TrippleSlashMotion_22
+  - first:
+      213: 4765514746347389627
+    second: TrippleSlashMotion_23
+  - first:
+      213: 1295621978605963374
+    second: TrippleSlashMotion_24
+  - first:
+      213: -7434503063505801578
+    second: TrippleSlashMotion_25
+  - first:
+      213: -1682300823399804694
+    second: TrippleSlashMotion_26
+  - first:
+      213: -2368519272773971794
+    second: TrippleSlashMotion_27
+  - first:
+      213: -5690681962291457414
+    second: TrippleSlashMotion_28
+  - first:
+      213: -4559665127755591454
+    second: TrippleSlashMotion_29
+  - first:
+      213: -873414225377533323
+    second: TrippleSlashMotion_30
+  - first:
+      213: -3416007821595723428
+    second: TrippleSlashMotion_31
+  - first:
+      213: -4120954158347156885
+    second: TrippleSlashMotion_32
+  - first:
+      213: 5055104575691103804
+    second: TrippleSlashMotion_33
+  - first:
+      213: -4037145148621950253
+    second: TrippleSlashMotion_34
+  - first:
+      213: 3243698047789594059
+    second: TrippleSlashMotion_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 48
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TrippleSlashMotion_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.31, y: 0.4}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2dd43be09757c9280800000000000000
+      internalID: -9035217589613933102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_1
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89502fd9966e152b0800000000000000
+      internalID: -5597439520548977256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_2
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45196de1e0ae86d60800000000000000
+      internalID: 7883808494079873364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_3
+      rect:
+        serializedVersion: 2
+        x: 555
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.26, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 52d8f3d97ac4ef740800000000000000
+      internalID: 5187668103558827301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_4
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6a3daab82f3ed450800000000000000
+      internalID: 6115394788178868846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_5
+      rect:
+        serializedVersion: 2
+        x: 925
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cca8508a5996ab0e0800000000000000
+      internalID: -2253372572055532852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_6
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaf9443b08efa4520800000000000000
+      internalID: 2687239956396810158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_7
+      rect:
+        serializedVersion: 2
+        x: 1295
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff4d25b02af96a30800000000000000
+      internalID: 4209170345139982335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_8
+      rect:
+        serializedVersion: 2
+        x: 1480
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.26, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b73293a9d21ad9370800000000000000
+      internalID: 8330992102938321787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_9
+      rect:
+        serializedVersion: 2
+        x: 1665
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5ca071f4044cbf30800000000000000
+      internalID: 4592620508032314463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_10
+      rect:
+        serializedVersion: 2
+        x: 1850
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.26, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40a007ebfa6a9a0e0800000000000000
+      internalID: -2258090464405091836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_11
+      rect:
+        serializedVersion: 2
+        x: 2035
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da5138c51a198db60800000000000000
+      internalID: 7771121279255647661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_12
+      rect:
+        serializedVersion: 2
+        x: 2220
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.25, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 077237a49784dd910800000000000000
+      internalID: 1863725506578556784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_13
+      rect:
+        serializedVersion: 2
+        x: 2405
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.3, y: 0.36}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83045fee42d71ce00800000000000000
+      internalID: 1063268584617492536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_14
+      rect:
+        serializedVersion: 2
+        x: 2590
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.27, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d73dd3e8687216710800000000000000
+      internalID: 1684671194478793597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_15
+      rect:
+        serializedVersion: 2
+        x: 2775
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.27, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40d122cc9114b2f00800000000000000
+      internalID: 1093038913622252804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_16
+      rect:
+        serializedVersion: 2
+        x: 2960
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.27, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66838a7a2faea49b0800000000000000
+      internalID: -5095001700500490138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_17
+      rect:
+        serializedVersion: 2
+        x: 3145
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.27, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f45f7a2a7cf568740800000000000000
+      internalID: 5153912134604158287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_18
+      rect:
+        serializedVersion: 2
+        x: 3330
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.27, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa24ca993b3b68aa0800000000000000
+      internalID: -6159037856423853398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TrippleSlashMotion_19
+      rect:
+        serializedVersion: 2
+        x: 3515
+        y: 0
+        width: 185
+        height: 116
+      alignment: 9
+      pivot: {x: 0.27, y: 0.3}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d45cb8e2cb14c9a20800000000000000
+      internalID: 3070401322450404685
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 75afc2916e4acfa4fa3f2a26ffbff8c0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":185.0,"y":116.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      TrippleSlashMotion_0: -9035217589613933102
+      TrippleSlashMotion_1: -5597439520548977256
+      TrippleSlashMotion_10: -2258090464405091836
+      TrippleSlashMotion_11: 7771121279255647661
+      TrippleSlashMotion_12: 1863725506578556784
+      TrippleSlashMotion_13: 1063268584617492536
+      TrippleSlashMotion_14: 1684671194478793597
+      TrippleSlashMotion_15: 1093038913622252804
+      TrippleSlashMotion_16: -5095001700500490138
+      TrippleSlashMotion_17: 5153912134604158287
+      TrippleSlashMotion_18: -6159037856423853398
+      TrippleSlashMotion_19: 3070401322450404685
+      TrippleSlashMotion_2: 7883808494079873364
+      TrippleSlashMotion_3: 5187668103558827301
+      TrippleSlashMotion_4: 6115394788178868846
+      TrippleSlashMotion_5: -2253372572055532852
+      TrippleSlashMotion_6: 2687239956396810158
+      TrippleSlashMotion_7: 4209170345139982335
+      TrippleSlashMotion_8: 8330992102938321787
+      TrippleSlashMotion_9: 4592620508032314463
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
