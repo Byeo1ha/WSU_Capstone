@@ -230,7 +230,6 @@ public class MidBossBombFieldProjectile : MonoBehaviour
 
         Vector3 explosionPosition = transform.position;
 
-        Debug.Log($"BombField 폭발 요청 위치: {explosionPosition}", this);
         ExplosionRequested?.Invoke(this, explosionPosition);
     }
 

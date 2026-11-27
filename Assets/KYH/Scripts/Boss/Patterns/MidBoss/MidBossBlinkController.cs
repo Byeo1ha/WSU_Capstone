@@ -16,6 +16,7 @@ public class MidBossBlinkController : BossPriorityPattern
     [SerializeField, Range(0.01f, 1f)] private float followUpWindupScale = 0.3f;
 
     private bool startFollowUpOnFinish;
+    private bool consumePendingRequest = true;
     public bool IsBlinking {get; private set;}
     public bool BlinkSucceeded {get; private set; }
     private bool hasMovedDuringBlink;
@@ -110,7 +111,7 @@ public class MidBossBlinkController : BossPriorityPattern
 
     public bool TryExecuteBlink()
     {
-        if(!isActiveAndEnabled || bossHealth == null || bossHealth.IsDead || pendingBlinkCount <= 0)
+        if(!isActiveAndEnabled || bossHealth == null || bossHealth.IsDead || consumePendingRequest &&pendingBlinkCount <= 0)
             return false;
 
         if(patternRunner == null || targetFinder == null || blinkArea == null || bossBody == null)
@@ -131,7 +132,7 @@ public class MidBossBlinkController : BossPriorityPattern
         if(!blinkArea.TryGetRandomX(currentPosition.x, targetPosition.x, out float destinationX))
             return false;
 
-        if(!TryConsumeBlinkRequest())
+        if(consumePendingRequest && !TryConsumeBlinkRequest())
             return false;
 
         Vector2 destination = new Vector2(destinationX, currentPosition.y);
@@ -159,13 +160,13 @@ public class MidBossBlinkController : BossPriorityPattern
         return true;
     }
 
-    public bool TryBeginBlink()
+    public bool TryBeginBlink(bool consumeRequest = true)
     {
         if (!isActiveAndEnabled ||
             IsBlinking ||
             bossHealth == null ||
             bossHealth.IsDead ||
-            pendingBlinkCount <= 0)
+            consumeRequest && pendingBlinkCount <= 0)
             return false;
 
         if (patternRunner == null ||
@@ -173,6 +174,9 @@ public class MidBossBlinkController : BossPriorityPattern
             patternRunner.CurrentState != BossPatternState.Idle ||
             bossVisual == null)
             return false;
+
+        consumePendingRequest = consumeRequest;
+        startFollowUpOnFinish = false;
 
         BlinkSucceeded = false;
         hasMovedDuringBlink = false;
@@ -221,5 +225,6 @@ public class MidBossBlinkController : BossPriorityPattern
         IsBlinking = false;
         BlinkSucceeded = false;
         hasMovedDuringBlink = false;
+        consumePendingRequest = true;
     }
 }

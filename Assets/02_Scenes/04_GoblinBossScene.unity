@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MidBossBlinkArea
   leftLimit: {fileID: 1699148978}
   rightLimit: {fileID: 1312133528}
-  MinimumPlayerDistance: 7
+  MinimumPlayerDistance: 1
   minimumMoveDistance: 1
   maxAttempts: 32
 --- !u!4 &548182767
@@ -1998,6 +1998,7 @@ MonoBehaviour:
   patternRunner: {fileID: 939212568}
   targetFinder: {fileID: 939212559}
   bossVisual: {fileID: 939212573}
+  blinkController: {fileID: 939212562}
   data: {fileID: 11400000, guid: cc764be6ee7e3834abcd37b77e9e7fd1, type: 2}
   projectilePool: {fileID: 650924109}
   floor: {fileID: 1699457356}

@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class MidBossBombFieldFloor : MonoBehaviour
 {
@@ -84,12 +83,6 @@ public class MidBossBombFieldFloor : MonoBehaviour
         float radius = Mathf.Max(0f, explosionRadius);
         safeMinX = Mathf.Clamp(explosionPosition.x - radius, fieldMinX, fieldMaxX);
         safeMaxX = Mathf.Clamp(explosionPosition.x + radius, fieldMinX, fieldMaxX);
-
-        Debug.Log(
-            $"BombField 범위 | 전체 {fieldMinX:F2} ~ {fieldMaxX:F2}" +
-            $" | 안전 {safeMinX:F2} ~ {safeMaxX:F2}" +
-            $" | 왼쪽 폭 {safeMinX - fieldMinX:F2}" +
-            $" | 오른쪽 폭 {fieldMaxX - safeMaxX:F2}", this);
 
         attackDamage = data.FieldDamage;
 

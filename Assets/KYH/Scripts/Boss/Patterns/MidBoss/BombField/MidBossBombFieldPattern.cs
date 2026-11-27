@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -11,6 +9,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     [SerializeField] private BossPatternRunner patternRunner;
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private MidBossVisual bossVisual;
+    [SerializeField] private MidBossBlinkController blinkController;
 
     [Header("BombField 연결")]
     [SerializeField] private MidBossBombFieldData data;
@@ -21,6 +20,8 @@ public class MidBossBombFieldPattern : BossPriorityPattern
 
     private MidBossBombFieldProjectile activeProjectile;
     private Coroutine explosionWait;
+    private Coroutine blinkWait;
+    private bool ownsBlink;
 
     private readonly float[] healthRatios = {0.7f, 0.4f, 0.2f};
 
@@ -43,7 +44,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     {
         if (bossHealth == null || patternRunner == null || targetFinder == null ||
             bossVisual == null || data == null || projectilePool == null ||
-            floor == null || spawnPoint == null || groundCollider == null)
+            floor == null || spawnPoint == null || groundCollider == null || blinkController == null)
         {
             Debug.LogError("BombField실행 참조를 모두 연결해 주세요.", this);
             enabled = false;
@@ -112,8 +113,6 @@ public class MidBossBombFieldPattern : BossPriorityPattern
 
             nextThresholdIndex++;
             pendingCount++;
-
-            Debug.Log($"BombField 예약: 남은 예약 {pendingCount}", this);
         }
     }
 
@@ -147,6 +146,7 @@ public class MidBossBombFieldPattern : BossPriorityPattern
             bossHealth.IsDead || !patternRunner.IsStartAllowed ||
             patternRunner.CurrentState != BossPatternState.Idle ||
             !projectilePool.isActiveAndEnabled || !floor.isActiveAndEnabled ||
+            !blinkController.isActiveAndEnabled || blinkController.IsBlinking ||
             !patternRunner.TrySelectPattern(this))
         {
             return false;
@@ -157,17 +157,59 @@ public class MidBossBombFieldPattern : BossPriorityPattern
         canStartFloor = false;
         hasStartedFloor = false;
 
-        patternRunner.StartPatternWaitingForActiveEvent();
-
-        if (patternRunner.CurrentState != BossPatternState.Windup)
+        if (!blinkController.TryBeginBlink(false))
         {
             CancelPriority();
             return false;
         }
 
+        ownsBlink = true;
         pendingCount--;
-        bossVisual.StartBombFieldAnim();
+
+        blinkWait = StartCoroutine(WaitForBlink());
         return true;
+    }
+
+    private IEnumerator WaitForBlink()
+    {
+        while (isRunning && blinkController.IsBlinking)
+        {
+            if (bossHealth.IsDead || !patternRunner.IsStartAllowed ||
+                !blinkController.isActiveAndEnabled)
+            {
+                blinkWait = null;
+                CancelPriority();
+                yield break;
+            }
+
+            yield return null;
+        }
+
+        blinkWait = null;
+
+        if (!isRunning)
+            yield break;
+
+        bool succeeded = blinkController.BlinkSucceeded;
+        ownsBlink = false;
+
+        if (!succeeded || bossHealth.IsDead || !patternRunner.IsStartAllowed ||
+            patternRunner.CurrentState != BossPatternState.Idle || 
+            !patternRunner.IsSelectedPattern(this))
+        {
+            CancelPriority();
+            yield break;
+        }
+
+        patternRunner.StartPatternWaitingForActiveEvent();
+
+        if (patternRunner.CurrentState != BossPatternState.Windup)
+        {
+            CancelPriority();
+            yield break;
+        }
+
+        bossVisual.StartBombFieldAnim();
     }
 
     public void BeginOrbGrowth()
@@ -287,6 +329,20 @@ public class MidBossBombFieldPattern : BossPriorityPattern
     {
         bool wasRunning = isRunning;
         isRunning = false;
+
+        if (blinkWait != null)
+        {
+            StopCoroutine(blinkWait);
+            blinkWait = null;
+        }
+
+        if (ownsBlink)
+        {
+            ownsBlink = false;
+
+            if (blinkController != null)
+                blinkController.CancelBlink();
+        }
 
         if (explosionWait != null)
         {
