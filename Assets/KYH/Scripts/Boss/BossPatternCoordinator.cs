@@ -211,7 +211,7 @@ public class BossPatternCoordinator : MonoBehaviour
 
         foreach (BossAttackPattern pattern in patterns)
         {
-            if (pattern == null || !pattern.isActiveAndEnabled)
+            if (pattern == null || !pattern.CanSelect)
                 continue;
 
             if (isMidRange && !(pattern is IBossApproachRange))
@@ -227,7 +227,7 @@ public class BossPatternCoordinator : MonoBehaviour
 
     private bool TryBeginApproach(BossAttackPattern selected, bool isMidRange)
     {
-        if (selected == null || approach == null || approach.IsApproaching)
+        if (selected == null || !selected.CanSelect || approach == null || approach.IsApproaching)
             return false;
 
         pendingPattern = selected;
@@ -323,7 +323,7 @@ public class BossPatternCoordinator : MonoBehaviour
 
         foreach (BossAttackPattern pattern in patterns)
         {
-            if (pattern == null || !pattern.isActiveAndEnabled)
+            if (pattern == null || !pattern.CanSelect)
                 continue;
 
             if (excludeLast && pattern == lastPattern)
@@ -339,7 +339,7 @@ public class BossPatternCoordinator : MonoBehaviour
 
     private bool TryStartAndRemember(BossAttackPattern pattern)
     {
-        if (!pattern.TryStartAttack())
+        if (pattern == null || !pattern.CanSelect ||!pattern.TryStartAttack())
             return false;
 
         lastPattern = pattern;

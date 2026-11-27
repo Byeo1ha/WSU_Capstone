@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class BossAttackPattern : MonoBehaviour
 {
+    public virtual bool CanSelect => isActiveAndEnabled;
     public abstract bool TryStartAttack();
 }
 

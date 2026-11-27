@@ -6,6 +6,9 @@ public class FinalBossComboPattern : BossAttackPattern
     [SerializeField] private BossPatternRunner patternRunner;
     [SerializeField] private BossHealth bossHealth;
 
+    [Header("패턴 사용 제한")]
+    [SerializeField, Range(0f, 1f)] private float stopHealthRatio = 0.7f;
+
     [Header("공격 연결")]
     [SerializeField] private BossTargetFinder targetFinder;
     [SerializeField] private FinalBossComboData data;
@@ -14,6 +17,8 @@ public class FinalBossComboPattern : BossAttackPattern
     [SerializeField] private FinalBossAnimation bossAnimation;
     [SerializeField] private SpriteRenderer comboRenderer;
 
+    public override bool CanSelect => base.CanSelect && bossHealth != null && !bossHealth.IsDead && bossHealth.MaxHealth > 0 &&
+        bossHealth.CurrentHealth > bossHealth.MaxHealth * stopHealthRatio;
     private readonly int idleState = Animator.StringToHash("Base Layer.FinalBoss_Idle");
 
     private int comboDirection;
@@ -206,7 +211,7 @@ public class FinalBossComboPattern : BossAttackPattern
 
     public override bool TryStartAttack()
     {
-        if (!CanExecute() || !patternRunner.TrySelectPattern(this))
+        if (!CanSelect ||!CanExecute() || !patternRunner.TrySelectPattern(this))
             return false;
 
         patternRunner.StartPatternWithWindupDuration(data.WindupDuration);
