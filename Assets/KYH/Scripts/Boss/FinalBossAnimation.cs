@@ -8,8 +8,10 @@ public class FinalBossAnimation : MonoBehaviour
     private Animator animator;
 
     private readonly int comboState = Animator.StringToHash("Base Layer.ComboPattern.FinalBoss_Combo");
-
+    private readonly int tripleSlashState = Animator.StringToHash("Base Layer.TripleSlashPattern.FinalBossTrippleSlash");
+    
     public bool CanPlayCombo => isActiveAndEnabled && animator != null && animator.isActiveAndEnabled && animator.HasState(0, comboState);
+    public bool CanPlayTripleSlash => isActiveAndEnabled && animator != null && animator.isActiveAndEnabled && animator.HasState(0, tripleSlashState);
 
     public bool HasComboClipEnded
     {
@@ -107,5 +109,40 @@ public class FinalBossAnimation : MonoBehaviour
             return;
 
         animator.SetTrigger("CancelDash");
+    }
+
+    public void StartTripleSlashAnim()
+    {
+        if (!CanPlayTripleSlash)
+            return;
+
+        animator.ResetTrigger("FinishTripleSlash");
+        animator.ResetTrigger("CancelTripleSlash");
+        animator.ResetTrigger("StartTripleSlash");
+        animator.SetTrigger("StartTripleSlash");
+    }
+
+    public void FinishTripleSlashAnim()
+    {
+        if (animator == null || !animator.isActiveAndEnabled)
+            return;
+
+        animator.ResetTrigger("StartTripleSlash");
+        animator.ResetTrigger("CancelTripleSlash");
+        animator.SetTrigger("FinishTripleSlash");
+    }
+
+    public void CancelTripleSlashAnim()
+    {
+        if (animator == null)
+            return;
+
+        animator.ResetTrigger("StartTripleSlash");
+        animator.ResetTrigger("FinishTripleSlash");
+
+        if (!animator.isActiveAndEnabled)
+            return;
+
+        animator.SetTrigger("CancelTripleSlash");
     }
 }

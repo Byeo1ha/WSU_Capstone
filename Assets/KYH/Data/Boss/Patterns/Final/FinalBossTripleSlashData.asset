@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FinalBossTripleSlashData
   moveSpeed: 8
   firstSlash:
-    sprite: {fileID: -5021324089465237007, guid: 1e60bb6082dbc4d4db9573f08aa2bd57, type: 3}
+    sprite: {fileID: -5260359358720305489, guid: 6f73ee8c93f64c647919557f61813926, type: 3}
     damage: 8
-    colliderSize: {x: 0.9585631, y: 1.60499}
-    colliderOffset: {x: -0.120169, y: 0.7914597}
+    colliderSize: {x: 0.5820823, y: 1.084601}
+    colliderOffset: {x: -0.04068971, y: 0.1596332}
   secondSlash:
-    sprite: {fileID: -3882124276750039428, guid: e7761337d40094c48b4bf39d0e71761d, type: 3}
+    sprite: {fileID: -6165342938960692180, guid: c9ac383c1ee5cc04699d374b33ad55eb, type: 3}
     damage: 10
-    colliderSize: {x: 0.9585631, y: 1.60499}
-    colliderOffset: {x: -0.120169, y: 0.7914597}
+    colliderSize: {x: 0.5820823, y: 1.084601}
+    colliderOffset: {x: -0.04068971, y: 0.1596332}
   thirdSlash:
     sprite: {fileID: -7187595013280473567, guid: 815ec4340fdff134d8e7f9fd9737d3f7, type: 3}
     damage: 14
-    colliderSize: {x: 0.9585631, y: 2}
-    colliderOffset: {x: -0.120169, y: 0.7914597}
+    colliderSize: {x: 0.9585631, y: 1.996521}
+    colliderOffset: {x: -0.120169, y: 0.6155933}

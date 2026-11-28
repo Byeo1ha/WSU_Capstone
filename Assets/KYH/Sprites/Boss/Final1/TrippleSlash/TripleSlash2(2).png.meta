@@ -1,16 +1,16 @@
 fileFormatVersion: 2
-guid: e7761337d40094c48b4bf39d0e71761d
+guid: c9ac383c1ee5cc04699d374b33ad55eb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3882124276750039428
-    second: TrippleSlash2_0
+      213: -6165342938960692180
+    second: TripleSlash2(2)_0
   - first:
-      213: -8288419597425765653
-    second: TrippleSlash2_1
+      213: -3758494753640888459
+    second: TripleSlash2(2)_1
   - first:
-      213: 8805769991525602748
-    second: TrippleSlash2_2
+      213: 3818944112291166446
+    second: TripleSlash2(2)_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -102,11 +102,63 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TrippleSlash2_0
+      name: TripleSlash2(2)_0
       rect:
         serializedVersion: 2
         x: 0
@@ -114,15 +166,15 @@ TextureImporter:
         width: 115
         height: 106
       alignment: 9
-      pivot: {x: 0.68, y: 0}
+      pivot: {x: 0.74, y: 0.23}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c76c466e98cef1ac0800000000000000
-      internalID: -3882124276750039428
+      spriteID: c2cf8cc234d407aa0800000000000000
+      internalID: -6165342938960692180
       vertices: []
       indices: 
       edges: []
@@ -131,7 +183,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 13479390c410e8548be8f2208a648bc4
+    spriteID: 984c2adb25da4b4408c666f5cd01487e
     internalID: 0
     vertices: []
     indices: 
@@ -141,9 +193,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":115.0,"y":106.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":115.0,"y":106.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      TrippleSlash2_0: -3882124276750039428
+      TripleSlash2(2)_0: -6165342938960692180
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

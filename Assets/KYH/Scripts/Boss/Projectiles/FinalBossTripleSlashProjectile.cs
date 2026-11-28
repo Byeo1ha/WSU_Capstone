@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
@@ -127,7 +126,7 @@ public class FinalBossTripleSlashProjectile : MonoBehaviour
         Returned?.Invoke(this);
     }
 
-    private void Osable()
+    private void OnDisable()
     {
         isFlying = false;
         damagedTargets.Clear();
